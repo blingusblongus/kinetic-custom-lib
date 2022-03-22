@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchForm } from '@kineticdata/react';
 import ListPicker from '../CustomComponents/ListPicker/ListPicker';
+import CustomCheckbox from '../CustomComponents/CustomCheckbox/Checkbox';
 
 const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
@@ -26,7 +27,7 @@ const ComponentList = ({ kappSlug, formSlug }) => {
             />
           );
         } else {
-          return <p>Checkbox Placeholder</p>;
+          return <CustomCheckbox choices={field.choices} />;
         }
       default:
         return <p key={field.key || -1}>Component not available</p>;
