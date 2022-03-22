@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Box } from '@mui/material';
 
-import { useDispatch } from '../../../../redux/hooks/hooks';
+import { useDispatch } from '../../../redux/hooks/hooks';
 
 const ListPicker = ({ style, choices = [], label, formKey }) => {
   const dispatch = useDispatch();
