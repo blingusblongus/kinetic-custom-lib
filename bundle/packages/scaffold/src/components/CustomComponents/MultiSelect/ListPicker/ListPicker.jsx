@@ -3,26 +3,25 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Box } from '@mui/material';
 
-const ListPicker = ({
-  style,
-  options = [],
-  label,
-  selected = [],
-  setSelected,
-}) => {
-  // const [selected, setSelected] = useState(selected)
+import { useSelector, useDispatch } from '../../../../redux/hooks/hooks';
 
-  options.filter(el => !selected.includes(el));
+const ListPicker = ({ style, choices = [], label, formKey }) => {
+  const dispatch = useDispatch();
+  const formResponses = useSelector(store => store.formResponses);
+
+  //Filter already chosen choices out of dropdown
   const [value, setValue] = useState([]);
+  choices.filter(el => !value.includes(el));
 
   const handleSelect = val => {
-    if (val === null) return;
-    if (selected.includes(val)) {
-      setSelected(selected.filter(el => el !== val));
-    } else {
-      setSelected([...selected, val]);
-    }
-    setValue(val);
+    dispatch({
+      type: 'FORM_UPDATE',
+      payload: {
+        formKey: formKey,
+        response: val,
+      },
+    });
+    setValue([...val]);
   };
 
   return (
@@ -30,7 +29,7 @@ const ListPicker = ({
       <Autocomplete
         multiple
         id="tags-standard"
-        options={options}
+        options={choices.map(choice => choice.label)}
         value={value}
         onChange={(e, val) => handleSelect(val)}
         renderInput={params => (

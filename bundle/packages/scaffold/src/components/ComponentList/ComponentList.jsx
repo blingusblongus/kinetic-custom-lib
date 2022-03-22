@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchForm } from '@kineticdata/react';
+import ListPicker from '../CustomComponents/MultiSelect/ListPicker/ListPicker';
 
 const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
@@ -29,6 +30,9 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     <>
       <h1>ComponentList</h1>
       <pre>{JSON.stringify(formJson, null, 2)}</pre>
+      {fields[0] && (
+        <ListPicker choices={fields[0].choices} formKey={fields[0].key} />
+      )}
     </>
   );
 };
