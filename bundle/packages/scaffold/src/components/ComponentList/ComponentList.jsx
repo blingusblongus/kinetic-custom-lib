@@ -14,6 +14,23 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     fields = fields.concat(pageFields);
   }
 
+  const pickComponent = field => {
+    switch (field.renderType) {
+      case 'checkbox':
+        if (field.renderAttributes.variant == 'multiselect') {
+          return (
+            <ListPicker
+              choices={field.choices}
+              formKey={field.key}
+              key={field.key}
+            />
+          );
+        }
+      default:
+        return <p>Component not available</p>;
+    }
+  };
+
   // fetch supplied form, along with pages containing elements
   useEffect(() => {
     fetchForm({
@@ -29,10 +46,8 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   return (
     <>
       <h1>ComponentList</h1>
+      {fields.map(pickComponent)}
       <pre>{JSON.stringify(formJson, null, 2)}</pre>
-      {fields[0] && (
-        <ListPicker choices={fields[0].choices} formKey={fields[0].key} />
-      )}
     </>
   );
 };

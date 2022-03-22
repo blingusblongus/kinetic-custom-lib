@@ -3,16 +3,16 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Box } from '@mui/material';
 
-import { useSelector, useDispatch } from '../../../../redux/hooks/hooks';
+import { useDispatch } from '../../../../redux/hooks/hooks';
 
 const ListPicker = ({ style, choices = [], label, formKey }) => {
   const dispatch = useDispatch();
-  const formResponses = useSelector(store => store.formResponses);
 
   //Filter already chosen choices out of dropdown
   const [value, setValue] = useState([]);
   choices.filter(el => !value.includes(el));
 
+  //dispatch an update to the store on selection
   const handleSelect = val => {
     dispatch({
       type: 'FORM_UPDATE',

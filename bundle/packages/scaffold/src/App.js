@@ -12,12 +12,18 @@ import { Home } from './components/Home';
 import { I18n } from '@kineticdata/react';
 import ComponentList from './components/ComponentList/ComponentList';
 
+import { useSelector } from './redux/hooks/hooks';
+
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
 
 const AppComponent = props => {
-  console.log('Appcomponent loading');
+  const kapp = useSelector(store => store.app.kapp);
+
+  console.log('app', useSelector(store => store));
+  console.log(kapp.attributesMap);
+
   if (props.error) {
     return <ErrorUnexpected />;
   } else if (props.loading) {
@@ -31,8 +37,8 @@ const AppComponent = props => {
             <Router>
               <ComponentList
                 path="/"
-                kappSlug="nick-sandbox"
-                formSlug="all-components"
+                kappSlug={kapp.slug}
+                formSlug={kapp.attributesMap.renderForm}
               />
             </Router>
           </div>
