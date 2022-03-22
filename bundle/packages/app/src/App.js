@@ -21,6 +21,7 @@ import TechBarApp from '@kineticdata/bundle-tech-bar';
 import DiscussionsApp from '@kineticdata/bundle-discussions';
 import SettingsApp from '@kineticdata/bundle-settings';
 import SurveyApp from '@kineticdata/bundle-survey';
+import Scaffold from 'scaffold';
 
 /**
  * The git repo name to be used for fetching deployed versions of this bundle.
@@ -35,6 +36,7 @@ const BUNDLE_PACKAGE_PROVIDERS = {
   queue: QueueApp,
   'tech-bar': TechBarApp,
   survey: SurveyApp,
+  scaffold: Scaffold,
 };
 
 // List of available static packages

@@ -21,6 +21,8 @@
 @import '~@kineticdata/bundle-survey/assets/styles/master';
 // etc.
 
+@import 'scaffold/src/assets/styles/master';
+
 // Import app styles and overrides for any above styles
 @import 'layout';
 @import 'authentication';

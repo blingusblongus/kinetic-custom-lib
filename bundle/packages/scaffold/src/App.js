@@ -1,21 +1,22 @@
-import React from "react";
-import { Redirect, Router } from "@reach/router";
-import { compose, lifecycle } from "recompose";
+import React from 'react';
+import { Redirect, Router } from '@reach/router';
+import { compose, lifecycle } from 'recompose';
 import {
   ErrorUnexpected,
   Loading,
   PageTitle,
-} from "@kineticdata/bundle-common";
-import { connect } from "./redux/store";
+} from '@kineticdata/bundle-common';
+import { connect } from './redux/store';
 
-import { Home } from "./components/Home";
-import { I18n } from "@kineticdata/react";
+import { Home } from './components/Home';
+import { I18n } from '@kineticdata/react';
 
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
 
-const AppComponent = (props) => {
+const AppComponent = props => {
+  console.log('Appcomponent loading');
   if (props.error) {
     return <ErrorUnexpected />;
   } else if (props.loading) {
@@ -25,7 +26,7 @@ const AppComponent = (props) => {
       main: (
         <I18n>
           <div className="package-layout package-layout--scaffold">
-            <PageTitle parts={["Loading..."]} />
+            <PageTitle parts={['Loading...']} />
             <Router>
               <Home path="/" />
             </Router>
@@ -36,7 +37,7 @@ const AppComponent = (props) => {
   }
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loading: false,
   error: null,
   appLocation: state.app.location,
@@ -45,22 +46,25 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {};
 
 export const App = compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
   lifecycle({
     componentDidMount() {},
-  })
+  }),
 )(AppComponent);
 
 /*****************************************************************************
  *** PUBLIC APP
  *****************************************************************************/
 
-export const PublicAppComponent = (props) => {
+export const PublicAppComponent = props => {
   return props.render({
     main: (
       <I18n>
         <div className="package-layout package-layout--scaffold">
-          <PageTitle parts={["Loading..."]} />
+          <PageTitle parts={['Loading...']} />
           <Router>
             <Redirect from="*" to={props.authRoute} noThrow />
           </Router>
@@ -70,10 +74,10 @@ export const PublicAppComponent = (props) => {
   });
 };
 
-const mapStateToPropsPublic = (state) => ({
+const mapStateToPropsPublic = state => ({
   authRoute: state.app.authRoute,
 });
 
 export const PublicApp = compose(connect(mapStateToPropsPublic))(
-  PublicAppComponent
+  PublicAppComponent,
 );

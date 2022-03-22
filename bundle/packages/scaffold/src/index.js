@@ -76,7 +76,7 @@ export default class extends Component {
 
   // Used for matching pathname to display this AppProvider
   // Not used if package is set as Bundle Package of a Kapp
-  // static location = '/scaffold';
+  static location = '/scaffold';
 
   // Set to true if package allows public (unauthenticated) routes
   static hasPublicRoutes = false;

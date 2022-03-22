@@ -6,8 +6,8 @@
     "lint": "eslint src --ext .js"
   },
   "dependencies": {
-    "@kineticdata/bundle-common": "^5.0.14",
-    "@kineticdata/react": "^5.0.14",
+    "@kineticdata/bundle-common": "5.1.0",
+    "@kineticdata/react": "5.1.0",
     "@reach/router": "git://github.com/kineticdata/router.git",
     "classnames": "^2.2.5",
     "immutable": "4.0.0-rc.9",
