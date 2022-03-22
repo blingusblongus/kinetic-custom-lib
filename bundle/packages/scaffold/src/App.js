@@ -10,6 +10,7 @@ import { connect } from './redux/store';
 
 import { Home } from './components/Home';
 import { I18n } from '@kineticdata/react';
+import ComponentList from './components/ComponentList/ComponentList';
 
 /*****************************************************************************
  *** PRIVATE APP
@@ -28,7 +29,11 @@ const AppComponent = props => {
           <div className="package-layout package-layout--scaffold">
             <PageTitle parts={['Loading...']} />
             <Router>
-              <Home path="/" />
+              <ComponentList
+                path="/"
+                kappSlug="nick-sandbox"
+                formSlug="all-components"
+              />
             </Router>
           </div>
         </I18n>
