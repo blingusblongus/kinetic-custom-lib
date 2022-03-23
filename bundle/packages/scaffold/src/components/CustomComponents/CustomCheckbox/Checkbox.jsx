@@ -32,21 +32,23 @@ const CustomCheckbox = ({ element }) => {
   );
 
   return (
-    <FormGroup>
+    <>
       <h2>{element.label}</h2>
 
-      {element.choices.map((choice, i) => {
-        let checked = selected.includes(choice.value);
-        return (
-          <FormControlLabel
-            control={<Checkbox value={choice.value} checked={checked} />}
-            label={choice.label}
-            key={i}
-            onChange={toggleSelected}
-          />
-        );
-      })}
-    </FormGroup>
+      <FormGroup>
+        {element.choices.map((choice, i) => {
+          let checked = selected.includes(choice.value);
+          return (
+            <FormControlLabel
+              control={<Checkbox value={choice.value} checked={checked} />}
+              label={choice.label}
+              key={i}
+              onChange={toggleSelected}
+            />
+          );
+        })}
+      </FormGroup>
+    </>
   );
 };
 

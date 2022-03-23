@@ -3,6 +3,7 @@ import { fetchForm } from '@kineticdata/react';
 import ListPicker from '../CustomComponents/ListPicker/ListPicker';
 import CustomCheckbox from '../CustomComponents/CustomCheckbox/Checkbox';
 import ComponentWrapper from '../ComponentWrapper/ComponentWrapper';
+import CustomDropdown from '../CustomComponents/CustomDropdown/CustomDropdown';
 
 const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
@@ -17,15 +18,18 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   }
 
   const pickComponent = field => {
+    let key = field.key;
     switch (field.renderType) {
       case 'checkbox':
         if (field.renderAttributes.variant == 'multiselect') {
-          return <ListPicker element={field} key={field.key} />;
+          return <ListPicker element={field} key={key} />;
         } else {
-          return <CustomCheckbox element={field} key={field.key} />;
+          return <CustomCheckbox element={field} key={key} />;
         }
+      case 'dropdown':
+        return <CustomDropdown element={field} key={key} />;
       default:
-        return <p key={field.key || -1}>Component not available</p>;
+        return <p key={key}>Component not available</p>;
     }
   };
 
