@@ -8,6 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
+import Button from '@mui/material/Button';
 
 import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 
@@ -202,5 +203,11 @@ export const CustomRadio = ({ element }) => {
         })}
       </RadioGroup>
     </FormControl>
+  );
+};
+
+export const CustomSubmit = ({ element }) => {
+  return (
+    <Button variant={element.renderAttributes?.variant}>{element.label}</Button>
   );
 };

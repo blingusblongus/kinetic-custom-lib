@@ -7,6 +7,7 @@ import {
   CustomSectionHeader,
   CustomHTML,
   CustomRadio,
+  CustomSubmit,
 } from '../components/CustomComponents/CustomComponents.jsx';
 
 /**
@@ -19,6 +20,12 @@ export const pickComponent = element => {
 
   if (element.type === 'section') {
     return <CustomSectionHeader element={element} key={element.name} />;
+  }
+
+  if (element.type === 'button') {
+    if (element.renderType === 'submit-page') {
+      return <CustomSubmit element={element} key={element.name} />;
+    }
   }
 
   switch (element.renderType) {
