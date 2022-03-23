@@ -5,19 +5,19 @@ import { Box } from '@mui/material';
 
 import { useDispatch } from '../../../redux/hooks/hooks';
 
-const ListPicker = ({ style, choices = [], label, formKey }) => {
+const ListPicker = ({ element }) => {
   const dispatch = useDispatch();
 
   //Filter already chosen choices out of dropdown
   const [value, setValue] = useState([]);
-  choices.filter(el => !value.includes(el));
+  let choices = element.choices.filter(el => !value.includes(el));
 
   //dispatch an update to the store on selection
   const handleSelect = val => {
     dispatch({
       type: 'FORM_UPDATE',
       payload: {
-        formKey: formKey,
+        formKey: element.key,
         response: val,
       },
     });
@@ -25,7 +25,8 @@ const ListPicker = ({ style, choices = [], label, formKey }) => {
   };
 
   return (
-    <Box sx={style || { margin: '40px', width: '50%' }}>
+    <Box>
+      <h2>{element.label}</h2>
       <Autocomplete
         multiple
         id="tags-standard"
@@ -36,8 +37,8 @@ const ListPicker = ({ style, choices = [], label, formKey }) => {
           <TextField
             {...params}
             variant="standard"
-            label={label || ''}
-            placeholder={label || ''}
+            label={element.label || ''}
+            placeholder={element.label || ''}
           />
         )}
       />

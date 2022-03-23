@@ -20,15 +20,9 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     switch (field.renderType) {
       case 'checkbox':
         if (field.renderAttributes.variant == 'multiselect') {
-          return (
-            <ListPicker
-              choices={field.choices}
-              formKey={field.key}
-              key={field.key}
-            />
-          );
+          return <ListPicker element={field} key={field.key} />;
         } else {
-          return <CustomCheckbox choices={field.choices} />;
+          return <CustomCheckbox element={field} key={field.key} />;
         }
       default:
         return <p key={field.key || -1}>Component not available</p>;
@@ -50,11 +44,12 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   return (
     <>
       <h1>ComponentList</h1>
-      {fields.map(comp => {
+      {fields.map(element => {
         return (
           <ComponentWrapper
-            component={pickComponent(comp)}
+            component={pickComponent(element)}
             sx={{ margin: 'auto', width: '80%' }}
+            key={element.key}
           />
         );
       })}
