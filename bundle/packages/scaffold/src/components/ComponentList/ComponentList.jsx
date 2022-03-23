@@ -38,7 +38,6 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     fetchForm({
       kappSlug: kappSlug,
       formSlug: formSlug,
-      // export: true,
       include: 'pages',
     }).then(({ form }) => setFormJson(form));
   }, []);
