@@ -8,6 +8,8 @@ import CustomText from '../CustomComponents/CustomText/CustomText';
 import CustomSectionHeader from '../CustomComponents/CustomSectionHeader/CustomSectionHeader';
 import { FormGroup, Paper } from '@mui/material';
 
+import { styles } from '../../assets/styles/styles';
+
 const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
   const pages = formJson ? formJson.pages : [];
@@ -77,16 +79,17 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   }, []);
 
   return (
-    <>
-      <h1>ComponentList</h1>
+    <div style={styles.background}>
+      <h1 style={styles.componentList.h1}>ComponentList</h1>
       <FormGroup>
         <Paper
           sx={{
             m: '1rem auto',
             width: '80%',
             padding: '2rem',
+            bgcolor: styles.form.backgroundColor,
           }}
-          elevation={4}
+          elevation={8}
         >
           {// iterate through form fields, wrapping custom components
           fields.map(element => {
@@ -102,7 +105,7 @@ const ComponentList = ({ kappSlug, formSlug }) => {
         </Paper>
       </FormGroup>
       <pre>{JSON.stringify(formJson, null, 2)}</pre>
-    </>
+    </div>
   );
 };
 
