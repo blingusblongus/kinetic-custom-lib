@@ -4,6 +4,7 @@ import ListPicker from '../CustomComponents/ListPicker/ListPicker';
 import CustomCheckbox from '../CustomComponents/CustomCheckbox/Checkbox';
 import ComponentWrapper from '../ComponentWrapper/ComponentWrapper';
 import CustomDropdown from '../CustomComponents/CustomDropdown/CustomDropdown';
+import CustomText from '../CustomComponents/CustomText/CustomText';
 
 const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
@@ -28,6 +29,8 @@ const ComponentList = ({ kappSlug, formSlug }) => {
         }
       case 'dropdown':
         return <CustomDropdown element={field} key={key} />;
+      case 'text':
+        return <CustomText element={field} key={key} />;
       default:
         return <p key={key}>Component not available</p>;
     }

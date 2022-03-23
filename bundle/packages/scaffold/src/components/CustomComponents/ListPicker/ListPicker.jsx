@@ -17,7 +17,7 @@ const ListPicker = ({ element }) => {
     dispatch({
       type: 'FORM_UPDATE',
       payload: {
-        formKey: element.key,
+        name: element.name,
         response: val,
       },
     });

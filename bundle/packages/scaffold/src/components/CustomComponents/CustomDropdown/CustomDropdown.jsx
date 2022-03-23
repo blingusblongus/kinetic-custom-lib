@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 import { useDispatch } from '../../../redux/hooks/hooks';
 
@@ -8,14 +8,20 @@ const CustomDropdown = ({ element }) => {
 
   const handleChange = (e, val) => {
     setSelection(e.target.value);
-    dispatch({
-      type: 'FORM_UPDATE',
-      payload: {
-        formKey: element.key,
-        response: selection,
-      },
-    });
   };
+
+  useEffect(
+    () => {
+      dispatch({
+        type: 'FORM_UPDATE',
+        payload: {
+          name: element.name,
+          response: selection,
+        },
+      });
+    },
+    [selection],
+  );
   return (
     <>
       <h2>{element.label}</h2>
