@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CustomText = ({ element }) => {
-  return <p>Custom Text</p>;
+  return <p>{element.text}</p>;
 };
 
 export default CustomText;

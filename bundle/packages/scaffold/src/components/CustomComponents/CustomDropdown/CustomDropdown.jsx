@@ -24,7 +24,7 @@ const CustomDropdown = ({ element }) => {
   );
   return (
     <>
-      <h2>{element.label}</h2>
+      <h6>{element.label}</h6>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 180 }}>
         <InputLabel id="demo-simple-select-standard-label">
           {element.label}

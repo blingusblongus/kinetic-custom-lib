@@ -33,7 +33,7 @@ const CustomCheckbox = ({ element }) => {
 
   return (
     <>
-      <h2>{element.label}</h2>
+      <h6>{element.label}</h6>
 
       <FormGroup>
         {element.choices.map((choice, i) => {

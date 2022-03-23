@@ -5,21 +5,47 @@ import CustomCheckbox from '../CustomComponents/CustomCheckbox/Checkbox';
 import ComponentWrapper from '../ComponentWrapper/ComponentWrapper';
 import CustomDropdown from '../CustomComponents/CustomDropdown/CustomDropdown';
 import CustomText from '../CustomComponents/CustomText/CustomText';
+import CustomSectionHeader from '../CustomComponents/CustomSectionHeader/CustomSectionHeader';
+import { FormGroup, Paper } from '@mui/material';
 
 const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
   const pages = formJson ? formJson.pages : [];
   let fields = [];
 
-  //create array of all fields from all pages
-  for (let page of pages) {
-    let pageFields = page.elements.filter(el => el.type == 'field');
+  //   //create array of all fields from all pages
+  //   for (let page of pages) {
+  //     let pageFields = page.elements.filter(el => el.type == 'field');
 
-    fields = fields.concat(pageFields);
+  //     fields = fields.concat(pageFields);
+  //   }
+
+  // create flattened list of elements, and assign depth to sections
+  const getElements = (parent, depth = 1) => {
+    for (let element of parent.elements) {
+      if (element.type == 'section') {
+        element.depth = depth;
+        fields.push(element);
+        getElements(element, depth + 1);
+      } else {
+        fields.push(element);
+      }
+    }
+  };
+  for (let parent of pages) {
+    getElements(parent);
   }
 
+  console.log(fields);
+
+  // Determine custom component to render
   const pickComponent = field => {
     let key = field.key;
+
+    if (field.type === 'section') {
+      return <CustomSectionHeader element={field} key={field.name} />;
+    }
+
     switch (field.renderType) {
       case 'checkbox':
         if (field.renderAttributes.variant == 'multiselect') {
@@ -32,7 +58,12 @@ const ComponentList = ({ kappSlug, formSlug }) => {
       case 'text':
         return <CustomText element={field} key={key} />;
       default:
-        return <p key={key}>Component not available</p>;
+        return (
+          <>
+            <p key={key}>Component not available</p>
+            <pre>{JSON.stringify(field, null, 2)}</pre>
+          </>
+        );
     }
   };
 
@@ -48,16 +79,28 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   return (
     <>
       <h1>ComponentList</h1>
-      {fields.map(element => {
-        if (!element.visible) return;
-        return (
-          <ComponentWrapper
-            component={pickComponent(element)}
-            sx={{ margin: 'auto', width: '80%' }}
-            key={element.key}
-          />
-        );
-      })}
+      <FormGroup>
+        <Paper
+          sx={{
+            m: '1rem auto',
+            width: '80%',
+            padding: '2rem',
+          }}
+          elevation={4}
+        >
+          {// iterate through form fields, wrapping custom components
+          fields.map(element => {
+            if (!element.visible) return;
+            return (
+              <ComponentWrapper
+                component={pickComponent(element)}
+                sx={{ margin: 'auto', width: '80%' }}
+                key={element.key || Math.random()}
+              />
+            );
+          })}
+        </Paper>
+      </FormGroup>
       <pre>{JSON.stringify(formJson, null, 2)}</pre>
     </>
   );

@@ -26,7 +26,7 @@ const ListPicker = ({ element }) => {
 
   return (
     <Box>
-      <h2>{element.label}</h2>
+      <h6>{element.label}</h6>
       <Autocomplete
         multiple
         id="tags-standard"
