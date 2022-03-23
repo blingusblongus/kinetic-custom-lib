@@ -7,8 +7,6 @@ import {
   PageTitle,
 } from '@kineticdata/bundle-common';
 import { connect } from './redux/store';
-
-import { Home } from './components/Home';
 import { I18n } from '@kineticdata/react';
 import ComponentList from './components/ComponentList/ComponentList';
 
@@ -22,7 +20,6 @@ const AppComponent = props => {
   const kapp = useSelector(store => store.app.kapp);
 
   console.log('app', useSelector(store => store));
-  console.log(kapp.attributesMap);
 
   if (props.error) {
     return <ErrorUnexpected />;

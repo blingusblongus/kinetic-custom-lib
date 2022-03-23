@@ -14,7 +14,7 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   // create flattened list of elements, and assign depth to sections
   const getElements = (parent, depth = 1) => {
     for (let element of parent.elements) {
-      if (element.type == 'section') {
+      if (element.type === 'section') {
         element.depth = depth;
         fields.push(element);
         getElements(element, depth + 1);
