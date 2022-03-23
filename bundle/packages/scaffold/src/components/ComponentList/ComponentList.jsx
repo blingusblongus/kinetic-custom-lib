@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchForm } from '@kineticdata/react';
-import ListPicker from '../CustomComponents/ListPicker/ListPicker';
-import CustomCheckbox from '../CustomComponents/CustomCheckbox/Checkbox';
 import ComponentWrapper from '../ComponentWrapper/ComponentWrapper';
-import CustomDropdown from '../CustomComponents/CustomDropdown/CustomDropdown';
-import CustomText from '../CustomComponents/CustomText/CustomText';
-import CustomSectionHeader from '../CustomComponents/CustomSectionHeader/CustomSectionHeader';
 import { FormGroup, Paper } from '@mui/material';
 
 import { styles } from '../../assets/styles/styles';
@@ -15,13 +10,6 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
   const pages = formJson ? formJson.pages : [];
   let fields = [];
-
-  //   //create array of all fields from all pages
-  //   for (let page of pages) {
-  //     let pageFields = page.elements.filter(el => el.type == 'field');
-
-  //     fields = fields.concat(pageFields);
-  //   }
 
   // create flattened list of elements, and assign depth to sections
   const getElements = (parent, depth = 1) => {
@@ -35,6 +23,7 @@ const ComponentList = ({ kappSlug, formSlug }) => {
       }
     }
   };
+
   for (let parent of pages) {
     getElements(parent);
   }
