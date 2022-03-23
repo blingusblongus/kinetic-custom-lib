@@ -70,8 +70,8 @@ export default class extends Component {
   }
 
   // Functions for hiding/supressing parts of the default layout
-  // static shouldHideHeader = props => false;
-  // static shouldHideSidebar = props => false
+  static shouldHideHeader = props => true;
+  static shouldHideSidebar = props => true;
   // static shouldSuppressSidebar = props => false
 
   // Used for matching pathname to display this AppProvider

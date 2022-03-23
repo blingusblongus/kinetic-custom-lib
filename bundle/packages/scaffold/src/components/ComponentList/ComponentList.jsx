@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchForm } from '@kineticdata/react';
 import ListPicker from '../CustomComponents/ListPicker/ListPicker';
 import CustomCheckbox from '../CustomComponents/CustomCheckbox/Checkbox';
+import ComponentWrapper from '../ComponentWrapper/ComponentWrapper';
 
 const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
@@ -49,7 +50,14 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   return (
     <>
       <h1>ComponentList</h1>
-      {fields.map(pickComponent)}
+      {fields.map(comp => {
+        return (
+          <ComponentWrapper
+            component={pickComponent(comp)}
+            sx={{ margin: 'auto', width: '80%' }}
+          />
+        );
+      })}
       <pre>{JSON.stringify(formJson, null, 2)}</pre>
     </>
   );
