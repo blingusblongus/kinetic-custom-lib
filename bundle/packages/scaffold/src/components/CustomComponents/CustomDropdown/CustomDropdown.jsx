@@ -7,7 +7,6 @@ const CustomDropdown = ({ element }) => {
   const dispatch = useDispatch();
 
   const handleChange = (e, val) => {
-    console.log(e);
     setSelection(e.target.value);
     dispatch({
       type: 'FORM_UPDATE',

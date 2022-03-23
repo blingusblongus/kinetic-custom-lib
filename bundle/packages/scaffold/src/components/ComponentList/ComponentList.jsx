@@ -43,12 +43,11 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     }).then(({ form }) => setFormJson(form));
   }, []);
 
-  console.log(fields);
-
   return (
     <>
       <h1>ComponentList</h1>
       {fields.map(element => {
+        if (!element.visible) return;
         return (
           <ComponentWrapper
             component={pickComponent(element)}
