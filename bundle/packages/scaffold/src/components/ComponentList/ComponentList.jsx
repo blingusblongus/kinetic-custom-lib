@@ -9,6 +9,7 @@ import CustomSectionHeader from '../CustomComponents/CustomSectionHeader/CustomS
 import { FormGroup, Paper } from '@mui/material';
 
 import { styles } from '../../assets/styles/styles';
+import { pickComponent } from '../../lib/utils';
 
 const ComponentList = ({ kappSlug, formSlug }) => {
   const [formJson, setFormJson] = useState('');
@@ -40,35 +41,6 @@ const ComponentList = ({ kappSlug, formSlug }) => {
 
   console.log(fields);
 
-  // Determine custom component to render
-  const pickComponent = field => {
-    let key = field.key;
-
-    if (field.type === 'section') {
-      return <CustomSectionHeader element={field} key={field.name} />;
-    }
-
-    switch (field.renderType) {
-      case 'checkbox':
-        if (field.renderAttributes.variant == 'multiselect') {
-          return <ListPicker element={field} key={key} />;
-        } else {
-          return <CustomCheckbox element={field} key={key} />;
-        }
-      case 'dropdown':
-        return <CustomDropdown element={field} key={key} />;
-      case 'text':
-        return <CustomText element={field} key={key} />;
-      default:
-        return (
-          <>
-            <p key={key}>Component not available</p>
-            <pre>{JSON.stringify(field, null, 2)}</pre>
-          </>
-        );
-    }
-  };
-
   // fetch supplied form, along with pages containing elements
   useEffect(() => {
     fetchForm({
@@ -82,15 +54,7 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     <div style={styles.background}>
       <h1 style={styles.componentList.h1}>ComponentList</h1>
       <FormGroup>
-        <Paper
-          sx={{
-            m: '1rem auto',
-            width: '80%',
-            padding: '2rem',
-            bgcolor: styles.form.backgroundColor,
-          }}
-          elevation={8}
-        >
+        <Paper style={styles.form} elevation={8}>
           {// iterate through form fields, wrapping custom components
           fields.map(element => {
             if (!element.visible) return;
