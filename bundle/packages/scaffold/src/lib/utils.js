@@ -5,6 +5,8 @@ import {
   CustomDropdown,
   CustomText,
   CustomSectionHeader,
+  CustomHTML,
+  CustomRadio,
 } from '../components/CustomComponents/CustomComponents.jsx';
 
 /**
@@ -30,10 +32,14 @@ export const pickComponent = element => {
       return <CustomDropdown element={element} key={key} />;
     case 'text':
       return <CustomText element={element} key={key} />;
+    case 'html':
+      return <CustomHTML element={element} key={key} />;
+    case 'radio':
+      return <CustomRadio element={element} key={key} />;
     default:
       return (
         <>
-          <p key={key}>Component not available</p>
+          <p key={key}>Component not supported</p>
           <pre>{JSON.stringify(element, null, 2)}</pre>
         </>
       );

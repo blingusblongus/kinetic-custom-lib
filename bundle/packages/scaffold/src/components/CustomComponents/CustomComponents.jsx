@@ -3,8 +3,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
 
 import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 
@@ -156,5 +159,48 @@ export const ListPicker = ({ element }) => {
         )}
       />
     </Box>
+  );
+};
+
+export const CustomHTML = ({ element }) => {
+  return (
+    <>
+      <div dangerouslySetInnerHTML={{ __html: element.text }} />
+    </>
+  );
+};
+
+export const CustomRadio = ({ element }) => {
+  const dispatch = useDispatch();
+  const handleChange = (e, val) => {
+    dispatch({
+      type: 'FORM_UPDATE',
+      payload: {
+        name: element.name,
+        response: val,
+      },
+    });
+  };
+  return (
+    <FormControl>
+      <FormLabel id="demo-radio-buttons-group-label">{element.label}</FormLabel>
+      <RadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue={element.defaultValue}
+        name={element.name}
+        onChange={handleChange}
+      >
+        {element.choices.map(choice => {
+          return (
+            <FormControlLabel
+              value={choice.value}
+              control={<Radio />}
+              label={choice.label}
+              key={choice.label}
+            />
+          );
+        })}
+      </RadioGroup>
+    </FormControl>
   );
 };
