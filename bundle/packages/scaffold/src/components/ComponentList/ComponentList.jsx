@@ -12,12 +12,12 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   let fields = [];
 
   // create flattened list of elements, and assign depth to sections
-  const getElements = (parent, depth = 1) => {
+  const getFormElements = (parent, depth = 1) => {
     for (let element of parent.elements) {
       if (element.type === 'section') {
         element.depth = depth;
         fields.push(element);
-        getElements(element, depth + 1);
+        getFormElements(element, depth + 1);
       } else {
         fields.push(element);
       }
@@ -25,10 +25,8 @@ const ComponentList = ({ kappSlug, formSlug }) => {
   };
 
   for (let parent of pages) {
-    getElements(parent);
+    getFormElements(parent);
   }
-
-  console.log(fields);
 
   // fetch supplied form, along with pages containing elements
   useEffect(() => {
