@@ -28,6 +28,11 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     getFormElements(parent);
   }
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('submitted');
+  };
+
   // fetch supplied form, along with pages containing elements
   useEffect(() => {
     fetchForm({
@@ -39,23 +44,26 @@ const ComponentList = ({ kappSlug, formSlug }) => {
 
   return (
     <div style={styles.background}>
-      <h1 style={styles.componentList.h1}>ComponentList</h1>
-      <FormGroup>
-        <Paper style={styles.form} elevation={8}>
-          {// iterate through form fields, wrapping custom components
-          fields.map(element => {
-            if (!element.visible) return;
-            return (
-              <ComponentWrapper
-                component={pickComponent(element)}
-                sx={{ margin: 'auto', width: '80%' }}
-                key={element.key || Math.random()}
-              />
-            );
-          })}
-        </Paper>
-      </FormGroup>
-      <pre>{JSON.stringify(formJson, null, 2)}</pre>
+      <form onSubmit={handleSubmit}>
+        <h1 style={styles.componentList.h1}>ComponentList</h1>
+
+        <FormGroup>
+          <Paper style={styles.form} elevation={8}>
+            {// iterate through form fields, wrapping custom components
+            fields.map(element => {
+              if (!element.visible) return;
+              return (
+                <ComponentWrapper
+                  component={pickComponent(element)}
+                  sx={{ margin: 'auto', width: '80%' }}
+                  key={element.key || Math.random()}
+                />
+              );
+            })}
+          </Paper>
+        </FormGroup>
+        <pre>{JSON.stringify(formJson, null, 2)}</pre>
+      </form>
     </div>
   );
 };

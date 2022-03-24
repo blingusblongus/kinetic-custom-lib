@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 
@@ -43,7 +44,7 @@ export const CustomCheckbox = ({ element }) => {
 
   return (
     <>
-      <h6>{element.label}</h6>
+      <Typography variant="h6">{element.label}</Typography>
 
       <FormGroup>
         {element.choices.map((choice, i) => {
@@ -84,7 +85,7 @@ export const CustomDropdown = ({ element }) => {
   );
   return (
     <>
-      <h6>{element.label}</h6>
+      <Typography variant="h6">{element.label}</Typography>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 180 }}>
         <InputLabel id="demo-simple-select-standard-label">
           {element.label}
@@ -119,7 +120,7 @@ export const CustomSectionHeader = ({ element }) => {
 };
 
 export const CustomText = ({ element }) => {
-  return <p>{element.text}</p>;
+  return <Typography variant="p">{element.text}</Typography>;
 };
 
 export const ListPicker = ({ element }) => {
@@ -143,7 +144,7 @@ export const ListPicker = ({ element }) => {
 
   return (
     <Box>
-      <h6>{element.label}</h6>
+      <Typography variant="h6">{element.label}</Typography>
       <Autocomplete
         multiple
         id="tags-standard"
@@ -154,7 +155,7 @@ export const ListPicker = ({ element }) => {
           <TextField
             {...params}
             variant="standard"
-            label={element.label || ''}
+            // label={element.label || ''}
             placeholder={element.label || ''}
           />
         )}
@@ -184,7 +185,7 @@ export const CustomRadio = ({ element }) => {
   };
   return (
     <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label">{element.label}</FormLabel>
+      <Typography variant="h6">{element.label}</Typography>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue={element.defaultValue}
@@ -208,6 +209,39 @@ export const CustomRadio = ({ element }) => {
 
 export const CustomSubmit = ({ element }) => {
   return (
-    <Button variant={element.renderAttributes?.variant}>{element.label}</Button>
+    <Button
+      type="submit"
+      variant={element.renderAttributes?.variant}
+      onClick={() => console.log('clicked')}
+    >
+      {element.label}
+    </Button>
+  );
+};
+
+export const CustomDate = ({ element }) => {
+  let today = new Date();
+  const dispatch = useDispatch();
+  const handleChange = e => {
+    dispatch({
+      type: 'FORM_UPDATE',
+      payload: {
+        name: element.name,
+        response: e.target.value,
+      },
+    });
+  };
+  return (
+    <>
+      <Typography variant="h6">{element.label}</Typography>
+      <TextField
+        type="date"
+        defaultValue={today.toISOString().split('T')[0]}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        onChange={handleChange}
+      />
+    </>
   );
 };

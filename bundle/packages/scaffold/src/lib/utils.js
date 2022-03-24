@@ -8,6 +8,7 @@ import {
   CustomHTML,
   CustomRadio,
   CustomSubmit,
+  CustomDate,
 } from '../components/CustomComponents/CustomComponents.jsx';
 
 /**
@@ -43,6 +44,8 @@ export const pickComponent = element => {
       return <CustomHTML element={element} key={key} />;
     case 'radio':
       return <CustomRadio element={element} key={key} />;
+    case 'date':
+      return <CustomDate element={element} key={key} />;
     default:
       return (
         <>
