@@ -12,6 +12,9 @@ import ComponentList from './components/ComponentList/ComponentList';
 
 import { useSelector } from './redux/hooks/hooks';
 
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './assets/styles/theme';
+
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -36,13 +39,15 @@ const AppComponent = props => {
         <I18n>
           <div className="package-layout package-layout--scaffold">
             <PageTitle parts={['Loading...']} />
-            <Router>
-              <ComponentList
-                path="/"
-                kappSlug={kapp.slug}
-                formSlug={kapp.attributesMap.renderForm}
-              />
-            </Router>
+            <ThemeProvider theme={theme}>
+              <Router>
+                <ComponentList
+                  path="/"
+                  kappSlug={kapp.slug}
+                  formSlug={kapp.attributesMap.renderForm}
+                />
+              </Router>
+            </ThemeProvider>
           </div>
         </I18n>
       ),
