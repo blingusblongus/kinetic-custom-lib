@@ -19,4 +19,7 @@ export const styles = {
       //   color: 'white',
     },
   },
+  divider: {
+    marginBottom: '3rem',
+  },
 };

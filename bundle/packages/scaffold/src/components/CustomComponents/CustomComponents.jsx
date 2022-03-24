@@ -10,10 +10,13 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 
 import { useDispatch } from '../../redux/hooks/hooks';
+
+import { styles } from '../../assets/styles/styles';
 
 export const CustomCheckbox = ({ element }) => {
   const dispatch = useDispatch();
@@ -116,7 +119,12 @@ export const CustomDropdown = ({ element }) => {
 export const CustomSectionHeader = ({ element }) => {
   let level = element.depth > 6 ? 6 : element.depth;
   let Tag = `h${level}`;
-  return <Tag>{element.title}</Tag>;
+  return (
+    <>
+      {/* <Divider variant="middle" style={{marginBottom: '1rem'}}/> */}
+      <Tag style={{ textAlign: 'center' }}>{element.title}</Tag>
+    </>
+  );
 };
 
 export const CustomText = ({ element }) => {
@@ -244,4 +252,8 @@ export const CustomDate = ({ element }) => {
       />
     </>
   );
+};
+
+export const CustomDivider = () => {
+  return <Divider variant="middle" style={styles.divider} />;
 };

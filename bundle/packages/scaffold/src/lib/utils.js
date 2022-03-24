@@ -9,24 +9,27 @@ import {
   CustomRadio,
   CustomSubmit,
   CustomDate,
+  CustomDivider,
 } from '../components/CustomComponents/CustomComponents.jsx';
 
 /**
  * Takes JSON form element and returns a custom JSX element
  * @param {Obj} element - Element or Section of form JSON
- * @returns {JSX} - Custom JSX element
+ * @returns {JSX} - Custom JSX form element
  */
 export const pickComponent = element => {
   let key = element.key;
 
+  console.log(element);
+
   if (element.type === 'section') {
     return <CustomSectionHeader element={element} key={element.name} />;
-  }
-
-  if (element.type === 'button') {
+  } else if (element.type === 'button') {
     if (element.renderType === 'submit-page') {
       return <CustomSubmit element={element} key={element.name} />;
     }
+  } else if (element.type === 'divider') {
+    return <CustomDivider />;
   }
 
   switch (element.renderType) {

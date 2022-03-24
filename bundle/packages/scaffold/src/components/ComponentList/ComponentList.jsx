@@ -13,11 +13,18 @@ const ComponentList = ({ kappSlug, formSlug }) => {
 
   // create flattened list of elements, and assign depth to sections
   const getFormElements = (parent, depth = 1) => {
-    for (let element of parent.elements) {
+    let elements = parent.elements;
+    for (let i = 0; i < elements.length; i++) {
+      let element = elements[i];
       if (element.type === 'section') {
         element.depth = depth;
         fields.push(element);
         getFormElements(element, depth + 1);
+
+        // add a divider if it's not the list element of the form
+        if (elements[i - 1]?.type !== 'divider' && elements[i + 1]) {
+          fields.push({ type: 'divider', visible: true });
+        }
       } else {
         fields.push(element);
       }
@@ -32,6 +39,7 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     e.preventDefault();
     console.log('submitted');
   };
+  console.log(fields);
 
   // fetch supplied form, along with pages containing elements
   useEffect(() => {
