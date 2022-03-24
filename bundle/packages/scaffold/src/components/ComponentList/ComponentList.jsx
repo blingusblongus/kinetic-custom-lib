@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { fetchForm } from '@kineticdata/react';
+import { fetchForm, createSubmission } from '@kineticdata/react';
 import ComponentWrapper from '../ComponentWrapper/ComponentWrapper';
 import { FormGroup, Paper } from '@mui/material';
 
 import { styles } from '../../assets/styles/styles';
 import { pickComponent } from '../../lib/utils';
 
+import { useSelector } from '../../redux/hooks/hooks';
+
 const ComponentList = ({ kappSlug, formSlug }) => {
+  const formValues = useSelector(store => store.values);
   const [formJson, setFormJson] = useState('');
   const pages = formJson ? formJson.pages : [];
   let fields = [];
@@ -16,6 +19,8 @@ const ComponentList = ({ kappSlug, formSlug }) => {
     let elements = parent.elements;
     for (let i = 0; i < elements.length; i++) {
       let element = elements[i];
+
+      //assign depth to elements, and recursively unwrap contents
       if (element.type === 'section') {
         element.depth = depth;
         fields.push(element);
@@ -37,18 +42,24 @@ const ComponentList = ({ kappSlug, formSlug }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    createSubmission({ kappSlug, formSlug, values: formValues })
+      .then(submission => console.log(submission))
+      .catch(err => console.log(err));
     console.log('submitted');
   };
-  console.log(fields);
 
   // fetch supplied form, along with pages containing elements
-  useEffect(() => {
-    fetchForm({
-      kappSlug: kappSlug,
-      formSlug: formSlug,
-      include: 'pages',
-    }).then(({ form }) => setFormJson(form));
-  }, []);
+  useEffect(
+    () => {
+      fetchForm({
+        kappSlug: kappSlug,
+        formSlug: formSlug,
+        include: 'pages',
+      }).then(({ form }) => setFormJson(form));
+    },
+    [kappSlug, formSlug],
+  );
 
   return (
     <div style={styles.background}>

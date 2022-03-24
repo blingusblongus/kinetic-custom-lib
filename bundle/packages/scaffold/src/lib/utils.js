@@ -10,6 +10,7 @@ import {
   CustomSubmit,
   CustomDate,
   CustomDivider,
+  CustomTextInput,
 } from '../components/CustomComponents/CustomComponents.jsx';
 
 /**
@@ -20,8 +21,12 @@ import {
 export const pickComponent = element => {
   let key = element.key;
 
-  console.log(element);
+  //check for conditional validation
+  if (element.required && typeof element.required !== 'boolean') {
+    return <p>Conditional Validation not supported</p>;
+  }
 
+  // handle sections and dividers
   if (element.type === 'section') {
     return <CustomSectionHeader element={element} key={element.name} />;
   } else if (element.type === 'button') {
@@ -32,9 +37,10 @@ export const pickComponent = element => {
     return <CustomDivider />;
   }
 
+  // handle 'field' elements
   switch (element.renderType) {
     case 'checkbox':
-      if (element.renderAttributes.variant == 'multiselect') {
+      if (element.renderAttributes.variant === 'multiselect') {
         return <ListPicker element={element} key={key} />;
       } else {
         return <CustomCheckbox element={element} key={key} />;
@@ -42,7 +48,11 @@ export const pickComponent = element => {
     case 'dropdown':
       return <CustomDropdown element={element} key={key} />;
     case 'text':
-      return <CustomText element={element} key={key} />;
+      if (element.type === 'content') {
+        return <CustomText element={element} key={key} />;
+      } else {
+        return <CustomTextInput element={element} key={key} />;
+      }
     case 'html':
       return <CustomHTML element={element} key={key} />;
     case 'radio':

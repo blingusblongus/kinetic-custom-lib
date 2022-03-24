@@ -3,7 +3,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -42,7 +41,7 @@ export const CustomCheckbox = ({ element }) => {
         },
       });
     },
-    [selected],
+    [selected, dispatch, element.name],
   );
 
   return (
@@ -155,6 +154,7 @@ export const ListPicker = ({ element }) => {
       <Typography variant="h6">{element.label}</Typography>
       <Autocomplete
         multiple
+        required={element.required}
         id="tags-standard"
         options={choices.map(choice => choice.label)}
         value={value}
@@ -192,26 +192,27 @@ export const CustomRadio = ({ element }) => {
     });
   };
   return (
-    <FormControl>
+    <>
       <Typography variant="h6">{element.label}</Typography>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue={element.defaultValue}
         name={element.name}
         onChange={handleChange}
+        required={element.required}
       >
         {element.choices.map(choice => {
           return (
             <FormControlLabel
               value={choice.value}
-              control={<Radio />}
+              control={<Radio required={element.required} />}
               label={choice.label}
               key={choice.label}
             />
           );
         })}
       </RadioGroup>
-    </FormControl>
+    </>
   );
 };
 
@@ -249,6 +250,7 @@ export const CustomDate = ({ element }) => {
           shrink: true,
         }}
         onChange={handleChange}
+        required={element.required}
       />
     </>
   );
@@ -256,4 +258,33 @@ export const CustomDate = ({ element }) => {
 
 export const CustomDivider = () => {
   return <Divider variant="middle" style={styles.divider} />;
+};
+
+export const CustomTextInput = ({ element }) => {
+  const dispatch = useDispatch();
+  // const [value, setValue] = useState('');
+
+  const handleChange = e => {
+    // setValue(e.target.value);
+    dispatch({
+      type: 'FORM_UPDATE',
+      payload: {
+        name: element.name,
+        response: e.target.value,
+      },
+    });
+  };
+  return (
+    <>
+      <Typography variant="h6">{element.label}</Typography>
+      <TextField
+        // label={element.label}
+        variant="filled"
+        onChange={handleChange}
+        size="small"
+        required={element.required}
+        // value={value}
+      />
+    </>
+  );
 };
