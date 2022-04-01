@@ -15,6 +15,10 @@
   display: flex;
 }
 
+.flex-right {
+  justify-content: end;
+}
+
 .bg--primary {
   background-color: var(--bg-color-primary);
 }

@@ -26,7 +26,7 @@ const Navbar = () => {
           />
           <div id="vteams-title">vTEAMS</div>
         </div>
-        <div className="flex">
+        <div className="flex flex-right">
           <Button
             sx={{
               color: 'black',

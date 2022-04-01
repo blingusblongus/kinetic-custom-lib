@@ -16,6 +16,7 @@ import Priority from '../Priority/Priority';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
+  const [estimate, setEstimate] = useState(' hours');
 
   const prioritySelections = [1, 2, 3].map(num => {
     return (
@@ -30,24 +31,20 @@ const TicketSubmission = ({ ticket }) => {
     <div className="form-wrapper">
       <div className="label-description">Ticket #{ticket.number}</div>
       <div className="submission-grid">
-        {/* <div className="grid-item"> */}
         <InputLabel id="estimate-label">Estimate</InputLabel>
-        {/* <TextField 
-        variant="standard" 
-        labelId="estimate-label" type="number" 
-        size='small'
-        sx={{
-            height: 10
-        }}/> */}
-        <input type="number" />
-        {/* </div> */}
-        {/* <div className="grid-item"> */}
+
+        <input
+          type="number"
+          value={estimate}
+          onChange={e => setEstimate(e.target.value)}
+        />
         <div />
+
         <InputLabel id="priority-label">Priority</InputLabel>
+
         <Select variant="standard" labelId="priority-label" defaultValue={1}>
           {prioritySelections}
         </Select>
-        {/* </div> */}
 
         <InputLabel id="date-label">Due Date</InputLabel>
         <input type="date" />
