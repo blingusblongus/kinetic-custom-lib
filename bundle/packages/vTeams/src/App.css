@@ -1,6 +1,11 @@
 :root {
   --color-white: white;
   --bg-color-primary: #012b3f;
+  --bg-off-white: #f8f8f8;
+}
+
+.page-container {
+  background-color: var(--bg-off-white);
 }
 
 .bg--primary {
@@ -21,4 +26,15 @@
 
 .flex-column {
   flex-direction: column;
+}
+
+.form-wrapper {
+  padding: 20px;
+  box-shadow: 1px 1px 7px lightgray;
+  border-radius: 8px;
+  background-color: var(--color-white);
+}
+
+.form-section {
+  margin: 20px 0px;
 }
