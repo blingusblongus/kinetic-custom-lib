@@ -1,0 +1,20 @@
+:root {
+  --color-white: white;
+  --bg-color-primary: #012b3f;
+}
+
+.bg--primary {
+  background-color: var(--bg-color-primary);
+}
+
+.flex-align-vert {
+  align-items: center;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
