@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Paper,
   Box,
@@ -11,9 +11,11 @@ import {
 import './TicketSubmission.css';
 
 const TicketSubmission = ({ ticket }) => {
+  const [shortDescription, setShortDescription] = useState('');
+  console.log(shortDescription);
   return (
     <div className="form-wrapper">
-      <div>TicketSubmission</div>
+      <div className="label-description">Ticket #{ticket.number}</div>
       <FormGroup row>
         <InputLabel id="estimate-label">Estimate</InputLabel>
         <Select variant="standard" labelId="estimate-label" />

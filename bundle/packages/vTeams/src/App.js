@@ -14,6 +14,7 @@ import { useSelector } from './redux/hooks/hooks';
 import { Home } from './components/Home';
 import Navbar from './components/Navbar/Navbar';
 import './App.css';
+import BreadCrumbContainer from './components/BreadCrumbs/BreadCrumbs';
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/

@@ -4,7 +4,7 @@
   --bg-off-white: #f8f8f8;
 }
 
-.page-container {
+.package-layout--vteams {
   background-color: var(--bg-off-white);
 }
 
@@ -29,7 +29,7 @@
 }
 
 .form-wrapper {
-  padding: 20px;
+  padding: 20px 40px;
   box-shadow: 1px 1px 7px lightgray;
   border-radius: 8px;
   background-color: var(--color-white);

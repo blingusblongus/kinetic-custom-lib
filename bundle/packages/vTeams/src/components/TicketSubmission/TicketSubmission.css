@@ -2,6 +2,10 @@
   font-size: 1.2rem;
   font-weight: bold;
   color: black;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   margin-bottom: 10px;
+}
+
+textarea {
+  margin: 0px -10px;
 }
