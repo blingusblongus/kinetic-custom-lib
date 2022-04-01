@@ -4,7 +4,7 @@
   --bg-off-white: #f8f8f8;
 }
 
-.package-layout--vteams {
+.page-container {
   background-color: var(--bg-off-white);
 }
 
