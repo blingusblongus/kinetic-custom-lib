@@ -5,6 +5,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import Button from '@mui/material/Button';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 
 const Navbar = () => {
   const iconSize = '2rem';
@@ -12,10 +14,8 @@ const Navbar = () => {
     <>
       <header className="navbar-grid bg--primary">
         <div className="flex">
-          <NavIcon component={<MenuIcon size="small" />} />
-          <NavIcon
-            component={<HomeOutlinedIcon sx={{ fontSize: iconSize }} />}
-          />
+          <NavIcon component={<MenuIcon />} />
+          <NavIcon component={<HomeOutlinedIcon />} />
         </div>
         <div className="flex flex-center">
           <NavIcon
@@ -38,9 +38,9 @@ const Navbar = () => {
           >
             Contact Us
           </Button>
-          <NavIcon component={<MenuIcon sx={{ fontSize: iconSize }} />} />
-          <NavIcon component={<MenuIcon sx={{ fontSize: iconSize }} />} />
-          <NavIcon component={<MenuIcon sx={{ fontSize: iconSize }} />} />
+          <NavIcon component={<ErrorOutlineIcon />} />
+          <NavIcon component={<NotificationsNoneIcon />} />
+          <NavIcon component={<PermIdentityOutlinedIcon />} />
         </div>
       </header>
 
