@@ -7,6 +7,7 @@ import {
   FormLabel,
   InputLabel,
   MenuItem,
+  TextField,
 } from '@mui/material';
 
 import './TicketSubmission.css';
@@ -30,7 +31,14 @@ const TicketSubmission = ({ ticket }) => {
       <div className="submission-grid">
         {/* <div className="grid-item"> */}
         <InputLabel id="estimate-label">Estimate</InputLabel>
-        <Select variant="standard" labelId="estimate-label" />
+        {/* <TextField 
+        variant="standard" 
+        labelId="estimate-label" type="number" 
+        size='small'
+        sx={{
+            height: 10
+        }}/> */}
+        <input type="number" />
         {/* </div> */}
         {/* <div className="grid-item"> */}
         <div />
@@ -39,6 +47,9 @@ const TicketSubmission = ({ ticket }) => {
           {prioritySelections}
         </Select>
         {/* </div> */}
+
+        <InputLabel id="date-label">Due Date</InputLabel>
+        <Select variant="standard" labelId="date-label" defaultValue={1} />
       </div>
 
       <div className="flex flex-column form-section">
