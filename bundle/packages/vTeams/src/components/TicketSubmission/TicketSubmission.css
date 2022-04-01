@@ -18,3 +18,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+input {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -mox-appearance: none;
+  appearance: none;
+}

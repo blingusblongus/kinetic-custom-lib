@@ -8,6 +8,7 @@ import {
   InputLabel,
   MenuItem,
   TextField,
+  Input,
 } from '@mui/material';
 
 import './TicketSubmission.css';
@@ -49,11 +50,11 @@ const TicketSubmission = ({ ticket }) => {
         {/* </div> */}
 
         <InputLabel id="date-label">Due Date</InputLabel>
-        <Select variant="standard" labelId="date-label" defaultValue={1} />
+        <input type="date" />
       </div>
 
       <div className="flex flex-column form-section">
-        <label className="label-description" for="short-description">
+        <label className="label-description" htmlFor="short-description">
           Short Description
         </label>
         <textarea
@@ -64,7 +65,7 @@ const TicketSubmission = ({ ticket }) => {
       </div>
 
       <div className="flex flex-column form-section">
-        <label className="label-description" for="full-description">
+        <label className="label-description" htmlFor="full-description">
           Full Description
         </label>
         <textarea
