@@ -15,6 +15,7 @@ import { Home } from './components/Home';
 import Navbar from './components/Navbar/Navbar';
 import './App.css';
 import BreadCrumbContainer from './components/BreadCrumbs/BreadCrumbs';
+import TicketSubmission from './components/TicketSubmission/TicketSubmission';
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
@@ -35,9 +36,12 @@ const AppComponent = props => {
           <div className="package-layout package-layout--vteams">
             <PageTitle parts={['Loading...']} />
             <Navbar />
-            <Router>
-              <Home path="/" />
-            </Router>
+            <div className="page-container">
+              <BreadCrumbContainer />
+              <Router>
+                <TicketSubmission path="/" />
+              </Router>
+            </div>
           </div>
         </I18n>
       ),

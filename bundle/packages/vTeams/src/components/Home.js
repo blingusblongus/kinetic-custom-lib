@@ -12,7 +12,6 @@ const HomeComponent = props => {
   return (
     <div className="page-container">
       <div className="page-panel">
-        <BreadCrumbContainer />
         <TicketSubmission ticket={demoTicket} />
       </div>
     </div>
