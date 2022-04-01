@@ -1,0 +1,24 @@
+:root {
+  --dot-width: 7px;
+}
+
+.priority-dot {
+  border-radius: 50%;
+  min-width: var(--dot-width);
+  max-width: var(--dot-width);
+  min-height: var(--dot-width);
+  max-height: var(--dot-width);
+  margin: auto 10px;
+}
+
+.dot-green {
+  background-color: green;
+}
+
+.dot-orange {
+  background-color: orange;
+}
+
+.dot-red {
+  background-color: red;
+}

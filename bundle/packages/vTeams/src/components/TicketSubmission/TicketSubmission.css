@@ -2,7 +2,7 @@
   font-size: 1.2rem;
   font-weight: var(--weight-heavy);
   color: black;
-  /* margin-left: 10px; */
+  margin-left: var(--indent-level);
   margin-bottom: 10px;
 }
 
@@ -10,6 +10,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 1fr 2fr;
   gap: 10px;
+  padding-left: var(--indent-level);
 }
 
 .submission-grid.grid-item {

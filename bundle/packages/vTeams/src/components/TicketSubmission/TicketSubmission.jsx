@@ -6,12 +6,23 @@ import {
   FormGroup,
   FormLabel,
   InputLabel,
+  MenuItem,
 } from '@mui/material';
 
 import './TicketSubmission.css';
+import Priority from '../Priority/Priority';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
+
+  const prioritySelections = [1, 2, 3].map(num => {
+    return (
+      <MenuItem value={num} key={num}>
+        <Priority level={num} />
+      </MenuItem>
+    );
+  });
+
   console.log(shortDescription);
   return (
     <div className="form-wrapper">
@@ -24,7 +35,9 @@ const TicketSubmission = ({ ticket }) => {
         {/* <div className="grid-item"> */}
         <div />
         <InputLabel id="priority-label">Priority</InputLabel>
-        <Select variant="standard" labelId="priority-label" input />
+        <Select variant="standard" labelId="priority-label" defaultValue={1}>
+          {prioritySelections}
+        </Select>
         {/* </div> */}
       </div>
 
