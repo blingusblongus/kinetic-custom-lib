@@ -1,6 +1,7 @@
 import React from 'react';
 import { compose, lifecycle } from 'recompose';
 import { connect } from '../redux/store';
+import TicketSubmission from './TicketSubmission/TicketSubmission';
 
 const HomeComponent = props => (
   <div className="page-container">
@@ -9,6 +10,7 @@ const HomeComponent = props => (
         <h1>Welcome to the Scaffold Package!</h1>
         <p>This is the home page.</p>
       </div>
+      <TicketSubmission />
     </div>
   </div>
 );
