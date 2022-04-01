@@ -6,12 +6,15 @@
   border-radius: 50%;
   background-color: var(--color-white);
   margin: 4px;
+  width: var(--nav-icon-dimensions);
+  height: var(--nav-icon-dimensions);
 }
 
 .nav-icon * {
   width: var(--nav-icon-dimensions);
   height: var(--nav-icon-dimensions);
   border-radius: 50%;
+  margin: auto;
 }
 
 .vteams-title {

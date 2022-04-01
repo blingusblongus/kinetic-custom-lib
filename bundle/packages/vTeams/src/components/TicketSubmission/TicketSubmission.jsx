@@ -16,10 +16,17 @@ const TicketSubmission = ({ ticket }) => {
   return (
     <div className="form-wrapper">
       <div className="label-description">Ticket #{ticket.number}</div>
-      <FormGroup row>
+      <div className="submission-grid">
+        {/* <div className="grid-item"> */}
         <InputLabel id="estimate-label">Estimate</InputLabel>
         <Select variant="standard" labelId="estimate-label" />
-      </FormGroup>
+        {/* </div> */}
+        {/* <div className="grid-item"> */}
+        <div />
+        <InputLabel id="priority-label">Priority</InputLabel>
+        <Select variant="standard" labelId="priority-label" input />
+        {/* </div> */}
+      </div>
 
       <div className="flex flex-column form-section">
         <label className="label-description" for="short-description">

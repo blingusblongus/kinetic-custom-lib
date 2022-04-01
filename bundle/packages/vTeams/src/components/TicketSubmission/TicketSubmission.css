@@ -1,11 +1,18 @@
 .label-description {
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: var(--weight-heavy);
   color: black;
   /* margin-left: 10px; */
   margin-bottom: 10px;
 }
 
-textarea {
-  margin: 0px -10px;
+.submission-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 2fr;
+  gap: 10px;
+}
+
+.submission-grid.grid-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
