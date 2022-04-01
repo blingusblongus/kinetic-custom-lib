@@ -5,3 +5,10 @@ header {
 .flex {
   display: flex;
 }
+
+.subheader {
+  height: 2rem;
+  width: 100vw;
+  background-color: var(--bg-color-white);
+  box-shadow: 0px 2px 2px lightgrey;
+}
