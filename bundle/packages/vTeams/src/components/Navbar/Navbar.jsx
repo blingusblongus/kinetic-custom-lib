@@ -4,6 +4,7 @@ import './Navbar.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import Button from '@mui/material/Button';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const Navbar = () => {
   const iconSize = '2rem';
@@ -11,9 +12,7 @@ const Navbar = () => {
     <>
       <header className="navbar-grid bg--primary">
         <div className="flex">
-          <NavIcon
-            component={<MenuIcon size="small" sx={{ fontSize: iconSize }} />}
-          />
+          <NavIcon component={<MenuIcon size="small" />} />
           <NavIcon
             component={<HomeOutlinedIcon sx={{ fontSize: iconSize }} />}
           />
@@ -33,7 +32,7 @@ const Navbar = () => {
               backgroundColor: 'white',
               height: '1.5rem',
               margin: 'auto 4px',
-              fontSize: '.8rem',
+              fontSize: '.7rem',
             }}
             size="small"
           >

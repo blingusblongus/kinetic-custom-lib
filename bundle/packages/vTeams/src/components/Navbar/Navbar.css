@@ -16,7 +16,7 @@ header {
 }
 
 #vteams-title {
-  margin: auto 0px;
+  margin: auto 10px;
   font-size: 1.2rem;
   font-weight: var(--weight-medium);
   color: var(--color-white);

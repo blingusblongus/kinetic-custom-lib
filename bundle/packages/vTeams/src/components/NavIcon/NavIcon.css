@@ -3,6 +3,8 @@
 }
 
 .nav-icon {
+  display: flex;
+  /* justify-content: center; */
   border-radius: 50%;
   background-color: var(--color-white);
   margin: 4px;
@@ -11,15 +13,8 @@
 }
 
 .nav-icon * {
-  width: var(--nav-icon-dimensions);
-  height: var(--nav-icon-dimensions);
   border-radius: 50%;
+  margin: auto;
   transform-origin: center;
   transform: scale(0.8);
-}
-
-.vteams-title {
-  color: var(--color-white);
-  margin: auto;
-  font-weight: 600;
 }
