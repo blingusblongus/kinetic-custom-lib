@@ -8,19 +8,11 @@ import {
 } from '@kineticdata/bundle-common';
 import { connect } from './redux/store';
 import { I18n } from '@kineticdata/react';
-import ComponentList from './components/ComponentList/ComponentList';
 
 import { useSelector } from './redux/hooks/hooks';
 
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from './assets/styles/theme';
-
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
 import { Home } from './components/Home';
+import Navbar from './components/Navbar/Navbar';
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
@@ -38,13 +30,12 @@ const AppComponent = props => {
     return props.render({
       main: (
         <I18n>
-          <div className="package-layout package-layout--scaffold">
+          <div className="package-layout package-layout--vteams">
             <PageTitle parts={['Loading...']} />
-            <ThemeProvider theme={theme}>
-              <Router>
-                <Home path="/" />
-              </Router>
-            </ThemeProvider>
+            <Navbar />
+            <Router>
+              <Home path="/" />
+            </Router>
           </div>
         </I18n>
       ),
