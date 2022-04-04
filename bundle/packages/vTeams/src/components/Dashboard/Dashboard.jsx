@@ -83,7 +83,7 @@ const Dashboard = () => {
 
   const daysArr = [...Array(31).keys()];
 
-  console.log(daysArr);
+  console.log(<DataGrid />);
 
   return (
     <div className="page-panel">
@@ -93,9 +93,17 @@ const Dashboard = () => {
           columns={columns}
           sx={{
             bgcolor: 'white',
-            '.MuiDataGrid-columnHeaders': {
+            '.MuiDataGrid-columnHeader': {
               backgroundColor: bgColorPrimary,
               color: colorWhite,
+            },
+            '.MuiDataGrid-menuIconButton': {
+              color: colorWhite,
+              opacity: 1,
+            },
+            '.MuiDataGrid-sortIcon': {
+              color: colorWhite,
+              opacity: 1,
             },
           }}
           density="compact"
