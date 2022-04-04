@@ -13,7 +13,7 @@ const Navbar = () => {
   const iconSize = '2rem';
 
   // hook up with redux later
-  const notifications = true;
+  const notifications = 1;
 
   return (
     <>
@@ -56,6 +56,7 @@ const Navbar = () => {
                   vertical: 'bottom',
                   horizontal: 'right',
                 }}
+                invisible={!notifications}
                 // overlap="circular"
                 variant="dot"
                 color="error"
