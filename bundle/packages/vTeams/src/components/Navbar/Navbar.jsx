@@ -33,6 +33,10 @@ const Navbar = () => {
               height: '1.5rem',
               margin: 'auto 4px',
               fontSize: '.7rem',
+              '&:hover': {
+                color: 'white',
+                backgroundColor: 'gray',
+              },
             }}
             size="small"
           >

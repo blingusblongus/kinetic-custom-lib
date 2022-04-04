@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Paper,
-  Box,
-  Select,
-  FormGroup,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  TextField,
-  Input,
-} from '@mui/material';
+import { Select, InputLabel, MenuItem, Button } from '@mui/material';
 
 import './TicketSubmission.css';
 import Priority from '../Priority/Priority';
@@ -72,6 +62,24 @@ const TicketSubmission = ({ ticket }) => {
             rows={8}
             placeholder="Add a more detailed description..."
           />
+        </div>
+
+        <div className="flex flex-right">
+          <Button
+            sx={{
+              height: '1.5rem',
+              margin: 'auto 4px',
+              fontSize: '.7rem',
+              '&:hover': {
+                color: 'white',
+                backgroundColor: 'gray',
+              },
+            }}
+            variant="contained"
+            size="small"
+          >
+            Submit
+          </Button>
         </div>
       </div>
     </div>
