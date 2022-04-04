@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Select, InputLabel, MenuItem } from '@mui/material';
+import { Select, InputLabel, MenuItem, Input } from '@mui/material';
 
 import './TicketSubmission.css';
 import Priority from '../Priority/Priority';
 import TeamsButton from '../TeamsButton/TeamsButton';
+import { TextField } from '@mui/material';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
@@ -24,10 +25,23 @@ const TicketSubmission = ({ ticket }) => {
         <div className="submission-grid">
           <InputLabel id="estimate-label">Estimate</InputLabel>
 
-          <input
+          {/* <input
             type="number"
             value={estimate}
             onChange={e => setEstimate(e.target.value)}
+          /> */}
+          <TextField
+            name="Estimated Duration"
+            variant="standard"
+            type="number"
+            placeholder="Estimated Hours"
+            sx={{
+              "input[type='number']:not(.form-control)": {
+                padding: 0,
+                border: 'none',
+                height: '2.1rem',
+              },
+            }}
           />
           <div />
 
