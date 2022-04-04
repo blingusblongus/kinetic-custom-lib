@@ -19,7 +19,7 @@ const TicketSubmission = ({ ticket }) => {
 
   return (
     <div className="page-panel">
-      <div className="form-wrapper">
+      <div className="card-wrapper">
         <div className="label-description">Ticket #{ticket?.number}</div>
         <div className="submission-grid">
           <InputLabel id="estimate-label">Estimate</InputLabel>

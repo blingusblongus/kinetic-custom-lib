@@ -42,7 +42,7 @@ $bg-color-light: #488dad;
   flex-direction: column;
 }
 
-.form-wrapper {
+.card-wrapper {
   padding: 20px 40px;
   box-shadow: 1px 1px 7px lightgray;
   border-radius: 8px;
@@ -51,6 +51,10 @@ $bg-color-light: #488dad;
 
 .form-section {
   margin: 20px 0px;
+}
+
+.grid {
+  display: grid;
 }
 
 :export {
