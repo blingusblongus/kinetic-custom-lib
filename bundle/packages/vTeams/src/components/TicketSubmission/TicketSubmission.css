@@ -18,3 +18,34 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+.knowledge-widget {
+  border-radius: 0.5rem;
+  background-color: var(--bg-color-primary);
+  transition: transform 1s;
+}
+
+.knowledge-widget-tab {
+  width: 150px;
+  height: 2rem;
+  transition: transform 1s;
+  /* transform: translateX(100%); */
+  z-index: 300;
+  right: 30px;
+  top: 15%;
+  position: fixed;
+  transform: translateX(100%);
+}
+
+.knowledge-widget-content {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  left: 30px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.knowledge-widget-tab:hover {
+  transform: translateX(0%);
+}
