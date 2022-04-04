@@ -108,7 +108,6 @@ const Dashboard = () => {
           }}
           density="compact"
           autoHeight
-          getRowClassName={params => console.log(params)}
         />
 
         <div className="flex flex-column" id="dashboard-col-report">

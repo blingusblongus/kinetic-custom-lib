@@ -8,6 +8,9 @@ import Badge from '@mui/material/Badge';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+import TeamsButton from '../TeamsButton/TeamsButton';
+
+import { bgColorPrimary, colorWhite, bgColorLight } from '../../App.scss';
 
 const Navbar = () => {
   const iconSize = '2rem';
@@ -31,22 +34,23 @@ const Navbar = () => {
           <div id="vteams-title">vTEAMS</div>
         </div>
         <div className="flex flex-right">
-          <Button
+          <TeamsButton
             sx={{
-              color: 'black',
               backgroundColor: 'white',
               height: '1.5rem',
               margin: 'auto 4px',
-              fontSize: '.7rem',
+              color: bgColorPrimary,
+              boxSizing: 'border-box',
               '&:hover': {
-                color: 'white',
-                backgroundColor: 'gray',
+                color: colorWhite,
+                border: '1px solid white',
+                backgroundColor: bgColorLight,
               },
             }}
             size="small"
           >
             Contact Us
-          </Button>
+          </TeamsButton>
           <NavIcon component={<ErrorOutlineIcon />} />
 
           <NavIcon
