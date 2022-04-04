@@ -2,9 +2,31 @@ import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import './Dashboard.scss';
 import { bgColorPrimary, colorWhite } from '../../App.scss';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
 const Dashboard = () => {
-  // Example Columns, Rows
+  // Example Data
+  // Table
   const columns = [
     { field: 'id', headerName: 'ID', width: 30 },
     {
@@ -48,7 +70,20 @@ const Dashboard = () => {
     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
   ];
+
+  // Burndown graph
+  const data = [
+    { x: 1, y: 50 },
+    { x: 10, y: 45 },
+    { x: 13, y: 24 },
+    { x: 16, y: 20 },
+    { x: 24, y: 12 },
+  ];
   // ^^^^^^^^^^^End Example Data
+
+  const daysArr = [...Array(31).keys()];
+
+  console.log(daysArr);
 
   return (
     <div className="page-panel">
@@ -67,12 +102,37 @@ const Dashboard = () => {
           autoHeight
           getRowClassName={params => console.log(params)}
         />
-        <div className="flex flex-column">
+
+        <div className="flex flex-column" id="dashboard-col-report">
           <div className="card-wrapper">
             <div className="card-title">Weekly Reports</div>
           </div>
           <div className="card-wrapper">
             <div className="card-title">Burn Down</div>
+            <div className="chart-wrapper">
+              <Line
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: {
+                      display: false,
+                    },
+                  },
+                }}
+                data={{
+                  labels: daysArr,
+                  datasets: [
+                    {
+                      label: 'Burn Down',
+                      data: data,
+                      backgroundColor: bgColorPrimary,
+                      borderColor: bgColorPrimary,
+                    },
+                  ],
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
