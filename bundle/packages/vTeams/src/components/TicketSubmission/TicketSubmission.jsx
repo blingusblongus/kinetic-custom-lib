@@ -5,6 +5,7 @@ import './TicketSubmission.css';
 import Priority from '../Priority/Priority';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import { TextField } from '@mui/material';
+import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import { bgColorPrimary } from '../../App.scss';
 
 const TicketSubmission = ({ ticket }) => {
@@ -21,21 +22,28 @@ const TicketSubmission = ({ ticket }) => {
 
   return (
     <>
-      <div className="knowledge-widget knowledge-widget-tab">
-        <div className="knowledge-widget knowledge-widget-content" />
+      {/* Knowledge Widget */}
+      <div className="knowledge-widget knowledge-widget--tab">
+        <div className="knowledge-widget knowledge-widget--content">
+          Some Extra info goes here
+        </div>
+        <LightbulbOutlinedIcon
+          sx={{
+            color: 'white',
+            position: 'absolute',
+            top: '4px',
+            left: '4px',
+          }}
+        />
       </div>
 
+      {/* Main Page Content */}
       <div className="page-panel">
         <div className="card-wrapper">
           <div className="label-description">Ticket #{ticket?.number}</div>
           <div className="submission-grid">
             <InputLabel id="estimate-label">Estimate</InputLabel>
 
-            {/* <input
-            type="number"
-            value={estimate}
-            onChange={e => setEstimate(e.target.value)}
-          /> */}
             <TextField
               name="Estimated Duration"
               variant="standard"
