@@ -93,7 +93,7 @@ const Dashboard = () => {
           columns={columns}
           sx={{
             bgcolor: 'white',
-            '.MuiDataGrid-columnHeader': {
+            '.MuiDataGrid-columnHeaders': {
               backgroundColor: bgColorPrimary,
               color: colorWhite,
             },
