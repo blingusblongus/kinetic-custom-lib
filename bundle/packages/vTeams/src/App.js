@@ -13,7 +13,7 @@ import { useSelector } from './redux/hooks/hooks';
 
 import { Home } from './components/Home';
 import Navbar from './components/Navbar/Navbar';
-import './App.css';
+import './App.scss';
 import BreadCrumbContainer from './components/BreadCrumbs/BreadCrumbs';
 import TicketSubmission from './components/TicketSubmission/TicketSubmission';
 /*****************************************************************************

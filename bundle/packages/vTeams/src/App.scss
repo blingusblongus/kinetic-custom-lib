@@ -7,6 +7,9 @@
   --indent-level: 10px;
 }
 
+$bg-color-primary: #012b3f;
+$bg-color-light: #488dad;
+
 .page-container {
   background-color: var(--bg-off-white);
 }
@@ -48,4 +51,9 @@
 
 .form-section {
   margin: 20px 0px;
+}
+
+:export {
+  bgColorPrimary: $bg-color-primary;
+  bgColorLight: $bg-color-light;
 }

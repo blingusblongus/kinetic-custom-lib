@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Select, InputLabel, MenuItem, Button } from '@mui/material';
+import { Select, InputLabel, MenuItem } from '@mui/material';
 
 import './TicketSubmission.css';
 import Priority from '../Priority/Priority';
-import BreadCrumbContainer from '../BreadCrumbs/BreadCrumbs';
+import TeamsButton from '../TeamsButton/TeamsButton';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
@@ -17,7 +17,6 @@ const TicketSubmission = ({ ticket }) => {
     );
   });
 
-  console.log(shortDescription);
   return (
     <div className="page-panel">
       <div className="form-wrapper">
@@ -65,21 +64,7 @@ const TicketSubmission = ({ ticket }) => {
         </div>
 
         <div className="flex flex-right">
-          <Button
-            sx={{
-              height: '1.5rem',
-              margin: 'auto 4px',
-              fontSize: '.7rem',
-              '&:hover': {
-                color: 'white',
-                backgroundColor: 'gray',
-              },
-            }}
-            variant="contained"
-            size="small"
-          >
-            Submit
-          </Button>
+          <TeamsButton>Submit</TeamsButton>
         </div>
       </div>
     </div>
