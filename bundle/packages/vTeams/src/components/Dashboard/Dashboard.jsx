@@ -48,6 +48,7 @@ const Dashboard = () => {
     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
   ];
+  // ^^^^^^^^^^^End Example Data
 
   return (
     <div className="page-panel">
@@ -67,9 +68,11 @@ const Dashboard = () => {
           getRowClassName={params => console.log(params)}
         />
         <div className="flex flex-column">
-          <div className="card-wrapper">Right Upper Content</div>
           <div className="card-wrapper">
-            <div>Right Lower Content</div>
+            <div className="card-title">Weekly Reports</div>
+          </div>
+          <div className="card-wrapper">
+            <div className="card-title">Burn Down</div>
           </div>
         </div>
       </div>
