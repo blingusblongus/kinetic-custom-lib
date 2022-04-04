@@ -4,12 +4,17 @@ import './Navbar.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import Button from '@mui/material/Button';
+import Badge from '@mui/material/Badge';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 
 const Navbar = () => {
   const iconSize = '2rem';
+
+  // hook up with redux later
+  const notifications = true;
+
   return (
     <>
       <header className="navbar-grid bg--primary">
@@ -43,7 +48,29 @@ const Navbar = () => {
             Contact Us
           </Button>
           <NavIcon component={<ErrorOutlineIcon />} />
-          <NavIcon component={<NotificationsNoneIcon />} />
+
+          <NavIcon
+            component={
+              <Badge
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                // overlap="circular"
+                variant="dot"
+                color="error"
+                sx={{
+                  '.MuiBadge-dot': {
+                    transform: 'scale(1.15)',
+                    transformOrigin: 'center',
+                  },
+                  '.MuiBadge-colorError': { backgroundColor: 'red' },
+                }}
+              >
+                <NotificationsNoneIcon />
+              </Badge>
+            }
+          />
           <NavIcon component={<PermIdentityOutlinedIcon />} />
         </div>
       </header>
