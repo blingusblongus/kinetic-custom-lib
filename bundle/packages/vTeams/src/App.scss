@@ -9,6 +9,7 @@
 
 $bg-color-primary: #012b3f;
 $bg-color-light: #488dad;
+$colorWhite: white;
 
 .page-container {
   background-color: var(--bg-off-white);
@@ -60,4 +61,5 @@ $bg-color-light: #488dad;
 :export {
   bgColorPrimary: $bg-color-primary;
   bgColorLight: $bg-color-light;
+  colorWhite: $colorWhite;
 }

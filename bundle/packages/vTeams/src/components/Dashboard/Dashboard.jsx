@@ -1,8 +1,10 @@
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import './Dashboard.scss';
+import { bgColorPrimary, colorWhite } from '../../App.scss';
 
 const Dashboard = () => {
+  // Example Columns, Rows
   const columns = [
     { field: 'id', headerName: 'ID', width: 30 },
     {
@@ -46,19 +48,24 @@ const Dashboard = () => {
     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
   ];
+
   return (
     <div className="page-panel">
       <div className="grid" id="dashboard-grid">
-        <div className="card-wrapper">
-          <div style={{ height: 500, padding: 20 }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              density="compact"
-              autoHeight
-            />
-          </div>
-        </div>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          sx={{
+            bgcolor: 'white',
+            '.MuiDataGrid-columnHeaders': {
+              backgroundColor: bgColorPrimary,
+              color: colorWhite,
+            },
+          }}
+          density="compact"
+          autoHeight
+          getRowClassName={params => console.log(params)}
+        />
         <div className="flex flex-column">
           <div className="card-wrapper">Right Upper Content</div>
           <div className="card-wrapper">

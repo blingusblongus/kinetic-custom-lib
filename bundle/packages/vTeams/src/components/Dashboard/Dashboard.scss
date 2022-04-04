@@ -1,4 +1,8 @@
 #dashboard-grid {
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 2fr;
   gap: 1rem;
+}
+
+#dashboard__card--datagrid {
+  height: 500;
 }
