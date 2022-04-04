@@ -9,6 +9,7 @@
     "@kineticdata/bundle-common": "5.1.0",
     "@kineticdata/react": "5.1.0",
     "@mui/icons-material": "^5.5.1",
+    "@mui/x-data-grid": "^5.7.0",
     "@reach/router": "git://github.com/kineticdata/router.git",
     "classnames": "^2.2.5",
     "immutable": "4.0.0-rc.9",
