@@ -5,11 +5,13 @@
   --weight-medium: 600;
   --weight-heavy: 700;
   --indent-level: 10px;
+  --line-dividers: 1px solid rgb(216, 216, 216);
 }
 
 $bg-color-primary: #012b3f;
 $bg-color-light: #488dad;
-$colorWhite: white;
+$color-white: white;
+$line-dividers: var(--line-dividers);
 
 .page-container {
   background-color: var(--bg-off-white);
@@ -62,8 +64,31 @@ $colorWhite: white;
   display: grid;
 }
 
+.no-padding {
+  padding: 0;
+}
+
+.card-pane {
+  padding: 10px;
+}
+
+.section-title {
+  font-weight: var(--weight-heavy);
+  padding-left: 10px;
+}
+
+.icon-center-vert {
+  display: flex;
+  align-items: center;
+}
+
+.icon-pad-right {
+  padding-right: 5px;
+}
+
 :export {
   bgColorPrimary: $bg-color-primary;
   bgColorLight: $bg-color-light;
-  colorWhite: $colorWhite;
+  colorWhite: $color-white;
+  line-dividers: $line-dividers;
 }

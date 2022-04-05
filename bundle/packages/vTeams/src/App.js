@@ -17,6 +17,7 @@ import './App.scss';
 import BreadCrumbContainer from './components/BreadCrumbs/BreadCrumbs';
 import TicketSubmission from './components/TicketSubmission/TicketSubmission';
 import Dashboard from './components/Dashboard/Dashboard';
+import TicketUserView from './components/TicketUserView./TicketUserView';
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
@@ -42,6 +43,7 @@ const AppComponent = props => {
               <Router>
                 <TicketSubmission path="/" />
                 <Dashboard path="/dashboard" />
+                <TicketUserView path="/ticket" />
               </Router>
             </div>
           </div>

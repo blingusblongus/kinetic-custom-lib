@@ -1,0 +1,15 @@
+#user-ticket-grid {
+  grid-template-columns: 3fr 2fr;
+}
+
+.left-pane {
+  border-right: var(--line-dividers);
+}
+
+.pane-header {
+  margin: auto 0px;
+}
+
+#left-pane-header {
+  grid-template-columns: 2fr 1fr 1fr;
+}

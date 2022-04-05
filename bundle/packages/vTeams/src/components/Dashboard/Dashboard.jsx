@@ -83,8 +83,6 @@ const Dashboard = () => {
 
   const daysArr = [...Array(31).keys()];
 
-  console.log(<DataGrid />);
-
   return (
     <div className="page-panel">
       <div className="grid" id="dashboard-grid">
