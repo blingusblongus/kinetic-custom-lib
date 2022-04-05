@@ -19,6 +19,7 @@ import BreadCrumbContainer from './components/BreadCrumbs/BreadCrumbs';
 import TicketSubmission from './components/TicketSubmission/TicketSubmission';
 import Dashboard from './components/Dashboard/Dashboard';
 import TicketUserView from './components/TicketUserView./TicketUserView';
+import { Footer } from './components/Footer/Footer';
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
@@ -63,6 +64,7 @@ const AppComponent = props => {
                   <TicketUserView path="/ticket" />
                 </Router>
               </div>
+              <Footer />
             </div>
           </ThemeProvider>
         </I18n>

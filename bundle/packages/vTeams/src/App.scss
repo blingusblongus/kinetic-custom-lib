@@ -121,6 +121,11 @@ $bg-off-white-darker: var(--bg-off-white-darker);
   padding-right: 5px;
 }
 
+footer {
+  background-color: $bg-color-primary;
+  height: 3rem;
+}
+
 :export {
   bgColorPrimary: $bg-color-primary;
   bgColorLight: $bg-color-light;
