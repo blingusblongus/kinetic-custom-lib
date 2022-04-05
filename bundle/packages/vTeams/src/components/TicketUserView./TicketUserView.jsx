@@ -3,13 +3,14 @@ import './TicketUserView.scss';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LabelWithIcon from '../LabelWithIcon/LabelWithIcon';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { TextField } from '@mui/material';
 
 import CustomTabs from '../CustomTabs/CustomTabs';
 import Priority from '../Priority/Priority';
+import { TextField } from '@mui/material';
 
 const TicketUserView = ({ ticket }) => {
   const [comment, setComment] = useState('');
+  const [date, setDate] = useState('');
 
   //example ticket
   if (!ticket) {
@@ -22,13 +23,17 @@ const TicketUserView = ({ ticket }) => {
     };
   }
 
-  let { priority, number, dueDate, status, owner } = ticket;
-  dueDate = dueDate.toLocaleString().split(',')[0];
+  const { priority, number, dueDate, status, owner } = ticket;
+  const parsedDate = dueDate.toLocaleString().split(',')[0];
 
   const tabs = ['Customer Details', 'Response Details', 'History & Comments'];
 
   const textareaChange = e => {
     setComment(e.target.value);
+  };
+
+  const dateChange = e => {
+    setDate(e.target.value);
   };
 
   return (
@@ -46,7 +51,7 @@ const TicketUserView = ({ ticket }) => {
 
               <LabelWithIcon
                 icon={<CalendarMonthIcon fontSize="inherit" />}
-                label={dueDate}
+                label={parsedDate}
               />
             </div>
 
@@ -64,6 +69,7 @@ const TicketUserView = ({ ticket }) => {
 
           <div className="card-pane right-pane">
             <div className="pane-header font-bold">Action & Status</div>
+
             <table>
               <tbody>
                 <tr>
@@ -82,10 +88,13 @@ const TicketUserView = ({ ticket }) => {
                 </tr>
                 <tr>
                   <th>Due Date</th>
-                  <td>{dueDate}</td>
+                  <td>
+                    <input type="date" onChange={dateChange} />
+                  </td>
                 </tr>
               </tbody>
             </table>
+
             <div className="section-title ticket-comments">
               Post Comment
               <div className="textarea-wrapper">

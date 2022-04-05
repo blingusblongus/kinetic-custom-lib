@@ -12,17 +12,11 @@
   padding: 0;
 }
 
-.right-pane {
-}
-
 .left-pane--content {
   background-color: var(--color-white);
   width: 100%;
   height: 4rem;
   border-style: none none solid none;
-}
-
-.right-pane--content {
 }
 
 .pane-header {
@@ -52,6 +46,10 @@
   margin-top: 10px;
 }
 
+.textarea-wrapper textarea {
+  min-height: 3rem;
+}
+
 table {
   width: 100%;
 }
@@ -73,4 +71,12 @@ tr:last-child {
 th {
   font-weight: 500;
   padding-left: 1rem;
+}
+
+input[type='date']:not(.form-control) {
+  border: none;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  margin-left: -40px;
+  font-weight: 500;
 }
