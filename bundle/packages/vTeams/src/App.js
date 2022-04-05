@@ -11,6 +11,7 @@ import { I18n } from '@kineticdata/react';
 
 import { useSelector } from './redux/hooks/hooks';
 import WebFont from 'webfontloader';
+import { ThemeProvider, createTheme } from '@mui/material';
 
 import { Home } from './components/Home';
 import Navbar from './components/Navbar/Navbar';
@@ -24,8 +25,17 @@ import TicketUserView from './components/TicketUserView./TicketUserView';
  *****************************************************************************/
 
 const AppComponent = props => {
-  const kapp = useSelector(store => store.app.kapp);
+  const THEME = createTheme({
+    typography: {
+      fontFamily: `"Inter", "Roboto", "Helvetica", "Arial", sans-serif`,
+      fontSize: 12,
+      fontWeightLight: 300,
+      fontWeightRegular: 400,
+      fontWeightMedium: 500,
+    },
+  });
 
+  // Load inter font for just custom app
   useEffect(() => {
     WebFont.load({
       google: {
@@ -42,18 +52,20 @@ const AppComponent = props => {
     return props.render({
       main: (
         <I18n>
-          <div className="package-layout package-layout--vteams">
-            <PageTitle parts={['Loading...']} />
-            <Navbar />
-            <div className="page-container">
-              <BreadCrumbContainer />
-              <Router>
-                <TicketSubmission path="/" />
-                <Dashboard path="/dashboard" />
-                <TicketUserView path="/ticket" />
-              </Router>
+          <ThemeProvider theme={THEME}>
+            <div className="package-layout package-layout--vteams">
+              <PageTitle parts={['Loading...']} />
+              <Navbar />
+              <div className="page-container">
+                <BreadCrumbContainer />
+                <Router>
+                  <TicketSubmission path="/" />
+                  <Dashboard path="/dashboard" />
+                  <TicketUserView path="/ticket" />
+                </Router>
+              </div>
             </div>
-          </div>
+          </ThemeProvider>
         </I18n>
       ),
     });
