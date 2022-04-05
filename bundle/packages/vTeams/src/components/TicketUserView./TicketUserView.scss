@@ -19,9 +19,7 @@
   background-color: var(--color-white);
   width: 100%;
   height: 4rem;
-  border-right: none;
-  border-left: none;
-  border-bottom: none;
+  border-style: none none solid none;
 }
 
 .right-pane--content {
@@ -35,6 +33,7 @@
 .pane-subheader {
   width: 100%;
   background-color: var(--bg-off-white-darker);
+  border-style: solid none;
 }
 
 #left-pane-header {
@@ -61,9 +60,14 @@ tr {
   display: grid;
   grid-template-columns: 1fr 2fr;
   border: var(--line-dividers);
+  border-style: solid none none none;
   width: 100%;
   height: 3rem;
   align-items: center;
+}
+
+tr:last-child {
+  border-style: solid none;
 }
 
 th {
