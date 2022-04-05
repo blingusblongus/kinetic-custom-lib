@@ -7,6 +7,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CustomTabs from '../CustomTabs/CustomTabs';
 import Priority from '../Priority/Priority';
 import { TextField } from '@mui/material';
+import TeamsButton from '../TeamsButton/TeamsButton';
 
 const TicketUserView = ({ ticket }) => {
   const [comment, setComment] = useState('');
@@ -99,6 +100,9 @@ const TicketUserView = ({ ticket }) => {
               Post Comment
               <div className="textarea-wrapper">
                 <textarea rows={5} onChange={textareaChange} />
+              </div>
+              <div className="flex flex-right padding-normal">
+                <TeamsButton />
               </div>
             </div>
           </div>
