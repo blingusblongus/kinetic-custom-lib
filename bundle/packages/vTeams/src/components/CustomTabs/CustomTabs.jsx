@@ -20,6 +20,12 @@ const CustomTabs = ({ options, defaultIndex, onChange = () => {} }) => {
         setTabValue(val);
         onChange(e, val, options[val]);
       }}
+      //   sx={{
+      //       '.MuiTabs-flexContainer': {
+      //           display: 'flex',
+      //           justifyContent: 'space-around',
+      //       }
+      //   }}
     >
       {options?.map((option, key) => {
         return <Tab label={option} key={key} />;

@@ -9,7 +9,6 @@ import {
 import { connect } from './redux/store';
 import { I18n } from '@kineticdata/react';
 
-import { useSelector } from './redux/hooks/hooks';
 import WebFont from 'webfontloader';
 import { ThemeProvider, createTheme } from '@mui/material';
 
@@ -39,7 +38,7 @@ const AppComponent = props => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Inter'],
+        families: ['Inter:300,400,500,700,900'],
       },
     });
   }, []);
