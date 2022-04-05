@@ -15,11 +15,6 @@ import { useSelector } from './redux/hooks/hooks';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './assets/styles/theme';
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/

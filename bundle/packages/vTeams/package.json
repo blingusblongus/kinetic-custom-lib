@@ -22,7 +22,8 @@
     "redux": "^3.7.2",
     "redux-first-history": "^4.0.0-alpha.7",
     "redux-saga": "^0.16.0",
-    "rudy-match-path": "^0.3.0"
+    "rudy-match-path": "^0.3.0",
+    "webfontloader": "^1.6.28"
   },
   "peerDependencies": {
     "react": "^16.13.0",

@@ -2,6 +2,7 @@
   --color-white: white;
   --bg-color-primary: #012b3f;
   --bg-off-white: #f8f8f8;
+  --bg-off-white-darker: #f7f7f8;
   --weight-medium: 600;
   --weight-heavy: 700;
   --indent-level: 10px;
@@ -12,9 +13,27 @@ $bg-color-primary: #012b3f;
 $bg-color-light: #488dad;
 $color-white: white;
 $line-dividers: var(--line-dividers);
+$bg-off-white-darker: var(--bg-off-white-darker);
+
+.font-loader {
+  font-family: 'Inter';
+}
+
+.font-small {
+  font-size: 12;
+}
+
+.font-medium {
+  font-size: 16;
+}
+
+.font-large {
+  font-size: 24;
+}
 
 .page-container {
   background-color: var(--bg-off-white);
+  font-family: 'Inter';
 }
 
 .flex {
@@ -89,6 +108,7 @@ $line-dividers: var(--line-dividers);
 :export {
   bgColorPrimary: $bg-color-primary;
   bgColorLight: $bg-color-light;
+  bgOffWhiteDarker: $bg-off-white-darker;
   colorWhite: $color-white;
   line-dividers: $line-dividers;
 }

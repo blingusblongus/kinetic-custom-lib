@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Router } from '@reach/router';
 import { compose, lifecycle } from 'recompose';
 import {
@@ -10,6 +10,7 @@ import { connect } from './redux/store';
 import { I18n } from '@kineticdata/react';
 
 import { useSelector } from './redux/hooks/hooks';
+import WebFont from 'webfontloader';
 
 import { Home } from './components/Home';
 import Navbar from './components/Navbar/Navbar';
@@ -25,7 +26,13 @@ import TicketUserView from './components/TicketUserView./TicketUserView';
 const AppComponent = props => {
   const kapp = useSelector(store => store.app.kapp);
 
-  console.log('app', useSelector(store => store));
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Inter'],
+      },
+    });
+  }, []);
 
   if (props.error) {
     return <ErrorUnexpected />;

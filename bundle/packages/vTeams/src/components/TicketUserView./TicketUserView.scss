@@ -4,10 +4,19 @@
 
 .left-pane {
   border-right: var(--line-dividers);
+  padding: 0;
 }
 
 .pane-header {
   margin: auto 0px;
+  padding: 10px;
+}
+
+.pane-subheader {
+  display: flex;
+  justify-content: center;
+  // margin: 15px 0 50px;
+  background-color: var(--bg-off-white-darker);
 }
 
 #left-pane-header {
