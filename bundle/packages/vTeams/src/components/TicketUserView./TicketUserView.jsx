@@ -3,11 +3,14 @@ import './TicketUserView.scss';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LabelWithIcon from '../LabelWithIcon/LabelWithIcon';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { TextField } from '@mui/material';
 
 import CustomTabs from '../CustomTabs/CustomTabs';
 import Priority from '../Priority/Priority';
 
 const TicketUserView = ({ ticket }) => {
+  const [comment, setComment] = useState('');
+
   //example ticket
   if (!ticket) {
     ticket = {
@@ -23,6 +26,10 @@ const TicketUserView = ({ ticket }) => {
   dueDate = dueDate.toLocaleString().split(',')[0];
 
   const tabs = ['Customer Details', 'Response Details', 'History & Comments'];
+
+  const textareaChange = e => {
+    setComment(e.target.value);
+  };
 
   return (
     <div className="page-panel">
@@ -79,7 +86,12 @@ const TicketUserView = ({ ticket }) => {
                 </tr>
               </tbody>
             </table>
-            <div className="ticket-comments" />
+            <div className="section-title ticket-comments">
+              Post Comment
+              <div className="textarea-wrapper">
+                <textarea rows={5} onChange={textareaChange} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
