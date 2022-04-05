@@ -14,6 +14,8 @@ import {
   Legend,
 } from 'chart.js';
 
+import SearchIcon from '@mui/icons-material/Search';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -86,27 +88,38 @@ const Dashboard = () => {
   return (
     <div className="page-panel">
       <div className="grid" id="dashboard-grid">
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          sx={{
-            bgcolor: 'white',
-            '.MuiDataGrid-columnHeaders': {
-              backgroundColor: bgColorPrimary,
-              color: colorWhite,
-            },
-            '.MuiDataGrid-menuIconButton': {
-              color: colorWhite,
-              opacity: 1,
-            },
-            '.MuiDataGrid-sortIcon': {
-              color: colorWhite,
-              opacity: 1,
-            },
-          }}
-          density="compact"
-          autoHeight
-        />
+        <div className="item-container">
+          <div className="datagrid-header">
+            <div className="search-icon-wrapper">
+              <SearchIcon fontsize="inherit" />
+            </div>
+            <input type="text" className="datagrid-search" placeholder="" />
+          </div>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            sx={{
+              bgcolor: 'white',
+              borderTop: 'none',
+              '.MuiDataGrid-columnHeaders': {
+                backgroundColor: bgColorPrimary,
+                color: colorWhite,
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+              },
+              '.MuiDataGrid-menuIconButton': {
+                color: colorWhite,
+                opacity: 1,
+              },
+              '.MuiDataGrid-sortIcon': {
+                color: colorWhite,
+                opacity: 1,
+              },
+            }}
+            density="compact"
+            autoHeight
+          />
+        </div>
 
         <div className="flex flex-column" id="dashboard-col-report">
           <div className="card-wrapper">

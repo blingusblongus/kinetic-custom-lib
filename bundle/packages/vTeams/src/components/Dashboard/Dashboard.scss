@@ -3,6 +3,34 @@
   height: 80%;
 }
 
+.datagrid-header {
+  background-color: var(--bg-color-primary);
+  height: 40px;
+  padding: 10px;
+  margin-bottom: -4px;
+  border: var(--line-dividers);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.datagrid-search {
+  border-radius: 1000px !important;
+  width: 50% !important;
+  box-shadow: inset 0px 0px 3px gray;
+}
+
+.datagrid-header input[type='text']:not(.form-control) {
+  height: 1.6rem;
+}
+
+.search-icon-wrapper {
+  position: absolute;
+  z-index: 400;
+  left: 13px;
+}
+
 #dashboard-grid {
   grid-template-columns: 3fr 2fr;
   gap: 1rem;
