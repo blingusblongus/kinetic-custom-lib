@@ -88,7 +88,7 @@ const Dashboard = () => {
   return (
     <div className="page-panel">
       <div className="grid" id="dashboard-grid">
-        <div className="item-container">
+        <div className="item-container card-wrapper no-padding">
           <div className="datagrid-header">
             <div className="search-icon-wrapper">
               <SearchIcon fontsize="inherit" />

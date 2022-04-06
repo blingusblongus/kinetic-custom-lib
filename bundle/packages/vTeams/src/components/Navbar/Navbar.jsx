@@ -34,21 +34,7 @@ const Navbar = () => {
           <div id="vteams-title">vTEAMS</div>
         </div>
         <div className="flex flex-right">
-          <TeamsButton
-            sx={{
-              backgroundColor: 'white',
-              height: '1.5rem',
-              margin: 'auto 4px',
-              color: bgColorPrimary,
-              boxSizing: 'border-box',
-              '&:hover': {
-                color: colorWhite,
-                border: '1px solid white',
-                backgroundColor: bgColorLight,
-              },
-            }}
-            size="small"
-          >
+          <TeamsButton size="small" mode="light">
             Contact Us
           </TeamsButton>
           <NavIcon component={<ErrorOutlineIcon />} />
