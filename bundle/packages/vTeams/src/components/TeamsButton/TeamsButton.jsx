@@ -9,6 +9,7 @@ import { bgColorPrimary, bgColorLight, colorWhite } from '../../App.scss';
  * @returns
  */
 const TeamsButton = props => {
+  //default styling
   const sx = {
     height: '1.5rem',
     margin: 'auto 4px',
@@ -20,6 +21,7 @@ const TeamsButton = props => {
     },
   };
 
+  //light mode styling
   if (props.mode === 'light') {
     sx.backgroundColor = colorWhite;
     sx.color = 'black';
@@ -30,6 +32,9 @@ const TeamsButton = props => {
       boxSizing: 'border-box',
     };
   }
+
+  // merge custom sx with predefined sx
+  if (props.sx) sx = { ...sx, ...props.sx };
 
   return (
     <Button
