@@ -36,8 +36,6 @@ const TeamsButton = props => {
   // merge custom mySx with predefined mySx
   if (props.sx) mySx = { ...mySx, ...props.sx };
 
-  console.log('mySx:', mySx);
-
   return (
     <Button
       variant="contained"
