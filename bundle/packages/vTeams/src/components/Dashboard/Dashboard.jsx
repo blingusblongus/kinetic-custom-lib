@@ -15,6 +15,7 @@ import {
 } from 'chart.js';
 
 import SearchIcon from '@mui/icons-material/Search';
+import TeamsButton from '../TeamsButton/TeamsButton';
 
 ChartJS.register(
   CategoryScale,
@@ -89,11 +90,19 @@ const Dashboard = () => {
     <div className="page-panel">
       <div className="grid" id="dashboard-grid">
         <div className="item-container card-wrapper no-padding">
-          <div className="datagrid-header">
+          <div className="datagrid-header flex">
             <div className="search-icon-wrapper">
-              <SearchIcon fontsize="inherit" />
+              <SearchIcon fontSize="inherit" />
             </div>
-            <input type="text" className="datagrid-search" placeholder="" />
+            <input
+              type="text"
+              className="datagrid-search"
+              placeholder="Search"
+            />
+            <div className="flex-container--right">
+              <TeamsButton mode="dark">View All</TeamsButton>
+              <TeamsButton mode="light">Create New</TeamsButton>
+            </div>
           </div>
           <DataGrid
             rows={rows}

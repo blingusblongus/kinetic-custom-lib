@@ -10,7 +10,7 @@ import { bgColorPrimary, bgColorLight, colorWhite } from '../../App.scss';
  */
 const TeamsButton = props => {
   //default styling
-  const sx = {
+  let mySx = {
     height: '1.5rem',
     margin: 'auto 4px',
     fontSize: '0.7rem',
@@ -23,9 +23,9 @@ const TeamsButton = props => {
 
   //light mode styling
   if (props.mode === 'light') {
-    sx.backgroundColor = colorWhite;
-    sx.color = 'black';
-    sx['&:hover'] = {
+    mySx.backgroundColor = colorWhite;
+    mySx.color = 'black';
+    mySx['&:hover'] = {
       color: colorWhite,
       border: '1px solid white',
       backgroundColor: bgColorLight,
@@ -33,16 +33,18 @@ const TeamsButton = props => {
     };
   }
 
-  // merge custom sx with predefined sx
-  if (props.sx) sx = { ...sx, ...props.sx };
+  // merge custom mySx with predefined mySx
+  if (props.sx) mySx = { ...mySx, ...props.sx };
+
+  console.log('mySx:', mySx);
 
   return (
     <Button
-      sx={sx}
       variant="contained"
       size="small"
       children="Submit"
       {...props}
+      sx={mySx}
     />
   );
 };
