@@ -10,6 +10,9 @@
   margin: 4px;
   width: var(--nav-icon-dimensions);
   height: var(--nav-icon-dimensions);
+  min-width: var(--nav-icon-dimensions);
+  min-height: var(--nav-icon-dimensions);
+  cursor: pointer;
 }
 
 .nav-icon * {
