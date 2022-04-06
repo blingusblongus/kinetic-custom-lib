@@ -27,9 +27,9 @@ const TeamsButton = props => {
     mySx.color = 'black';
     mySx['&:hover'] = {
       color: colorWhite,
-      border: '1px solid white',
+      // border: '1px solid white',
+      boxShadow: 'inset 0px 0px 2px white, inset 0px 0px 2px white',
       backgroundColor: bgColorLight,
-      boxSizing: 'border-box',
     };
   }
 
