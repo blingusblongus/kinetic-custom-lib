@@ -3,14 +3,11 @@ import NavIcon from '../NavIcon/NavIcon';
 import './Navbar.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import TeamsButton from '../TeamsButton/TeamsButton';
-
-import { bgColorPrimary, colorWhite, bgColorLight } from '../../App.scss';
 
 const Navbar = () => {
   const iconSize = '2rem';

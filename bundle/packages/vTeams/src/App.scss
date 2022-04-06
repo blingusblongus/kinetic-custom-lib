@@ -14,6 +14,9 @@ $bg-color-light: #488dad;
 $color-white: var(--color-white);
 $line-dividers: var(--line-dividers);
 $bg-off-white-darker: var(--bg-off-white-darker);
+$font-small: 12;
+$font-medium: 16;
+$font-large: 24;
 
 .line-dividers {
   border: $line-dividers;
@@ -24,15 +27,15 @@ $bg-off-white-darker: var(--bg-off-white-darker);
 }
 
 .font-small {
-  font-size: 12;
+  font-size: $font-small;
 }
 
 .font-medium {
-  font-size: 16;
+  font-size: $font-medium;
 }
 
 .font-large {
-  font-size: 24;
+  font-size: $font-large;
 }
 
 .font-bold {
@@ -140,4 +143,7 @@ footer {
   bgOffWhiteDarker: $bg-off-white-darker;
   colorWhite: $color-white;
   line-dividers: $line-dividers;
+  fontSmall: $font-small;
+  fontMedium: $font-medium;
+  fontLarge: $font-large;
 }
