@@ -39,29 +39,26 @@ const Navbar = () => {
           </TeamsButton>
           <NavIcon component={<ErrorOutlineIcon />} />
 
-          <NavIcon
-            component={
-              <Badge
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                invisible={!notifications}
-                // overlap="circular"
-                variant="dot"
-                color="error"
-                sx={{
-                  '.MuiBadge-dot': {
-                    transform: 'scale(1.15)',
-                    transformOrigin: 'center',
-                  },
-                  '.MuiBadge-colorError': { backgroundColor: 'red' },
-                }}
-              >
-                <NotificationsNoneIcon />
-              </Badge>
-            }
-          />
+          <Badge
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            invisible={!notifications}
+            overlap="circular"
+            variant="dot"
+            color="error"
+            sx={{
+              '.MuiBadge-dot': {
+                transform: 'scale(1.15)',
+                transformOrigin: 'center',
+              },
+              '.MuiBadge-colorError': { backgroundColor: 'red' },
+            }}
+          >
+            <NavIcon component={<NotificationsNoneIcon />} />
+          </Badge>
+
           <NavIcon component={<PermIdentityOutlinedIcon />} />
         </div>
       </header>
