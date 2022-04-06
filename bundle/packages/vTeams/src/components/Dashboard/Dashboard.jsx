@@ -16,6 +16,8 @@ import {
 
 import SearchIcon from '@mui/icons-material/Search';
 import TeamsButton from '../TeamsButton/TeamsButton';
+import { SearchNormal1 } from 'iconsax-react';
+import { fontMedium } from '../../App.scss';
 
 ChartJS.register(
   CategoryScale,
@@ -92,7 +94,8 @@ const Dashboard = () => {
         <div className="item-container card-wrapper no-padding">
           <div className="datagrid-header flex">
             <div className="search-icon-wrapper">
-              <SearchIcon fontSize="inherit" />
+              {/* <SearchIcon fontSize="inherit" /> */}
+              <SearchNormal1 size={fontMedium} />
             </div>
             <input
               type="text"
