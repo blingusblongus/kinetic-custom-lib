@@ -138,10 +138,11 @@ const Dashboard = () => {
         </div>
 
         <div className="flex flex-column" id="dashboard-col-report">
-          <div className="card-wrapper">
+          <RecentlyViewed />
+          {/* <div className="card-wrapper">
             <div className="card-title">Weekly Reports</div>
-            <RecentlyViewed />
-          </div>
+            
+          </div> */}
           <div className="card-wrapper">
             <div className="card-title">Burn Down</div>
             <div className="chart-wrapper">
