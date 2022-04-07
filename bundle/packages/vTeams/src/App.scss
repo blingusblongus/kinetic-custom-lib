@@ -1,22 +1,21 @@
+@import './assets/styles/variables';
+
 :root {
-  --color-white: white;
-  --bg-color-primary: #012b3f;
-  --bg-off-white: #f8f8f8;
-  --bg-off-white-darker: #f7f7f8;
-  --weight-medium: 600;
-  --weight-heavy: 700;
-  --indent-level: 10px;
-  --line-dividers: 1px solid #e5e5e5;
+  --color-white: $color-white;
+  --bg-color-primary: $bg-color-primary;
+  --bg-off-white: $bg-off-white;
+  --bg-off-white-darker: $bg-off-white-darker;
+  --weight-medium: $weight-medium;
+  --weight-heavy: $weight-heavy;
+  --indent-level: $indent-level;
+  --line-dividers: $line-dividers;
 }
 
-$bg-color-primary: var(--bg-color-primary);
-$bg-color-light: #488dad;
-$color-white: var(--color-white);
-$line-dividers: var(--line-dividers);
-$bg-off-white-darker: var(--bg-off-white-darker);
-$font-small: 12;
-$font-medium: 16;
-$font-large: 24;
+// $bg-color-primary: var(--bg-color-primary);
+// $bg-color-light: #488dad;
+// $color-white: var(--color-white);
+// $line-dividers: var(--line-dividers);
+// $bg-off-white-darker: var(--bg-off-white-darker);
 
 .line-dividers {
   border: $line-dividers;
@@ -51,7 +50,7 @@ $font-large: 24;
 }
 
 .page-container {
-  background-color: var(--bg-off-white);
+  background-color: $bg-off-white;
   font-family: 'Inter';
 }
 
@@ -64,7 +63,7 @@ $font-large: 24;
 }
 
 .bg--primary {
-  background-color: var(--bg-color-primary);
+  background-color: $bg-color-primary;
 }
 
 .flex-align-vert {
@@ -87,11 +86,11 @@ $font-large: 24;
   padding: 20px 40px;
   box-shadow: 1px 1px 7px lightgray;
   border-radius: 8px;
-  background-color: var(--color-white);
+  background-color: $color-white;
 }
 
 .card-title {
-  font-weight: var(--weight-heavy);
+  font-weight: $weight-heavy;
 }
 
 .form-section {

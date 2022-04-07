@@ -6,7 +6,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 import CustomTabs from '../CustomTabs/CustomTabs';
 import Priority from '../Priority/Priority';
-import { TextField } from '@mui/material';
 import TeamsButton from '../TeamsButton/TeamsButton';
 
 const TicketUserView = ({ ticket }) => {

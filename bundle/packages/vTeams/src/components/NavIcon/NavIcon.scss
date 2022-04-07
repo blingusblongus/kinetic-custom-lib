@@ -1,0 +1,22 @@
+@import '../../assets/styles/variables';
+
+$dimensions: 2rem;
+
+.nav-icon {
+  display: flex;
+  border-radius: 50%;
+  background-color: $color-white;
+  margin: 4px;
+  width: $dimensions;
+  height: $dimensions;
+  min-width: $dimensions;
+  min-height: $dimensions;
+  cursor: pointer;
+
+  * {
+    border-radius: 50%;
+    margin: auto;
+    transform-origin: center;
+    transform: scale(0.95);
+  }
+}

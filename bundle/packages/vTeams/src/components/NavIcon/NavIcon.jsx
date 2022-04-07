@@ -1,5 +1,5 @@
 import React from 'react';
-import './NavIcon.css';
+import './NavIcon.scss';
 
 const NavIcon = ({ src, component }) => {
   const innerElement = !!src ? <img src={src} /> : component;

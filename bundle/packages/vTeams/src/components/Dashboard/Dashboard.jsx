@@ -1,7 +1,10 @@
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import './Dashboard.scss';
-import { bgColorPrimary, colorWhite } from '../../App.scss';
+import {
+  bgColorPrimary,
+  colorWhite,
+} from '../../assets/styles/_variables.scss';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -18,6 +21,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import { SearchNormal1 } from 'iconsax-react';
 import { fontMedium } from '../../App.scss';
+import RecentlyViewed from '../RecentlyViewed/RecentlyViewed';
 
 ChartJS.register(
   CategoryScale,
@@ -89,7 +93,7 @@ const Dashboard = () => {
   const daysArr = [...Array(31).keys()];
 
   return (
-    <div className="page-panel">
+    <div className="dashboard page-panel">
       <div className="grid" id="dashboard-grid">
         <div className="item-container card-wrapper no-padding">
           <div className="datagrid-header flex">
@@ -136,6 +140,7 @@ const Dashboard = () => {
         <div className="flex flex-column" id="dashboard-col-report">
           <div className="card-wrapper">
             <div className="card-title">Weekly Reports</div>
+            <RecentlyViewed />
           </div>
           <div className="card-wrapper">
             <div className="card-title">Burn Down</div>
