@@ -1,83 +1,85 @@
+@import '../../assets//styles/variables';
+
 #user-ticket-grid {
   grid-template-columns: 3fr 2fr;
-}
 
-.card-pane {
-  padding: 0;
-  min-height: 60vh;
-}
+  .card-pane {
+    padding: 0;
+    min-height: 60vh;
+  }
 
-.left-pane {
-  border-right: var(--line-dividers);
-  padding: 0;
-}
+  .left-pane {
+    border-right: $line-dividers;
+    padding: 0;
+  }
 
-.left-pane--content {
-  background-color: var(--color-white);
-  width: 100%;
-  height: 4rem;
-  border-style: none none solid none;
-}
+  .left-pane--content {
+    background-color: $line-dividers;
+    width: 100%;
+    height: 4rem;
+    border-style: none none solid none;
+  }
 
-.pane-header {
-  margin: auto 0px;
-  padding: 10px;
-}
+  .pane-header {
+    margin: auto 0px;
+    padding: 10px;
+  }
 
-.pane-subheader {
-  width: 100%;
-  background-color: var(--bg-off-white-darker);
-  border-style: solid none;
-}
+  .pane-subheader {
+    width: 100%;
+    background-color: $bg-off-white-darker;
+    border-style: solid none;
+  }
 
-#left-pane-header {
-  grid-template-columns: 2fr 1fr 1fr;
-}
+  #left-pane-header {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
 
-.MuiTabs-flexContainer {
-  justify-content: space-around;
-}
+  .MuiTabs-flexContainer {
+    justify-content: space-around;
+  }
 
-.ticket-comments {
-  padding: 10px;
-}
+  .ticket-comments {
+    padding: 10px;
+  }
 
-.textarea-wrapper {
-  margin-top: 10px;
-}
+  .textarea-wrapper {
+    margin-top: 10px;
+  }
 
-.textarea-wrapper textarea {
-  min-height: 3rem;
-}
+  .textarea-wrapper textarea {
+    min-height: 3rem;
+  }
 
-table {
-  width: 100%;
-}
+  table {
+    width: 100%;
+  }
 
-tr {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  border: var(--line-dividers);
-  border-style: solid none none none;
-  width: 100%;
-  height: 3rem;
-  align-items: center;
-}
+  tr {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border: $line-dividers;
+    border-style: solid none none none;
+    width: 100%;
+    height: 3rem;
+    align-items: center;
+  }
 
-tr:last-child {
-  border-style: solid none;
-}
+  tr:last-child {
+    border-style: solid none;
+  }
 
-th {
-  font-weight: 500;
-  padding-left: 1rem;
-  font-size: 16;
-}
+  th {
+    font-weight: 500;
+    padding-left: 1rem;
+    font-size: 16;
+  }
 
-input[type='date']:not(.form-control) {
-  border: none;
-  flex-direction: row-reverse;
-  align-items: flex-end;
-  margin-left: -40px;
-  font-weight: 500;
+  input[type='date']:not(.form-control) {
+    border: none;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    margin-left: -40px;
+    font-weight: 500;
+  }
 }

@@ -93,7 +93,7 @@ const Dashboard = () => {
   const daysArr = [...Array(31).keys()];
 
   return (
-    <div className="page-panel">
+    <div className="dashboard page-panel">
       <div className="grid" id="dashboard-grid">
         <div className="item-container card-wrapper no-padding">
           <div className="datagrid-header flex">
