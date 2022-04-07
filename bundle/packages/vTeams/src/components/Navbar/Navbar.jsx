@@ -1,6 +1,6 @@
 import React from 'react';
 import NavIcon from '../NavIcon/NavIcon';
-import './Navbar.css';
+import './Navbar.scss';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import Badge from '@mui/material/Badge';
