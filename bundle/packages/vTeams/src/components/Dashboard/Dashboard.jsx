@@ -107,7 +107,7 @@ const Dashboard = () => {
               placeholder="Search"
             />
             <div className="flex-container--right">
-              <TeamsButton mode="dark">View All</TeamsButton>
+              {/* <TeamsButton mode="dark">View All</TeamsButton> */}
               <TeamsButton mode="light">Create New</TeamsButton>
             </div>
           </div>
