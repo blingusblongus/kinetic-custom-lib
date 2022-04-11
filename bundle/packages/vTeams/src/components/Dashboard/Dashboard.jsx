@@ -131,7 +131,7 @@ const Dashboard = () => {
                   labels: daysArr,
                   datasets: [
                     {
-                      label: 'Burn Down',
+                      label: 'Hours Remaining',
                       data: data,
                       backgroundColor: bgColorPrimary,
                       borderColor: bgColorPrimary,

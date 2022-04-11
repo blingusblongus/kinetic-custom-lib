@@ -37,6 +37,12 @@
     position: absolute;
     z-index: 400;
     left: 13px;
+    top: 9px;
+    cursor: pointer;
+
+    &:active {
+      transform: translateX(100);
+    }
   }
 
   #dashboard-grid {
