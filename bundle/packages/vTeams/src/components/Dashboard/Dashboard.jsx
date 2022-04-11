@@ -33,6 +33,27 @@ ChartJS.register(
   Legend,
 );
 
+const addBackground = {
+  id: 'custom_canvas_background_color',
+  beforeDraw: chart => {
+    const { left, top, width, height } = chart.chartArea;
+    console.log('chart data', chart);
+    const ctx = chart.canvas.getContext('2d');
+    ctx.save();
+    ctx.globalCompositeOperation = 'destination-over';
+
+    var gradient = ctx.createLinearGradient(0, top, 0, height);
+
+    // Add three color stops
+    gradient.addColorStop(0.35, 'rgba(255,255,255,.2');
+    gradient.addColorStop(1, 'rgba(190,201,224,.39');
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(left, top, width, height);
+    ctx.restore();
+  },
+};
+
 const Dashboard = () => {
   // Example Data
   // Table
@@ -147,12 +168,37 @@ const Dashboard = () => {
             <div className="card-title">Burn Down</div>
             <div className="chart-wrapper">
               <Line
+                plugins={[addBackground]}
                 options={{
                   responsive: true,
                   maintainAspectRatio: false,
+                  scales: {
+                    x: {
+                      grid: {
+                        display: false,
+                      },
+                    },
+                    y: {
+                      grid: {
+                        // borderWidth: 2,
+                        color: 'rgba(180,180,180,.1)',
+                        lineWidth: 2,
+                        borderDash: [6, 6],
+                      },
+                    },
+                  },
                   plugins: {
                     legend: {
                       display: false,
+                    },
+                  },
+                  elements: {
+                    point: {
+                      radius: 0,
+                      hitRadius: 3,
+                    },
+                    line: {
+                      borderWidth: 1,
                     },
                   },
                 }}

@@ -35,10 +35,12 @@ const RecentlyViewed = ({ tickets }) => {
       </header>
       <table>
         <thead>
-          <th>Ticket Number</th>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Status</th>
+          <tr>
+            <th>Ticket Number</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
         </thead>
         <tbody>
           {tickets?.map(ticket => {
