@@ -6,11 +6,19 @@
     color: $color-white;
     display: flex;
     width: 100%;
-
-    .accordion-summary-item {
-      display: block;
-    }
   }
+}
+
+.accordion-summary-item {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.summary-item-box {
+  background-color: $bg-off-white-darker;
+  border-radius: 10px;
 }
 
 .acc-summary-grid {
@@ -19,6 +27,18 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.acc-details-container {
+  display: flex;
+}
+
+.acc-details-grow {
+  flex-grow: 1;
+}
+
+.open-tickets-vertical {
+  flex-grow: 0;
+  margin: 20px;
+}
 .header-labels {
   width: 100%;
   display: grid;
