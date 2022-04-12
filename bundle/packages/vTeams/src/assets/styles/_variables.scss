@@ -16,6 +16,11 @@ $indent-level: 10px;
 
 $line-dividers: 1px solid #e5e5e5;
 
+$priority-dot-width: 7px;
+$priority-low-color: green;
+$priority-medium-color: orange;
+$priority-high-color: red;
+
 :export {
   bgColorPrimary: $bg-color-primary;
   bgColorLight: $bg-color-light;

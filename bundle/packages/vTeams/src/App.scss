@@ -39,15 +39,15 @@
 }
 
 .font-bold {
-  font-weight: 700;
+  font-weight: $weight-heavy;
 }
 
 .font-light {
-  font-weight: 300;
+  font-weight: $weight-light;
 }
 
 .font-normal {
-  font-weight: 500;
+  font-weight: $weight-medium;
 }
 
 .page-container {
@@ -102,8 +102,14 @@
   display: grid;
 }
 
+.card-header {
+  height: 3rem;
+  border-radius: 8px;
+}
+
 .header-dark {
   background-color: $bg-color-primary;
+  color: $color-white;
 }
 
 .no-padding {
@@ -139,6 +145,27 @@ footer {
 
 .full-width {
   width: 100%;
+}
+
+.priority-dot {
+  border-radius: 50%;
+  min-width: $priority-dot-width;
+  max-width: $priority-dot-width;
+  min-height: $priority-dot-width;
+  max-height: $priority-dot-width;
+  margin: auto 10px;
+}
+
+.dot-green {
+  background-color: green;
+}
+
+.dot-orange {
+  background-color: orange;
+}
+
+.dot-red {
+  background-color: red;
 }
 
 :export {
