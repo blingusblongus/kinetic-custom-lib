@@ -12,12 +12,6 @@
   --line-dividers: $line-dividers;
 }
 
-// $bg-color-primary: var(--bg-color-primary);
-// $bg-color-light: #488dad;
-// $color-white: var(--color-white);
-// $line-dividers: var(--line-dividers);
-// $bg-off-white-darker: var(--bg-off-white-darker);
-
 .line-dividers {
   border: $line-dividers;
 }
@@ -90,6 +84,11 @@
   background-color: $color-white;
 }
 
+.card-shadow {
+  box-shadow: 1px 1px 7px lightgray;
+  border-radius: 8px;
+}
+
 .card-title {
   font-weight: $weight-heavy;
 }
@@ -154,6 +153,8 @@ footer {
   min-height: $priority-dot-width;
   max-height: $priority-dot-width;
   margin: auto 10px;
+  display: inline-block;
+  align-self: center;
 }
 
 .dot-green {

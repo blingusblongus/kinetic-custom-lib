@@ -1,6 +1,35 @@
 @import '../../assets/styles/variables';
 
 .queue-grid {
-  grid-template-columns: 2fr 1fr;
-  gap: 5%;
+  grid-template-columns: 3fr 2fr;
+  gap: 3%;
+}
+
+.accordion-details {
+  background-color: $color-white;
+  font-size: $font-small;
+  border-radius: 10px;
+  padding: 1rem;
+  align-items: center;
+
+  .font-bold {
+    font-weight: $weight-heavy;
+  }
+}
+
+.open-tickets-container {
+  display: grid;
+  grid-template-columns: 4fr 3fr 3fr 3fr;
+  padding: 0.5rem 1rem;
+  margin: 5px auto;
+
+  .priority-dot {
+    margin: auto 5px;
+  }
+}
+
+.budget-container {
+  font-size: $font-small;
+  display: grid;
+  grid-template-columns: 4fr 9fr;
 }
