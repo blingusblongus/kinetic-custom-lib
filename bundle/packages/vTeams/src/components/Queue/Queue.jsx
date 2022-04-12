@@ -5,9 +5,10 @@ import TicketTable from '../TicketTable/TicketTable';
 const Queue = () => {
   return (
     <div className="queue page-panel">
-      <div className="item-container card-wrapper no-padding">
-        <div>Queue</div>
-        <TicketTable />
+      <div className="flex flex-between">
+        <TicketTable viewAllBtn />
+
+        <div className="item-container card-wrapper no-padding">Hello</div>
       </div>
     </div>
   );

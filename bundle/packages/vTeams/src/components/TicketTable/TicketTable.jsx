@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import { SearchNormal1 } from 'iconsax-react';
@@ -11,7 +11,14 @@ import {
 
 import './_TicketTable.scss';
 
-const TicketTable = ({ columns = [], rows = [] }) => {
+const TicketTable = ({
+  columns = [],
+  rows = [],
+  createBtn = false,
+  viewAllBtn = false,
+}) => {
+  const [value, setValue] = useState('');
+
   return (
     <div className="item-container card-wrapper no-padding">
       <div className="datagrid-header flex">
@@ -19,10 +26,16 @@ const TicketTable = ({ columns = [], rows = [] }) => {
           {/* <SearchIcon fontSize="inherit" /> */}
           <SearchNormal1 size={fontMedium} />
         </div>
-        <input type="text" className="datagrid-search" placeholder="Search" />
+        <input
+          type="text"
+          className="datagrid-search"
+          placeholder="Search"
+          value={value}
+          onChange={e => setValue(e.target.value)}
+        />
         <div className="flex-container--right">
-          {/* <TeamsButton mode="dark">View All</TeamsButton> */}
-          <TeamsButton mode="light">Create New</TeamsButton>
+          {viewAllBtn && <TeamsButton mode="dark">View All</TeamsButton>}
+          {createBtn && <TeamsButton mode="light">Create New</TeamsButton>}
         </div>
       </div>
       <DataGrid

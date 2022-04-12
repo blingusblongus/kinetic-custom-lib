@@ -38,7 +38,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard page-panel">
       <div className="grid" id="dashboard-grid">
-        <TicketTable columns={columns} rows={rows} />
+        <TicketTable columns={columns} rows={rows} createBtn />
         <div className="flex flex-column" id="dashboard-col-report">
           <RecentlyViewed />
           {/* <div className="card-wrapper">
