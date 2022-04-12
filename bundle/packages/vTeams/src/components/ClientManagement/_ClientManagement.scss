@@ -1,0 +1,27 @@
+@import '../../assets/styles/variables';
+
+.client-management {
+  header {
+    background-color: $bg-color-primary;
+    color: $color-white;
+    display: flex;
+    width: 100%;
+
+    .accordion-summary-item {
+      display: block;
+    }
+  }
+}
+
+.acc-summary-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.header-labels {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2;
+  flex: 1;
+}

@@ -9,6 +9,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { countPriorityTickets } from '../../lib/utils';
 
 import { bgOffWhiteDarker } from '../../assets/styles/_variables.scss';
 
@@ -35,12 +36,6 @@ const Queue = () => {
     },
   ];
 
-  const countPriorityTickets = (client, level) => {
-    return client.tickets.filter(
-      ({ open, priority }) => open && priority === level,
-    ).length;
-  };
-
   return (
     <div className="queue page-panel">
       <div className="grid queue-grid">
@@ -53,35 +48,34 @@ const Queue = () => {
               <div className="font-bold">Client Management</div>
               <TeamsButton>View All</TeamsButton>
             </div>
-            {clients.map(client => {
+            {clients.map(({ name, tickets, budget }) => {
               return (
-                <Accordion key={client.name}>
+                <Accordion key={name}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls={`panel${client.name}-content`}
-                    id={`panel${client.name}-header`}
+                    aria-controls={`panel${name}-content`}
+                    id={`panel${name}-header`}
                   >
-                    <span>{client.name}</span>
+                    <span>{name}</span>
                   </AccordionSummary>
                   <AccordionDetails sx={{ backgroundColor: bgOffWhiteDarker }}>
                     <div className="open-tickets-container accordion-details">
                       <span className="font-bold">Open Tickets:</span>
                       <div className="flex flex-align-vert">
                         <div className="priority-dot dot-red" />
-                        <span>{countPriorityTickets(client, 3)} High</span>
+                        <span>{countPriorityTickets(tickets, 3)} High</span>
                       </div>
                       <div className="flex flex-align-vert">
                         <div className="priority-dot dot-orange" />
-                        <span>{countPriorityTickets(client, 2)} Medium</span>
+                        <span>{countPriorityTickets(tickets, 2)} Medium</span>
                       </div>
                       <div className="flex flex-align-vert">
                         <div className="priority-dot dot-green" />
-                        <span>{countPriorityTickets(client, 1)} Low</span>
+                        <span>{countPriorityTickets(tickets, 1)} Low</span>
                       </div>
                     </div>
                     <div className="budget-container accordion-details">
-                      <span className="font-bold">Time Budget:</span>{' '}
-                      {client.budget}hrs
+                      <span className="font-bold">Time Budget:</span> {budget}hrs
                     </div>
                   </AccordionDetails>
                 </Accordion>

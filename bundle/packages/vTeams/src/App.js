@@ -21,6 +21,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import TicketUserView from './components/TicketUserView./TicketUserView';
 import Queue from './components/Queue/Queue';
 import { Footer } from './components/Footer/Footer';
+import ClientManagement from './components/ClientManagement/ClientManagement';
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
@@ -64,6 +65,7 @@ const AppComponent = props => {
                   <Dashboard path="/dashboard" />
                   <TicketUserView path="/ticket" />
                   <Queue path="/queue" />
+                  <ClientManagement path="/clients" />
                 </Router>
               </div>
               <Footer />
