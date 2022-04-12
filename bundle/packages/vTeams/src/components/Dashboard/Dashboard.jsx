@@ -1,5 +1,5 @@
 import React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+
 import './Dashboard.scss';
 import {
   bgColorPrimary,
@@ -17,15 +17,12 @@ import {
   Legend,
 } from 'chart.js';
 
-import SearchIcon from '@mui/icons-material/Search';
-import TeamsButton from '../TeamsButton/TeamsButton';
-import { SearchNormal1 } from 'iconsax-react';
-import { fontMedium } from '../../App.scss';
 import RecentlyViewed from '../RecentlyViewed/RecentlyViewed';
 
 import { columns, rows, data, daysArr } from './modules.js';
 
 import { addBackground } from './plugins.js';
+import TicketTable from '../TicketTable/TicketTable';
 
 ChartJS.register(
   CategoryScale,
@@ -41,48 +38,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard page-panel">
       <div className="grid" id="dashboard-grid">
-        <div className="item-container card-wrapper no-padding">
-          <div className="datagrid-header flex">
-            <div className="search-icon-wrapper">
-              {/* <SearchIcon fontSize="inherit" /> */}
-              <SearchNormal1 size={fontMedium} />
-            </div>
-            <input
-              type="text"
-              className="datagrid-search"
-              placeholder="Search"
-            />
-            <div className="flex-container--right">
-              {/* <TeamsButton mode="dark">View All</TeamsButton> */}
-              <TeamsButton mode="light">Create New</TeamsButton>
-            </div>
-          </div>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            sx={{
-              bgcolor: 'white',
-              borderTop: 'none',
-              '.MuiDataGrid-columnHeaders': {
-                backgroundColor: bgColorPrimary,
-                color: colorWhite,
-                borderTopLeftRadius: 0,
-                borderTopRightRadius: 0,
-              },
-              '.MuiDataGrid-menuIconButton': {
-                color: colorWhite,
-                opacity: 1,
-              },
-              '.MuiDataGrid-sortIcon': {
-                color: colorWhite,
-                opacity: 1,
-              },
-            }}
-            density="compact"
-            autoHeight
-          />
-        </div>
-
+        <TicketTable columns={columns} rows={rows} />
         <div className="flex flex-column" id="dashboard-col-report">
           <RecentlyViewed />
           {/* <div className="card-wrapper">
