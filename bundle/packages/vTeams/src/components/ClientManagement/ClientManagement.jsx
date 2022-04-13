@@ -2,7 +2,6 @@ import React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import './_ClientManagement.scss';
@@ -10,57 +9,9 @@ import TeamsButton from '../TeamsButton/TeamsButton';
 import { countPriorityTickets } from '../../lib/utils';
 import TicketTable from '../TicketTable/TicketTable';
 
-const ClientManagement = () => {
-  const projects = [
-    {
-      name: 'Portal Project',
-      client: 'Hazelden',
-      overallTime: 400,
-      timeLeft: 234,
-      countOpen() {
-        return this.tickets.filter(({ status }) => status === 'open').length;
-      },
-      tickets: [
-        {
-          status: 'open',
-          date: new Date(),
-          priority: 3,
-          shortDescription: 'Lorem Ipsum',
-          ticketOwner: null,
-          assignedTo: 'Eric N.',
-          id: 320401,
-        },
-        {
-          status: 'open',
-          date: new Date(),
-          priority: 3,
-          shortDescription: 'Lorem Ipsum',
-          ticketOwner: null,
-          assignedTo: 'Noah B.',
-          id: 320415,
-        },
-        {
-          status: 'open',
-          date: new Date(),
-          priority: 2,
-          shortDescription: 'Lorem Ipsum',
-          ticketOwner: null,
-          assignedTo: 'Daniel H.',
-          id: 593592,
-        },
-        {
-          status: 'open',
-          date: new Date(),
-          priority: 3,
-          shortDescription: 'Lorem Ipsum',
-          ticketOwner: null,
-          assignedTo: 'Matthew H.',
-          id: 249495,
-        },
-      ],
-    },
-  ];
+import { projects } from './modules.js';
 
+const ClientManagement = () => {
   const columns = [
     { field: 'date', headerName: 'Date', width: 100 },
     { field: 'priority', headerName: 'Priority', width: 100 },
@@ -74,7 +25,10 @@ const ClientManagement = () => {
       <header>
         <div className="header-labels">
           <div>Project</div>
-          <div>Project</div>
+          <div>Client</div>
+          <div>Overall Time</div>
+          <div>Time Left</div>
+          <div>Open Tickets</div>
         </div>
         <TeamsButton mode="light">Add Project</TeamsButton>
       </header>

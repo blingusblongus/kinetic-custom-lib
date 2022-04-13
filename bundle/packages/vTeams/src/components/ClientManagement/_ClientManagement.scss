@@ -5,8 +5,18 @@
     background-color: $bg-color-primary;
     color: $color-white;
     display: flex;
+    justify-content: space-between;
     width: 100%;
+    height: auto;
+    padding: 16px;
   }
+}
+
+.header-labels {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: center;
+  align-items: center;
 }
 
 .accordion-summary-item {
@@ -24,8 +34,13 @@
 .acc-summary-grid {
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 15%) 1fr;
 }
+
+// .accordion-summary-item:last-child {
+//     background-color: green;
+//     margin-right: 20px;
+//   }
 
 .acc-details-container {
   display: flex;
