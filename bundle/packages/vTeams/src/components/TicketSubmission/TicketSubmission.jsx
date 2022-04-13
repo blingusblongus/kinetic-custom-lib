@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Select, InputLabel, MenuItem, Input } from '@mui/material';
 
-import './TicketSubmission.css';
 import Priority from '../Priority/Priority';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import { TextField } from '@mui/material';
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
-import { bgColorPrimary } from '../../App.scss';
+import { bgColorPrimary } from '../../assets/styles/_variables.scss';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+
+import './_TicketSubmission.scss';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
-  const [estimate, setEstimate] = useState(' hours');
+  // const [estimate, setEstimate] = useState(' hours');
 
   const prioritySelections = [1, 2, 3].map(num => {
     return (
@@ -39,10 +41,10 @@ const TicketSubmission = ({ ticket }) => {
 
       {/* Main Page Content */}
       <div className="page-panel">
-        <div className="card-wrapper">
+        <div className="card-wrapper ticket-submission">
           <div className="label-description">Ticket #{ticket?.number}</div>
           <div className="submission-grid">
-            <InputLabel id="estimate-label">Estimate</InputLabel>
+            {/* <InputLabel id="estimate-label">Estimate</InputLabel>
 
             <TextField
               name="Estimated Duration"
@@ -57,20 +59,32 @@ const TicketSubmission = ({ ticket }) => {
                 },
               }}
             />
-            <div />
+            <div /> */}
 
-            <InputLabel id="priority-label">Priority</InputLabel>
+            <div className="submission-subgrid">
+              <InputLabel id="date-label">Due Date</InputLabel>
+              <input type="date" />
+            </div>
 
-            <Select
-              variant="standard"
-              labelId="priority-label"
-              defaultValue={1}
-            >
-              {prioritySelections}
-            </Select>
+            <div className="submission-subgrid" />
 
-            <InputLabel id="date-label">Due Date</InputLabel>
-            <input type="date" />
+            <div className="submission-subgrid">
+              <InputLabel id="priority-label">Priority</InputLabel>
+
+              <Select
+                variant="standard"
+                labelId="priority-label"
+                defaultValue={1}
+              >
+                {prioritySelections}
+              </Select>
+            </div>
+
+            <div className="submission-subgrid">
+              <a href="" className="icon-link">
+                <AttachFileIcon />Attach File
+              </a>
+            </div>
           </div>
 
           <div className="flex flex-column form-section">

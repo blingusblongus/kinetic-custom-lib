@@ -44,17 +44,28 @@
   font-weight: $weight-medium;
 }
 
-.page-container {
-  background-color: $bg-off-white;
-  font-family: 'Inter';
-}
-
 .flex {
   display: flex;
 }
 
 .flex-right {
   justify-content: end;
+}
+
+.icon-link {
+  color: $link-color;
+  align-self: center;
+  text-decoration: underline 2px;
+
+  &:hover {
+    color: $link-color-hover;
+    text-decoration: underline 2px;
+  }
+}
+
+.page-container {
+  background-color: $bg-off-white;
+  font-family: 'Inter';
 }
 
 .bg--primary {

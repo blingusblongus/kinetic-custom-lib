@@ -14,12 +14,15 @@ $weight-heavy: 700;
 
 $indent-level: 10px;
 
-$line-dividers: 1px solid #e5e5e5;
+$line-dividers: 1px solid #7a7a7a;
 
 $priority-dot-width: 7px;
 $priority-low-color: green;
 $priority-medium-color: orange;
 $priority-high-color: red;
+
+$link-color: #8b8b8b;
+$link-color-hover: #4f4f4f;
 
 :export {
   bgColorPrimary: $bg-color-primary;

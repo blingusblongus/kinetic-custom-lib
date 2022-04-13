@@ -1,17 +1,30 @@
+@import '../../assets/styles/variables';
+
+.ticket-submission {
+  width: 80%;
+  min-width: 600px;
+}
+
 .label-description {
   font-size: 1.2rem;
-  font-weight: var(--weight-heavy);
+  font-weight: $weight-heavy;
   color: black;
-  margin-left: var(--indent-level);
+  margin-left: $indent-level;
   margin-bottom: 10px;
 }
 
 .submission-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 2fr;
-  gap: 10px;
-  padding-left: var(--indent-level);
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding-left: $indent-level;
   align-items: center;
+}
+
+.submission-subgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // justify-items: start;
 }
 
 .submission-grid.grid-item {
@@ -21,7 +34,7 @@
 
 .knowledge-widget {
   border-radius: 0.5rem;
-  background-color: var(--bg-color-primary);
+  background-color: $bg-color-primary;
   transition: transform 1s;
 }
 
@@ -43,7 +56,7 @@
   left: 30px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  color: var(--color-white);
+  color: $color-white;
   padding: 10px;
   font-size: 11px;
 }
