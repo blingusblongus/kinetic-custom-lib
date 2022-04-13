@@ -4,11 +4,11 @@ import { Select, InputLabel, MenuItem, Input } from '@mui/material';
 import Priority from '../Priority/Priority';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import { TextField } from '@mui/material';
-import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import { bgColorPrimary } from '../../assets/styles/_variables.scss';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 import './_TicketSubmission.scss';
+import KnowledgeWidget from '../KnowledgeWidget/KnowledgeWidget';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
@@ -25,19 +25,7 @@ const TicketSubmission = ({ ticket }) => {
   return (
     <>
       {/* Knowledge Widget */}
-      <div className="knowledge-widget knowledge-widget--tab">
-        <div className="knowledge-widget knowledge-widget--content">
-          Some Extra info goes here
-        </div>
-        <LightbulbOutlinedIcon
-          sx={{
-            color: 'white',
-            position: 'absolute',
-            top: '4px',
-            left: '4px',
-          }}
-        />
-      </div>
+      <KnowledgeWidget />
 
       {/* Main Page Content */}
       <div className="page-panel">
@@ -81,7 +69,7 @@ const TicketSubmission = ({ ticket }) => {
             </div>
 
             <div className="submission-subgrid">
-              <a href="" className="icon-link">
+              <a className="icon-link">
                 <AttachFileIcon />Attach File
               </a>
             </div>

@@ -1,0 +1,34 @@
+@import '../../assets/styles/variables';
+
+.knowledge-widget {
+  border-radius: 0.5rem;
+  background-color: $bg-color-primary;
+  transition: transform 1s;
+}
+
+.knowledge-widget--tab {
+  width: 150px;
+  height: 2rem;
+  transition: transform 1s;
+  z-index: 300;
+  right: 30px;
+  top: 15%;
+  position: fixed;
+  transform: translateX(100%);
+}
+
+.knowledge-widget--content {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  left: 30px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  color: $color-white;
+  padding: 10px;
+  font-size: 11px;
+}
+
+.knowledge-widget--tab:hover {
+  transform: translateX(0%);
+}
