@@ -18,7 +18,8 @@ const Queue = () => {
     {
       name: 'USAA',
       tickets: [{ open: true, priority: 2 }],
-      budget: 17,
+      initialBudget: 17,
+      currentBudget: 13,
     },
     {
       name: 'Slalom/OSL',
@@ -27,12 +28,14 @@ const Queue = () => {
         { open: true, priority: 1 },
         { open: true, priority: 3 },
       ],
-      budget: 17,
+      initialBudget: 178,
+      currentBudget: 13,
     },
     {
       name: 'Hennepin Healthcare',
       tickets: [{ open: true, priority: 3 }, { open: true, priority: 3 }],
-      budget: 17,
+      initialBudget: 534,
+      currentBudget: 13,
     },
   ];
 
@@ -48,15 +51,15 @@ const Queue = () => {
               <div className="font-bold">Client Management</div>
               <TeamsButton>View All</TeamsButton>
             </div>
-            {clients.map(({ name, tickets, budget }) => {
+            {clients.map(({ name, tickets, initialBudget, currentBudget }) => {
               return (
-                <Accordion key={name}>
+                <Accordion disableGutters key={name}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls={`panel${name}-content`}
                     id={`panel${name}-header`}
                   >
-                    <span>{name}</span>
+                    <span className="font-bold">{name}</span>
                   </AccordionSummary>
                   <AccordionDetails sx={{ backgroundColor: bgOffWhiteDarker }}>
                     <div className="open-tickets-container accordion-details">
@@ -75,7 +78,12 @@ const Queue = () => {
                       </div>
                     </div>
                     <div className="budget-container accordion-details">
-                      <span className="font-bold">Time Budget:</span> {budget}hrs
+                      <span className="font-bold">Starting Budget:</span>{' '}
+                      {initialBudget}hrs
+                    </div>
+                    <div className="budget-container accordion-details">
+                      <span className="font-bold">Hours Remaining:</span>{' '}
+                      {currentBudget}hrs
                     </div>
                   </AccordionDetails>
                 </Accordion>
