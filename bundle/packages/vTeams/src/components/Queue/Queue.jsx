@@ -17,23 +17,26 @@ const Queue = () => {
   const clients = [
     {
       name: 'USAA',
-      tickets: [{ open: true, priority: 2 }],
+      tickets: [{ status: 'open', priority: 2 }],
       initialBudget: 17,
       currentBudget: 13,
     },
     {
       name: 'Slalom/OSL',
       tickets: [
-        { open: true, priority: 2 },
-        { open: true, priority: 1 },
-        { open: true, priority: 3 },
+        { status: 'open', priority: 2 },
+        { status: 'open', priority: 1 },
+        { status: 'open', priority: 3 },
       ],
       initialBudget: 178,
       currentBudget: 13,
     },
     {
       name: 'Hennepin Healthcare',
-      tickets: [{ open: true, priority: 3 }, { open: true, priority: 3 }],
+      tickets: [
+        { status: 'open', priority: 3 },
+        { status: 'open', priority: 3 },
+      ],
       initialBudget: 534,
       currentBudget: 13,
     },
