@@ -7,10 +7,14 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CustomTabs from '../CustomTabs/CustomTabs';
 import Priority from '../Priority/Priority';
 import TeamsButton from '../TeamsButton/TeamsButton';
+import { CoreForm } from '@kineticdata/react';
 
 const TicketUserView = ({ ticket }) => {
+  const tabs = ['Response Details', 'History & Comments', 'Customer Details'];
+
   const [comment, setComment] = useState('');
   const [date, setDate] = useState('');
+  const [activeTab, setActiveTab] = useState(0);
 
   //example ticket
   if (!ticket) {
@@ -26,8 +30,6 @@ const TicketUserView = ({ ticket }) => {
   const { priority, number, dueDate, status, owner } = ticket;
   const parsedDate = dueDate.toLocaleString().split(',')[0];
 
-  const tabs = ['Customer Details', 'Response Details', 'History & Comments'];
-
   const textareaChange = e => {
     setComment(e.target.value);
   };
@@ -36,8 +38,17 @@ const TicketUserView = ({ ticket }) => {
     setDate(e.target.value);
   };
 
+  const TabPanel = ({ activeTab, index, children, ...other }) => {
+    return (
+      <div hidden={activeTab !== index} {...other}>
+        {children}
+      </div>
+    );
+  };
+
   return (
     <div className="page-panel">
+      <CoreForm kapp="nick-sandbox" form="crud" />
       <div className="card-wrapper no-padding">
         <div className="grid" id="user-ticket-grid">
           <div className="card-pane left-pane no-padding">
@@ -58,13 +69,19 @@ const TicketUserView = ({ ticket }) => {
             <div className="pane-subheader line-dividers">
               <CustomTabs
                 options={tabs}
-                // onChange={(e, newValue, val) => console.log('Tabs', e, newValue, val)}
+                onChange={(e, newValue, val) => setActiveTab(newValue)}
               />
             </div>
 
-            <div className="left-pane--content line-dividers" />
-            <div className="left-pane--content line-dividers" />
-            <div className="left-pane--content line-dividers" />
+            <TabPanel index={0} activeTab={activeTab}>
+              First Tab
+            </TabPanel>
+            <TabPanel index={1} activeTab={activeTab}>
+              Second Tab
+            </TabPanel>
+            <TabPanel index={2} activeTab={activeTab}>
+              Third Tab
+            </TabPanel>
           </div>
 
           <div className="card-pane right-pane">
