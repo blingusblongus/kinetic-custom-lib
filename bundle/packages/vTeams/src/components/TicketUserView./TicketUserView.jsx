@@ -7,7 +7,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CustomTabs from '../CustomTabs/CustomTabs';
 import Priority from '../Priority/Priority';
 import TeamsButton from '../TeamsButton/TeamsButton';
-import { CoreForm } from '@kineticdata/react';
 
 const TicketUserView = ({ ticket }) => {
   const tabs = ['Response Details', 'History & Comments', 'Customer Details'];
@@ -48,7 +47,6 @@ const TicketUserView = ({ ticket }) => {
 
   return (
     <div className="page-panel">
-      <CoreForm kapp="nick-sandbox" form="crud" />
       <div className="card-wrapper no-padding">
         <div className="grid" id="user-ticket-grid">
           <div className="card-pane left-pane no-padding">
