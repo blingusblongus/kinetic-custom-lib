@@ -9,6 +9,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 import './_TicketSubmission.scss';
 import KnowledgeWidget from '../KnowledgeWidget/KnowledgeWidget';
+import { PageTitle } from '@kineticdata/bundle-common';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
@@ -30,8 +31,8 @@ const TicketSubmission = ({ ticket }) => {
   return (
     <>
       {/* Knowledge Widget */}
+      <PageTitle parts={['New Ticket']} />
       <KnowledgeWidget />
-
       {/* Main Page Content */}
       <div className="page-panel">
         <div className="card-wrapper ticket-submission">

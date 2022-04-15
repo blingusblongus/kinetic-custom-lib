@@ -18,6 +18,7 @@ import {
 } from 'chart.js';
 
 import RecentlyViewed from '../RecentlyViewed/RecentlyViewed';
+import { PageTitle } from '@kineticdata/bundle-common';
 
 import { columns, rows, data, daysArr } from './modules.js';
 
@@ -36,70 +37,73 @@ ChartJS.register(
 
 const Dashboard = () => {
   return (
-    <div className="dashboard page-panel">
-      <div className="grid" id="dashboard-grid">
-        <TicketTable columns={columns} rows={rows} createBtn />
-        <div className="flex flex-column" id="dashboard-col-report">
-          <RecentlyViewed />
-          {/* <div className="card-wrapper">
+    <>
+      <PageTitle parts={['Home']} />
+      <div className="dashboard page-panel">
+        <div className="grid" id="dashboard-grid">
+          <TicketTable columns={columns} rows={rows} createBtn />
+          <div className="flex flex-column" id="dashboard-col-report">
+            <RecentlyViewed />
+            {/* <div className="card-wrapper">
             <div className="card-title">Weekly Reports</div>
             
           </div> */}
-          <div className="card-wrapper">
-            <div className="card-title">Burn Down</div>
-            <div className="chart-wrapper">
-              <Line
-                plugins={[addBackground]}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  scales: {
-                    x: {
-                      grid: {
+            <div className="card-wrapper">
+              <div className="card-title">Burn Down</div>
+              <div className="chart-wrapper">
+                <Line
+                  plugins={[addBackground]}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                      x: {
+                        grid: {
+                          display: false,
+                        },
+                      },
+                      y: {
+                        grid: {
+                          // borderWidth: 2,
+                          color: 'rgba(180,180,180,.1)',
+                          lineWidth: 2,
+                          borderDash: [6, 6],
+                        },
+                      },
+                    },
+                    plugins: {
+                      legend: {
                         display: false,
                       },
                     },
-                    y: {
-                      grid: {
-                        // borderWidth: 2,
-                        color: 'rgba(180,180,180,.1)',
-                        lineWidth: 2,
-                        borderDash: [6, 6],
+                    elements: {
+                      point: {
+                        radius: 0,
+                        hitRadius: 3,
+                      },
+                      line: {
+                        borderWidth: 1,
                       },
                     },
-                  },
-                  plugins: {
-                    legend: {
-                      display: false,
-                    },
-                  },
-                  elements: {
-                    point: {
-                      radius: 0,
-                      hitRadius: 3,
-                    },
-                    line: {
-                      borderWidth: 1,
-                    },
-                  },
-                }}
-                data={{
-                  labels: daysArr,
-                  datasets: [
-                    {
-                      label: 'Hours Remaining',
-                      data: data,
-                      backgroundColor: bgColorPrimary,
-                      borderColor: bgColorPrimary,
-                    },
-                  ],
-                }}
-              />
+                  }}
+                  data={{
+                    labels: daysArr,
+                    datasets: [
+                      {
+                        label: 'Hours Remaining',
+                        data: data,
+                        backgroundColor: bgColorPrimary,
+                        borderColor: bgColorPrimary,
+                      },
+                    ],
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
