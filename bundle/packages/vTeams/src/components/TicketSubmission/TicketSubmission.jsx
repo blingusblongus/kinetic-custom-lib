@@ -22,6 +22,11 @@ const TicketSubmission = ({ ticket }) => {
     );
   });
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(e);
+  };
+
   return (
     <>
       {/* Knowledge Widget */}
@@ -30,9 +35,10 @@ const TicketSubmission = ({ ticket }) => {
       {/* Main Page Content */}
       <div className="page-panel">
         <div className="card-wrapper ticket-submission">
-          <div className="label-description">Ticket #{ticket?.number}</div>
-          <div className="submission-grid">
-            {/* <InputLabel id="estimate-label">Estimate</InputLabel>
+          <form onSubmit={handleSubmit} onSubmitCapture={handleSubmit}>
+            <div className="label-description">Ticket #{ticket?.number}</div>
+            <div className="submission-grid">
+              {/* <InputLabel id="estimate-label">Estimate</InputLabel>
 
             <TextField
               name="Estimated Duration"
@@ -49,57 +55,66 @@ const TicketSubmission = ({ ticket }) => {
             />
             <div /> */}
 
-            <div className="submission-subgrid">
-              <InputLabel id="date-label">Due Date</InputLabel>
-              <input type="date" />
+              <div className="submission-subgrid">
+                <InputLabel htmlFor="date" id="date-label">
+                  Due Date
+                </InputLabel>
+                <input type="date" name="date" />
+              </div>
+
+              <div className="submission-subgrid" />
+
+              <div className="submission-subgrid">
+                <InputLabel
+                  htmlFor="ticket-submission-priority"
+                  id="priority-label"
+                >
+                  Priority
+                </InputLabel>
+
+                <Select
+                  variant="standard"
+                  labelId="priority-label"
+                  defaultValue={1}
+                  name="priority"
+                >
+                  {prioritySelections}
+                </Select>
+              </div>
+
+              <div className="submission-subgrid">
+                <a className="icon-link">
+                  <AttachFileIcon />Attach File
+                </a>
+              </div>
             </div>
 
-            <div className="submission-subgrid" />
-
-            <div className="submission-subgrid">
-              <InputLabel id="priority-label">Priority</InputLabel>
-
-              <Select
-                variant="standard"
-                labelId="priority-label"
-                defaultValue={1}
-              >
-                {prioritySelections}
-              </Select>
+            <div className="flex flex-column form-section">
+              <label className="label-description" htmlFor="short-description">
+                Short Description
+              </label>
+              <textarea
+                name="short-description"
+                rows={4}
+                placeholder="Add a more detailed description..."
+              />
             </div>
 
-            <div className="submission-subgrid">
-              <a className="icon-link">
-                <AttachFileIcon />Attach File
-              </a>
+            <div className="flex flex-column form-section">
+              <label className="label-description" htmlFor="full-description">
+                Full Description
+              </label>
+              <textarea
+                name="full-description"
+                rows={8}
+                placeholder="Add a more detailed description..."
+              />
             </div>
-          </div>
 
-          <div className="flex flex-column form-section">
-            <label className="label-description" htmlFor="short-description">
-              Short Description
-            </label>
-            <textarea
-              name="short-description"
-              rows={4}
-              placeholder="Add a more detailed description..."
-            />
-          </div>
-
-          <div className="flex flex-column form-section">
-            <label className="label-description" htmlFor="full-description">
-              Full Description
-            </label>
-            <textarea
-              name="full-description"
-              rows={8}
-              placeholder="Add a more detailed description..."
-            />
-          </div>
-
-          <div className="flex flex-right">
-            <TeamsButton>Submit</TeamsButton>
-          </div>
+            <div className="flex flex-right">
+              <TeamsButton type="submit">Submit</TeamsButton>
+            </div>
+          </form>
         </div>
       </div>
     </>
