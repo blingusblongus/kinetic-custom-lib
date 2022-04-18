@@ -16,7 +16,7 @@ import LayoutRenderer from './components/layout';
 import { AppProvider } from './AppProvider';
 // Import available packages
 import ServicesApp from '@kineticdata/bundle-services';
-import QueueApp from '@kineticdata/bundle-queue';
+import QueueApp from '@kineticdata/bundle-queue-custom';
 import TechBarApp from '@kineticdata/bundle-tech-bar';
 import DiscussionsApp from '@kineticdata/bundle-discussions';
 import SettingsApp from '@kineticdata/bundle-settings';

@@ -54,7 +54,8 @@
     "typeface-open-sans": "^0.0.54",
     "underscore": "^1.8.3",
     "scaffold": "5.0.0",
-    "vTeams": "0.0.1"
+    "vTeams": "0.0.1",
+    "@kineticdata/bundle-queue-custom": "5.1.0"
   },
   "devDependencies": {
     "@react-workspaces/react-scripts": "^3.4.0-alpha-01",
