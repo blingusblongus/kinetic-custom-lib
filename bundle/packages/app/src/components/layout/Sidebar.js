@@ -90,6 +90,8 @@ const SidebarComponent = props => {
     techBarKapp: props.techBarKapp,
   });
 
+  console.log(props.profile.username);
+
   return (
     <>
       <div className="app-sidebar__group app-sidebar__group--toggle">
@@ -102,7 +104,20 @@ const SidebarComponent = props => {
           />
         </button>
       </div>
+
       <div className="app-sidebar__group">
+        {Utils.isMemberOf(props.profile, 'Role::vTeams Client') && (
+          <SidebarLink
+            to={`/kapps/vteams/dashboard`}
+            icon="fa fa-home"
+            matchExclude={`/kapps/${props.queueKapp.slug}${
+              QueueApp.settingsRoute
+            }`}
+          >
+            <I18n>Client Home</I18n>
+          </SidebarLink>
+        )}
+
         <SidebarLink to="/" icon="fa fa-home" matchParams={{ exact: true }}>
           <I18n>Home</I18n>
         </SidebarLink>
@@ -126,6 +141,7 @@ const SidebarComponent = props => {
             <I18n>Queue</I18n>
           </SidebarLink>
         )}
+
         {Utils.isKappVisible(props.techBarKapp) && (
           <SidebarLink
             to={`/kapps/${props.techBarKapp.slug}`}
