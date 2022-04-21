@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './Dashboard.scss';
 import {
@@ -20,10 +20,17 @@ import {
 import RecentlyViewed from '../RecentlyViewed/RecentlyViewed';
 import { PageTitle } from '@kineticdata/bundle-common';
 
-import { columns, rows, data, daysArr } from './modules.js';
+import { columns as c, rows as r, data, daysArr } from './modules.js';
 
 import { addBackground } from './plugins.js';
 import TicketTable from '../TicketTable/TicketTable';
+
+import {
+  searchSubmissions,
+  SubmissionSearch,
+  SubmissionTable,
+} from '@kineticdata/react';
+import { parseSubsToTablegrid } from '../../../../customUtils/utils.js';
 
 ChartJS.register(
   CategoryScale,
@@ -36,12 +43,23 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+  const [rowData, setRowData] = useState('');
+  let [columns, rows] = parseSubsToTablegrid(rowData);
+
+  useEffect(() => {
+    const search = new SubmissionSearch().include('values').build();
+
+    searchSubmissions({ kapp: 'vteams', form: 'tickets', search }).then(
+      result => setRowData(result.submissions),
+    );
+  }, []);
+
   return (
     <>
       <PageTitle parts={['Home']} />
       <div className="dashboard page-panel">
         <div className="grid" id="dashboard-grid">
-          <TicketTable columns={columns} rows={rows} createBtn />
+          <TicketTable columns={columns || c} rows={rows || r} createBtn />
           <div className="flex flex-column" id="dashboard-col-report">
             <RecentlyViewed />
             {/* <div className="card-wrapper">

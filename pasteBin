@@ -1,0 +1,42 @@
+[
+    {
+        "field": "id",
+        "headerName": "ID",
+        "width": 30
+    },
+    {
+        "field": "firstName",
+        "headerName": "First name",
+        "width": 140,
+        "editable": true
+    },
+    {
+        "field": "lastName",
+        "headerName": "Last name",
+        "width": 150,
+        "editable": true
+    },
+    {
+        "field": "age",
+        "headerName": "Age",
+        "type": "number",
+        "width": 50,
+        "editable": true
+    },
+    {
+        "field": "fullName",
+        "headerName": "Full name",
+        "description": "This column has a value getter and is not sortable.",
+        "sortable": false,
+        "width": 160
+    }
+]
+
+{
+    "Date Due": "2022-04-15",
+    "Priority": "1",
+    "Attachments": [],
+    "Short Description": "Test from bundle",
+    "Full Description": "This was sent from a custom bundle frontend",
+    "Assignee": "Dan"
+}

@@ -16,20 +16,25 @@
       flex-direction: row;
       flex-wrap: wrap;
       margin: 0.25rem 0 1.5rem 0;
+
       .timestamp {
         font-size: 0.875rem;
         line-height: 1.5rem;
         padding: 0;
+
         .label {
           color: $gray60;
         }
+
         .value {
           color: $blue-lake;
           margin-left: 0.25rem;
+
           &:hover {
             text-decoration: underline;
           }
         }
+
         &:not(:last-child):after {
           content: '\2022';
           color: $gray50;
