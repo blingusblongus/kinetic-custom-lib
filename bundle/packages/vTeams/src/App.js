@@ -22,6 +22,7 @@ import TicketUserView from './components/TicketUserView./TicketUserView';
 import Queue from './components/Queue/Queue';
 import { Footer } from './components/Footer/Footer';
 import ClientManagement from './components/ClientManagement/ClientManagement';
+import CoreTicket from './components/CoreTicketView/CoreTicketView';
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
@@ -63,7 +64,7 @@ const AppComponent = props => {
                 <Router>
                   <TicketSubmission path="/" />
                   <Dashboard path="/dashboard" />
-                  <TicketUserView path="/ticket" />
+                  <CoreTicket path="/ticket" />
                   <Queue path="/queue" />
                   <ClientManagement path="/clients" />
                 </Router>

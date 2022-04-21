@@ -12,7 +12,7 @@ import KnowledgeWidget from '../KnowledgeWidget/KnowledgeWidget';
 import { PageTitle } from '@kineticdata/bundle-common';
 
 import { CoreForm } from '@kineticdata/react';
-import { VTEAMS } from '../../lib/globals';
+import { VTEAMS } from '../../../../globals/globals';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
@@ -31,8 +31,6 @@ const TicketSubmission = ({ ticket }) => {
     console.log(e);
   };
 
-  const pending = () => <div>Submitting................</div>;
-
   const completed = () => <div>Form Submitted!</div>;
 
   return (
@@ -49,9 +47,7 @@ const TicketSubmission = ({ ticket }) => {
             onError={err => alert(err)}
             onCreated={() => alert('form created')}
             onCompleted={() => alert('form completed')}
-            components={{
-              Pending: pending,
-            }}
+            components={{}}
           />
         </div>
       </div>
