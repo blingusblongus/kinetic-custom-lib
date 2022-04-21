@@ -8,6 +8,7 @@ import {
   bgColorPrimary,
   colorWhite,
 } from '../../assets/styles/_variables.scss';
+import { history } from '@kineticdata/react';
 
 import './_TicketTable.scss';
 
@@ -20,6 +21,10 @@ const TicketTable = ({
   viewAllBtn = false,
 }) => {
   const [value, setValue] = useState('');
+
+  const handleRowClick = e => {
+    history.push(`${URLS.CLIENT_SUBMIT}/${e.id}`);
+  };
 
   return (
     <div className="item-container card-wrapper no-padding">
@@ -47,6 +52,7 @@ const TicketTable = ({
       <DataGrid
         rows={rows}
         columns={columns}
+        onRowClick={handleRowClick}
         sx={{
           bgcolor: 'white',
           borderTop: 'none',

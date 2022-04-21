@@ -9,6 +9,8 @@ const CoreTicketView = ({ id }) => {
   const [submission, setSubmission] = useState({});
   // if (!id) id = '0bfdda56-c013-11ec-b72e-299adb97fb02';
 
+  const navToTicket = () => {};
+
   return (
     <div className="page-panel">
       <div className="card-wrapper no-padding">
