@@ -9,7 +9,6 @@ import Priority from "../vTeams/src/components/Priority/Priority";
  */
 export const parseSubsToTablegrid = (submissions) => {
     const [cs, rs] = [[], []];
-    console.log(submissions[0])
 
     if (submissions.length > 1) {
         for (let key in submissions[0].values) {

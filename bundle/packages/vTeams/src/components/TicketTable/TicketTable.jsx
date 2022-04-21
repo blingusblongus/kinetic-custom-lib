@@ -11,6 +11,8 @@ import {
 
 import './_TicketTable.scss';
 
+import URLS from '../../../../globals/urls.js';
+
 const TicketTable = ({
   columns = [],
   rows = [],
@@ -35,7 +37,11 @@ const TicketTable = ({
         />
         <div className="flex-container--right">
           {viewAllBtn && <TeamsButton mode="dark">View All</TeamsButton>}
-          {createBtn && <TeamsButton mode="light">Create New</TeamsButton>}
+          {createBtn && (
+            <TeamsButton mode="light" linkPath={URLS.CLIENT_SUBMIT}>
+              Create New
+            </TeamsButton>
+          )}
         </div>
       </div>
       <DataGrid
