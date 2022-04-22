@@ -8,8 +8,7 @@ import './_CoreTicketView.scss';
 const CoreTicketView = ({ id }) => {
   const [submission, setSubmission] = useState({});
   // if (!id) id = '0bfdda56-c013-11ec-b72e-299adb97fb02';
-
-  const navToTicket = () => {};
+  console.log(id);
 
   return (
     <div className="page-panel">

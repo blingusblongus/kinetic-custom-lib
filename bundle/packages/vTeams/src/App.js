@@ -64,6 +64,7 @@ const AppComponent = props => {
                 <Router>
                   <TicketSubmission path="/" />
                   <Dashboard path="/dashboard" />
+                  <CoreTicket path="/ticket" />
                   <CoreTicket path="/ticket/:id" />
                   <Queue path="/queue" />
                   <ClientManagement path="/clients" />
