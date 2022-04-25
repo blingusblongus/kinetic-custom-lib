@@ -48,16 +48,6 @@ const Dashboard = () => {
   let [columns, rows] = parseSubsToTablegrid(rowData);
 
   console.log(columns);
-
-  //massage columns
-  for (let col of columns) {
-    if (col.field === 'Attachments') {
-      col.renderCell = params => JSON.stringify(params.value);
-    }
-    if (col.field === 'Priority') {
-      col.renderCell = params => <Priority level={params.value} />;
-    }
-  }
   useEffect(() => {
     const search = new SubmissionSearch().include('values').build();
 

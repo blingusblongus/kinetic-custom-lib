@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import { SearchNormal1 } from 'iconsax-react';
 import { fontMedium } from '../../App.scss';
@@ -13,7 +12,6 @@ import { history } from '@kineticdata/react';
 import './_TicketTable.scss';
 
 import URLS from '../../../globals/urls.js';
-
 import Priority from '../Priority/Priority';
 
 const TicketTable = ({
@@ -41,6 +39,23 @@ const TicketTable = ({
     );
   });
 
+  //massage columns
+  for (let col of columns) {
+    if (col.field === 'Attachments') {
+      console.log(col);
+      col.valueGetter = params => {
+        if (params.value.length < 1) {
+          return;
+        } else {
+          return params.value.map(el => el.name).join(', ');
+        }
+      };
+    }
+    if (col.field === 'Priority') {
+      col.renderCell = params => <Priority level={params.value} />;
+    }
+  }
+
   return (
     <div className="item-container card-wrapper no-padding datagrid-container">
       <div className="datagrid-header flex">
@@ -61,7 +76,7 @@ const TicketTable = ({
         <div className="flex-container--right">
           {viewAllBtn && <TeamsButton mode="dark">View All</TeamsButton>}
           {createBtn && (
-            <TeamsButton mode="light" linkPath={URLS.CLIENT_SUBMIT}>
+            <TeamsButton mode="light" linkpath={URLS.CLIENT_SUBMIT}>
               Create New
             </TeamsButton>
           )}

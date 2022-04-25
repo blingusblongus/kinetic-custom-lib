@@ -29,7 +29,7 @@ const CoreTicketView = ({ id }) => {
               Your Ticket Has Been Successfully Submitted.
             </div>
             <div className="flex flex-center">
-              <TeamsButton mode="dark" linkPath={URL.CLIENT_HOME}>
+              <TeamsButton mode="dark" linkpath={URL.CLIENT_HOME}>
                 Back to Home
               </TeamsButton>
             </div>
