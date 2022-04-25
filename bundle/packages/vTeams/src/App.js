@@ -58,9 +58,9 @@ const AppComponent = props => {
           <ThemeProvider theme={THEME}>
             <div className="package-layout package-layout--vteams">
               <PageTitle parts={['Loading...']} />
-              <Navbar />
+              {/* <Navbar /> */}
               <div className="page-container">
-                <BreadCrumbContainer />
+                {/* <BreadCrumbContainer /> */}
                 <Router>
                   <TicketSubmission path="/" />
                   <Dashboard path="/dashboard" />

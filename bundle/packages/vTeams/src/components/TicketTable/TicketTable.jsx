@@ -12,7 +12,7 @@ import { history } from '@kineticdata/react';
 
 import './_TicketTable.scss';
 
-import URLS from '../../../../globals/urls.js';
+import URLS from '../../../globals/urls.js';
 
 const TicketTable = ({
   columns = [],

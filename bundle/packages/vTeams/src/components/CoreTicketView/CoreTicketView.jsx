@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CoreForm } from '@kineticdata/react';
-import { VTEAMS } from '../../../../globals/globals.js';
-import URL from '../../../../globals/urls.js';
+import { VTEAMS } from '../../../globals/globals.js';
+import URL from '../../../globals/urls.js';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import './_CoreTicketView.scss';
 

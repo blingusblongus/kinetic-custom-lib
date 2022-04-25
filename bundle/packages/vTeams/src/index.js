@@ -70,7 +70,7 @@ export default class extends Component {
   }
 
   // Functions for hiding/supressing parts of the default layout
-  static shouldHideHeader = props => true;
+  // static shouldHideHeader = props => true;
   // static shouldHideSidebar = props => true;
   // static shouldSuppressSidebar = props => false
 

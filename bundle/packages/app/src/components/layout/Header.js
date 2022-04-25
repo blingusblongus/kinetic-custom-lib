@@ -6,7 +6,8 @@ import { ProfileDropdown } from './ProfileDropdown';
 import { SearchBar } from './SearchBar';
 import { Utils } from '@kineticdata/bundle-common';
 
-import logo from '../../assets/images/login-name.png';
+import logo from '../../assets/images/esolutionsONE_logo_square.png';
+import URLS from 'vteams/globals/urls';
 
 const HeaderComponent = props => (
   <>
@@ -19,7 +20,7 @@ const HeaderComponent = props => (
       )}
     {props.logo &&
       props.logo !== 'Disabled' && (
-        <Link className="logo" to="/">
+        <Link className="logo" to={URLS.LOGO_LINK}>
           <img src={props.logo} alt="Logo" />
         </Link>
       )}

@@ -12,7 +12,7 @@ import KnowledgeWidget from '../KnowledgeWidget/KnowledgeWidget';
 import { PageTitle } from '@kineticdata/bundle-common';
 
 import { CoreForm } from '@kineticdata/react';
-import { VTEAMS } from '../../../../globals/globals';
+import { VTEAMS } from '../../../globals/globals';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
