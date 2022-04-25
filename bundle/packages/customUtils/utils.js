@@ -1,5 +1,3 @@
-import Priority from "../vTeams/src/components/Priority/Priority";
-
 /**
  * Parses list of submissions retrieved with the Kinetic searchSubmission API,
  * and formats them for use in a MUI tablegrid component
@@ -12,7 +10,7 @@ export const parseSubsToTablegrid = (submissions) => {
 
     if (submissions.length > 1) {
         for (let key in submissions[0].values) {
-            cs.push({ field: key, headerName: key, width: 100 })
+            cs.push({ field: key, headerName: key, flex: 1})
         }
         for (let sub of submissions) {
             let vals = {

@@ -2,9 +2,10 @@ import React from 'react';
 import './Priority.css';
 
 const Priority = ({ level }) => {
+  if (!level) return <div>None</div>;
   let text = '';
   let c = 'dot-';
-  if (level === 1) {
+  if (level == 1) {
     text = 'Low';
     c += 'green';
   } else if (level == 2) {

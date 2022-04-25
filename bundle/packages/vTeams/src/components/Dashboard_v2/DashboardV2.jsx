@@ -1,0 +1,81 @@
+import React, { useEffect, useState } from 'react';
+
+import './DashboardV2.scss';
+import {
+  bgColorPrimary,
+  colorWhite,
+} from '../../assets/styles/_variables.scss';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+import RecentlyViewed from '../RecentlyViewed/RecentlyViewed';
+import { PageTitle } from '@kineticdata/bundle-common';
+import Priority from '../Priority/Priority';
+
+// import { columns as c, rows as r, data, daysArr } from './modules.js';
+
+// import { addBackground } from './plugins.js';
+import TicketTable from '../TicketTable/TicketTable';
+
+import {
+  searchSubmissions,
+  SubmissionSearch,
+  SubmissionTable,
+} from '@kineticdata/react';
+import { parseSubsToTablegrid } from '../../../../customUtils/utils.js';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+);
+
+const Dashboard = () => {
+  const [rowData, setRowData] = useState('');
+  let [columns, rows] = parseSubsToTablegrid(rowData);
+
+  console.log(columns);
+
+  //massage columns
+  for (let col of columns) {
+    if (col.field === 'Attachments') {
+      col.renderCell = params => JSON.stringify(params.value);
+    }
+    if (col.field === 'Priority') {
+      col.renderCell = params => <Priority level={params.value} />;
+    }
+  }
+  useEffect(() => {
+    const search = new SubmissionSearch().include('values').build();
+
+    searchSubmissions({ kapp: 'vteams', form: 'tickets', search }).then(
+      result => setRowData(result.submissions),
+    );
+  }, []);
+
+  return (
+    <>
+      <PageTitle parts={['Home']} />
+      <div className="dashboard page-panel">
+        <div className="table-wrapper">
+          <TicketTable columns={columns} rows={rows} createBtn />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Dashboard;
