@@ -19,7 +19,6 @@ const TicketTable = ({
   rows = [],
   createBtn = false,
   viewAllBtn = false,
-  ...props
 }) => {
   const [value, setValue] = useState('');
 
@@ -42,7 +41,20 @@ const TicketTable = ({
   //massage columns
   for (let col of columns) {
     if (col.field === 'Attachments') {
-      console.log(col);
+      col.renderCell = params => {
+        if (!params.value) return;
+        return (
+          <>
+            {params.row.Attachments.map((el, key) => {
+              return (
+                <a href={el.link} key={key}>
+                  {el.name}
+                </a>
+              );
+            })}
+          </>
+        );
+      };
       col.valueGetter = params => {
         if (params.value.length < 1) {
           return;
