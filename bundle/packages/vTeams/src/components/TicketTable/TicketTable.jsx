@@ -40,19 +40,26 @@ const TicketTable = ({
 
   //massage columns
   for (let col of columns) {
+    if (col.field === 'Date Due') {
+      col.flex = 2;
+    }
+    if (col.field === 'Full Description') {
+      col.flex = 2;
+    }
     if (col.field === 'Attachments') {
       col.renderCell = params => {
         if (!params.value) return;
         return (
-          <>
-            {params.row.Attachments.map((el, key) => {
+          <div>
+            {params.row.Attachments.map((el, key, arr) => {
               return (
                 <a href={el.link} key={key}>
                   {el.name}
+                  {key < arr.length - 1 && ', '}
                 </a>
               );
             })}
-          </>
+          </div>
         );
       };
       col.valueGetter = params => {
