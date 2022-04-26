@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { useSelector } from 'react-redux';
 import './DashboardV2.scss';
 import {
   bgColorPrimary,
@@ -17,16 +17,14 @@ import {
   Legend,
 } from 'chart.js';
 
-import RecentlyViewed from '../RecentlyViewed/RecentlyViewed';
 import { PageTitle } from '@kineticdata/bundle-common';
 
-// import { columns as c, rows as r, data, daysArr } from './modules.js';
-
-// import { addBackground } from './plugins.js';
 import TicketTable from '../TicketTable/TicketTable';
 
 import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import { parseSubsToTablegrid } from '../../../../customUtils/utils.js';
+
+import { Utils } from '@kineticdata/bundle-common';
 
 ChartJS.register(
   CategoryScale,
@@ -41,6 +39,8 @@ ChartJS.register(
 const Dashboard = () => {
   const [rowData, setRowData] = useState('');
   let [columns, rows] = parseSubsToTablegrid(rowData);
+  const store = useSelector(store => store);
+  console.log(store);
 
   // fetch submissions
   useEffect(() => {

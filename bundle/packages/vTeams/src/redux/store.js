@@ -7,7 +7,7 @@ import { history } from '@kineticdata/react';
 import reducers from './reducers';
 import sagas from './sagas';
 
-console.log('Configuring scaffold package redux store');
+console.log('Configuring vTeams package redux store');
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'VTEAMS' })

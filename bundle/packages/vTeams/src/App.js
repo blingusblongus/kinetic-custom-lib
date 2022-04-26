@@ -24,6 +24,9 @@ import Queue from './components/Queue/Queue';
 import { Footer } from './components/Footer/Footer';
 import ClientManagement from './components/ClientManagement/ClientManagement';
 import CoreTicket from './components/CoreTicketView/CoreTicketView';
+import { Provider, useSelector } from 'react-redux';
+import { store } from './redux/store';
+
 /*****************************************************************************
  *** PRIVATE APP
  *****************************************************************************/
@@ -56,24 +59,27 @@ const AppComponent = props => {
     return props.render({
       main: (
         <I18n>
-          <ThemeProvider theme={THEME}>
-            <div className="package-layout package-layout--vteams">
-              <PageTitle parts={['Loading...']} />
-              {/* <Navbar /> */}
-              <div className="page-container">
-                {/* <BreadCrumbContainer /> */}
-                <Router>
-                  <TicketSubmission path="/" />
-                  <Dashboard path="/dashboard" />
-                  <CoreTicket path="/ticket" />
-                  <CoreTicket path="/ticket/:id" />
-                  <Queue path="/queue" />
-                  <ClientManagement path="/clients" />
-                </Router>
+          <Provider store={store}>
+            <ThemeProvider theme={THEME}>
+              <div className="package-layout package-layout--vteams">
+                <PageTitle parts={['Loading...']} />
+                {/* <Navbar /> */}
+                <div className="page-container">
+                  {/* <BreadCrumbContainer /> */}
+                  <Router>
+                    {/* <TicketSubmission path="/" /> */}
+                    <Redirect from="/" to="/kapps/vteams/dashboard" noThrow />
+                    <Dashboard path="/dashboard" />
+                    <CoreTicket path="/ticket" />
+                    <CoreTicket path="/ticket/:id" />
+                    <Queue path="/queue" />
+                    <ClientManagement path="/clients" />
+                  </Router>
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
-          </ThemeProvider>
+            </ThemeProvider>
+          </Provider>
         </I18n>
       ),
     });
