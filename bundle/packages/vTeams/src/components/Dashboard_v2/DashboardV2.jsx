@@ -19,18 +19,13 @@ import {
 
 import RecentlyViewed from '../RecentlyViewed/RecentlyViewed';
 import { PageTitle } from '@kineticdata/bundle-common';
-import Priority from '../Priority/Priority';
 
 // import { columns as c, rows as r, data, daysArr } from './modules.js';
 
 // import { addBackground } from './plugins.js';
 import TicketTable from '../TicketTable/TicketTable';
 
-import {
-  searchSubmissions,
-  SubmissionSearch,
-  SubmissionTable,
-} from '@kineticdata/react';
+import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import { parseSubsToTablegrid } from '../../../../customUtils/utils.js';
 
 ChartJS.register(
@@ -47,7 +42,7 @@ const Dashboard = () => {
   const [rowData, setRowData] = useState('');
   let [columns, rows] = parseSubsToTablegrid(rowData);
 
-  console.log(columns);
+  // fetch submissions
   useEffect(() => {
     const search = new SubmissionSearch().include('values').build();
 

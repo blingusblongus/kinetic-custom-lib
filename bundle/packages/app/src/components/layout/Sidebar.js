@@ -90,8 +90,6 @@ const SidebarComponent = props => {
     techBarKapp: props.techBarKapp,
   });
 
-  console.log(props.profile.username);
-
   return (
     <>
       <div className="app-sidebar__group app-sidebar__group--toggle">
