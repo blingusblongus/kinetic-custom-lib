@@ -38,6 +38,8 @@ const TicketTable = ({
     );
   });
 
+  console.log('filteredRows', filteredRows);
+
   //massage columns
   for (let col of columns) {
     if (col.field === 'Date Due') {
@@ -74,6 +76,9 @@ const TicketTable = ({
       col.renderCell = params => <Priority level={params.value} />;
     }
   }
+
+  console.log('columns', columns);
+  console.log('rows', filteredRows);
 
   return (
     <div className="item-container card-wrapper no-padding datagrid-container">

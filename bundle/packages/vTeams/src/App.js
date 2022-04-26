@@ -26,6 +26,7 @@ import ClientManagement from './components/ClientManagement/ClientManagement';
 import CoreTicket from './components/CoreTicketView/CoreTicketView';
 import { Provider, useSelector } from 'react-redux';
 import { store } from './redux/store';
+import ClientHome from './components/ClientHome/ClientHome';
 
 /*****************************************************************************
  *** PRIVATE APP
@@ -74,6 +75,7 @@ const AppComponent = props => {
                     <CoreTicket path="/ticket/:id" />
                     <Queue path="/queue" />
                     <ClientManagement path="/clients" />
+                    <ClientHome path="/client/home" />
                   </Router>
                 </div>
                 <Footer />

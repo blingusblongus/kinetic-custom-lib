@@ -1,4 +1,4 @@
 export const VTEAMS = {
   KAPPSLUG: 'vteams',
-  TICKET_FORM_SLUG: 'tickets',
+  TICKET_FORM_SLUG: 'vteams-ticket',
 };
