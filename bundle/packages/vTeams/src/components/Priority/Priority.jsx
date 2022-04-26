@@ -3,16 +3,20 @@ import './Priority.css';
 
 const Priority = ({ level }) => {
   if (!level) return <div>None</div>;
+  level = parseInt(level);
   let text = '';
   let c = 'dot-';
-  if (level == 1) {
+  if (level === 4) {
     text = 'Low';
     c += 'green';
-  } else if (level == 2) {
+  } else if (level === 3) {
     text = 'Medium';
     c += 'orange';
-  } else if (level == 3) {
+  } else if (level === 2) {
     text = 'High';
+    c += 'red';
+  } else if (level === 1) {
+    text = 'Critical';
     c += 'red';
   }
 

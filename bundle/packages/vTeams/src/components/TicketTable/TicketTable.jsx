@@ -70,7 +70,7 @@ const TicketTable = ({
         }
       };
     }
-    if (col.field === 'Priority') {
+    if (col.field === 'Priority' || col.field === 'Urgency') {
       col.renderCell = params => <Priority level={params.value} />;
     }
   }
