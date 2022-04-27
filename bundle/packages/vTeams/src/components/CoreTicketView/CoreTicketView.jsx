@@ -4,6 +4,7 @@ import { VTEAMS } from '../../../globals/globals.js';
 import URL from '../../../globals/urls.js';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import './_CoreTicketView.scss';
+import Activities from '../Activities/Activities.jsx';
 
 const CoreTicketView = ({ id }) => {
   const [submission, setSubmission] = useState({});
@@ -35,6 +36,8 @@ const CoreTicketView = ({ id }) => {
             </div>
           </>
         )}
+
+      <Activities id={id} />
     </div>
   );
 };
