@@ -3,8 +3,19 @@
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
+  opacity: 1;
+  animation: fadeIn 1.5s;
 
   .comment-header {
     color: gray;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
