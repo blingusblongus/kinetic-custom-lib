@@ -8,6 +8,7 @@ import Activity from './Activity/Activity.jsx';
 import './_Activities.scss';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import { useSelector } from 'react-redux';
+import { gridColumnsTotalWidthSelector } from '@mui/x-data-grid';
 
 const Activities = ({ id }) => {
   const [activities, setActivities] = useState([]);
@@ -15,8 +16,14 @@ const Activities = ({ id }) => {
   const [reFetch, setReFetch] = useState(false);
 
   const userProfile = useSelector(store => store.app.profile);
-  console.log(userProfile);
 
+  const isFulfiller = userProfile.memberships
+    .map(mem => {
+      return mem.team.name;
+    })
+    .includes('vTeams');
+
+  console.log(userProfile);
   const handleSubmit = e => {
     e.preventDefault();
     console.log('submitted');
@@ -25,23 +32,25 @@ const Activities = ({ id }) => {
       'Ticket ID': id,
       Comment: commentText,
       Commenter: userProfile.displayName,
+      isFulfiller: isFulfiller,
     };
 
     createSubmission({
       kappSlug: 'vteams',
       formSlug: 'activity',
       values,
-    }).then(submission => {
-      console.log('submission sent', submission);
-      setCommentText('');
-      setReFetch(!reFetch);
-    });
+    })
+      .then(submission => {
+        console.log('submitted:', submission);
+        setCommentText('');
+        setReFetch(!reFetch);
+      })
+      .catch(err => console.log(err));
   };
 
   useEffect(
     () => {
       const fetchActivities = async () => {
-        console.log(id);
         const search = new SubmissionSearch()
           .eq('values[Ticket ID]', id)
           .include('values')
@@ -63,7 +72,6 @@ const Activities = ({ id }) => {
     [id, reFetch],
   );
 
-  console.log(activities);
   return (
     <div className="card-wrapper activity-feed">
       <h2>Notes and Comments</h2>
