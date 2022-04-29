@@ -37,10 +37,8 @@ const CoreTicketView = ({ id }) => {
           </>
         )}
 
-      {
-        //if existing form, show comments
-        <Activities id={id} />
-      }
+      {//if existing form, show comments
+      (id || submission.id) && <Activities id={id || submission.id} />}
     </div>
   );
 };
