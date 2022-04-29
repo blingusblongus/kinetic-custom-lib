@@ -3,6 +3,7 @@ import {
   SubmissionSearch,
   searchSubmissions,
   createSubmission,
+  fetchSubmission,
 } from '@kineticdata/react';
 import Activity from './Activity/Activity.jsx';
 import './_Activities.scss';
@@ -14,6 +15,7 @@ const Activities = ({ id }) => {
   const [commentText, setCommentText] = useState('');
   const [reFetch, setReFetch] = useState(false);
   const [internalMode, setInternalMode] = useState(false);
+  const [ticketOrg, setTicketOrg] = useState('');
 
   const userProfile = useSelector(store => store.app.profile);
   const isFulfiller = userProfile.memberships
@@ -34,6 +36,7 @@ const Activities = ({ id }) => {
       Comment: commentText,
       Commenter: userProfile.displayName,
       isFulfiller: isFulfiller,
+      'Org Visibility': ticketOrg,
     };
 
     createSubmission({ kappSlug, formSlug, values })
@@ -47,6 +50,10 @@ const Activities = ({ id }) => {
 
   useEffect(
     () => {
+      fetchSubmission({ id, include: 'values' })
+        .then(result => setTicketOrg(result.submission.values['Organization']))
+        .catch(err => console.log(err));
+
       const fetchActivities = async () => {
         const search = new SubmissionSearch()
           .eq('values[Ticket ID]', id)
