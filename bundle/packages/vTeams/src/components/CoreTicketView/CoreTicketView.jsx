@@ -19,6 +19,9 @@ const CoreTicketView = ({ id }) => {
           kapp={VTEAMS.KAPPSLUG}
           form={VTEAMS.TICKET_FORM_SLUG}
           onCompleted={e => setSubmission(e.submission)}
+          components={{
+            Button: TeamsButton,
+          }}
         />
       </div>
 
@@ -37,7 +40,10 @@ const CoreTicketView = ({ id }) => {
           </>
         )}
 
-      <Activities id={id} />
+      {
+        //if existing form, show activities
+        <Activities id={id} />
+      }
     </div>
   );
 };

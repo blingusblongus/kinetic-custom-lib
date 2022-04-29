@@ -42,7 +42,7 @@ ChartJS.register(
   Legend,
 );
 
-const Dashboard = () => {
+const DashboardV1 = () => {
   const [rowData, setRowData] = useState('');
   let [columns, rows] = parseSubsToTablegrid(rowData);
 
@@ -125,4 +125,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardV1;

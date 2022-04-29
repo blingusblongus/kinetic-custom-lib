@@ -6,16 +6,15 @@ const Activity = ({ submission }) => {
   const [date, time] = submittedAt.split('T');
 
   console.log(values);
-
+  //assign conditional classes to activity items
   const classes = [`${values.isFulfiller && 'isFulfiller'}`].join(' ');
-  console.log(classes);
 
   return (
     <div className={`activity-container ${classes}`}>
       <div className="comment-header">
         {values['Commenter']}: {date} {time.split('.')[0]}
       </div>
-      <div>{values['Comment']}</div>
+      <div className="comment-content">{values['Comment']}</div>
     </div>
   );
 };

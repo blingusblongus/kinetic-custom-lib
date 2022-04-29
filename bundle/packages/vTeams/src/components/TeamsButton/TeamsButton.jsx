@@ -44,7 +44,9 @@ const TeamsButton = props => {
       children="Submit"
       {...props}
       sx={mySx}
-      onClick={() => props.linkpath && history.push(props.linkpath)}
+      onClick={
+        props.onClick || (() => props.linkpath && history.push(props.linkpath))
+      }
     />
   );
 };

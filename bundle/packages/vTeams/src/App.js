@@ -27,6 +27,7 @@ import CoreTicket from './components/CoreTicketView/CoreTicketView';
 import { Provider, useSelector } from 'react-redux';
 import { store } from './redux/store';
 import ClientHome from './components/ClientHome/ClientHome';
+import DashboardV1 from './components/Dashboard/Dashboard';
 
 /*****************************************************************************
  *** PRIVATE APP
@@ -71,8 +72,10 @@ const AppComponent = props => {
                     {/* <TicketSubmission path="/" /> */}
                     <Redirect from="/" to="/kapps/vteams/dashboard" noThrow />
                     <Dashboard path="/dashboard" />
+                    <DashboardV1 path="/dashboard/v1" />
                     <CoreTicket path="/ticket" />
                     <CoreTicket path="/ticket/:id" />
+                    <TicketSubmission path="/ticket/draft" />
                     <Queue path="/queue" />
                     <ClientManagement path="/clients" />
                     <ClientHome path="/client/home" />

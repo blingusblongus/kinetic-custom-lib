@@ -8,38 +8,35 @@ import Activity from './Activity/Activity.jsx';
 import './_Activities.scss';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import { useSelector } from 'react-redux';
-import { gridColumnsTotalWidthSelector } from '@mui/x-data-grid';
 
 const Activities = ({ id }) => {
   const [activities, setActivities] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [reFetch, setReFetch] = useState(false);
+  const [internalMode, setInternalMode] = useState(false);
 
   const userProfile = useSelector(store => store.app.profile);
-
   const isFulfiller = userProfile.memberships
     .map(mem => {
       return mem.team.name;
     })
     .includes('vTeams');
+  const textareaClasses = internalMode ? 'internal' : '';
 
-  console.log(userProfile);
   const handleSubmit = e => {
-    e.preventDefault();
-    console.log('submitted');
+    const formSlug = internalMode ? 'internal-notes' : 'activity';
+    const kappSlug = 'vteams';
 
-    const values = {
+    e.preventDefault();
+
+    let values = {
       'Ticket ID': id,
       Comment: commentText,
       Commenter: userProfile.displayName,
       isFulfiller: isFulfiller,
     };
 
-    createSubmission({
-      kappSlug: 'vteams',
-      formSlug: 'activity',
-      values,
-    })
+    createSubmission({ kappSlug, formSlug, values })
       .then(submission => {
         console.log('submitted:', submission);
         setCommentText('');
@@ -62,7 +59,23 @@ const Activities = ({ id }) => {
             form: 'activity',
             search,
           });
-          setActivities(result.submissions);
+          console.log('activity search', result);
+
+          // let result2;
+          // if(isFulfiller){
+          //     result2 = await searchSubmissions({
+          //         kapp: 'vteams',
+          //         form: 'internal-notes',
+          //         search,
+          //     });
+          // }
+
+          const results = result.submissions //?.concat(result2.submissions)
+            .sort((a, b) => {
+              return new Date(b.submittedAt) - new Date(a.submittedAt);
+            });
+          setActivities(results);
+          setInternalMode(false);
         } catch (e) {
           console.log(e);
         }
@@ -71,6 +84,12 @@ const Activities = ({ id }) => {
     },
     [id, reFetch],
   );
+
+  const toggleInternal = () => {
+    setInternalMode(!internalMode);
+  };
+
+  console.log(activities);
 
   return (
     <div className="card-wrapper activity-feed">
@@ -82,15 +101,21 @@ const Activities = ({ id }) => {
             rows={3}
             value={commentText}
             onChange={e => setCommentText(e.target.value)}
+            className={textareaClasses}
           />
+          {isFulfiller && (
+            <TeamsButton mode="light" onClick={toggleInternal}>
+              Toggle Internal
+            </TeamsButton>
+          )}
           <TeamsButton mode="dark" sx={{ margin: '10px' }} type="submit" />
         </form>
       </div>
-
       {// Activity log
-      activities.map(submission => {
-        return <Activity key={submission.handle} submission={submission} />;
-      })}
+      activities.length > 0 &&
+        activities.map(submission => {
+          return <Activity key={submission.handle} submission={submission} />;
+        })}
     </div>
   );
 };

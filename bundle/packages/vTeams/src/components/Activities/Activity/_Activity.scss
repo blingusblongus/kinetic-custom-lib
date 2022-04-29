@@ -1,19 +1,28 @@
+@import '../../../assets/styles/variables';
+
 .activity-container {
-  border: 1px solid gray;
+  border: $line-dividers;
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
   opacity: 1;
   animation: fadeIn 1.5s;
+  box-shadow: 1px 1px 3px lightgray;
 
   .comment-header {
     color: gray;
+  }
+
+  .comment-content {
+    // max-width: 60%;
+    // justify-self: end;
   }
 }
 
 .isFulfiller {
   text-align: right;
   justify-content: right;
+  align-items: flex-end;
 }
 
 @keyframes fadeIn {
