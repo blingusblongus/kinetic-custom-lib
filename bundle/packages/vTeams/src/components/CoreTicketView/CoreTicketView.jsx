@@ -8,9 +8,6 @@ import Activities from '../Activities/Activities.jsx';
 
 const CoreTicketView = ({ id }) => {
   const [submission, setSubmission] = useState({});
-  // if (!id) id = '0bfdda56-c013-11ec-b72e-299adb97fb02';
-  console.log(id);
-
   return (
     <div className="page-panel">
       <div className="card-wrapper no-padding">
@@ -41,7 +38,7 @@ const CoreTicketView = ({ id }) => {
         )}
 
       {
-        //if existing form, show activities
+        //if existing form, show comments
         <Activities id={id} />
       }
     </div>

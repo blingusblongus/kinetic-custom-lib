@@ -2,6 +2,7 @@ import React from 'react';
 import logoImage from '../../assets/images/login-background.png';
 import logoName from '../../assets/images/login-name.png';
 import { I18n } from '@kineticdata/react';
+import logo from '../../assets/images/esolutionsONE_logo_square.png';
 
 export const LoginWrapper = ({ children }) => (
   <div className="login-container">
@@ -9,13 +10,13 @@ export const LoginWrapper = ({ children }) => (
       {children}
       <div
         className="login-image-container"
-        style={{ backgroundImage: `url(${logoImage})` }}
+        style={{ backgroundImage: `url(${logo})` }}
       >
         <div className="kinops-text">
-          <img
+          {/* <img
             src={logoName}
             alt="Kinops - streamline everyday work for teams"
-          />
+          /> */}
           <h3>
             <I18n>Welcome to kinops</I18n>
           </h3>

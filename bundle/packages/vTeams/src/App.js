@@ -70,7 +70,7 @@ const AppComponent = props => {
                   {/* <BreadCrumbContainer /> */}
                   <Router>
                     {/* <TicketSubmission path="/" /> */}
-                    <Redirect from="/" to="/kapps/vteams/dashboard" noThrow />
+                    <Redirect from="/" to="/kapps/vteams/client/home" noThrow />
                     <Dashboard path="/dashboard" />
                     <DashboardV1 path="/dashboard/v1" />
                     <CoreTicket path="/ticket" />

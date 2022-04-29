@@ -40,6 +40,7 @@ const AppComponent = props => {
           <main className={`package-layout package-layout--app`}>
             <PageTitle parts={['Loading...']} />
             <Switch>
+              <Redirect path="/" to="/kapps/vteams/client/home" />
               <Route exact path="/kapps/:kappSlug" component={Kapp} />
               <Route
                 exact
