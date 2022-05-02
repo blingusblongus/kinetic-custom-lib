@@ -25,6 +25,16 @@
   align-items: flex-end;
 }
 
+.isInternal {
+  .comment-content {
+    color: red;
+  }
+
+  .comment-header::after {
+    content: ' (Internal)';
+  }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

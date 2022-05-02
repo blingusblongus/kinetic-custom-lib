@@ -36,7 +36,7 @@ const Activities = ({ id }) => {
       Comment: commentText,
       Commenter: userProfile.displayName,
       isFulfiller: isFulfiller,
-      'Org Visibility': ticketOrg,
+      Organization: ticketOrg,
     };
 
     createSubmission({ kappSlug, formSlug, values })
@@ -50,10 +50,12 @@ const Activities = ({ id }) => {
 
   useEffect(
     () => {
+      // Retrieve Ticket Data
       fetchSubmission({ id, include: 'values' })
         .then(result => setTicketOrg(result.submission.values['Organization']))
         .catch(err => console.log(err));
 
+      // Retrieve comments
       const fetchActivities = async () => {
         const search = new SubmissionSearch()
           .eq('values[Ticket ID]', id)
@@ -61,26 +63,40 @@ const Activities = ({ id }) => {
           .build();
 
         try {
-          const result = await searchSubmissions({
+          const comments = await searchSubmissions({
             kapp: 'vteams',
             form: 'activity',
             search,
           });
-          console.log('activity search', result);
+          console.log('activity search', comments);
 
-          // let result2;
-          // if(isFulfiller){
-          //     result2 = await searchSubmissions({
-          //         kapp: 'vteams',
-          //         form: 'internal-notes',
-          //         search,
-          //     });
-          // }
-
-          const results = result.submissions //?.concat(result2.submissions)
-            .sort((a, b) => {
-              return new Date(b.submittedAt) - new Date(a.submittedAt);
+          let internalComments;
+          let results;
+          if (isFulfiller) {
+            internalComments = await searchSubmissions({
+              kapp: 'vteams',
+              form: 'internal-notes',
+              search,
             });
+
+            //Tag internalComments for conditional display
+            internalComments.submissions.forEach(submission => {
+              submission.values.isInternal = true;
+            });
+
+            results = [
+              ...comments.submissions,
+              ...internalComments.submissions,
+            ];
+          } else {
+            results = comments.submissions;
+          }
+
+          //sort comments by date
+          results.sort((a, b) => {
+            return new Date(b.submittedAt) - new Date(a.submittedAt);
+          });
+
           setActivities(results);
           setInternalMode(false);
         } catch (e) {

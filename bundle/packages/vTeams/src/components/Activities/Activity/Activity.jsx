@@ -7,9 +7,10 @@ const Activity = ({ submission }) => {
 
   console.log(values);
   //assign conditional classes to activity items
-  const classes = [`${values.isFulfiller === 'true' && 'isFulfiller'}`].join(
-    ' ',
-  );
+  const classes = [
+    `${values.isFulfiller === 'true' && 'isFulfiller'}`,
+    `${values.isInternal && 'isInternal'}`,
+  ].join(' ');
 
   return (
     <div className={`activity-container ${classes}`}>
