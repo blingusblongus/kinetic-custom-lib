@@ -8,8 +8,17 @@ import Activities from '../Activities/Activities.jsx';
 
 const CoreTicketView = ({ id }) => {
   const [submission, setSubmission] = useState({});
+
+  const header = id ? (
+    <h1>Ticket Handle: {id.substr(id.length - 6)}</h1>
+  ) : (
+    <h1>Submit a Ticket</h1>
+  );
+
   return (
     <div className="page-panel">
+      {header}
+
       <div className="card-wrapper no-padding">
         <CoreForm
           submission={id || submission.id}

@@ -115,7 +115,7 @@ const Activities = ({ id }) => {
   console.log(activities);
 
   return (
-    <div className="card-wrapper activity-feed">
+    <div className="card-wrapper activities">
       <h2>Notes and Comments</h2>
       <div>
         <div>Add new Comment:</div>
@@ -137,11 +137,17 @@ const Activities = ({ id }) => {
           )}
         </form>
       </div>
-      {// Activity log
-      activities.length > 0 &&
-        activities.map(submission => {
-          return <Activity key={submission.handle} submission={submission} />;
-        })}
+      <div className="activity-feed-container">
+        <div className="activity-feed">
+          {// Activity log
+          activities.length > 0 &&
+            activities.map(submission => {
+              return (
+                <Activity key={submission.handle} submission={submission} />
+              );
+            })}
+        </div>
+      </div>
     </div>
   );
 };
