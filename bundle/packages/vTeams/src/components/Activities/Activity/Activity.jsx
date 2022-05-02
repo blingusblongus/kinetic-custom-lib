@@ -5,7 +5,6 @@ const Activity = ({ submission }) => {
   const { values, submittedAt, submittedBy } = submission;
   const [date, time] = submittedAt.split('T');
 
-  console.log(values);
   //assign conditional classes to activity items
   const classes = [
     `${values.isFulfiller === 'true' && 'isFulfiller'}`,

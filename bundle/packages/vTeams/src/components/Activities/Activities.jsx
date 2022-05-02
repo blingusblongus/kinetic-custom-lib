@@ -68,7 +68,6 @@ const Activities = ({ id }) => {
             form: 'activity',
             search,
           });
-          console.log('activity search', comments);
 
           let internalComments;
           let results;
@@ -112,11 +111,10 @@ const Activities = ({ id }) => {
     setInternalMode(!internalMode);
   };
 
-  console.log(activities);
-
   return (
     <div className="card-wrapper activities">
       <h2>Notes and Comments</h2>
+
       <div>
         <div>Add new Comment:</div>
         <form onSubmit={handleSubmit}>
@@ -137,6 +135,7 @@ const Activities = ({ id }) => {
           )}
         </form>
       </div>
+
       <div className="activity-feed-container">
         <div className="activity-feed">
           {// Activity log
