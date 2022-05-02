@@ -125,13 +125,16 @@ const Activities = ({ id }) => {
             value={commentText}
             onChange={e => setCommentText(e.target.value)}
             className={textareaClasses}
+            placeholder={
+              internalMode ? 'Visible to vTeams' : 'Visible To Client'
+            }
           />
+          <TeamsButton mode="dark" sx={{ margin: '10px' }} type="submit" />
           {isFulfiller && (
             <TeamsButton mode="light" onClick={toggleInternal}>
               Toggle Internal
             </TeamsButton>
           )}
-          <TeamsButton mode="dark" sx={{ margin: '10px' }} type="submit" />
         </form>
       </div>
       {// Activity log
