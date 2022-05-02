@@ -20,7 +20,7 @@ const HeaderComponent = props => (
       )}
     {props.logo &&
       props.logo !== 'Disabled' && (
-        <Link className="logo" to={URLS.LOGO_LINK}>
+        <Link className="logo" to={URLS.CLIENT_HOME}>
           <img src={props.logo} alt="Logo" />
         </Link>
       )}

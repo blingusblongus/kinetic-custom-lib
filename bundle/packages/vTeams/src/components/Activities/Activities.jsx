@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 const Activities = ({ id }) => {
   const [activities, setActivities] = useState([]);
   const [commentText, setCommentText] = useState('');
+  const [hoursSpent, setHoursSpent] = useState(null);
   const [reFetch, setReFetch] = useState(false);
   const [internalMode, setInternalMode] = useState(false);
   const [ticketOrg, setTicketOrg] = useState('');
@@ -39,10 +40,16 @@ const Activities = ({ id }) => {
       Organization: ticketOrg,
     };
 
+    // Append hoursSpent if necessary
+    if (hoursSpent) {
+      values.hoursSpent = hoursSpent;
+    }
+
     createSubmission({ kappSlug, formSlug, values })
       .then(submission => {
         console.log('submitted:', submission);
         setCommentText('');
+        setHoursSpent(null);
         setReFetch(!reFetch);
       })
       .catch(err => console.log(err));
@@ -116,8 +123,20 @@ const Activities = ({ id }) => {
       <h2>Notes and Comments</h2>
 
       <div>
-        <div>Add new Comment:</div>
+        {/* <div>Add new Comment:</div> */}
         <form onSubmit={handleSubmit}>
+          {isFulfiller && (
+            <div className="hours-container">
+              <label htmlFor="hoursSpent">Hours:</label>
+              <input
+                type="number"
+                value={hoursSpent}
+                name="hoursSpent"
+                onChange={e => setHoursSpent(e.target.value)}
+              />
+            </div>
+          )}
+          <label htmlFor="comment">Comment:</label>
           <textarea
             rows={3}
             value={commentText}
@@ -126,6 +145,7 @@ const Activities = ({ id }) => {
             placeholder={
               internalMode ? 'Visible to vTeams' : 'Visible To Client'
             }
+            name="comment"
           />
           <TeamsButton mode="dark" sx={{ margin: '10px' }} type="submit" />
           {isFulfiller && (

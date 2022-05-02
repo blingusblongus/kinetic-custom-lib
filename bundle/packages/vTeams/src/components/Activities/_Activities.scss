@@ -15,6 +15,14 @@
   padding: 5px;
 }
 
+.hours-container {
+  width: 15rem;
+
+  label: {
+    color: red;
+  }
+}
+
 textarea:not(.form-control) {
   &.internal {
     background-color: rgb(255, 206, 206);
