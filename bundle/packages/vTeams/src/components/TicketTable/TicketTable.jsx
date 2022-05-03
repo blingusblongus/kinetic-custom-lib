@@ -84,8 +84,14 @@ const TicketTable = ({
 
   console.log('columns', columns);
   console.log('rows', filteredRows);
+  const colOrder = ['Title', 'Description', 'Requested Date'];
 
   const filteredColumns = columns.filter(col => {
+    if (colOrder.includes(col.field)) {
+      col.index = colOrder.indexOf(col.field);
+    } else {
+      col.index = 999;
+    }
     if (!fulfiller) {
       const exclude = ['Organization'];
       return !exclude.some(el => el === col.field);
@@ -93,6 +99,8 @@ const TicketTable = ({
       return true;
     }
   });
+
+  filteredColumns.sort((a, b) => a.index - b.index);
 
   return (
     <div className="item-container card-wrapper no-padding datagrid-container">
