@@ -4,6 +4,7 @@ import { parseSubsToTablegrid } from '../../../../customUtils/utils';
 import { PageTitle } from '@kineticdata/bundle-common';
 import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import './_ClientHome.scss';
+import BurndownChart from '../BurndownChart/BurndownChart';
 
 const ClientHome = () => {
   const [rowData, setRowData] = useState('');
@@ -26,6 +27,10 @@ const ClientHome = () => {
         <div className="table-wrapper">
           <TicketTable columns={columns} rows={rows} createBtn />
         </div>
+      </div>
+      <div className="dashboard page-panel">
+        <h1>Burndown Chart</h1>
+        <BurndownChart />
       </div>
     </div>
   );
