@@ -18,10 +18,6 @@ const ClientHome = () => {
     );
   }, []);
 
-  console.log(rowData);
-  console.log(columns);
-  console.log(rows);
-
   return (
     <div>
       <PageTitle parts={['Home']} />

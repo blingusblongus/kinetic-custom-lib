@@ -25,6 +25,7 @@ import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import { parseSubsToTablegrid } from '../../../../customUtils/utils.js';
 
 import { Utils } from '@kineticdata/bundle-common';
+import { isFulfiller } from '../../lib/utils';
 
 ChartJS.register(
   CategoryScale,
@@ -39,9 +40,9 @@ ChartJS.register(
 const Dashboard = () => {
   const [rowData, setRowData] = useState('');
   let [columns, rows] = parseSubsToTablegrid(rowData);
-  const store = useSelector(store => store);
-  console.log(store);
+  const userProfile = useSelector(store => store.userProfile);
 
+  const fulfiller = isFulfiller(userProfile);
   // fetch submissions
   useEffect(() => {
     const search = new SubmissionSearch().include('values').build();

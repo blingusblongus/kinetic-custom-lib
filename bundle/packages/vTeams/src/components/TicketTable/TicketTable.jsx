@@ -14,6 +14,9 @@ import './_TicketTable.scss';
 import URLS from '../../../globals/urls.js';
 import Priority from '../Priority/Priority';
 
+import { isFulfiller } from '../../lib/utils';
+import { useSelector } from 'react-redux';
+
 const TicketTable = ({
   columns = [],
   rows = [],
@@ -21,6 +24,8 @@ const TicketTable = ({
   viewAllBtn = false,
 }) => {
   const [value, setValue] = useState('');
+  const userProfile = useSelector(store => store.app.profile);
+  const fulfiller = isFulfiller(userProfile);
 
   const handleRowClick = e => {
     history.push(`${URLS.CLIENT_SUBMIT}/${e.id}`);
@@ -80,6 +85,15 @@ const TicketTable = ({
   console.log('columns', columns);
   console.log('rows', filteredRows);
 
+  const filteredColumns = columns.filter(col => {
+    if (!fulfiller) {
+      const exclude = ['Organization'];
+      return !exclude.some(el => el === col.field);
+    } else {
+      return true;
+    }
+  });
+
   return (
     <div className="item-container card-wrapper no-padding datagrid-container">
       <div className="datagrid-header flex">
@@ -110,7 +124,7 @@ const TicketTable = ({
         <div style={{ flexGrow: 1 }}>
           <DataGrid
             rows={filteredRows}
-            columns={columns}
+            columns={filteredColumns}
             onRowClick={handleRowClick}
             sx={{
               bgcolor: 'white',

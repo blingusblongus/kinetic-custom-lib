@@ -10,3 +10,10 @@ export const countPriorityTickets = (tickets, level, countClosed = false) => {
     ({ status, priority }) => (status || countClosed) && priority === level,
   ).length;
 };
+
+export const isFulfiller = userProfile =>
+  userProfile.memberships
+    .map(mem => {
+      return mem.team.name;
+    })
+    .includes('vTeams');
