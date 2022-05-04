@@ -106,17 +106,27 @@ const SidebarComponent = props => {
       <div className="app-sidebar__group">
         {Utils.isMemberOf(props.profile, 'Role::vTeams Client') && (
           <SidebarLink
-            to={`/kapps/vteams/dashboard`}
+            to={`/kapps/vteams/home`}
             icon="fa fa-home"
             matchExclude={`/kapps/${props.queueKapp.slug}${
               QueueApp.settingsRoute
             }`}
           >
-            <I18n>Client Home</I18n>
+            <I18n>Home</I18n>
           </SidebarLink>
         )}
 
-        <SidebarLink to="/" icon="fa fa-home" matchParams={{ exact: true }}>
+        <SidebarLink
+          to={`/kapps/vteams/ticket`}
+          icon="fa fa-plus"
+          matchExclude={`/kapps/${props.queueKapp.slug}${
+            QueueApp.settingsRoute
+          }`}
+        >
+          <I18n>New Ticket</I18n>
+        </SidebarLink>
+
+        {/* <SidebarLink to="/" icon="fa fa-home" matchParams={{ exact: true }}>
           <I18n>Home</I18n>
         </SidebarLink>
         {Utils.isKappVisible(props.servicesKapp) && (
@@ -126,9 +136,9 @@ const SidebarComponent = props => {
           >
             <I18n>Service Catalog</I18n>
           </SidebarLink>
-        )}
+        )} */}
 
-        {Utils.isKappVisible(props.queueKapp) && (
+        {/* {Utils.isKappVisible(props.queueKapp) && (
           <SidebarLink
             to={`/kapps/${props.queueKapp.slug}`}
             icon="fa fa-tasks"
@@ -138,9 +148,9 @@ const SidebarComponent = props => {
           >
             <I18n>Queue</I18n>
           </SidebarLink>
-        )}
+        )} */}
 
-        {Utils.isKappVisible(props.techBarKapp) && (
+        {/* {Utils.isKappVisible(props.techBarKapp) && (
           <SidebarLink
             to={`/kapps/${props.techBarKapp.slug}`}
             icon="fa fa-clock-o"
@@ -150,11 +160,11 @@ const SidebarComponent = props => {
           >
             <I18n>Tech Bar</I18n>
           </SidebarLink>
-        )}
+        )} */}
       </div>
       <div className="app-sidebar__group--divider" />
       <div className="app-sidebar__group">
-        {Utils.isKappVisible(props.servicesKapp) && (
+        {/* {Utils.isKappVisible(props.servicesKapp) && (
           <SidebarLink
             to={`/kapps/${props.servicesKapp.slug}/requests`}
             icon="fa fa-file-text-o"
@@ -162,6 +172,7 @@ const SidebarComponent = props => {
             <I18n>My Requests</I18n>
           </SidebarLink>
         )}
+         */}
         {Utils.isKappVisible(props.servicesKapp) &&
           props.servicesFavoritesEnabled && (
             <SidebarLink
@@ -179,11 +190,11 @@ const SidebarComponent = props => {
             <I18n>My Surveys</I18n>
           </SidebarLink>
         )}
-        {props.discussionsEnabled && (
+        {/* {props.discussionsEnabled && (
           <SidebarLink to="/discussions" icon="fa fa-comments-o">
             <I18n>My Discussions</I18n>
           </SidebarLink>
-        )}
+        )} */}
       </div>
       <div className="app-sidebar__group app-sidebar__group--static mt-auto">
         <div className="action-wrapper">
