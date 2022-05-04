@@ -17,12 +17,12 @@ export const LoginWrapper = ({ children }) => (
             src={logoName}
             alt="Kinops - streamline everyday work for teams"
           /> */}
-          <h3>
+          {/* <h3>
             <I18n>Welcome to kinops</I18n>
           </h3>
           <p>
             <I18n>Streamline everyday work for teams.</I18n>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { PageTitle } from '@kineticdata/bundle-common';
 import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import './_ClientHome.scss';
 import BurndownChart from '../BurndownChart/BurndownChart';
+import BurndownDash from '../BurndownDash/BurndownDash';
 
 const ClientHome = () => {
   const [rowData, setRowData] = useState('');
@@ -22,6 +23,9 @@ const ClientHome = () => {
   return (
     <div>
       <PageTitle parts={['Home']} />
+      <div className="page-panel">
+        <BurndownDash />
+      </div>
       <div className="dashboard page-panel">
         <h1>Your Tickets</h1>
         <div className="table-wrapper">
