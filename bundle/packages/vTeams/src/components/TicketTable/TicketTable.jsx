@@ -48,7 +48,7 @@ const TicketTable = ({
   //massage columns
   for (let col of columns) {
     if (col.field === 'Title') {
-      col.flex = 1.5;
+      col.flex = 2;
     }
     if (col.field === 'Requested Date Due') {
       col.flex = 1;
@@ -100,7 +100,7 @@ const TicketTable = ({
       col.index = 999;
     }
 
-    const exclude = ['Number'];
+    const exclude = ['Number', 'Organization ID'];
     if (!fulfiller) {
       exclude.push(['Organization']);
     }
