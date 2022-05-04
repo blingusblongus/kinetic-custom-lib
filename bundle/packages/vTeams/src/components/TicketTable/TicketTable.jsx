@@ -47,13 +47,20 @@ const TicketTable = ({
 
   //massage columns
   for (let col of columns) {
-    if (col.field === 'Date Due') {
+    if (col.field === 'Title') {
+      col.flex = 1.5;
+    }
+    if (col.field === 'Requested Date Due') {
+      col.flex = 1;
+    }
+    if (col.field === 'Description') {
       col.flex = 2;
     }
-    if (col.field === 'Full Description') {
-      col.flex = 2;
+    if (col.field === 'Estimate') {
+      col.flex = 0.5;
     }
     if (col.field === 'Attachments') {
+      col.flex = 0.5;
       col.renderCell = params => {
         if (!params.value) return;
         return (
@@ -92,12 +99,12 @@ const TicketTable = ({
     } else {
       col.index = 999;
     }
+
+    const exclude = ['Number'];
     if (!fulfiller) {
-      const exclude = ['Organization'];
-      return !exclude.some(el => el === col.field);
-    } else {
-      return true;
+      exclude.push(['Organization']);
     }
+    return !exclude.some(el => el === col.field);
   });
 
   filteredColumns.sort((a, b) => a.index - b.index);

@@ -28,10 +28,10 @@ const ClientHome = () => {
           <TicketTable columns={columns} rows={rows} createBtn />
         </div>
       </div>
-      <div className="dashboard page-panel">
+      {/* <div className="dashboard page-panel">
         <h1>Burndown Chart</h1>
         <BurndownChart />
-      </div>
+      </div> */}
     </div>
   );
 };
