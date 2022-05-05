@@ -6,7 +6,7 @@ import { ProfileDropdown } from './ProfileDropdown';
 import { SearchBar } from './SearchBar';
 import { Utils } from '@kineticdata/bundle-common';
 
-import logo from '../../assets/images/esolutionsONE_logo_square.png';
+import logo from '../../assets/images/esolutions_logo_white.svg';
 import URLS from 'vteams/globals/urls';
 
 const HeaderComponent = props => (

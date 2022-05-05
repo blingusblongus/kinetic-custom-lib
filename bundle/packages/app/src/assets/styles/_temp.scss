@@ -7,3 +7,24 @@
 .dropdown .dropdown-menu {
   @include scrollbar();
 }
+
+.app-header {
+  background-color: #012b3f;
+
+  .kinetic-typeahead {
+    .search {
+      color: white;
+    }
+
+    .goto-search {
+      color: white;
+    }
+  }
+  .dropdown {
+    color: white;
+
+    a {
+      color: white;
+    }
+  }
+}

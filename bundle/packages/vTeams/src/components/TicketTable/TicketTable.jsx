@@ -154,6 +154,10 @@ const TicketTable = ({
                 color: colorWhite,
                 opacity: 1,
               },
+              '.MuiDataGrid-filterIcon': {
+                color: colorWhite,
+                opacity: 1,
+              },
               '.MuiDataGrid-sortIcon': {
                 color: colorWhite,
                 opacity: 1,
