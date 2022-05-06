@@ -1,0 +1,12 @@
+@import '../../assets/styles/variables';
+
+footer {
+  height: 50px;
+  font-size: $font-small;
+  text-align: center;
+  color: $color-white;
+
+  a {
+    margin: auto 10px auto 10px;
+  }
+}
