@@ -42,7 +42,7 @@ const Activities = ({ id }) => {
 
     // Append hoursSpent if necessary
     if (hoursSpent) {
-      values.hoursSpent = hoursSpent;
+      values['Hours Worked'] = hoursSpent;
     }
 
     createSubmission({ kappSlug, formSlug, values })

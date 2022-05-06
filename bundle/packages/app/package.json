@@ -1,6 +1,6 @@
 {
-  "name": "@kineticdata/bundle",
-  "version": "5.1.0",
+  "name": "esolutions_vteams",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "prestart": "node ./src/setupEnv.js",
