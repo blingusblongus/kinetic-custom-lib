@@ -49,7 +49,7 @@ const Activities = ({ id }) => {
       .then(submission => {
         console.log('submitted:', submission);
         setCommentText('');
-        setHoursSpent(null);
+        setHoursSpent('');
         setReFetch(!reFetch);
       })
       .catch(err => console.log(err));
