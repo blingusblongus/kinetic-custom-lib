@@ -20,6 +20,13 @@ export const isFulfiller = userProfile =>
     })
     .includes('vTeams');
 
+/**
+ * Takes in KD searchSubmissions options,
+ * and recursively builds an array aggregated all paginated results
+ * @param {object} opts - Kinetic Data searchSubmissions options obj
+ * @param {*} results
+ * @returns Array of submissions
+ */
 export const getPaginated = async (opts, results = []) => {
   const response = await searchSubmissions(opts);
   console.log(response);
