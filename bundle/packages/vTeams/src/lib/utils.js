@@ -29,7 +29,6 @@ export const isFulfiller = userProfile =>
  */
 export const getPaginated = async (opts, results = []) => {
   const response = await searchSubmissions(opts);
-  console.log(response);
   if (response.nextPageToken) {
     return getPaginated(
       { nextPageToken: response.nextPageToken },

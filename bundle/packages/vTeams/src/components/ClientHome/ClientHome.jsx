@@ -27,7 +27,6 @@ const ClientHome = () => {
     getSubmissions();
   }, []);
 
-  console.log('clienthome mounted');
   return (
     <div>
       <PageTitle parts={['Home']} />
