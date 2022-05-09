@@ -6,6 +6,7 @@ import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import './_ClientHome.scss';
 import BurndownChart from '../BurndownChart/BurndownChart';
 import BurndownClient from '../BurndownClient/BurndownClient';
+import { getPaginated } from '../../lib/utils';
 
 const ClientHome = () => {
   const [rowData, setRowData] = useState('');
@@ -14,12 +15,19 @@ const ClientHome = () => {
   // fetch submissions
   useEffect(() => {
     // Get all tickets for current client
-    const search = new SubmissionSearch().include('values').build();
-    searchSubmissions({ kapp: 'vteams', form: 'vteams-ticket', search }).then(
-      result => setRowData(result.submissions),
-    );
+    const getSubmissions = async () => {
+      const search = new SubmissionSearch().include('values').build();
+      let submissions = await getPaginated({
+        kapp: 'vteams',
+        form: 'vteams-ticket',
+        search,
+      });
+      setRowData(submissions);
+    };
+    getSubmissions();
   }, []);
 
+  console.log('clienthome mounted');
   return (
     <div>
       <PageTitle parts={['Home']} />
