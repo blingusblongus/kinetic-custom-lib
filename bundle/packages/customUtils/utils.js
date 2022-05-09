@@ -7,8 +7,6 @@
  */
 export const parseSubsToTablegrid = (submissions) => {
     const [cs, rs] = [[], []];
-    console.log('parseSub called')
-    console.log('submissions', submissions);
 
     if (submissions.length > 0) {
         for (let key in submissions[0].values) {

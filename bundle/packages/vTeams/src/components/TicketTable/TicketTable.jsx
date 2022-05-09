@@ -43,8 +43,6 @@ const TicketTable = ({
     );
   });
 
-  console.log('filteredRows', filteredRows);
-
   //massage columns
   for (let col of columns) {
     if (col.field === 'Title') {
@@ -89,8 +87,6 @@ const TicketTable = ({
     }
   }
 
-  console.log('columns', columns);
-  console.log('rows', filteredRows);
   const colOrder = ['Title', 'Description', 'Requested Date'];
 
   const filteredColumns = columns.filter(col => {
