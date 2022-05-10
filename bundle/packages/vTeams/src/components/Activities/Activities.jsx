@@ -10,6 +10,7 @@ import './_Activities.scss';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import { useSelector } from 'react-redux';
 import { getPaginated } from '../../lib/utils.js';
+import { FORM_FIELDS } from '../../../globals/globals.js';
 
 const Activities = ({ id }) => {
   const [activities, setActivities] = useState([]);
@@ -18,6 +19,7 @@ const Activities = ({ id }) => {
   const [reFetch, setReFetch] = useState(false);
   const [internalMode, setInternalMode] = useState(false);
   const [ticketOrg, setTicketOrg] = useState('');
+  const [workLogChecked, setWorkLogChecked] = useState(false);
 
   const userProfile = useSelector(store => store.app.profile);
   const isFulfiller = userProfile.memberships
@@ -41,9 +43,14 @@ const Activities = ({ id }) => {
       Organization: ticketOrg,
     };
 
-    // Append hoursSpent if necessary
+    // Append hoursSpent and worklog if necessary
+    const { IS_WORK_LOG, HOURS_WORKED } = FORM_FIELDS;
     if (hoursSpent) {
-      values['Hours Worked'] = hoursSpent;
+      values[HOURS_WORKED] = hoursSpent;
+    }
+    if (workLogChecked) {
+      // closest to boolean on KD form is array of checkboxes
+      values[IS_WORK_LOG] = [IS_WORK_LOG];
     }
 
     createSubmission({ kappSlug, formSlug, values })
@@ -76,8 +83,6 @@ const Activities = ({ id }) => {
             form: 'activity',
             search,
           });
-
-          console.log('comments:', comments);
 
           let internalComments;
           let results;
@@ -127,16 +132,32 @@ const Activities = ({ id }) => {
         <form onSubmit={handleSubmit}>
           {isFulfiller && (
             <div className="hours-container">
-              <label htmlFor="hoursSpent">Hours:</label>
-              <input
-                type="number"
-                value={hoursSpent}
-                name="hoursSpent"
-                onChange={e => setHoursSpent(e.target.value)}
-              />
+              <div className="comment-label__checkbox">
+                <input
+                  type="checkbox"
+                  name="isWorkLog"
+                  checked={workLogChecked}
+                  onChange={() => setWorkLogChecked(!workLogChecked)}
+                />
+                <label htmlFor="isWorkLog"> Mark as Work Log</label>
+              </div>
+
+              {workLogChecked && (
+                <>
+                  <label htmlFor="hoursSpent">Hours:</label>
+                  <input
+                    type="number"
+                    value={hoursSpent}
+                    name="hoursSpent"
+                    onChange={e => setHoursSpent(e.target.value)}
+                  />
+                </>
+              )}
             </div>
           )}
-          <label htmlFor="comment">Comment:</label>
+          <label htmlFor="comment">
+            Comment{workLogChecked && ' (Work Notes)'}:
+          </label>
           <textarea
             rows={3}
             value={commentText}
