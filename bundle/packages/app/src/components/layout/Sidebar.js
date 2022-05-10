@@ -104,17 +104,15 @@ const SidebarComponent = props => {
       </div>
 
       <div className="app-sidebar__group">
-        {Utils.isMemberOf(props.profile, 'Role::vTeams Client') && (
-          <SidebarLink
-            to={`/kapps/vteams/home`}
-            icon="fa fa-home"
-            matchExclude={`/kapps/${props.queueKapp.slug}${
-              QueueApp.settingsRoute
-            }`}
-          >
-            <I18n>Home</I18n>
-          </SidebarLink>
-        )}
+        <SidebarLink
+          to={`/kapps/vteams/home`}
+          icon="fa fa-home"
+          matchExclude={`/kapps/${props.queueKapp.slug}${
+            QueueApp.settingsRoute
+          }`}
+        >
+          <I18n>Home</I18n>
+        </SidebarLink>
 
         <SidebarLink
           to={`/kapps/vteams/ticket`}
