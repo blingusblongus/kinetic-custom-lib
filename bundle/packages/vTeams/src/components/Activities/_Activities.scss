@@ -28,3 +28,10 @@ textarea:not(.form-control) {
     background-color: rgb(255, 206, 206);
   }
 }
+
+.message-no-comments {
+  font-style: italic;
+  font-size: $font-small;
+  color: gray;
+  text-align: center;
+}

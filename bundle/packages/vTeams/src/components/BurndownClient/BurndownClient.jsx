@@ -12,7 +12,7 @@ const BurndownClient = () => {
   const userProfile = useSelector(store => store.app.profile);
   const organization = userProfile.attributes.find(
     attr => attr.name == 'Organization',
-  ).values[0];
+  )?.values[0];
 
   useEffect(() => {
     // fetch info from client form
@@ -60,14 +60,21 @@ const BurndownClient = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Burndown for {burndown.clientName}</h1>
-      <div className="page-panel">
-        <p>Total Hours this Month: {burndown.totalHours} hours</p>
-        <p>Work Done this Billing Period: {burndown.hoursThisPeriod} hours</p>
-        <p>Hours Remaining: {burndown.hoursRemaining} hours</p>
-      </div>
-    </div>
+    <>
+      {' '}
+      {organization && (
+        <div>
+          <h1>Burndown for {burndown.clientName}</h1>
+          <div className="page-panel">
+            <p>Total Hours this Month: {burndown.totalHours} hours</p>
+            <p>
+              Work Done this Billing Period: {burndown.hoursThisPeriod} hours
+            </p>
+            <p>Hours Remaining: {burndown.hoursRemaining} hours</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

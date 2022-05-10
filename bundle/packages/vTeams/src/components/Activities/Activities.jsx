@@ -165,6 +165,10 @@ const Activities = ({ id }) => {
                 <Activity key={submission.handle} submission={submission} />
               );
             })}
+
+          {activities.length === 0 && (
+            <div className="message-no-comments">No Comments to display</div>
+          )}
         </div>
       </div>
     </div>
