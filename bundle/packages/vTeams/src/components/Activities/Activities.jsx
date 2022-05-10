@@ -65,7 +65,6 @@ const Activities = ({ id }) => {
 
   useEffect(
     () => {
-      console.log('api fetch');
       // Retrieve Ticket Data
       fetchSubmission({ id, include: 'values' })
         .then(result => setTicketOrg(result.submission.values['Organization']))
@@ -84,8 +83,6 @@ const Activities = ({ id }) => {
             form: 'activity',
             search,
           });
-
-          console.log('comments:', comments);
 
           let internalComments;
           let results;
@@ -125,10 +122,6 @@ const Activities = ({ id }) => {
   const toggleInternal = () => {
     setInternalMode(!internalMode);
   };
-
-  console.log('isFulfiller', isFulfiller);
-  console.log('userProfile', userProfile);
-  console.log('worklog checked', workLogChecked);
 
   return (
     <div className="card-wrapper activities">
