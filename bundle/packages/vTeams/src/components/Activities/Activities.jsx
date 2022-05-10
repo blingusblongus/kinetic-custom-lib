@@ -9,11 +9,12 @@ import Activity from './Activity/Activity.jsx';
 import './_Activities.scss';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import { useSelector } from 'react-redux';
+import { getPaginated } from '../../lib/utils.js';
 
 const Activities = ({ id }) => {
   const [activities, setActivities] = useState([]);
   const [commentText, setCommentText] = useState('');
-  const [hoursSpent, setHoursSpent] = useState(null);
+  const [hoursSpent, setHoursSpent] = useState('');
   const [reFetch, setReFetch] = useState(false);
   const [internalMode, setInternalMode] = useState(false);
   const [ticketOrg, setTicketOrg] = useState('');
@@ -70,32 +71,31 @@ const Activities = ({ id }) => {
           .build();
 
         try {
-          const comments = await searchSubmissions({
+          const comments = await getPaginated({
             kapp: 'vteams',
             form: 'activity',
             search,
           });
 
+          console.log('comments:', comments);
+
           let internalComments;
           let results;
           if (isFulfiller) {
-            internalComments = await searchSubmissions({
+            internalComments = await getPaginated({
               kapp: 'vteams',
               form: 'internal-notes',
               search,
             });
 
             //Tag internalComments for conditional display
-            internalComments.submissions.forEach(submission => {
+            internalComments.forEach(submission => {
               submission.values.isInternal = true;
             });
 
-            results = [
-              ...comments.submissions,
-              ...internalComments.submissions,
-            ];
+            results = [...comments, ...internalComments];
           } else {
-            results = comments.submissions;
+            results = comments;
           }
 
           //sort comments by date

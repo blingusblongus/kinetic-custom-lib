@@ -14,11 +14,7 @@ export const countPriorityTickets = (tickets, level, countClosed = false) => {
 };
 
 export const isFulfiller = userProfile =>
-  userProfile.memberships
-    .map(mem => {
-      return mem.team.name;
-    })
-    .includes('vTeams');
+  userProfile.memberships.map(mem => mem.team.name).includes('vTeams');
 
 /**
  * Takes in KD searchSubmissions options,
