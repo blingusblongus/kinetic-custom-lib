@@ -35,3 +35,17 @@ textarea:not(.form-control) {
   color: gray;
   text-align: center;
 }
+
+input[type='checkbox'] {
+  margin: auto 10px auto 0px;
+}
+
+.comment-label__checkbox {
+  display: flex;
+  align-items: center;
+
+  label {
+    margin-bottom: 0;
+    margin-top: 2px;
+  }
+}
