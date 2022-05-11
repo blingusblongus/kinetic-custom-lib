@@ -6,11 +6,17 @@ import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import './_ClientHome.scss';
 import BurndownChart from '../BurndownChart/BurndownChart';
 import BurndownClient from '../BurndownClient/BurndownClient';
-import { getPaginated } from '../../lib/utils';
+import BurndownFulfiller from '../BurndownFulfiller/BurndownFulfiller';
+import { getPaginated, isFulfiller } from '../../lib/utils';
+import { useSelector } from 'react-redux';
 
 const ClientHome = () => {
   const [rowData, setRowData] = useState('');
   let [columns, rows] = parseSubsToTablegrid(rowData);
+  const userProfile = useSelector(store => store.app.profile);
+  const fulfiller = isFulfiller(userProfile);
+  console.log('profile', userProfile);
+  console.log('isFulfiller', fulfiller);
 
   // fetch submissions
   useEffect(() => {
@@ -31,7 +37,7 @@ const ClientHome = () => {
     <div>
       <PageTitle parts={['Home']} />
       <div className="page-panel">
-        <BurndownClient />
+        {!fulfiller ? <BurndownClient /> : <BurndownFulfiller />}
       </div>
       <div className="dashboard page-panel">
         <h1>Your Tickets</h1>

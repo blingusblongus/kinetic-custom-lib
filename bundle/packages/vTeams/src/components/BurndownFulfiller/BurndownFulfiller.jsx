@@ -5,6 +5,7 @@ import { VTEAMS } from '../../../globals/globals';
 
 const BurndownFulfiller = () => {
   const [data, setData] = useState({});
+  console.log('burndownfulfiller mounted');
 
   useEffect(() => {
     const fetchBurndownInfo = async () => {
@@ -46,6 +47,7 @@ const BurndownFulfiller = () => {
 
       console.log('workLogs', workLogs);
       for (let log of workLogs) {
+        if (!log) continue;
         const org = log.values['Organization'];
         hash[org].submissions.push(log);
         hash[org]['Hours Worked'] += Number(log.values['Hours Worked']);
