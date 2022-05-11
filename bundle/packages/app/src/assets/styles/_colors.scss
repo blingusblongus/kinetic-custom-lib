@@ -1,3 +1,5 @@
+@import '../../../../vTeams/src/assets/styles/variables';
+
 /**
  * Colors - App
  *
@@ -35,7 +37,7 @@
 // $danger:     $red; // #fa3a37
 // $light:      $gray-100;
 // $subtle:     $gray-400;
-// $dark:       $gray-800;
+$dark: $bg-color-primary; // $gray-800;
 
 $theme-colors: () !default;
 $theme-colors: map-merge(
