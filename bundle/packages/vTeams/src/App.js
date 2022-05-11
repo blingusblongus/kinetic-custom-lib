@@ -28,6 +28,7 @@ import { Provider, useSelector } from 'react-redux';
 import { store } from './redux/store';
 import ClientHome from './components/ClientHome/ClientHome';
 import DashboardV1 from './components/Dashboard/Dashboard';
+import FormView from './components/FormView/FormView';
 
 /*****************************************************************************
  *** PRIVATE APP
@@ -70,6 +71,7 @@ const AppComponent = props => {
                   {/* <BreadCrumbContainer /> */}
                   <Router>
                     {/* <TicketSubmission path="/" /> */}
+                    <FormView path="/forms/:formSlug" />
                     <Redirect from="/" to="/kapps/vteams/home" noThrow />
                     {/* <Dashboard path="/dashboard" /> */}
                     {/* <DashboardV1 path="/dashboard/v1" /> */}
