@@ -10,7 +10,7 @@ import './_Activities.scss';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import { useSelector } from 'react-redux';
 import { getPaginated } from '../../lib/utils.js';
-import { FORM_FIELDS } from '../../../globals/globals.js';
+import { FORM_FIELDS, VTEAMS } from '../../../globals/globals.js';
 
 const Activities = ({ id }) => {
   const [activities, setActivities] = useState([]);
@@ -79,8 +79,8 @@ const Activities = ({ id }) => {
 
         try {
           const comments = await getPaginated({
-            kapp: 'vteams',
-            form: 'activity',
+            kapp: VTEAMS.KAPPSLUG,
+            form: VTEAMS.ACTIVITIES_FORM_SLUG,
             search,
           });
 
@@ -88,8 +88,8 @@ const Activities = ({ id }) => {
           let results;
           if (isFulfiller) {
             internalComments = await getPaginated({
-              kapp: 'vteams',
-              form: 'internal-notes',
+              kapp: VTEAMS.KAPPSLUG,
+              form: VTEAMS.INTERNAL_NOTES_FORM_SLUG,
               search,
             });
 

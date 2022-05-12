@@ -4,6 +4,7 @@ import { isFulfiller } from '../../lib/utils';
 import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
 import './_BurndownClient.scss';
 import moment from 'moment';
+import { VTEAMS, FORM_FIELDS, ATTRIBUTES } from '../../../globals/globals';
 
 const BurndownClient = () => {
   const [hours, setHours] = useState(0);
@@ -11,7 +12,7 @@ const BurndownClient = () => {
 
   const userProfile = useSelector(store => store.app.profile);
   const organization = userProfile.attributes.find(
-    attr => attr.name == 'Organization',
+    attr => attr.name == ATTRIBUTES.ORGANIZATION,
   )?.values[0];
 
   useEffect(() => {
@@ -22,12 +23,15 @@ const BurndownClient = () => {
       .build();
 
     searchSubmissions({
-      kapp: 'vteams',
-      form: 'clients',
+      kapp: VTEAMS.KAPPSLUG,
+      form: VTEAMS.CLIENTS_FORM_SLUG,
       search: clientInfoSearch,
     }).then(result => {
-      const billingPeriod = result.submissions[0]?.values['Billing Start Date'];
-      const totalHours = Number(result.submissions[0]?.values['Monthly Hours']);
+      const billingPeriod =
+        result.submissions[0]?.values[FORM_FIELDS.BILLING_START];
+      const totalHours = Number(
+        result.submissions[0]?.values[FORM_FIELDS.MONTHLY_HOURS],
+      );
       // get all activities for current client
       const activitiesSearch = new SubmissionSearch()
         .eq('values[Organization]', organization)
@@ -35,13 +39,13 @@ const BurndownClient = () => {
         .build();
 
       searchSubmissions({
-        kapp: 'vteams',
-        form: 'activity',
+        kapp: VTEAMS.KAPPSLUG,
+        form: VTEAMS.ACTIVITIES_FORM_SLUG,
         search: activitiesSearch,
       }).then(result => {
         const subs = result.submissions;
         const burndownHours = subs.reduce((sum, sub) => {
-          const hours = sub.values['Hours Worked'];
+          const hours = sub.values[FORM_FIELDS.HOURS_WORKED];
           // if tagged with hours and after the client's billing period start, sum
           return hours && moment(sub.createdAt) > moment(billingPeriod)
             ? sum + Number(hours)
