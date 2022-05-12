@@ -30,8 +30,10 @@ const Activities = ({ id }) => {
   const textareaClasses = internalMode ? 'internal' : '';
 
   const handleSubmit = e => {
-    const formSlug = internalMode ? 'internal-notes' : 'activity';
-    const kappSlug = 'vteams';
+    const formSlug = internalMode
+      ? VTEAMS.INTERNAL_NOTES_FORM_SLUG
+      : VTEAMS.ACTIVITIES_FORM_SLUG;
+    const kappSlug = VTEAMS.KAPPSLUG;
 
     e.preventDefault();
 
