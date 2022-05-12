@@ -1,1 +1,36 @@
 @import '../../assets/styles/variables';
+
+$img-dimensions: 70px;
+
+.burndown-dashboard {
+  display: flex;
+  justify-content: space-around;
+  gap: 10%;
+
+  .burndown-panel {
+    background-color: $color-white;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 30%;
+    width: 30%;
+    max-height: 70vh;
+    overflow: hidden;
+  }
+
+  .burndown-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: $line-dividers;
+
+    img {
+      width: $img-dimensions;
+      height: $img-dimensions;
+    }
+
+    .burndown-organization {
+      font-weight: $weight-heavy;
+      margin: auto;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
 import { getPaginated } from '../../lib/utils';
 import { VTEAMS } from '../../../globals/globals';
+import './BurndownFulfiller.scss';
 
 const BurndownFulfiller = () => {
   const [data, setData] = useState({});
@@ -30,6 +31,8 @@ const BurndownFulfiller = () => {
             submissions: [],
             ['Hours Worked']: 0,
             ['Monthly Hours']: Number(submission.values['Monthly Hours']),
+            logo: submission.values['Logo Url'],
+            name: org,
           };
         }
       }
@@ -43,7 +46,7 @@ const BurndownFulfiller = () => {
 
       const workLogs = await getPaginated({
         kapp: VTEAMS.KAPPSLUG,
-        form: VTEAMS.ACTIVITY_FORM_SLUG,
+        form: VTEAMS.ACTIVITIES_FORM_SLUG,
         search,
       });
 
@@ -63,8 +66,21 @@ const BurndownFulfiller = () => {
   }, []);
 
   return (
-    <div>
+    <div className="burndown-dashboard page-panel">
       {Object.keys(data).map((org, i) => {
+        const { logo, submissions, name } = data[org];
+        return (
+          <div key={i} className="burndown-panel">
+            <div className="burndown-header">
+              <img src={logo} />
+              <div className="burndown-organization">{name}</div>
+            </div>
+            <div className="burndown-body" />
+            {JSON.stringify(data[org])}
+          </div>
+        );
+      })}
+      {/* {Object.keys(data).map((org, i) => {
         console.log(data[org]);
         const total = data[org]['Monthly Hours'];
         const utilized = data[org]['Hours Worked'];
@@ -74,7 +90,7 @@ const BurndownFulfiller = () => {
             {org}: {remaining} hours remaining of {total} hours.
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };

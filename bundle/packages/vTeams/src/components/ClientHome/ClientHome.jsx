@@ -36,9 +36,9 @@ const ClientHome = () => {
   return (
     <div>
       <PageTitle parts={['Home']} />
-      <div className="page-panel">
+      {/* <div className="page-panel">
         {!fulfiller ? <BurndownClient /> : <BurndownFulfiller />}
-      </div>
+      </div> */}
       <div className="dashboard page-panel">
         <h1>Your Tickets</h1>
         <div className="table-wrapper">
