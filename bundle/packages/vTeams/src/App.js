@@ -29,6 +29,7 @@ import { store } from './redux/store';
 import ClientHome from './components/ClientHome/ClientHome';
 import DashboardV1 from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';
+import BurndownFulfiller from './components/BurndownFulfiller/BurndownFulfiller';
 
 /*****************************************************************************
  *** PRIVATE APP
@@ -81,6 +82,7 @@ const AppComponent = props => {
                     {/* <Queue path="/queue" /> */}
                     {/* <ClientManagement path="/clients" /> */}
                     <ClientHome path="/home" />
+                    <BurndownFulfiller path="/clients" />
                   </Router>
                 </div>
                 <Footer />
