@@ -31,6 +31,8 @@ export const getPaginated = async (opts, results = []) => {
       results.concat(response.submissions),
     );
   } else {
+    console.log(response);
+    console.log(results.concat(response.submissions));
     return results.concat(response.submissions);
   }
 };

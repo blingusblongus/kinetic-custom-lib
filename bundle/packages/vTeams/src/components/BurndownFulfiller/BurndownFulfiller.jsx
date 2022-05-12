@@ -23,6 +23,8 @@ const BurndownFulfiller = () => {
       for (let submission of clientInfo) {
         console.log('submission', submission);
         const org = submission.values['Organization'];
+        if (!org) continue;
+
         if (!hash[org]) {
           hash[org] = {
             submissions: [],
