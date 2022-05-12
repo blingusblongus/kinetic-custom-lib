@@ -13,7 +13,7 @@ const BurndownFulfiller = () => {
 
       const clientInfo = await getPaginated({
         kapp: VTEAMS.KAPPSLUG,
-        form: VTEAMS.CLIENT_FORM_SLUG,
+        form: VTEAMS.CLIENTS_FORM_SLUG,
         search,
       });
       console.log(clientInfo);
