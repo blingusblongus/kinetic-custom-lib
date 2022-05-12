@@ -75,8 +75,24 @@ const BurndownFulfiller = () => {
               <img src={logo} />
               <div className="burndown-organization">{name}</div>
             </div>
-            <div className="burndown-body" />
-            {JSON.stringify(data[org])}
+            <div className="burndown-body">
+              <div className="burndown-item">
+                <span className="burndown-item--header">Total Hours: </span>
+                <span>{data[org]['Monthly Hours']}</span>
+              </div>
+              <div className="burndown-item">
+                <span className="burndown-item--header">Hours Used: </span>
+                <span>{data[org]['Hours Worked']}</span>
+              </div>
+              <div className="burndown-item">
+                <span className="burndown-item--header">Hours Remaining: </span>
+                <span>
+                  {data[org]['Monthly Hours'] - data[org]['Hours Worked']}
+                </span>
+              </div>
+            </div>
+            <div className="burndown-footer">View Details</div>
+            {/* {JSON.stringify(data[org])} */}
           </div>
         );
       })}

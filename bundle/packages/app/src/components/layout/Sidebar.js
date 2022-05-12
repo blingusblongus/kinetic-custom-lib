@@ -115,6 +115,16 @@ const SidebarComponent = props => {
         </SidebarLink>
 
         <SidebarLink
+          to={`/kapps/vteams/clients`}
+          icon="fa fa-folder"
+          matchExclude={`/kapps/${props.queueKapp.slug}${
+            QueueApp.settingsRoute
+          }`}
+        >
+          <I18n>Clients</I18n>
+        </SidebarLink>
+
+        <SidebarLink
           to={`/kapps/vteams/ticket`}
           icon="fa fa-plus"
           matchExclude={`/kapps/${props.queueKapp.slug}${
