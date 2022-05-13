@@ -19,17 +19,24 @@
 
 A client should be able to:
 
-[ ] Log in
-[ ] View a list of their submitted tickets
+- [ ] Log in
+- [ ] View a list of their submitted tickets
+- [ ] Sort submitted tickets by Status, Date Submitted, etc.
+- [ ] Submit a new Ticket
+
+A fulfiller should be able to:
+
+- [ ] Log in
+- [ ] View a list of all tickets from all organizations
+- [ ] Update the details of a ticket
+  - [ ] Update the state of the ticket
+  - [ ] Assign the ticket to a vTeams member
+  - [ ] Adjust other details of a ticket
+- [ ] Communicate with the client via comments attached to the ticket
+- [ ] Log hours worked with a 'Work Log' comment
+- [ ] Store private, internal notes in the comment section
 
 ## Troubleshooting
-
-<!-- <details>
-  <summary>Failed Webhook Migration while running export.rb</summary>
-  <h3>Solution:</h3>
-  <p>Ensure Ruby is up to date.</p>
-  `install ruby`
-</details> -->
 
 - Failed Webhook migration during export.rb run
   - Solution: Ensure the version of Ruby being used is up to date
