@@ -34,6 +34,7 @@ const Activities = ({ id }) => {
       ? VTEAMS.INTERNAL_NOTES_FORM_SLUG
       : VTEAMS.ACTIVITIES_FORM_SLUG;
     const kappSlug = VTEAMS.KAPPSLUG;
+    const { IS_WORK_LOG, HOURS_WORKED } = FORM_FIELDS;
 
     e.preventDefault();
 
@@ -43,16 +44,12 @@ const Activities = ({ id }) => {
       Commenter: userProfile.displayName,
       isFulfiller: isFulfiller,
       Organization: ticketOrg,
+      [IS_WORK_LOG]: workLogChecked,
     };
 
-    // Append hoursSpent and worklog if necessary
-    const { IS_WORK_LOG, HOURS_WORKED } = FORM_FIELDS;
+    // Append hoursSpent if necessary
     if (hoursSpent) {
       values[HOURS_WORKED] = hoursSpent;
-    }
-    if (workLogChecked) {
-      // closest to boolean on KD form is array of checkboxes
-      values[IS_WORK_LOG] = [IS_WORK_LOG];
     }
 
     createSubmission({ kappSlug, formSlug, values })
