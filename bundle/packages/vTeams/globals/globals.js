@@ -4,7 +4,7 @@ export const VTEAMS = {
   ACTIVITIES_FORM_SLUG: 'activities',
   CLIENTS_FORM_SLUG: 'clients',
   INTERNAL_NOTES_FORM_SLUG: 'internal-notes',
-  VERSION: '0.1.2'
+  VERSION: '0.2.0'
 };
 
 export const FORM_FIELDS = {

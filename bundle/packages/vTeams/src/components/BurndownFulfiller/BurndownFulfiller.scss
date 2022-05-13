@@ -14,7 +14,8 @@ $img-dimensions: 70px;
   .client-container {
     display: flex;
     justify-content: space-around;
-    gap: 10%;
+    gap: 20px;
+    flex-wrap: wrap;
 
     .burndown-panel {
       background-color: $color-white;
