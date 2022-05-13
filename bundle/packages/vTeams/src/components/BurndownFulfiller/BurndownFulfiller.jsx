@@ -9,8 +9,7 @@ import TeamsButton from '../TeamsButton/TeamsButton';
 
 const BurndownFulfiller = () => {
   const [data, setData] = useState({});
-  const [modal, setModal] = useState({ show: true, submissions: [] });
-  console.log('burndownfulfiller mounted');
+  //   const [modal, setModal] = useState({ show: true, submissions: [] });
 
   useEffect(() => {
     const fetchBurndownInfo = async () => {
@@ -21,12 +20,10 @@ const BurndownFulfiller = () => {
         form: VTEAMS.CLIENTS_FORM_SLUG,
         search,
       });
-      console.log(clientInfo);
 
       // Init hashmap to track burndown data
       const hash = {};
       for (let submission of clientInfo) {
-        console.log('submission', submission);
         const org = submission.values['Organization'];
         if (!org) continue;
 
@@ -42,8 +39,6 @@ const BurndownFulfiller = () => {
         }
       }
 
-      console.log('hash', hash);
-
       search = new SubmissionSearch()
         .eq('values[isWorkLog]', 'true')
         .include('values')
@@ -55,7 +50,6 @@ const BurndownFulfiller = () => {
         search,
       });
 
-      console.log('workLogs', workLogs);
       for (let log of workLogs) {
         if (!log) continue;
         const org = log.values['Organization'];
@@ -63,7 +57,6 @@ const BurndownFulfiller = () => {
         hash[org]['Hours Worked'] += Number(log.values['Hours Worked']);
       }
 
-      console.log(hash);
       setData(hash);
     };
 
@@ -126,22 +119,10 @@ const BurndownFulfiller = () => {
                 >
                   View Details
                 </div>
-                {/* {JSON.stringify(data[org])} */}
               </div>
             );
           })}
         </div>
-        {/* {Object.keys(data).map((org, i) => {
-        console.log(data[org]);
-        const total = data[org]['Monthly Hours'];
-        const utilized = data[org]['Hours Worked'];
-        const remaining = total - utilized;
-        return (
-          <div key={i}>
-            {org}: {remaining} hours remaining of {total} hours.
-          </div>
-        );
-      })} */}
       </div>
 
       {/* {modal.show && <WorkLogList 
