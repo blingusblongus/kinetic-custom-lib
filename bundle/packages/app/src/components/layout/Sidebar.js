@@ -24,6 +24,7 @@ import QueueApp from '@kineticdata/bundle-queue';
 import ServicesApp from '@kineticdata/bundle-services';
 import SurveyApp from '@kineticdata/bundle-survey';
 import TechBarApp from '@kineticdata/bundle-tech-bar';
+import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 
 const buildKappSettingsList = ({
   profile,
@@ -114,15 +115,17 @@ const SidebarComponent = props => {
           <I18n>Home</I18n>
         </SidebarLink>
 
-        <SidebarLink
-          to={`/kapps/vteams/clients`}
-          icon="fa fa-folder"
-          matchExclude={`/kapps/${props.queueKapp.slug}${
-            QueueApp.settingsRoute
-          }`}
-        >
-          <I18n>Clients</I18n>
-        </SidebarLink>
+        {isMemberOf(props.profile, 'vTeams') && (
+          <SidebarLink
+            to={`/kapps/vteams/clients`}
+            icon="fa fa-folder"
+            matchExclude={`/kapps/${props.queueKapp.slug}${
+              QueueApp.settingsRoute
+            }`}
+          >
+            <I18n>Clients</I18n>
+          </SidebarLink>
+        )}
 
         <SidebarLink
           to={`/kapps/vteams/ticket`}

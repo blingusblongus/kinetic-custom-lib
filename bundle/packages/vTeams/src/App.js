@@ -73,6 +73,7 @@ const AppComponent = props => {
                   <Router>
                     {/* <TicketSubmission path="/" /> */}
                     <FormView path="/forms/:formSlug" />
+                    <FormView path="/forms/:formSlug/:formId" />
                     <Redirect from="/" to="/kapps/vteams/home" noThrow />
                     {/* <Dashboard path="/dashboard" /> */}
                     {/* <DashboardV1 path="/dashboard/v1" /> */}
