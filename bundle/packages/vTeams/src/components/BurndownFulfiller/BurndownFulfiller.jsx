@@ -5,6 +5,7 @@ import { VTEAMS } from '../../../globals/globals';
 import './BurndownFulfiller.scss';
 import WorkLogList from './WorkLogList/WorkLogList';
 import { history } from '@kineticdata/react';
+import TeamsButton from '../TeamsButton/TeamsButton';
 
 const BurndownFulfiller = () => {
   const [data, setData] = useState({});
@@ -72,7 +73,19 @@ const BurndownFulfiller = () => {
   return (
     <>
       <div className="burndown-dashboard page-panel">
-        <div className="burndown-dashboard__header">Clients Dashboard</div>
+        <div className="burndown-dashboard__header">
+          <div>Clients Dashboard</div>
+          <div>
+            <TeamsButton
+              linkpath={`/kapps/${VTEAMS.KAPPSLUG}/forms/${
+                VTEAMS.CLIENTS_FORM_SLUG
+              }`}
+            >
+              Add New Client
+            </TeamsButton>
+          </div>
+        </div>
+
         <div className="client-container">
           {Object.keys(data).map((org, i) => {
             const { logo, submissions, name, id } = data[org];

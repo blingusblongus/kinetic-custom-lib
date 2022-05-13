@@ -7,6 +7,8 @@ $img-dimensions: 70px;
     font-weight: $weight-heavy;
     color: $color-grey;
     padding: 30px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .client-container {
