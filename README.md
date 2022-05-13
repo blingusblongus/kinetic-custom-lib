@@ -1,10 +1,24 @@
 # vTEAMS Client / Fulfiller Portal
 
-1. 
+*Prod Address:* https://esolutionsone.kinops.io/
+
+*Dev Address:* https://esolutionsone-dev.kinops.io/
+
+## Deployment
+  Backend:
+  1. Clone platform-template repo: `git clone https://github.com/kineticdata/platform-template.git` (may require KD member to grant access)
+  2. Edit `config/servername_environment_export_config.yml` and `config/servername_enviroment_import_config.yml` with space name, slug, and login info for both dev and prod instances
+  3. run `export.rb -c "./config/servername_environment_export_config.yml"`
+  4. run `import.rb -c "./config/servername_environment_import_config.yml"`
+
+  Frontend:
+  1. `git pull` any changes from the github repo
+  2. `yarn build`
+  3. If pushing dev frontend, rename bundle/packages/app/build/ to build-dev/
+  4. Sign into s3 bucket
+  5. Click 'Upload Folder' and upload build/ folder (for prod) or build-dev (for dev)
 
 ## Bugs & Questions
-
- ### Deployment
 
  - [5.13.22]: After dev => prod migration, the value from the 'f3' field on the Clients form (which previously was a Billing Start Date) was automatically mapped to the new 'f3' field, 'Logo Url.'
     <details>
@@ -14,7 +28,6 @@
     - Questions: What's the best practice for keeping things in sync when the data model on prod changes? Do we need scripting to cover our bases?
  
  
-
 ## QA Testing
 
 A client should be able to:
@@ -23,6 +36,9 @@ A client should be able to:
 - [ ] View a list of their submitted tickets
 - [ ] Sort submitted tickets by Status, Date Submitted, etc.
 - [ ] Submit a new Ticket
+  - [ ] with Title, Description, Requested Due Date
+  - [ ] with Attachments
+- [ ] Leave a comment on a ticket for a vTeams member
 
 A fulfiller should be able to:
 
@@ -35,6 +51,8 @@ A fulfiller should be able to:
 - [ ] Communicate with the client via comments attached to the ticket
 - [ ] Log hours worked with a 'Work Log' comment
 - [ ] Store private, internal notes in the comment section
+- [ ] View a dashboard showing all clients and burndown information associated with them
+- [ ] Add a new client
 
 ## Troubleshooting
 
