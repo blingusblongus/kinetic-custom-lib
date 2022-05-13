@@ -119,6 +119,8 @@ const Activities = ({ id }) => {
   );
 
   const toggleInternal = () => {
+    setHoursSpent('');
+    setWorkLogChecked(false);
     setInternalMode(!internalMode);
   };
 
@@ -131,15 +133,17 @@ const Activities = ({ id }) => {
         <form onSubmit={handleSubmit}>
           {isFulfiller && (
             <div className="hours-container">
-              <div className="comment-label__checkbox">
-                <input
-                  type="checkbox"
-                  name="isWorkLog"
-                  checked={workLogChecked}
-                  onChange={() => setWorkLogChecked(!workLogChecked)}
-                />
-                <label htmlFor="isWorkLog"> Mark as Work Log</label>
-              </div>
+              {!internalMode && (
+                <div className="comment-label__checkbox">
+                  <input
+                    type="checkbox"
+                    name="isWorkLog"
+                    checked={workLogChecked}
+                    onChange={() => setWorkLogChecked(!workLogChecked)}
+                  />
+                  <label htmlFor="isWorkLog"> Mark as Work Log</label>
+                </div>
+              )}
 
               {workLogChecked && (
                 <>
