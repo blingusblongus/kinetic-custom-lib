@@ -72,7 +72,7 @@ export default class extends Component {
   // Functions for hiding/supressing parts of the default layout
   // static shouldHideHeader = props => true;
   // static shouldHideSidebar = props => true;
-  // static shouldSuppressSidebar = props => true;
+  static shouldSuppressSidebar = props => true;
 
   // Used for matching pathname to display this AppProvider
   // Not used if package is set as Bundle Package of a Kapp
