@@ -23,7 +23,7 @@
   .dropdown {
     color: white;
 
-    a {
+    a[role='button'] {
       color: white;
     }
   }
