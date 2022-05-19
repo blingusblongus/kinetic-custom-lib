@@ -1,10 +1,10 @@
 import React from 'react';
 import { CoreForm } from '@kineticdata/react';
 
-const FormView = ({ formSlug, formId }) => {
+const FormView = ({ formSlug, submissionId }) => {
   console.log(formSlug);
-  if (formId) {
-    return <CoreForm submission={formId} />;
+  if (submissionId) {
+    return <CoreForm submission={submissionId} />;
   } else {
     return <CoreForm kapp="vteams" form={formSlug} />;
   }
