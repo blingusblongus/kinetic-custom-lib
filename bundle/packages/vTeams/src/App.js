@@ -86,7 +86,7 @@ const AppComponent = props => {
                     <BurndownFulfiller path="/clients" />
                   </Router>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
               </div>
             </ThemeProvider>
           </Provider>
