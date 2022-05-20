@@ -5,23 +5,29 @@ import { PageTitle } from '@kineticdata/bundle-common';
 import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import './_ClientHome.scss';
 import BurndownChart from '../BurndownChart/BurndownChart';
-import BurndownClient from '../BurndownClient/BurndownClient';
-import BurndownFulfiller from '../BurndownFulfiller/BurndownFulfiller';
 import { getPaginated, isFulfiller } from '../../lib/utils';
 import { useSelector } from 'react-redux';
+import { FORM_FIELDS, VTEAMS, ATTRIBUTES } from '../../../globals/globals';
+import { format, addMonths, addDays } from 'date-fns';
 
 const ClientHome = () => {
-  const [rowData, setRowData] = useState('');
+  const [rowData, setRowData] = useState([]);
+  const [clientData, setClientData] = useState({});
+  const [worklogs, setWorkLogs] = useState([]);
+  const [chartData, setChartData] = useState([]);
+
   let [columns, rows] = parseSubsToTablegrid(rowData);
+
   const userProfile = useSelector(store => store.app.profile);
   const fulfiller = isFulfiller(userProfile);
-  console.log('profile', userProfile);
-  console.log('isFulfiller', fulfiller);
+  const organization = userProfile.attributes.find(
+    attr => attr.name === ATTRIBUTES.ORGANIZATION,
+  ).values[0];
 
   // fetch submissions
   useEffect(() => {
     // Get all tickets for current client
-    const getSubmissions = async () => {
+    const getTickets = async () => {
       const search = new SubmissionSearch().include('values').build();
       let submissions = await getPaginated({
         kapp: 'vteams',
@@ -30,8 +36,95 @@ const ClientHome = () => {
       });
       setRowData(submissions);
     };
-    getSubmissions();
+    getTickets();
+
+    const getClientData = async () => {
+      const search = new SubmissionSearch()
+        .eq('values[Organization]', organization)
+        .include('values')
+        .build();
+
+      let submissions = await getPaginated({
+        kapp: VTEAMS.KAPPSLUG,
+        form: VTEAMS.CLIENTS_FORM_SLUG,
+        search,
+      });
+      setClientData(submissions[0]);
+    };
+
+    const getWorkLogs = async () => {
+      const search = new SubmissionSearch()
+        .eq('values[Organization]', organization)
+        .eq('values[isWorkLog]', 'true')
+        .include('values')
+        .build();
+
+      let submissions = await getPaginated({
+        kapp: VTEAMS.KAPPSLUG,
+        form: VTEAMS.ACTIVITIES_FORM_SLUG,
+        search,
+      });
+
+      setWorkLogs(submissions);
+    };
+
+    // Get client info if logged in user isn't vTeams
+    if (organization !== VTEAMS.FULFILLER_ORG_NAME) {
+      getClientData();
+      getWorkLogs();
+    }
   }, []);
+
+  useEffect(
+    () => {
+      if (Object.keys(clientData).length < 1) return;
+      const startDate = Date.parse(
+        clientData.values[FORM_FIELDS.BILLING_START],
+      );
+      const endDate = addMonths(startDate, 1);
+      const data = [];
+      let d = startDate;
+      let monthlyHours = clientData.values[FORM_FIELDS.MONTHLY_HOURS];
+
+      while (d < endDate) {
+        let dailyHours = worklogs
+          .filter(
+            log =>
+              format(d, 'MM/DD/YYYY') === format(log.submittedAt, 'MM/DD/YYYY'),
+          )
+          .reduce(
+            (sum, log) => (sum += Number(log.values[FORM_FIELDS.HOURS_WORKED])),
+            0,
+          );
+
+        monthlyHours -= dailyHours;
+
+        // if (dailyHours !== 0) {
+        //   monthlyHours -= dailyHours;
+        //   let datapoint = dailyHours === 0 ?
+        //     { name: format(d, 'MM/DD') } : { name: format(d, 'MM/DD'), hours: monthlyHours }
+        //   data.push(datapoint);
+        // }
+
+        data.push({ name: format(d, 'MM/DD'), hours: monthlyHours });
+
+        d = addDays(d, 1);
+      }
+
+      console.log('startDate', startDate);
+      console.log('endDate', endDate);
+      console.log('data', data);
+      setChartData(data);
+    },
+    [worklogs],
+  );
+
+  console.log('clientData', clientData);
+  console.log('profile', userProfile);
+  console.log('isFulfiller', fulfiller);
+  console.log('organization', organization);
+  console.log('worklogs', worklogs);
+  console.log('chartData', chartData);
 
   return (
     <div>
@@ -39,9 +132,10 @@ const ClientHome = () => {
       {/* <div className="page-panel">
         {!fulfiller ? <BurndownClient /> : <BurndownFulfiller />}
       </div> */}
+      {!fulfiller && <BurndownChart data={chartData} />}
       <div className="dashboard page-panel">
-        <h1>Your Tickets</h1>
         <div className="table-wrapper">
+          <h1>Your Tickets</h1>
           <TicketTable columns={columns} rows={rows} createBtn />
         </div>
       </div>
