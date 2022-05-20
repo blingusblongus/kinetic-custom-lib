@@ -12,24 +12,13 @@ import { I18n } from '@kineticdata/react';
 import WebFont from 'webfontloader';
 import { ThemeProvider, createTheme } from '@mui/material';
 
-import { Home } from './components/Home';
-import Navbar from './components/Navbar/Navbar';
-import './App.scss';
-import BreadCrumbContainer from './components/BreadCrumbs/BreadCrumbs';
-import TicketSubmission from './components/TicketSubmission/TicketSubmission';
-// import Dashboard from './components/Dashboard/Dashboard';
-import Dashboard from './components/Dashboard_v2/DashboardV2';
-import TicketUserView from './components/TicketUserView./TicketUserView';
-import Queue from './components/Queue/Queue';
-import { Footer } from './components/Footer/Footer';
-import ClientManagement from './components/ClientManagement/ClientManagement';
 import CoreTicket from './components/CoreTicketView/CoreTicketView';
 import { Provider, useSelector } from 'react-redux';
 import { store } from './redux/store';
-import ClientHome from './components/ClientHome/ClientHome';
-import DashboardV1 from './components/Dashboard/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';
 import BurndownFulfiller from './components/BurndownFulfiller/BurndownFulfiller';
+import './App.scss';
 
 /*****************************************************************************
  *** PRIVATE APP
@@ -67,26 +56,17 @@ const AppComponent = props => {
             <ThemeProvider theme={THEME}>
               <div className="package-layout package-layout--vteams">
                 <PageTitle parts={['Loading...']} />
-                {/* <Navbar /> */}
                 <div className="page-container">
-                  {/* <BreadCrumbContainer /> */}
                   <Router>
-                    {/* <TicketSubmission path="/" /> */}
                     <FormView path="/forms/:formSlug" />
                     <FormView path="/forms/:formSlug/:submissionId" />
                     <Redirect from="/" to="/kapps/vteams/home" noThrow />
-                    {/* <Dashboard path="/dashboard" /> */}
-                    {/* <DashboardV1 path="/dashboard/v1" /> */}
                     <CoreTicket path="/ticket" />
                     <CoreTicket path="/ticket/:id" />
-                    {/* <TicketSubmission path="/ticket/draft" /> */}
-                    {/* <Queue path="/queue" /> */}
-                    {/* <ClientManagement path="/clients" /> */}
-                    <ClientHome path="/home" />
+                    <Dashboard path="/home" />
                     <BurndownFulfiller path="/clients" />
                   </Router>
                 </div>
-                {/* <Footer /> */}
               </div>
             </ThemeProvider>
           </Provider>

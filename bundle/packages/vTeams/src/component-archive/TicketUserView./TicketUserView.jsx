@@ -3,7 +3,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LabelWithIcon from '../LabelWithIcon/LabelWithIcon';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-import CustomTabs from '../CustomTabs/CustomTabs';
+import CustomTabs from '../../component-archive/CustomTabs/CustomTabs';
 import Priority from '../Priority/Priority';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import './_TicketUserView.scss';
