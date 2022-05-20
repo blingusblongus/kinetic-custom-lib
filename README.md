@@ -13,6 +13,7 @@
 
   Frontend:
   1. `git pull` any changes from the github repo
+  3. `export NODE_OPTIONS=--max_old_space_size=4096` to increase javascript heap size
   2. `yarn build`
   3. If pushing dev frontend, rename bundle/packages/app/build/ to build-dev/
   4. Sign into s3 bucket
