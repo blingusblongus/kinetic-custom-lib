@@ -10,10 +10,9 @@
   2. Edit `config/servername_environment_export_config.yml` and `config/servername_enviroment_import_config.yml` with space name, slug, and login info for both dev and prod instances
   3. run `export.rb -c "./config/servername_environment_export_config.yml"`
   4. run `import.rb -c "./config/servername_environment_import_config.yml"`
-
   Frontend:
   1. `git pull` any changes from the github repo
-  3. `export NODE_OPTIONS=--max_old_space_size=4096` to increase javascript heap size
+  . `export NODE_OPTIONS=--max_old_space_size=4096` to increase javascript heap size
   2. `yarn build`
   3. If pushing dev frontend, rename bundle/packages/app/build/ to build-dev/
   4. Sign into s3 bucket
