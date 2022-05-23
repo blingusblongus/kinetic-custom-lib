@@ -27,8 +27,6 @@ const BurndownDash = () => {
       .catch(err => console.log(err));
   }, []);
 
-  console.log('clients', clients);
-  console.log('client', client);
   return (
     <div>
       <h1>Burndown</h1>

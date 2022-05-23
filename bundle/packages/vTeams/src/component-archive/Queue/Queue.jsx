@@ -1,7 +1,7 @@
 import { Ticket } from 'iconsax-react';
 import React from 'react';
-import TeamsButton from '../TeamsButton/TeamsButton';
-import TicketTable from '../TicketTable/TicketTable';
+import TeamsButton from '../../components/TeamsButton/TeamsButton';
+import TicketTable from '../../components/TicketTable/TicketTable';
 import './_Queue.scss';
 
 import Accordion from '@mui/material/Accordion';

@@ -1,5 +1,5 @@
 import React from 'react';
-import TeamsButton from '../TeamsButton/TeamsButton';
+import TeamsButton from '../../components/TeamsButton/TeamsButton';
 import './RecentlyViewed.scss';
 import {
   bgColorPrimary,

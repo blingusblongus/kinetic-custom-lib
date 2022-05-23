@@ -5,9 +5,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import './_ClientManagement.scss';
-import TeamsButton from '../TeamsButton/TeamsButton';
+import TeamsButton from '../../components/TeamsButton/TeamsButton';
 import { countPriorityTickets } from '../../lib/utils';
-import TicketTable from '../TicketTable/TicketTable';
+import TicketTable from '../../components/TicketTable/TicketTable';
 
 import { projects } from './modules.js';
 

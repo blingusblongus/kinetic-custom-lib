@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Select, InputLabel, MenuItem, Input } from '@mui/material';
 
-import Priority from '../Priority/Priority';
-import TeamsButton from '../TeamsButton/TeamsButton';
+import Priority from '../../components/Priority/Priority';
+import TeamsButton from '../../components/TeamsButton/TeamsButton';
 import { TextField } from '@mui/material';
 import { bgColorPrimary } from '../../assets/styles/_variables.scss';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
