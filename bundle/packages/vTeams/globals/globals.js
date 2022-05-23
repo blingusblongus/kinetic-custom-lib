@@ -5,7 +5,6 @@ export const SLUGS = {
   CLIENTS_FORM_SLUG: 'clients',
   INTERNAL_NOTES_FORM_SLUG: 'internal-notes',
   VERSION: '0.2.0',
-  FULFILLER_ORG_NAME: 'vTeams'
 };
 
 export const FORM_FIELDS = {
@@ -18,4 +17,5 @@ export const FORM_FIELDS = {
 
 export const ATTRIBUTES = {
   ORGANIZATION: 'Organization',
+  FULFILLER_ORG_NAME: 'vTeams',
 }
