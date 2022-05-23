@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
+import { SubmissionSearch } from '@kineticdata/react';
 import { getPaginated } from '../../lib/utils';
-import { VTEAMS } from '../../../globals/globals';
+import { VTEAMS, FORM_FIELDS } from '../../../globals/globals';
 import './ClientOverview.scss';
-import WorkLogList from './WorkLogList/WorkLogList';
+// import WorkLogList from './WorkLogList/WorkLogList';
 import { history } from '@kineticdata/react';
 import TeamsButton from '../TeamsButton/TeamsButton';
 
@@ -30,8 +30,10 @@ const ClientOverview = () => {
         if (!hash[org]) {
           hash[org] = {
             submissions: [],
-            ['Hours Worked']: 0,
-            ['Monthly Hours']: Number(submission.values['Monthly Hours']),
+            [FORM_FIELDS.HOURS_WORKED]: 0,
+            [FORM_FIELDS.MONTHLY_HOURS]: Number(
+              submission.values[FORM_FIELDS.MONTHLY_HOURS],
+            ),
             logo: submission.values['Logo Url'],
             name: org,
             id: submission.id,
@@ -54,7 +56,9 @@ const ClientOverview = () => {
         if (!log) continue;
         const org = log.values['Organization'];
         hash[org].submissions.push(log);
-        hash[org]['Hours Worked'] += Number(log.values['Hours Worked']);
+        hash[org][FORM_FIELDS.HOURS_WORKED] += Number(
+          log.values[FORM_FIELDS.HOURS_WORKED],
+        );
       }
 
       setData(hash);
@@ -91,18 +95,19 @@ const ClientOverview = () => {
                 <div className="burndown-body">
                   <div className="burndown-item">
                     <span className="burndown-item--header">Total Hours: </span>
-                    <span>{data[org]['Monthly Hours']}</span>
+                    <span>{data[org][FORM_FIELDS.MONTHLY_HOURS]}</span>
                   </div>
                   <div className="burndown-item">
                     <span className="burndown-item--header">Hours Used: </span>
-                    <span>{data[org]['Hours Worked']}</span>
+                    <span>{data[org][FORM_FIELDS.HOURS_WORKED]}</span>
                   </div>
                   <div className="burndown-item">
                     <span className="burndown-item--header">
                       Hours Remaining:{' '}
                     </span>
                     <span>
-                      {data[org]['Monthly Hours'] - data[org]['Hours Worked']}
+                      {data[org][FORM_FIELDS.MONTHLY_HOURS] -
+                        data[org][FORM_FIELDS.HOURS_WORKED]}
                     </span>
                   </div>
                 </div>
