@@ -1,10 +1,11 @@
 @import './assets/styles/variables';
 @use './assets/styles/TicketTable';
 
-.page-container {
+.app-body {
   background-color: $bg-secondary;
   font-family: 'Inter';
   color: $primary;
+  height: 100%;
 }
 
 .page-panel {
