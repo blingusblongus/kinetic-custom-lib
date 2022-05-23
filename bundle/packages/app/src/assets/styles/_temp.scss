@@ -33,6 +33,29 @@ $primary: #00487c;
   }
 }
 
-// .app-sidebar {
-//   background-color: $bg-primary;
-// }
+.app-sidebar {
+  background-color: $bg-primary;
+  color: $primary;
+
+  .app-sidebar__group {
+    a {
+      background-color: $bg-primary;
+      color: $primary;
+
+      &.active {
+        background-color: $bg-primary;
+        color: $primary;
+      }
+    }
+
+    button {
+      background-color: $bg-primary;
+      color: $primary;
+    }
+
+    .action-wrapper a {
+      background-color: $bg-primary;
+      color: $primary;
+    }
+  }
+}
