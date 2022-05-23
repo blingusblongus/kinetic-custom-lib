@@ -16,12 +16,11 @@ import LayoutRenderer from './components/layout';
 import { AppProvider } from './AppProvider';
 // Import available packages
 import ServicesApp from '@kineticdata/bundle-services';
-import QueueApp from '@kineticdata/bundle-queue-custom';
+import QueueApp from '@kineticdata/bundle-queue';
 import TechBarApp from '@kineticdata/bundle-tech-bar';
 import DiscussionsApp from '@kineticdata/bundle-discussions';
 import SettingsApp from '@kineticdata/bundle-settings';
 import SurveyApp from '@kineticdata/bundle-survey';
-import Scaffold from 'scaffold';
 import VTeams from 'vTeams';
 
 /**
@@ -37,7 +36,6 @@ const BUNDLE_PACKAGE_PROVIDERS = {
   queue: QueueApp,
   'tech-bar': TechBarApp,
   survey: SurveyApp,
-  scaffold: Scaffold,
   vTeams: VTeams,
 };
 
