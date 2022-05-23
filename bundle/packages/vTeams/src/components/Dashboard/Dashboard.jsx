@@ -14,7 +14,7 @@ const Dashboard = () => {
   useEffect(() => {
     // Get all tickets for current client
     const getSubmissions = async () => {
-      const search = new SubmissionSearch().include('values').build();
+      const search = new SubmissionSearch().include('values,details').build();
       let submissions = await getPaginated({
         kapp: 'vteams',
         form: 'vteams-ticket',
