@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
+import { SubmissionSearch } from '@kineticdata/react';
 import { getPaginated } from '../../lib/utils';
-import { VTEAMS } from '../../../globals/globals';
+import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import './ClientOverview.scss';
-import WorkLogList from './WorkLogList/WorkLogList';
-import { history } from '@kineticdata/react';
+// import WorkLogList from './WorkLogList/WorkLogList';
 import TeamsButton from '../TeamsButton/TeamsButton';
+import ClientPanel from './ClientPanel/ClientPanel';
 
 const ClientOverview = () => {
   const [data, setData] = useState({});
@@ -16,22 +16,24 @@ const ClientOverview = () => {
       let search = new SubmissionSearch().include('values').build();
 
       const clientInfo = await getPaginated({
-        kapp: VTEAMS.KAPPSLUG,
-        form: VTEAMS.CLIENTS_FORM_SLUG,
+        kapp: SLUGS.KAPPSLUG,
+        form: SLUGS.CLIENTS_FORM_SLUG,
         search,
       });
 
       // Init hashmap to track burndown data
       const hash = {};
       for (let submission of clientInfo) {
-        const org = submission.values['Organization'];
+        const org = submission.values[FORM_FIELDS.ORGANIZATION];
         if (!org) continue;
 
         if (!hash[org]) {
           hash[org] = {
             submissions: [],
-            ['Hours Worked']: 0,
-            ['Monthly Hours']: Number(submission.values['Monthly Hours']),
+            [FORM_FIELDS.HOURS_WORKED]: 0,
+            [FORM_FIELDS.MONTHLY_HOURS]: Number(
+              submission.values[FORM_FIELDS.MONTHLY_HOURS],
+            ),
             logo: submission.values['Logo Url'],
             name: org,
             id: submission.id,
@@ -45,8 +47,8 @@ const ClientOverview = () => {
         .build();
 
       const workLogs = await getPaginated({
-        kapp: VTEAMS.KAPPSLUG,
-        form: VTEAMS.ACTIVITIES_FORM_SLUG,
+        kapp: SLUGS.KAPPSLUG,
+        form: SLUGS.ACTIVITIES_FORM_SLUG,
         search,
       });
 
@@ -54,7 +56,9 @@ const ClientOverview = () => {
         if (!log) continue;
         const org = log.values['Organization'];
         hash[org].submissions.push(log);
-        hash[org]['Hours Worked'] += Number(log.values['Hours Worked']);
+        hash[org][FORM_FIELDS.HOURS_WORKED] += Number(
+          log.values[FORM_FIELDS.HOURS_WORKED],
+        );
       }
 
       setData(hash);
@@ -70,8 +74,8 @@ const ClientOverview = () => {
           <div>Clients Dashboard</div>
           <div>
             <TeamsButton
-              linkpath={`/kapps/${VTEAMS.KAPPSLUG}/forms/${
-                VTEAMS.CLIENTS_FORM_SLUG
+              linkpath={`/kapps/${SLUGS.KAPPSLUG}/forms/${
+                SLUGS.CLIENTS_FORM_SLUG
               }`}
             >
               Add New Client
@@ -81,46 +85,8 @@ const ClientOverview = () => {
 
         <div className="client-container">
           {Object.keys(data).map((org, i) => {
-            const { logo, submissions, name, id } = data[org];
-            return (
-              <div key={i} className="burndown-panel">
-                <div className="burndown-header">
-                  <img src={logo} />
-                  <div className="burndown-organization">{name}</div>
-                </div>
-                <div className="burndown-body">
-                  <div className="burndown-item">
-                    <span className="burndown-item--header">Total Hours: </span>
-                    <span>{data[org]['Monthly Hours']}</span>
-                  </div>
-                  <div className="burndown-item">
-                    <span className="burndown-item--header">Hours Used: </span>
-                    <span>{data[org]['Hours Worked']}</span>
-                  </div>
-                  <div className="burndown-item">
-                    <span className="burndown-item--header">
-                      Hours Remaining:{' '}
-                    </span>
-                    <span>
-                      {data[org]['Monthly Hours'] - data[org]['Hours Worked']}
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="burndown-footer"
-                  // onClick={()=>setModal({show: true, submissions})}
-                  onClick={() =>
-                    history.push(
-                      `/kapps/${VTEAMS.KAPPSLUG}/forms/${
-                        VTEAMS.CLIENTS_FORM_SLUG
-                      }/${id}`,
-                    )
-                  }
-                >
-                  View Details
-                </div>
-              </div>
-            );
+            const orgInfo = data[org];
+            return <ClientPanel orgInfo={orgInfo} key={orgInfo.id} />;
           })}
         </div>
       </div>

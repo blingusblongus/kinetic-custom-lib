@@ -1,5 +1,5 @@
 import React from 'react';
-import { VTEAMS } from '../../../globals/globals';
+import { SLUGS } from '../../../globals/globals';
 import './Footer.scss';
 
 export const Footer = () => {
@@ -16,7 +16,7 @@ export const Footer = () => {
           <a>Report an Issue</a>
           -
         </div>
-        <div>Version {VTEAMS.VERSION}</div>
+        <div>Version {SLUGS.VERSION}</div>
       </div>
     </footer>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   SubmissionSearch,
-  searchSubmissions,
   createSubmission,
   fetchSubmission,
 } from '@kineticdata/react';
@@ -10,7 +9,7 @@ import './_Activities.scss';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import { useSelector } from 'react-redux';
 import { getPaginated } from '../../lib/utils.js';
-import { FORM_FIELDS, VTEAMS } from '../../../globals/globals.js';
+import { FORM_FIELDS, SLUGS } from '../../../globals/globals.js';
 
 const Activities = ({ id }) => {
   const [activities, setActivities] = useState([]);
@@ -31,9 +30,9 @@ const Activities = ({ id }) => {
 
   const handleSubmit = e => {
     const formSlug = internalMode
-      ? VTEAMS.INTERNAL_NOTES_FORM_SLUG
-      : VTEAMS.ACTIVITIES_FORM_SLUG;
-    const kappSlug = VTEAMS.KAPPSLUG;
+      ? SLUGS.INTERNAL_NOTES_FORM_SLUG
+      : SLUGS.ACTIVITIES_FORM_SLUG;
+    const kappSlug = SLUGS.KAPPSLUG;
     const { IS_WORK_LOG, HOURS_WORKED } = FORM_FIELDS;
 
     e.preventDefault();
@@ -78,8 +77,8 @@ const Activities = ({ id }) => {
 
         try {
           const comments = await getPaginated({
-            kapp: VTEAMS.KAPPSLUG,
-            form: VTEAMS.ACTIVITIES_FORM_SLUG,
+            kapp: SLUGS.KAPPSLUG,
+            form: SLUGS.ACTIVITIES_FORM_SLUG,
             search,
           });
 
@@ -87,8 +86,8 @@ const Activities = ({ id }) => {
           let results;
           if (isFulfiller) {
             internalComments = await getPaginated({
-              kapp: VTEAMS.KAPPSLUG,
-              form: VTEAMS.INTERNAL_NOTES_FORM_SLUG,
+              kapp: SLUGS.KAPPSLUG,
+              form: SLUGS.INTERNAL_NOTES_FORM_SLUG,
               search,
             });
 
@@ -115,7 +114,7 @@ const Activities = ({ id }) => {
       };
       fetchActivities();
     },
-    [id, reFetch],
+    [id, reFetch, isFulfiller],
   );
 
   const toggleInternal = () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import './_Activity.scss';
 
 const Activity = ({ submission }) => {
-  const { values, submittedAt, submittedBy } = submission;
+  const { values, submittedAt } = submission;
   const [date, time] = submittedAt.split('T');
   const hours = submission.values['Hours Worked'];
 

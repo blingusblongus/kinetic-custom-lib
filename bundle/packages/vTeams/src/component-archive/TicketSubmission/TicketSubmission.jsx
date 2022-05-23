@@ -12,7 +12,7 @@ import KnowledgeWidget from '../KnowledgeWidget/KnowledgeWidget';
 import { PageTitle } from '@kineticdata/bundle-common';
 
 import { CoreForm } from '@kineticdata/react';
-import { VTEAMS } from '../../../globals/globals';
+import { SLUGS } from '../../../globals/globals';
 
 const TicketSubmission = ({ ticket }) => {
   const [shortDescription, setShortDescription] = useState('');
@@ -42,8 +42,8 @@ const TicketSubmission = ({ ticket }) => {
       <div className="page-panel">
         <div className="card-wrapper ticket-submission">
           <CoreForm
-            kapp={VTEAMS.KAPPSLUG}
-            form={VTEAMS.TICKET_FORM_SLUG}
+            kapp={SLUGS.KAPPSLUG}
+            form={SLUGS.TICKET_FORM_SLUG}
             onError={err => alert(err)}
             onCreated={() => alert('form created')}
             onCompleted={() => alert('form completed')}

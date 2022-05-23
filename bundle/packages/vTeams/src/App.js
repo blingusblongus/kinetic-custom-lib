@@ -13,7 +13,7 @@ import WebFont from 'webfontloader';
 import { ThemeProvider, createTheme } from '@mui/material';
 
 import CoreTicket from './components/CoreTicketView/CoreTicketView';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Dashboard from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';

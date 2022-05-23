@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { bgColorPrimary, bgColorLight, colorWhite } from '../../App.scss';
-import { navigate } from '@reach/router';
 import { history } from '@kineticdata/react';
+
 /**
  * Props are passed down to the Button component.
  * Mode='light' provides a quick override.
