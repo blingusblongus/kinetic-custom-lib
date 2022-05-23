@@ -10,6 +10,7 @@ import './Dashboard.scss';
 import { useSelector } from 'react-redux';
 import { FORM_FIELDS, SLUGS, ATTRIBUTES } from '../../../globals/globals';
 import { format, addMonths, addDays } from 'date-fns';
+import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable';
 
 const Dashboard = () => {
   const [rowData, setRowData] = useState([]);
@@ -114,9 +115,10 @@ const Dashboard = () => {
       <PageTitle parts={['Home']} />
       <div className="dashboard page-panel">
         <h1>Your Tickets</h1>
-        <div className="table-wrapper">
+        {/* <div className="table-wrapper">
           <TicketTable columns={columns} rows={rows} createBtn />
-        </div>
+        </div> */}
+        <PlaceholderTable />
 
         <div className="page-panel">
           <BurndownChart data={chartData} />
