@@ -4,6 +4,7 @@ import { parseSubsToTablegrid } from '../../../../customUtils/utils';
 import { PageTitle } from '@kineticdata/bundle-common';
 import { SubmissionSearch } from '@kineticdata/react';
 import { getPaginated } from '../../lib/utils';
+import BurndownChart from '../BurndownChart/BurndownChart';
 import './Dashboard.scss';
 
 const Dashboard = () => {
@@ -32,6 +33,10 @@ const Dashboard = () => {
         <h1>Your Tickets</h1>
         <div className="table-wrapper">
           <TicketTable columns={columns} rows={rows} createBtn />
+        </div>
+
+        <div className="page-panel">
+          <BurndownChart />
         </div>
       </div>
     </div>
