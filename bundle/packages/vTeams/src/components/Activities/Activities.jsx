@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   SubmissionSearch,
-  searchSubmissions,
   createSubmission,
   fetchSubmission,
 } from '@kineticdata/react';
@@ -115,7 +114,7 @@ const Activities = ({ id }) => {
       };
       fetchActivities();
     },
-    [id, reFetch],
+    [id, reFetch, isFulfiller],
   );
 
   const toggleInternal = () => {

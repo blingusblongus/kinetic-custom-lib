@@ -2,16 +2,13 @@ import React, { useState, useEffect } from 'react';
 import TicketTable from '../TicketTable/TicketTable';
 import { parseSubsToTablegrid } from '../../../../customUtils/utils';
 import { PageTitle } from '@kineticdata/bundle-common';
-import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
-import { getPaginated, isFulfiller } from '../../lib/utils';
-import { useSelector } from 'react-redux';
+import { SubmissionSearch } from '@kineticdata/react';
+import { getPaginated } from '../../lib/utils';
 import './Dashboard.scss';
 
 const Dashboard = () => {
   const [rowData, setRowData] = useState('');
   let [columns, rows] = parseSubsToTablegrid(rowData);
-  const userProfile = useSelector(store => store.app.profile);
-  const fulfiller = isFulfiller(userProfile);
 
   // fetch submissions
   useEffect(() => {

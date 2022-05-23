@@ -85,11 +85,11 @@ const ClientOverview = () => {
 
         <div className="client-container">
           {Object.keys(data).map((org, i) => {
-            const { logo, submissions, name, id } = data[org];
+            const { logo, name, id } = data[org];
             return (
               <div key={i} className="burndown-panel">
                 <div className="burndown-header">
-                  <img src={logo} />
+                  <img src={logo} alt={`${name} logo`} />
                   <div className="burndown-organization">{name}</div>
                 </div>
                 <div className="burndown-body">

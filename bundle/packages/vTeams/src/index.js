@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import matchPath from 'rudy-match-path';
+// import matchPath from 'rudy-match-path';
 import { LocationProvider, Router } from '@reach/router';
 import {
   CommonProvider,
