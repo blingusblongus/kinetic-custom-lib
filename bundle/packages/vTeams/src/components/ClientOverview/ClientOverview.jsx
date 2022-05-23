@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
 import { getPaginated } from '../../lib/utils';
 import { VTEAMS } from '../../../globals/globals';
-import './BurndownFulfiller.scss';
+import './ClientOverview.scss';
 import WorkLogList from './WorkLogList/WorkLogList';
 import { history } from '@kineticdata/react';
 import TeamsButton from '../TeamsButton/TeamsButton';
 
-const BurndownFulfiller = () => {
+const ClientOverview = () => {
   const [data, setData] = useState({});
   //   const [modal, setModal] = useState({ show: true, submissions: [] });
 
@@ -133,4 +133,4 @@ const BurndownFulfiller = () => {
   );
 };
 
-export default BurndownFulfiller;
+export default ClientOverview;

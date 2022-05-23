@@ -17,7 +17,7 @@ import { Provider, useSelector } from 'react-redux';
 import { store } from './redux/store';
 import Dashboard from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';
-import BurndownFulfiller from './components/BurndownFulfiller/BurndownFulfiller';
+import ClientOverview from './components/ClientOverview/ClientOverview';
 import './App.scss';
 
 /*****************************************************************************
@@ -64,7 +64,7 @@ const AppComponent = props => {
                     <CoreTicket path="/ticket" />
                     <CoreTicket path="/ticket/:id" />
                     <Dashboard path="/home" />
-                    <BurndownFulfiller path="/clients" />
+                    <ClientOverview path="/clients" />
                   </Router>
                 </div>
               </div>
