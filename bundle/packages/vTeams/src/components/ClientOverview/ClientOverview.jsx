@@ -4,7 +4,6 @@ import { getPaginated } from '../../lib/utils';
 import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import './ClientOverview.scss';
 // import WorkLogList from './WorkLogList/WorkLogList';
-import { history } from '@kineticdata/react';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import ClientPanel from './ClientPanel/ClientPanel';
 
