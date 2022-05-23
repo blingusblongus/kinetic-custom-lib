@@ -6,6 +6,7 @@ import './ClientOverview.scss';
 // import WorkLogList from './WorkLogList/WorkLogList';
 import { history } from '@kineticdata/react';
 import TeamsButton from '../TeamsButton/TeamsButton';
+import ClientPanel from './ClientPanel/ClientPanel';
 
 const ClientOverview = () => {
   const [data, setData] = useState({});
@@ -85,47 +86,8 @@ const ClientOverview = () => {
 
         <div className="client-container">
           {Object.keys(data).map((org, i) => {
-            const { logo, name, id } = data[org];
-            return (
-              <div key={i} className="burndown-panel">
-                <div className="burndown-header">
-                  <img src={logo} alt={`${name} logo`} />
-                  <div className="burndown-organization">{name}</div>
-                </div>
-                <div className="burndown-body">
-                  <div className="burndown-item">
-                    <span className="burndown-item--header">Total Hours: </span>
-                    <span>{data[org][FORM_FIELDS.MONTHLY_HOURS]}</span>
-                  </div>
-                  <div className="burndown-item">
-                    <span className="burndown-item--header">Hours Used: </span>
-                    <span>{data[org][FORM_FIELDS.HOURS_WORKED]}</span>
-                  </div>
-                  <div className="burndown-item">
-                    <span className="burndown-item--header">
-                      Hours Remaining:{' '}
-                    </span>
-                    <span>
-                      {data[org][FORM_FIELDS.MONTHLY_HOURS] -
-                        data[org][FORM_FIELDS.HOURS_WORKED]}
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="burndown-footer"
-                  // onClick={()=>setModal({show: true, submissions})}
-                  onClick={() =>
-                    history.push(
-                      `/kapps/${SLUGS.KAPPSLUG}/forms/${
-                        SLUGS.CLIENTS_FORM_SLUG
-                      }/${id}`,
-                    )
-                  }
-                >
-                  View Details
-                </div>
-              </div>
-            );
+            const orgInfo = data[org];
+            return <ClientPanel orgInfo={orgInfo} key={orgInfo.id} />;
           })}
         </div>
       </div>
