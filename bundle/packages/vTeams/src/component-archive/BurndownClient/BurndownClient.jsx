@@ -4,7 +4,7 @@ import { isFulfiller } from '../../lib/utils';
 import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
 import './_BurndownClient.scss';
 import moment from 'moment';
-import { VTEAMS, FORM_FIELDS, ATTRIBUTES } from '../../../globals/globals';
+import { SLUGS, FORM_FIELDS, ATTRIBUTES } from '../../../globals/globals';
 
 const BurndownClient = () => {
   const [hours, setHours] = useState(0);
@@ -23,8 +23,8 @@ const BurndownClient = () => {
       .build();
 
     searchSubmissions({
-      kapp: VTEAMS.KAPPSLUG,
-      form: VTEAMS.CLIENTS_FORM_SLUG,
+      kapp: SLUGS.KAPPSLUG,
+      form: SLUGS.CLIENTS_FORM_SLUG,
       search: clientInfoSearch,
     }).then(result => {
       const billingPeriod =
@@ -39,8 +39,8 @@ const BurndownClient = () => {
         .build();
 
       searchSubmissions({
-        kapp: VTEAMS.KAPPSLUG,
-        form: VTEAMS.ACTIVITIES_FORM_SLUG,
+        kapp: SLUGS.KAPPSLUG,
+        form: SLUGS.ACTIVITIES_FORM_SLUG,
         search: activitiesSearch,
       }).then(result => {
         const subs = result.submissions;

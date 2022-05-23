@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SubmissionSearch } from '@kineticdata/react';
 import { getPaginated } from '../../lib/utils';
-import { VTEAMS, FORM_FIELDS } from '../../../globals/globals';
+import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import './ClientOverview.scss';
 // import WorkLogList from './WorkLogList/WorkLogList';
 import { history } from '@kineticdata/react';
@@ -16,15 +16,15 @@ const ClientOverview = () => {
       let search = new SubmissionSearch().include('values').build();
 
       const clientInfo = await getPaginated({
-        kapp: VTEAMS.KAPPSLUG,
-        form: VTEAMS.CLIENTS_FORM_SLUG,
+        kapp: SLUGS.KAPPSLUG,
+        form: SLUGS.CLIENTS_FORM_SLUG,
         search,
       });
 
       // Init hashmap to track burndown data
       const hash = {};
       for (let submission of clientInfo) {
-        const org = submission.values['Organization'];
+        const org = submission.values[FORM_FIELDS.ORGANIZATION];
         if (!org) continue;
 
         if (!hash[org]) {
@@ -47,8 +47,8 @@ const ClientOverview = () => {
         .build();
 
       const workLogs = await getPaginated({
-        kapp: VTEAMS.KAPPSLUG,
-        form: VTEAMS.ACTIVITIES_FORM_SLUG,
+        kapp: SLUGS.KAPPSLUG,
+        form: SLUGS.ACTIVITIES_FORM_SLUG,
         search,
       });
 
@@ -74,8 +74,8 @@ const ClientOverview = () => {
           <div>Clients Dashboard</div>
           <div>
             <TeamsButton
-              linkpath={`/kapps/${VTEAMS.KAPPSLUG}/forms/${
-                VTEAMS.CLIENTS_FORM_SLUG
+              linkpath={`/kapps/${SLUGS.KAPPSLUG}/forms/${
+                SLUGS.CLIENTS_FORM_SLUG
               }`}
             >
               Add New Client
@@ -116,8 +116,8 @@ const ClientOverview = () => {
                   // onClick={()=>setModal({show: true, submissions})}
                   onClick={() =>
                     history.push(
-                      `/kapps/${VTEAMS.KAPPSLUG}/forms/${
-                        VTEAMS.CLIENTS_FORM_SLUG
+                      `/kapps/${SLUGS.KAPPSLUG}/forms/${
+                        SLUGS.CLIENTS_FORM_SLUG
                       }/${id}`,
                     )
                   }

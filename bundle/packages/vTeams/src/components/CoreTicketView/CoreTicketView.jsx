@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CoreForm } from '@kineticdata/react';
-import { VTEAMS } from '../../../globals/globals.js';
+import { SLUGS } from '../../../globals/globals.js';
 import URL from '../../../globals/urls.js';
 import TeamsButton from '../TeamsButton/TeamsButton.jsx';
 import './_CoreTicketView.scss';
@@ -22,8 +22,8 @@ const CoreTicketView = ({ id }) => {
       <div className="card-wrapper no-padding">
         <CoreForm
           submission={id || submission.id}
-          kapp={VTEAMS.KAPPSLUG}
-          form={VTEAMS.TICKET_FORM_SLUG}
+          kapp={SLUGS.KAPPSLUG}
+          form={SLUGS.TICKET_FORM_SLUG}
           onCompleted={e => setSubmission(e.submission)}
           components={{
             Button: TeamsButton,

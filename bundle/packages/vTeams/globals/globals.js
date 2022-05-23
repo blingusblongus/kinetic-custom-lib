@@ -1,4 +1,4 @@
-export const VTEAMS = {
+export const SLUGS = {
   KAPPSLUG: 'vteams',
   TICKET_FORM_SLUG: 'vteams-ticket',
   ACTIVITIES_FORM_SLUG: 'activities',
@@ -12,6 +12,7 @@ export const FORM_FIELDS = {
   HOURS_WORKED: 'Hours Worked',
   BILLING_START: 'Billing Start Date',
   MONTHLY_HOURS: 'Monthly Hours',
+  ORGANIZATION: 'Organization',
 }
 
 export const ATTRIBUTES = {
