@@ -1,0 +1,145 @@
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+        font-size: 0.8em;
+    }
+
+    tr:nth-child(even) {
+        background-color: #eef4f5
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid #c4c4c4;
+    }
+
+    th {
+        background-color: #012b3f;
+        color: white;
+    }
+
+    .totals-row {
+        background-color: #012b3f;
+        color: white;
+    }
+
+    h1,
+    h2 {
+        text-align: center;
+    }
+
+    h3 {
+        margin-left: 20px;
+        margin-top: 30px;
+    }
+
+    header {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        font-size: 0.8em;
+        padding: 5px;
+    }
+
+    header div {
+        text-align: right;
+    }
+
+    header img {
+        width: 35px;
+        margin: 10px;
+        object-fit: contain;
+    }
+
+    .page {
+        padding: 20px;
+        font-family: "Times New Roman", Times, serif;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .summary-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 15px;
+        width: 50%;
+        min-width: 350px;
+    }
+
+    .client-logo {
+        width: 150px;
+        max-width: 250px;
+        max-height:150px;
+        object-fit: contain;
+        margin: auto;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    footer {
+        text-align: center;
+        font-size: 0.8em;
+        font-style: italic;
+        margin: 20px;
+    }
+</style>
+
+<div class="page">
+    <header>
+        <img
+            src="https://kineticbundledev.s3.us-east-2.amazonaws.com/build/static/media/esolutions_logo_green.182c7269.svg" />
+
+        <div>
+            <div>esolutionsONE, Inc</div>
+            <div>Transforming Your Business Workflows on the Now Platform</div>
+        </div>
+    </header>
+    <h1>Weekly Client Report</h1>
+    <h2>${vars('client')}</h2>
+
+    <div class="logo-container">
+        <img src="${vars('client_logo')}" alt="${vars('client')} logo" class="client-logo" />
+    </div>
+
+    <h3>Executive Summary</h3>
+    <div class="summary-grid">
+        <div>Week Commencing: </div>
+        <div>${vars('week_commencing')}</div>
+        <div>Report Prepared On: </div>
+        <div>${vars('report_prepared_on')}</div>
+        <div>Hours Consumed: </div>
+        <div>${vars('hours_consumed')}</div>
+    </div>
+
+    <h3>Work Details</h3>
+    <p>Below are the details of all work carried out for you during this week against each of the tickets we worked on.
+    </p>
+    <table>
+        <thead style="text-align: left;">
+            <tr>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Notes</th>
+                <th>Consultant</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${vars('activities_html')}
+            <tr class="totals-row">
+                <td colspan="4">Total Hours</td>
+                <td>${vars('hours_consumed')}</td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+        <div>Virtual Teams is an e:solutionsOne Inc remote managed service</div>
+        <div>CONFIDENTIAL - for e:solutionsOne virtual teams staff and the intended recipient(s) only</div>
+    </footer>
+</div>

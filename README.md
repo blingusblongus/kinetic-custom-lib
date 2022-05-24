@@ -31,6 +31,7 @@
       <img src='./images/bug_screen_001.png' height='300px' />
     </details>
     - Questions: What's the best practice for keeping things in sync when the data model on prod changes? Do we need scripting to cover our bases?
+  - The bridge models broke after migration (though everything somehow still worked enough that I didn't notice until I tried to utilize the bridge models again). It seems the bridge plugins etc. don't get set-up or updated by default.
  
  
 ## QA Testing
