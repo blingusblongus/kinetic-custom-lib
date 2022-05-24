@@ -13,9 +13,9 @@ const PlaceholderTable = () => {
       </div>
       <table>
         <thead>
-          <th>
-            <td />
-          </th>
+          <tr>
+            <th />
+          </tr>
         </thead>
         <tbody>
           {rows.map((el, i) => (

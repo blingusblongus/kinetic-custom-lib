@@ -110,6 +110,7 @@ const Dashboard = () => {
     [worklogs],
   );
 
+  console.log(chartData);
   return (
     <div>
       <PageTitle parts={['Home']} />

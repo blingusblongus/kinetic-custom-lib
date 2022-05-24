@@ -7,6 +7,10 @@ table {
     background-color: $primary;
     height: 3rem;
     color: white;
+
+    tr {
+      background-color: $primary;
+    }
   }
 }
 
