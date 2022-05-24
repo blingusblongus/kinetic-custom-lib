@@ -3,15 +3,15 @@ import TicketTable from '../TicketTable/TicketTable';
 import { parseSubsToTablegrid } from '../../../../customUtils/utils';
 import { PageTitle } from '@kineticdata/bundle-common';
 import { SubmissionSearch } from '@kineticdata/react';
-import { getPaginated, isFulfiller } from '../../lib/utils';
+import { getPaginated } from '../../lib/utils';
 import BurndownChart from '../BurndownChart/BurndownChart';
 import './Dashboard.scss';
 
 import { useSelector } from 'react-redux';
-import { FORM_FIELDS, SLUGS, ATTRIBUTES } from '../../../globals/globals';
+import { FORM_FIELDS, SLUGS, NAMES } from '../../../globals/globals';
 import { format, addMonths, addDays } from 'date-fns';
 import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable';
-
+import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 const Dashboard = () => {
   const [rowData, setRowData] = useState([]);
   const [clientData, setClientData] = useState({});
@@ -21,12 +21,13 @@ const Dashboard = () => {
   let [columns, rows] = parseSubsToTablegrid(rowData);
 
   const userProfile = useSelector(store => store.app.profile);
-  const fulfiller = isFulfiller(userProfile);
+  const fulfiller = isMemberOf(userProfile, 'vTeams');
+
   const organization = userProfile.attributes.find(
-    attr => attr.name === ATTRIBUTES.ORGANIZATION,
+    attr => attr.name === NAMES.ATTRIBUTE_ORGANIZATION,
   ).values[0];
 
-  // fetch submissions
+  // fetch submissions on load
   useEffect(() => {
     // Get all tickets for current client
     const getTickets = async () => {
@@ -71,14 +72,16 @@ const Dashboard = () => {
     };
 
     // Get client info if logged in user isn't vTeams
-    if (organization !== ATTRIBUTES.FULFILLER_ORG_NAME) {
+    if (organization !== NAMES.FULFILLER_ORG_NAME) {
       getClientData();
       getWorkLogs();
     }
   }, []);
 
+  // fetch burndown info on worklogs set/update
   useEffect(
     () => {
+      if (fulfiller) return;
       if (Object.keys(clientData).length < 1) return;
       const startDate = Date.parse(
         clientData.values[FORM_FIELDS.BILLING_START],
@@ -110,7 +113,6 @@ const Dashboard = () => {
     [worklogs],
   );
 
-  console.log(chartData);
   return (
     <div>
       <PageTitle parts={['Home']} />
@@ -121,10 +123,12 @@ const Dashboard = () => {
         </div> */}
         <PlaceholderTable />
 
-        <div className="dashboard-row">
-          <BurndownChart data={chartData} />
-          <BurndownChart data={chartData} />
-        </div>
+        {!fulfiller && (
+          <div className="dashboard-row">
+            <BurndownChart data={chartData} />
+            <BurndownChart data={chartData} />
+          </div>
+        )}
       </div>
     </div>
   );

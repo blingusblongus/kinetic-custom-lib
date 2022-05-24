@@ -15,7 +15,7 @@ export const FORM_FIELDS = {
   ORGANIZATION: 'Organization',
 }
 
-export const ATTRIBUTES = {
-  ORGANIZATION: 'Organization',
+export const NAMES = {
+  ATTRIBUTE_ORGANIZATION: 'Organization',
   FULFILLER_ORG_NAME: 'vTeams',
 }

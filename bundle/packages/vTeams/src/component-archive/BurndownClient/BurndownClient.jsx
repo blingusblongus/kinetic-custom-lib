@@ -4,7 +4,7 @@ import { isFulfiller } from '../../lib/utils';
 import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
 import './_BurndownClient.scss';
 import moment from 'moment';
-import { SLUGS, FORM_FIELDS, ATTRIBUTES } from '../../../globals/globals';
+import { SLUGS, FORM_FIELDS, NAMES } from '../../../globals/globals';
 
 const BurndownClient = () => {
   const [hours, setHours] = useState(0);
@@ -12,7 +12,7 @@ const BurndownClient = () => {
 
   const userProfile = useSelector(store => store.app.profile);
   const organization = userProfile.attributes.find(
-    attr => attr.name == ATTRIBUTES.ORGANIZATION,
+    attr => attr.name == NAMES.ATTRIBUTE_ORGANIZATION,
   )?.values[0];
 
   useEffect(() => {
