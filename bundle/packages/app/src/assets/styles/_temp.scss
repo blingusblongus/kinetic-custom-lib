@@ -4,27 +4,58 @@
  *     -Move css into appropriate sass files when ready
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+$bg-primary: #ffffff;
+$bg-secondary: #e0ecf5;
+$primary: #00487c;
+
 .dropdown .dropdown-menu {
   @include scrollbar();
 }
 
 .app-header {
-  background-color: #012b3f;
+  background-color: $bg-primary;
 
   .kinetic-typeahead {
     .search {
-      color: white;
+      color: $primary;
     }
 
     .goto-search {
-      color: white;
+      color: $primary;
     }
   }
   .dropdown {
-    color: white;
+    color: $primary;
 
     a[role='button'] {
-      color: white;
+      color: $primary;
+    }
+  }
+}
+
+.app-sidebar {
+  background-color: $bg-primary;
+  color: $primary;
+
+  .app-sidebar__group {
+    a {
+      background-color: $bg-primary;
+      color: $primary;
+
+      &.active {
+        background-color: $bg-primary;
+        color: $primary;
+      }
+    }
+
+    button {
+      background-color: $bg-primary;
+      color: $primary;
+    }
+
+    .action-wrapper a {
+      background-color: $bg-primary;
+      color: $primary;
     }
   }
 }
