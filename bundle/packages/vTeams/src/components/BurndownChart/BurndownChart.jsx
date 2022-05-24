@@ -16,7 +16,7 @@ import {
 const BurndownChart = ({ data }) => {
   console.log(data);
   return (
-    <div className="chart-wrapper">
+    <div className="chart-wrapper card-wrapper">
       <ResponsiveContainer width={'100%'} height={200}>
         <LineChart width={400} height={300} data={data}>
           <CartesianGrid strokeDasharray="3 3" />

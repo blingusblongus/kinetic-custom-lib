@@ -121,7 +121,8 @@ const Dashboard = () => {
         </div> */}
         <PlaceholderTable />
 
-        <div className="page-panel">
+        <div className="dashboard-row">
+          <BurndownChart data={chartData} />
           <BurndownChart data={chartData} />
         </div>
       </div>
