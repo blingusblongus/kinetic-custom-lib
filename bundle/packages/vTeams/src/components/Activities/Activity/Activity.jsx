@@ -42,10 +42,6 @@ const Activity = ({ submission, reFetch, setReFetch }) => {
         setReFetch(!reFetch);
         setEditMode(false);
         setLoading(false);
-        // fetchSubmission({id: submission.id, include: 'values'})
-        //   .then(result => {
-        //     setValues(result.submission.values);
-        //   }).catch(err => console.error(err));
       })
       .catch(err => {
         console.error(err);
