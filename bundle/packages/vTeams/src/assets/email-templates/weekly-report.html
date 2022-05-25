@@ -6,7 +6,11 @@
         font-size: 0.8em;
     }
 
-    tr:nth-child(even) {
+    thead {
+        text-align: left;
+    }
+
+    tr:nth-child(even):not(.totals-row) {
         background-color: #eef4f5
     }
 
@@ -113,14 +117,21 @@
         <div>${vars('week_commencing')}</div>
         <div>Report Prepared On: </div>
         <div>${vars('report_prepared_on')}</div>
-        <div>Hours Consumed: </div>
+        <div>Hours Consumed this Week: </div>
         <div>${vars('hours_consumed')}</div>
+        <div>Monthly Hours:</div>
+        <div>${vars('monthly_hours')}</div>
+        <div>Monthly Hours Consumed:</div>
+        <div>${vars('monthly_hours_used')}</div>
+        <div>Monthly Hours Remaining:</div>
+        <div>${vars('monthly_hours_remaining')}</div>
     </div>
 
     <h3>Work Details</h3>
     <p>Below are the details of all work carried out for you during this week against each of the tickets we worked on.
     </p>
-    <table>
+    ${vars('activities_html')}
+    <!-- <table>
         <thead style="text-align: left;">
             <tr>
                 <th>Date</th>
@@ -137,7 +148,7 @@
                 <td>${vars('hours_consumed')}</td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
     <footer>
         <div>Virtual Teams is an e:solutionsOne Inc remote managed service</div>
         <div>CONFIDENTIAL - for e:solutionsOne virtual teams staff and the intended recipient(s) only</div>
