@@ -117,9 +117,9 @@ const Dashboard = () => {
     <div>
       <PageTitle parts={['Home']} />
       <div className="dashboard page-panel">
-        {/* <div className="table-wrapper">
+        <div className="table-wrapper">
           <TicketTable columns={columns} rows={rows} createBtn />
-        </div> */}
+        </div>
         <PlaceholderTable />
 
         {!fulfiller && (

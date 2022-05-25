@@ -13,6 +13,7 @@ export const FORM_FIELDS = {
   BILLING_START: 'Current Billing Period Start Date',
   MONTHLY_HOURS: 'Monthly Hours',
   ORGANIZATION: 'Organization',
+  COMMENT: 'Comment',
 }
 
 export const NAMES = {
