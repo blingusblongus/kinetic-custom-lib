@@ -3,6 +3,7 @@ import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 import { NAMES, FORM_FIELDS } from '../../../../globals/globals';
 import './_Activity.scss';
 import { useSelector } from 'react-redux';
+import TeamsButton from '../../TeamsButton/TeamsButton';
 
 const Activity = ({ submission }) => {
   const { values, submittedAt } = submission;
@@ -64,8 +65,7 @@ const Activity = ({ submission }) => {
         {!editMode ? (
           comment
         ) : (
-          <input
-            type="text"
+          <textarea
             value={updateInfo[FORM_FIELDS.COMMENT]}
             onChange={e =>
               setUpdateInfo({
@@ -76,6 +76,7 @@ const Activity = ({ submission }) => {
           />
         )}
       </div>
+      {editMode && <TeamsButton>Submit Edit</TeamsButton>}
     </div>
   );
 };
