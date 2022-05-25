@@ -94,11 +94,12 @@ const Activity = ({ submission, reFetch, setReFetch }) => {
           />
         )}
       </div>
-      {editMode && loading ? (
-        <span>editing...</span>
-      ) : (
-        <TeamsButton onClick={handleSubmitEdit}>Submit Edit</TeamsButton>
-      )}
+      {editMode &&
+        (loading ? (
+          <span>editing...</span>
+        ) : (
+          <TeamsButton onClick={handleSubmitEdit}>Submit Edit</TeamsButton>
+        ))}
     </div>
   );
 };
