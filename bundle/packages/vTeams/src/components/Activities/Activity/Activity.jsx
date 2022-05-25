@@ -4,9 +4,11 @@ import { NAMES, FORM_FIELDS } from '../../../../globals/globals';
 import './_Activity.scss';
 import { useSelector } from 'react-redux';
 import TeamsButton from '../../TeamsButton/TeamsButton';
+import { updateSubmission, fetchSubmission } from '@kineticdata/react';
 
-const Activity = ({ submission }) => {
-  const { values, submittedAt } = submission;
+const Activity = ({ submission, reFetch, setReFetch }) => {
+  const [loading, setLoading] = useState(false);
+  let { values, submittedAt } = submission;
   const [date, time] = submittedAt.split('T');
   const [editMode, setEditMode] = useState(false);
   const [updateInfo, setUpdateInfo] = useState({
@@ -28,7 +30,27 @@ const Activity = ({ submission }) => {
     setEditMode(!editMode);
   };
 
-  console.log(editMode);
+  const handleSubmitEdit = () => {
+    const updatedValues = { ...values, ...updateInfo };
+    setLoading(true);
+    updateSubmission({
+      id: submission.id,
+      values: updatedValues,
+      include: 'values',
+    })
+      .then(result => {
+        setReFetch(!reFetch);
+        setEditMode(false);
+        setLoading(false);
+        // fetchSubmission({id: submission.id, include: 'values'})
+        //   .then(result => {
+        //     setValues(result.submission.values);
+        //   }).catch(err => console.error(err));
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   return (
     <div className={`activity-container ${classes}`}>
@@ -76,7 +98,11 @@ const Activity = ({ submission }) => {
           />
         )}
       </div>
-      {editMode && <TeamsButton>Submit Edit</TeamsButton>}
+      {editMode && loading ? (
+        <span>editing...</span>
+      ) : (
+        <TeamsButton onClick={handleSubmitEdit}>Submit Edit</TeamsButton>
+      )}
     </div>
   );
 };

@@ -185,7 +185,12 @@ const Activities = ({ id }) => {
           activities.length > 0 &&
             activities.map(submission => {
               return (
-                <Activity key={submission.handle} submission={submission} />
+                <Activity
+                  key={submission.handle}
+                  submission={submission}
+                  reFetch={reFetch}
+                  setReFetch={setReFetch}
+                />
               );
             })}
 
