@@ -117,7 +117,6 @@ const Dashboard = () => {
     <div>
       <PageTitle parts={['Home']} />
       <div className="dashboard page-panel">
-        <h1>Your Tickets</h1>
         {/* <div className="table-wrapper">
           <TicketTable columns={columns} rows={rows} createBtn />
         </div> */}
