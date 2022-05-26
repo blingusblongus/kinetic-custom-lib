@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import TicketTable from '../TicketTable/TicketTable';
 import { parseSubsToTablegrid } from '../../../../customUtils/utils';
 import { PageTitle } from '@kineticdata/bundle-common';
 import { SubmissionSearch } from '@kineticdata/react';
-import { getPaginated } from '../../lib/utils';
 import BurndownChart from '../BurndownChart/BurndownChart';
 import './Dashboard.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { FORM_FIELDS, SLUGS, NAMES } from '../../../globals/globals';
-import { format, addMonths, addDays } from 'date-fns';
+import { SLUGS, NAMES } from '../../../globals/globals';
+
 import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable';
 import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
-  const store = useSelector(store => store);
   const rowData = useSelector(store => store.tickets);
   const worklogs = useSelector(store => store.workLogs);
   const clientData = useSelector(store => store.organization);
-
-  const [chartData, setChartData] = useState([]);
 
   let [columns, rows] = parseSubsToTablegrid(rowData);
 
@@ -86,42 +82,6 @@ const Dashboard = () => {
     }
   }, []);
 
-  // fetch burndown info on worklogs set/update
-  useEffect(
-    () => {
-      if (fulfiller) return;
-      console.log(clientData);
-      if (Object.keys(clientData).length < 1) return;
-      const startDate = Date.parse(clientData[FORM_FIELDS.BILLING_START]);
-      const endDate = addMonths(startDate, 1);
-      const data = [];
-      let d = startDate;
-      let monthlyHours = clientData[FORM_FIELDS.MONTHLY_HOURS];
-
-      while (d < endDate) {
-        let dailyHours = worklogs
-          .filter(
-            log =>
-              format(d, 'MM/DD/YYYY') === format(log.submittedAt, 'MM/DD/YYYY'),
-          )
-          .reduce(
-            (sum, log) => (sum += Number(log.values[FORM_FIELDS.HOURS_WORKED])),
-            0,
-          );
-
-        monthlyHours -= dailyHours;
-        data.push({ name: format(d, 'MM/DD'), hours: monthlyHours });
-
-        d = addDays(d, 1);
-      }
-
-      setChartData(data);
-    },
-    [worklogs, clientData],
-  );
-
-  console.log('store', store);
-
   return (
     <div>
       <PageTitle parts={['Home']} />
@@ -133,8 +93,8 @@ const Dashboard = () => {
 
         {!fulfiller && (
           <div className="dashboard-row">
-            <BurndownChart data={chartData} />
-            <BurndownChart data={chartData} />
+            <BurndownChart clientData={clientData} worklogs={worklogs} />
+            <BurndownChart clientData={clientData} worklogs={worklogs} />
           </div>
         )}
       </div>

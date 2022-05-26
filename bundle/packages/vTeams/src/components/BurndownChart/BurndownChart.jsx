@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './_BurndownChart.scss';
+import { FORM_FIELDS } from '../../../globals/globals';
+import { format, addMonths, addDays } from 'date-fns';
 
 import {
   Label,
@@ -13,8 +15,32 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const BurndownChart = ({ data }) => {
-  console.log(data);
+const BurndownChart = ({ clientData, worklogs }) => {
+  console.log(clientData);
+  if (!clientData || Object.keys(clientData).length < 1) return null;
+  const startDate = Date.parse(clientData[FORM_FIELDS.BILLING_START]);
+  const endDate = addMonths(startDate, 1);
+  const data = [];
+  let d = startDate;
+  let monthlyHours = clientData[FORM_FIELDS.MONTHLY_HOURS];
+
+  while (d < endDate) {
+    let dailyHours = worklogs
+      .filter(
+        log =>
+          format(d, 'MM/DD/YYYY') === format(log.submittedAt, 'MM/DD/YYYY'),
+      )
+      .reduce(
+        (sum, log) => (sum += Number(log.values[FORM_FIELDS.HOURS_WORKED])),
+        0,
+      );
+
+    monthlyHours -= dailyHours;
+    data.push({ name: format(d, 'MM/DD'), hours: monthlyHours });
+
+    d = addDays(d, 1);
+  }
+
   return (
     <div className="chart-wrapper card-wrapper">
       <ResponsiveContainer width={'100%'} height={200}>
