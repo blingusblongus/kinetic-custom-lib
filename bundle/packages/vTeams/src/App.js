@@ -18,6 +18,10 @@ import { store } from './redux/store';
 import Dashboard from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';
 import ClientOverview from './components/ClientOverview/ClientOverview';
+import { SLUGS, NAMES } from '../globals/globals';
+import { SubmissionSearch } from '@kineticdata/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 import './App.scss';
 
 /*****************************************************************************
@@ -35,6 +39,13 @@ const AppComponent = props => {
     },
   });
 
+  const dispatch = useDispatch();
+  const userProfile = useSelector(store => store.app.profile);
+  const fulfiller = isMemberOf(userProfile, 'vTeams');
+  const organization = userProfile.attributes.find(
+    attr => attr.name === NAMES.ATTRIBUTE_ORGANIZATION,
+  ).values[0];
+
   // Load inter font for just custom app
   useEffect(() => {
     WebFont.load({
@@ -42,6 +53,57 @@ const AppComponent = props => {
         families: ['Inter:300,400,500,700,900'],
       },
     });
+
+    // configure search for specific tickets if !fulfiller, else fetch all
+    //'FETCH_TICKETS' returns paginated results
+    //'FETCH_TICKETS_ALL' returns non-paginated (collected) results
+    const ticketSearch = fulfiller
+      ? new SubmissionSearch().include('values').build()
+      : new SubmissionSearch()
+          .eq('values[Organization]', organization)
+          .include('values')
+          .build();
+
+    dispatch({
+      type: 'FETCH_TICKETS',
+      payload: {
+        kapp: SLUGS.KAPPSLUG,
+        form: SLUGS.TICKET_FORM_SLUG,
+        search: ticketSearch,
+      },
+    });
+
+    // Client-specific fetches
+    if (!fulfiller) {
+      const workLogSearch = new SubmissionSearch()
+        .eq('values[Organization]', organization)
+        .eq('values[isWorkLog]', 'true')
+        .include('values')
+        .build();
+
+      dispatch({
+        type: 'FETCH_WORKLOGS',
+        payload: {
+          kapp: SLUGS.KAPPSLUG,
+          form: SLUGS.ACTIVITIES_FORM_SLUG,
+          search: workLogSearch,
+        },
+      });
+
+      const clientSearch = new SubmissionSearch()
+        .eq('values[Organization]', organization)
+        .include('values')
+        .build();
+
+      dispatch({
+        type: 'FETCH_ORGANIZATION',
+        payload: {
+          kapp: SLUGS.KAPPSLUG,
+          form: SLUGS.CLIENTS_FORM_SLUG,
+          search: clientSearch,
+        },
+      });
+    }
   }, []);
 
   if (props.error) {
@@ -52,24 +114,22 @@ const AppComponent = props => {
     return props.render({
       main: (
         <I18n>
-          <Provider store={store}>
-            <ThemeProvider theme={THEME}>
-              <div className="package-layout package-layout--vteams">
-                <PageTitle parts={['Loading...']} />
-                <div className="page-container">
-                  <Router>
-                    <FormView path="/forms/:formSlug" />
-                    <FormView path="/forms/:formSlug/:submissionId" />
-                    <Redirect from="/" to="/kapps/vteams/home" noThrow />
-                    <CoreTicket path="/ticket" />
-                    <CoreTicket path="/ticket/:id" />
-                    <Dashboard path="/home" />
-                    <ClientOverview path="/clients" />
-                  </Router>
-                </div>
+          <ThemeProvider theme={THEME}>
+            <div className="package-layout package-layout--vteams">
+              <PageTitle parts={['Loading...']} />
+              <div className="page-container">
+                <Router>
+                  <FormView path="/forms/:formSlug" />
+                  <FormView path="/forms/:formSlug/:submissionId" />
+                  <Redirect from="/" to="/kapps/vteams/home" noThrow />
+                  <CoreTicket path="/ticket" />
+                  <CoreTicket path="/ticket/:id" />
+                  <Dashboard path="/home" />
+                  <ClientOverview path="/clients" />
+                </Router>
               </div>
-            </ThemeProvider>
-          </Provider>
+            </div>
+          </ThemeProvider>
         </I18n>
       ),
     });

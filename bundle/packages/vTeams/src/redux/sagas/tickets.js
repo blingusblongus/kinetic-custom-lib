@@ -5,15 +5,21 @@ import { getPaginated } from '../../lib/utils';
 function* fetchTickets(action) {
   try {
     let response;
+    let payload;
     switch (action.type) {
       case 'FETCH_TICKETS':
         response = yield searchSubmissions(action.payload);
+        payload = response;
         break;
       case 'FETCH_TICKETS_ALL':
         response = yield getPaginated(action.payload);
+        payload = {
+          nextPageToken: null,
+          submissions: response.submissions,
+        };
         break;
     }
-    yield put({ type: 'SET_TICKETS', payload: response.submissions });
+    yield put({ type: 'SET_TICKETS', payload });
   } catch (error) {
     console.error(error);
   }
