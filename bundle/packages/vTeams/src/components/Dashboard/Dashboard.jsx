@@ -15,11 +15,12 @@ import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+
+  const store = useSelector(store => store);
   const rowData = useSelector(store => store.tickets);
-  const worklogs = useSelector(store => store.worklogs);
-  // const [rowData, setRowData] = useState(tickets);
-  const [clientData, setClientData] = useState({});
-  // const [worklogs, setWorkLogs] = useState([]);
+  const worklogs = useSelector(store => store.workLogs);
+  const clientData = useSelector(store => store.organization);
+
   const [chartData, setChartData] = useState([]);
 
   let [columns, rows] = parseSubsToTablegrid(rowData);
@@ -30,8 +31,6 @@ const Dashboard = () => {
   const organization = userProfile.attributes.find(
     attr => attr.name === NAMES.ATTRIBUTE_ORGANIZATION,
   ).values[0];
-
-  const store = useSelector(store => store);
 
   // fetch submissions on load
   useEffect(() => {
@@ -76,7 +75,6 @@ const Dashboard = () => {
         .include('values')
         .build();
 
-      console.log('fetching org');
       dispatch({
         type: 'FETCH_ORGANIZATION',
         payload: {
@@ -86,68 +84,19 @@ const Dashboard = () => {
         },
       });
     }
-
-    // // Get all tickets for current client
-    // const getTickets = async () => {
-    //   const search = new SubmissionSearch().include('values').build();
-    //   let submissions = await getPaginated({
-    //     kapp: SLUGS.KAPPSLUG,
-    //     form: SLUGS.TICKET_FORM_SLUG,
-    //     search,
-    //   });
-    //   setRowData(submissions);
-    // };
-    // getTickets();
-
-    const getClientData = async () => {
-      const search = new SubmissionSearch()
-        .eq('values[Organization]', organization)
-        .include('values')
-        .build();
-
-      let submissions = await getPaginated({
-        kapp: SLUGS.KAPPSLUG,
-        form: SLUGS.CLIENTS_FORM_SLUG,
-        search,
-      });
-      setClientData(submissions[0]);
-    };
-
-    // const getWorkLogs = async () => {
-    //   const search = new SubmissionSearch()
-    //     .eq('values[Organization]', organization)
-    //     .eq('values[isWorkLog]', 'true')
-    //     .include('values')
-    //     .build();
-
-    //   let submissions = await getPaginated({
-    //     kapp: SLUGS.KAPPSLUG,
-    //     form: SLUGS.ACTIVITIES_FORM_SLUG,
-    //     search,
-    //   });
-
-    //   setWorkLogs(submissions);
-    // };
-
-    // Get client info if logged in user isn't vTeams
-    // if (organization !== NAMES.FULFILLER_ORG_NAME) {
-    //   getClientData();
-    //   getWorkLogs();
-    // }
   }, []);
 
   // fetch burndown info on worklogs set/update
   useEffect(
     () => {
       if (fulfiller) return;
+      console.log(clientData);
       if (Object.keys(clientData).length < 1) return;
-      const startDate = Date.parse(
-        clientData.values[FORM_FIELDS.BILLING_START],
-      );
+      const startDate = Date.parse(clientData[FORM_FIELDS.BILLING_START]);
       const endDate = addMonths(startDate, 1);
       const data = [];
       let d = startDate;
-      let monthlyHours = clientData.values[FORM_FIELDS.MONTHLY_HOURS];
+      let monthlyHours = clientData[FORM_FIELDS.MONTHLY_HOURS];
 
       while (d < endDate) {
         let dailyHours = worklogs

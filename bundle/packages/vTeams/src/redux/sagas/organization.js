@@ -3,7 +3,6 @@ import { searchSubmissions } from '@kineticdata/react';
 
 function* fetchOrganization(action) {
   try {
-    console.log('in saga');
     let response = yield searchSubmissions(action.payload);
     yield put({
       type: 'SET_ORGANIZATION',
