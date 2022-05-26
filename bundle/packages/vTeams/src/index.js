@@ -47,21 +47,23 @@ export default class extends Component {
         <Provider store={store} context={context}>
           <CommonProvider>
             <LocationProvider hashRouting history={connectedHistory}>
-              <ToastsContainer duration={5000} />
-              <ModalFormContainer />
-              <Router>
-                {this.props.appState.authenticated ? (
-                  <App
-                    render={this.props.render}
-                    path={`${this.props.appState.location}/*`}
-                  />
-                ) : (
-                  <PublicApp
-                    render={this.props.render}
-                    path={`${this.props.appState.location}/*`}
-                  />
-                )}
-              </Router>
+              <Provider store={store}>
+                <ToastsContainer duration={5000} />
+                <ModalFormContainer />
+                <Router>
+                  {this.props.appState.authenticated ? (
+                    <App
+                      render={this.props.render}
+                      path={`${this.props.appState.location}/*`}
+                    />
+                  ) : (
+                    <PublicApp
+                      render={this.props.render}
+                      path={`${this.props.appState.location}/*`}
+                    />
+                  )}
+                </Router>
+              </Provider>
             </LocationProvider>
           </CommonProvider>
         </Provider>
