@@ -7,13 +7,15 @@ import { getPaginated } from '../../lib/utils';
 import BurndownChart from '../BurndownChart/BurndownChart';
 import './Dashboard.scss';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FORM_FIELDS, SLUGS, NAMES } from '../../../globals/globals';
 import { format, addMonths, addDays } from 'date-fns';
 import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable';
 import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
+
 const Dashboard = () => {
-  const [rowData, setRowData] = useState([]);
+  const rowData = useSelector(store => store.tickets);
+  // const [rowData, setRowData] = useState(tickets);
   const [clientData, setClientData] = useState({});
   const [worklogs, setWorkLogs] = useState([]);
   const [chartData, setChartData] = useState([]);
@@ -27,19 +29,33 @@ const Dashboard = () => {
     attr => attr.name === NAMES.ATTRIBUTE_ORGANIZATION,
   ).values[0];
 
+  const dispatch = useDispatch();
+  const store = useSelector(store => store);
+
   // fetch submissions on load
   useEffect(() => {
-    // Get all tickets for current client
-    const getTickets = async () => {
-      const search = new SubmissionSearch().include('values').build();
-      let submissions = await getPaginated({
+    const search = new SubmissionSearch().include('values').build();
+    console.log(search);
+    dispatch({
+      type: 'FETCH_TICKETS',
+      payload: {
         kapp: SLUGS.KAPPSLUG,
         form: SLUGS.TICKET_FORM_SLUG,
         search,
-      });
-      setRowData(submissions);
-    };
-    getTickets();
+      },
+    });
+
+    // // Get all tickets for current client
+    // const getTickets = async () => {
+    //   const search = new SubmissionSearch().include('values').build();
+    //   let submissions = await getPaginated({
+    //     kapp: SLUGS.KAPPSLUG,
+    //     form: SLUGS.TICKET_FORM_SLUG,
+    //     search,
+    //   });
+    //   setRowData(submissions);
+    // };
+    // getTickets();
 
     const getClientData = async () => {
       const search = new SubmissionSearch()
@@ -112,6 +128,8 @@ const Dashboard = () => {
     },
     [worklogs],
   );
+
+  console.log('store', store);
 
   return (
     <div>
