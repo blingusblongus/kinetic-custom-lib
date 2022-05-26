@@ -14,10 +14,12 @@ import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable'
 import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const rowData = useSelector(store => store.tickets);
+  const worklogs = useSelector(store => store.worklogs);
   // const [rowData, setRowData] = useState(tickets);
   const [clientData, setClientData] = useState({});
-  const [worklogs, setWorkLogs] = useState([]);
+  // const [worklogs, setWorkLogs] = useState([]);
   const [chartData, setChartData] = useState([]);
 
   let [columns, rows] = parseSubsToTablegrid(rowData);
@@ -29,21 +31,45 @@ const Dashboard = () => {
     attr => attr.name === NAMES.ATTRIBUTE_ORGANIZATION,
   ).values[0];
 
-  const dispatch = useDispatch();
   const store = useSelector(store => store);
 
   // fetch submissions on load
   useEffect(() => {
-    const search = new SubmissionSearch().include('values').build();
-    console.log(search);
+    // configure search for specific tickets if !fulfiller, else fetch all
+    //'FETCH_TICKETS' returns paginated results
+    //'FETCH_TICKETS_ALL' returns non-paginated (collected) results
+    const ticketSearch = fulfiller
+      ? new SubmissionSearch().include('values').build()
+      : new SubmissionSearch()
+          .eq('values[Organization]', organization)
+          .include('values')
+          .build();
+
     dispatch({
       type: 'FETCH_TICKETS',
       payload: {
         kapp: SLUGS.KAPPSLUG,
         form: SLUGS.TICKET_FORM_SLUG,
-        search,
+        search: ticketSearch,
       },
     });
+
+    if (!fulfiller) {
+      const workLogSearch = new SubmissionSearch()
+        .eq('values[Organization]', organization)
+        .eq('values[isWorkLog]', 'true')
+        .include('values')
+        .build();
+
+      dispatch({
+        type: 'FETCH_WORKLOGS',
+        payload: {
+          kapp: SLUGS.KAPPSLUG,
+          form: SLUGS.ACTIVITIES_FORM_SLUG,
+          search: workLogSearch,
+        },
+      });
+    }
 
     // // Get all tickets for current client
     // const getTickets = async () => {
@@ -71,27 +97,27 @@ const Dashboard = () => {
       setClientData(submissions[0]);
     };
 
-    const getWorkLogs = async () => {
-      const search = new SubmissionSearch()
-        .eq('values[Organization]', organization)
-        .eq('values[isWorkLog]', 'true')
-        .include('values')
-        .build();
+    // const getWorkLogs = async () => {
+    //   const search = new SubmissionSearch()
+    //     .eq('values[Organization]', organization)
+    //     .eq('values[isWorkLog]', 'true')
+    //     .include('values')
+    //     .build();
 
-      let submissions = await getPaginated({
-        kapp: SLUGS.KAPPSLUG,
-        form: SLUGS.ACTIVITIES_FORM_SLUG,
-        search,
-      });
+    //   let submissions = await getPaginated({
+    //     kapp: SLUGS.KAPPSLUG,
+    //     form: SLUGS.ACTIVITIES_FORM_SLUG,
+    //     search,
+    //   });
 
-      setWorkLogs(submissions);
-    };
+    //   setWorkLogs(submissions);
+    // };
 
     // Get client info if logged in user isn't vTeams
-    if (organization !== NAMES.FULFILLER_ORG_NAME) {
-      getClientData();
-      getWorkLogs();
-    }
+    // if (organization !== NAMES.FULFILLER_ORG_NAME) {
+    //   getClientData();
+    //   getWorkLogs();
+    // }
   }, []);
 
   // fetch burndown info on worklogs set/update
