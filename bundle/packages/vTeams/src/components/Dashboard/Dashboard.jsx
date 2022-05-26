@@ -54,6 +54,7 @@ const Dashboard = () => {
       },
     });
 
+    // Client-specific fetches
     if (!fulfiller) {
       const workLogSearch = new SubmissionSearch()
         .eq('values[Organization]', organization)
@@ -67,6 +68,21 @@ const Dashboard = () => {
           kapp: SLUGS.KAPPSLUG,
           form: SLUGS.ACTIVITIES_FORM_SLUG,
           search: workLogSearch,
+        },
+      });
+
+      const clientSearch = new SubmissionSearch()
+        .eq('values[Organization]', organization)
+        .include('values')
+        .build();
+
+      console.log('fetching org');
+      dispatch({
+        type: 'FETCH_ORGANIZATION',
+        payload: {
+          kapp: SLUGS.KAPPSLUG,
+          form: SLUGS.CLIENTS_FORM_SLUG,
+          search: clientSearch,
         },
       });
     }
@@ -152,7 +168,7 @@ const Dashboard = () => {
 
       setChartData(data);
     },
-    [worklogs],
+    [worklogs, clientData],
   );
 
   console.log('store', store);
