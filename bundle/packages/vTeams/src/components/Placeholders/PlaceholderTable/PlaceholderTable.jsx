@@ -20,7 +20,7 @@ const PlaceholderTable = () => {
         <tbody>
           {rows.map((el, i) => (
             <tr key={i}>
-              <td>Hello</td>
+              <td> </td>
             </tr>
           ))}
         </tbody>

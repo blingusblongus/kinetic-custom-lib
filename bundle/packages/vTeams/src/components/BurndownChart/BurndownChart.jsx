@@ -43,6 +43,7 @@ const BurndownChart = ({ clientData, worklogs }) => {
 
   return (
     <div className="chart-wrapper card-wrapper">
+      <h3>Burndown</h3>
       <ResponsiveContainer width={'100%'} height={200}>
         <LineChart width={400} height={300} data={data}>
           <CartesianGrid strokeDasharray="3 3" />
