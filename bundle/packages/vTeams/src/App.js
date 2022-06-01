@@ -13,8 +13,6 @@ import WebFont from 'webfontloader';
 import { ThemeProvider, createTheme } from '@mui/material';
 
 import CoreTicket from './components/CoreTicketView/CoreTicketView';
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
 import Dashboard from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';
 import ClientOverview from './components/ClientOverview/ClientOverview';
@@ -44,7 +42,7 @@ const AppComponent = props => {
   const fulfiller = isMemberOf(userProfile, 'vTeams');
   const organization = userProfile.attributes.find(
     attr => attr.name === NAMES.ATTRIBUTE_ORGANIZATION,
-  ).values[0];
+  )?.values[0];
 
   // Load inter font for just custom app
   useEffect(() => {
