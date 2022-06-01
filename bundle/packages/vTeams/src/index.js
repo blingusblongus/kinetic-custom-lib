@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import matchPath from 'rudy-match-path';
+// import matchPath from 'rudy-match-path';
 import { LocationProvider, Router } from '@reach/router';
 import {
   CommonProvider,
@@ -47,21 +47,23 @@ export default class extends Component {
         <Provider store={store} context={context}>
           <CommonProvider>
             <LocationProvider hashRouting history={connectedHistory}>
-              <ToastsContainer duration={5000} />
-              <ModalFormContainer />
-              <Router>
-                {this.props.appState.authenticated ? (
-                  <App
-                    render={this.props.render}
-                    path={`${this.props.appState.location}/*`}
-                  />
-                ) : (
-                  <PublicApp
-                    render={this.props.render}
-                    path={`${this.props.appState.location}/*`}
-                  />
-                )}
-              </Router>
+              <Provider store={store}>
+                <ToastsContainer duration={5000} />
+                <ModalFormContainer />
+                <Router>
+                  {this.props.appState.authenticated ? (
+                    <App
+                      render={this.props.render}
+                      path={`${this.props.appState.location}/*`}
+                    />
+                  ) : (
+                    <PublicApp
+                      render={this.props.render}
+                      path={`${this.props.appState.location}/*`}
+                    />
+                  )}
+                </Router>
+              </Provider>
             </LocationProvider>
           </CommonProvider>
         </Provider>
@@ -72,7 +74,7 @@ export default class extends Component {
   // Functions for hiding/supressing parts of the default layout
   // static shouldHideHeader = props => true;
   // static shouldHideSidebar = props => true;
-  // static shouldSuppressSidebar = props => true;
+  static shouldSuppressSidebar = props => true;
 
   // Used for matching pathname to display this AppProvider
   // Not used if package is set as Bundle Package of a Kapp

@@ -4,15 +4,20 @@
 
 *Dev Address:* https://esolutionsone-dev.kinops.io/
 
+
+## Usage
+
+
+
 ## Deployment
   Backend:
   1. Clone platform-template repo: `git clone https://github.com/kineticdata/platform-template.git` (may require KD member to grant access)
   2. Edit `config/servername_environment_export_config.yml` and `config/servername_enviroment_import_config.yml` with space name, slug, and login info for both dev and prod instances
   3. run `export.rb -c "./config/servername_environment_export_config.yml"`
   4. run `import.rb -c "./config/servername_environment_import_config.yml"`
-
   Frontend:
   1. `git pull` any changes from the github repo
+  . `export NODE_OPTIONS=--max_old_space_size=4096` to increase javascript heap size
   2. `yarn build`
   3. If pushing dev frontend, rename bundle/packages/app/build/ to build-dev/
   4. Sign into s3 bucket
@@ -26,6 +31,7 @@
       <img src='./images/bug_screen_001.png' height='300px' />
     </details>
     - Questions: What's the best practice for keeping things in sync when the data model on prod changes? Do we need scripting to cover our bases?
+  - The bridge models broke after migration (though everything somehow still worked enough that I didn't notice until I tried to utilize the bridge models again). It seems the bridge plugins etc. don't get set-up or updated by default.
  
  
 ## QA Testing

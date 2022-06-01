@@ -1,15 +1,11 @@
 @import './assets/styles/variables';
 @use './assets/styles/TicketTable';
 
-:root {
-  --color-white: $color-white;
-  --bg-color-primary: $bg-color-primary;
-  --bg-off-white: $bg-off-white;
-  --bg-off-white-darker: $bg-off-white-darker;
-  --weight-medium: $weight-medium;
-  --weight-heavy: $weight-heavy;
-  --indent-level: $indent-level;
-  --line-dividers: $line-dividers;
+.app-body {
+  background-color: $bg-secondary;
+  font-family: 'Inter';
+  color: $primary;
+  height: 100%;
 }
 
 .page-panel {
@@ -68,11 +64,6 @@
   }
 }
 
-.page-container {
-  background-color: $bg-off-white;
-  font-family: 'Inter';
-}
-
 .bg--primary {
   background-color: $bg-color-primary;
 }
@@ -98,9 +89,9 @@
 }
 
 .card-wrapper {
-  padding: 20px 40px;
-  box-shadow: 1px 1px 7px lightgray;
-  border-radius: 8px;
+  padding: 20px 20px;
+  box-shadow: 0px 4px 20px rgba(69, 118, 154, 0.3);
+  border-radius: 5px;
   background-color: $color-white;
 }
 
@@ -187,15 +178,4 @@ footer {
 
 .dot-red {
   background-color: red;
-}
-
-:export {
-  bgColorPrimary: $bg-color-primary;
-  bgColorLight: $bg-color-light;
-  bgOffWhiteDarker: $bg-off-white-darker;
-  colorWhite: $color-white;
-  line-dividers: $line-dividers;
-  fontSmall: $font-small;
-  fontMedium: $font-medium;
-  fontLarge: $font-large;
 }

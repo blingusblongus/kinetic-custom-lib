@@ -18,7 +18,7 @@ export const actions = {
 
 export const State = Record({
   size: 'large',
-  sidebarOpen: true,
+  sidebarOpen: -1,
   // There are some pages where we want the sidebar to be less of a focus in the
   // user interface (the home page of the services kapp is one example). The
   // suppressedSidebarOpen state tracks whether or not the sidebar should be open

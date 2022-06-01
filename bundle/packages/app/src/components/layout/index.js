@@ -156,7 +156,8 @@ export default connect(
         if (mobile) {
           setSidebarOpen(-1);
         } else {
-          setTimeout(() => setSidebarOpen(-1), 300);
+          setSidebarOpen(-1);
+          // setTimeout(() => setSidebarOpen(-1), 300);
         }
       } else if (sidebarOpen === null) {
         setSidebarOpen(mobile || shouldSuppressSidebar ? -1 : 1);

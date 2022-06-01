@@ -1,7 +1,7 @@
 import React from 'react';
-import logoImage from '../../assets/images/login-background.png';
-import logoName from '../../assets/images/login-name.png';
-import { I18n } from '@kineticdata/react';
+// import logoImage from '../../assets/images/login-background.png';
+// import logoName from '../../assets/images/login-name.png';
+// import { I18n } from '@kineticdata/react';
 import logo from '../../assets/images/esolutions_logo_green.svg';
 
 export const LoginWrapper = ({ children }) => (

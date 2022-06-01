@@ -10,7 +10,7 @@ import sagas from './sagas';
 console.log('Configuring vTeams package redux store');
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'VTEAMS' })
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'SLUGS' })
   : compose;
 
 const sagaMiddlware = createSagaMiddleware();

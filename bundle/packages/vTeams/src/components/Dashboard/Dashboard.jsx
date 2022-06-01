@@ -1,128 +1,47 @@
-import React, { useEffect, useState } from 'react';
-
-import './Dashboard.scss';
-import {
-  bgColorPrimary,
-  colorWhite,
-} from '../../assets/styles/_variables.scss';
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-
-import RecentlyViewed from '../RecentlyViewed/RecentlyViewed';
-import { PageTitle } from '@kineticdata/bundle-common';
-
-import { columns as c, rows as r, data, daysArr } from './modules.js';
-
-import { addBackground } from './plugins.js';
+import React from 'react';
 import TicketTable from '../TicketTable/TicketTable';
+import { parseSubsToTablegrid } from '../../../../customUtils/utils';
+import { PageTitle } from '@kineticdata/bundle-common';
+import BurndownChart from '../BurndownChart/BurndownChart';
+import { useSelector } from 'react-redux';
+import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable';
+import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
+import './Dashboard.scss';
 
-import {
-  searchSubmissions,
-  SubmissionSearch,
-  SubmissionTable,
-} from '@kineticdata/react';
-import { parseSubsToTablegrid } from '../../../../customUtils/utils.js';
+const Dashboard = () => {
+  // When fetching tickets
+  // 'FETCH_TICKETS' returns one page of results => {submissions, messages, nextPageToken, count, countPageToken}
+  // 'FETCH_TICKETS_ALL' returns all results in same format (collected in submissions);
+  const rowData = useSelector(store => store.tickets.submissions);
+  const worklogs = useSelector(store => store.workLogs);
+  const clientData = useSelector(store => store.organization);
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-);
-
-const DashboardV1 = () => {
-  const [rowData, setRowData] = useState('');
   let [columns, rows] = parseSubsToTablegrid(rowData);
 
-  useEffect(() => {
-    const search = new SubmissionSearch().include('values').build();
-
-    searchSubmissions({ kapp: 'vteams', form: 'tickets', search }).then(
-      result => setRowData(result.submissions),
-    );
-  }, []);
+  const userProfile = useSelector(store => store.app.profile);
+  const fulfiller = isMemberOf(userProfile, 'vTeams');
 
   return (
-    <>
+    <div>
       <PageTitle parts={['Home']} />
       <div className="dashboard page-panel">
-        <div className="grid" id="dashboard-grid">
-          <TicketTable columns={columns || c} rows={rows || r} createBtn />
-          <div className="flex flex-column" id="dashboard-col-report">
-            <RecentlyViewed />
-            {/* <div className="card-wrapper">
-            <div className="card-title">Weekly Reports</div>
-            
-          </div> */}
-            <div className="card-wrapper">
-              <div className="card-title">Burn Down</div>
-              <div className="chart-wrapper">
-                <Line
-                  plugins={[addBackground]}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                      x: {
-                        grid: {
-                          display: false,
-                        },
-                      },
-                      y: {
-                        grid: {
-                          // borderWidth: 2,
-                          color: 'rgba(180,180,180,.1)',
-                          lineWidth: 2,
-                          borderDash: [6, 6],
-                        },
-                      },
-                    },
-                    plugins: {
-                      legend: {
-                        display: false,
-                      },
-                    },
-                    elements: {
-                      point: {
-                        radius: 0,
-                        hitRadius: 3,
-                      },
-                      line: {
-                        borderWidth: 1,
-                      },
-                    },
-                  }}
-                  data={{
-                    labels: daysArr,
-                    datasets: [
-                      {
-                        label: 'Hours Remaining',
-                        data: data,
-                        backgroundColor: bgColorPrimary,
-                        borderColor: bgColorPrimary,
-                      },
-                    ],
-                  }}
-                />
-              </div>
-            </div>
+        {fulfiller ? (
+          <div className="table-wrapper">
+            <TicketTable columns={columns} rows={rows} createBtn />
           </div>
-        </div>
+        ) : (
+          <PlaceholderTable />
+        )}
+
+        {!fulfiller && (
+          <div className="dashboard-row">
+            <BurndownChart clientData={clientData} worklogs={worklogs} />
+            <BurndownChart clientData={clientData} worklogs={worklogs} />
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
-export default DashboardV1;
+export default Dashboard;
