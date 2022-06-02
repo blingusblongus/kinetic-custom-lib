@@ -56,7 +56,10 @@ const AppComponent = props => {
     //'FETCH_TICKETS' returns paginated results
     //'FETCH_TICKETS_ALL' returns non-paginated (collected) results
     const ticketSearch = fulfiller
-      ? new SubmissionSearch().include('values').build()
+      ? new SubmissionSearch()
+          .include('values')
+          .limit('3')
+          .build()
       : new SubmissionSearch()
           .eq('values[Organization]', organization)
           .include('values')

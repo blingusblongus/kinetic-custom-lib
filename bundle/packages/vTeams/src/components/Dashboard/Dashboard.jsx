@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TicketTable from '../TicketTable/TicketTable';
 import { parseSubsToTablegrid } from '../../../../customUtils/utils';
 import { PageTitle } from '@kineticdata/bundle-common';
@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable';
 import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 import './Dashboard.scss';
+import CustomTable from '../CustomTable/CustomTable';
+import { SLUGS } from '../../../globals/globals';
 
 const Dashboard = () => {
   // When fetching tickets
@@ -21,12 +23,24 @@ const Dashboard = () => {
   const userProfile = useSelector(store => store.app.profile);
   const fulfiller = isMemberOf(userProfile, 'vTeams');
 
+  useEffect(() => {}, []);
+
   return (
     <div>
       <PageTitle parts={['Home']} />
       <div className="dashboard page-panel">
         {fulfiller ? (
           <div className="table-wrapper">
+            <CustomTable
+              kapp={SLUGS.KAPPSLUG}
+              form={SLUGS.TICKET_FORM_SLUG}
+              searchOptions={{ include: 'values', limit: 5 }}
+            />
+            <CustomTable
+              kapp={SLUGS.KAPPSLUG}
+              form={SLUGS.TICKET_FORM_SLUG}
+              searchOptions={{ include: 'values', limit: 5, sortBy: 'Title' }}
+            />
             <TicketTable columns={columns} rows={rows} createBtn />
           </div>
         ) : (
