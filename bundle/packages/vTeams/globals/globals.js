@@ -15,7 +15,9 @@ export const FORM_FIELDS = {
   ORGANIZATION: 'Organization',
   COMMENT: 'Comment',
   TITLE: 'Title',
-  DATE_DUE: 'Date Due',
+  DATE_DUE: 'Requested Date Due',
+  DESCRIPTION: 'Description',
+  STATUS: 'Status',
 }
 
 export const NAMES = {

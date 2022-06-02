@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
+import {
+  SubmissionSearch,
+  searchSubmissions,
+  fetchForm,
+} from '@kineticdata/react';
 import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import './CustomTable.scss';
 
-const CustomTable = ({ kapp, form, searchOptions }) => {
+const CustomTable = ({ label, kapp, form, searchOptions }) => {
   const [searchResult, setSearchResult] = useState({});
 
+  const [fields, setFields] = useState([]);
+  const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
+
+  const [visible, setVisible] = useState([
+    'Title',
+    'Description',
+    'Requested Date Due',
+  ]);
   // //set defaults here instead of in parameters to avoid effect looping
   // // if(!searchOptions){
   // //   searchOptions = {
@@ -66,31 +78,70 @@ const CustomTable = ({ kapp, form, searchOptions }) => {
 
   useEffect(() => {
     defaultSearch();
+
+    fetchForm({ kappSlug: kapp, formSlug: form, include: 'fields' })
+      .then(({ form }) => setFields(form.fields.map(field => field.name)))
+      .catch(err => console.error(err));
   }, []);
+
+  console.log(searchResult.submissions);
+  console.log(fields);
+
+  const Settings = () => {
+    return (
+      <div
+        className="table-settings"
+        style={{ position: 'fixed', ...settingsPos }}
+      >
+        <div>Show Column</div>
+        {fields.map(field => {
+          let checked = visible.includes(field);
+          const handleCheck = () => {
+            if (checked) {
+              setVisible(visible.filter(el => el != field));
+            } else {
+              setVisible([...visible, field]);
+            }
+          };
+          return (
+            <div key={field}>
+              <input type="checkbox" checked={checked} onChange={handleCheck} />
+              <label>{field}</label>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  console.log(settingsPos);
 
   return (
     <div className="card-wrapper">
       <div className="table-header">
-        <span className="table-title">Active Tickets</span>
+        <span className="table-title">{label}</span>
       </div>
       <table>
-        <thead>
+        <thead
+          onMouseUp={e => {
+            e.preventDefault();
+            setSettingsPos({ top: e.pageY, left: e.pageX });
+          }}
+        >
           <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Requested Date</th>
-            <th>Requested Date</th>
+            {visible.map(f => {
+              return <th key={f}>{f}</th>;
+            })}
           </tr>
         </thead>
         <tbody>
           {searchResult.submissions?.map((submission, i) => {
-            const { TITLE, DATE_DUE } = FORM_FIELDS;
+            const { TITLE, DESCRIPTION, STATUS, DATE_DUE } = FORM_FIELDS;
             return (
               <tr key={i}>
-                <td>{submission.values[TITLE]}</td>
-                <td>{submission.values['Description']}</td>
-                <td>{submission.values[DATE_DUE]}</td>
-                <td>{submission.values[TITLE]}</td>
+                {visible.map(f => {
+                  return <td key={f}>{submission.values[f]}</td>;
+                })}
               </tr>
             );
           })}
@@ -99,7 +150,9 @@ const CustomTable = ({ kapp, form, searchOptions }) => {
       <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
         <TeamsButton>Next Page</TeamsButton>
         <TeamsButton>Prev Page</TeamsButton>
+        <TeamsButton>Settings</TeamsButton>
       </div>
+      <Settings />
     </div>
   );
 };
