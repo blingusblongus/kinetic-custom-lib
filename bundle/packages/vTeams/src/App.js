@@ -56,14 +56,13 @@ const AppComponent = props => {
     //'FETCH_TICKETS' returns paginated results
     //'FETCH_TICKETS_ALL' returns non-paginated (collected) results
     const ticketSearch = fulfiller
-      ? new SubmissionSearch()
-          .include('values')
-          .limit('3')
-          .build()
+      ? new SubmissionSearch().include('values').build()
       : new SubmissionSearch()
           .eq('values[Organization]', organization)
           .include('values')
           .build();
+
+    const settingsSearch = new SubmissionSearch().include('values').build();
 
     dispatch({
       type: 'FETCH_TICKETS',
@@ -71,6 +70,15 @@ const AppComponent = props => {
         kapp: SLUGS.KAPPSLUG,
         form: SLUGS.TICKET_FORM_SLUG,
         search: ticketSearch,
+      },
+    });
+
+    dispatch({
+      type: 'FETCH_SETTINGS',
+      payload: {
+        kapp: SLUGS.KAPPSLUG,
+        form: 'user-settings',
+        search: settingsSearch,
       },
     });
 

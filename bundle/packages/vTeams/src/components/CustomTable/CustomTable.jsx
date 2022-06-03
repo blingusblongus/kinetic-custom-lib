@@ -13,21 +13,25 @@ import './CustomTable.scss';
 
 const CustomTable = ({ label, kapp, form, searchOptions }) => {
   const [searchResult, setSearchResult] = useState({});
-
+  // const tableSettings = useSelector(store => store.settings.settings?.find(obj => obj.name == label));
   const [fields, setFields] = useState([]);
   const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
   const [showSettings, setShowSettings] = useState(false);
 
-  const userSettings = [
-    {
-      name: 'My Tickets',
-      visible: ['Title', 'Description', 'Requested Date Due'],
-    },
-  ];
+  // const userSettings = {
+  //   settingsId: null,
+  //   tables: [{
+  //     name: 'Active Tickets',
+  //     visible: ['Title', 'Description', 'Requested Date Due'],
+  //   }]
+  // };
+
   const [visible, setVisible] = useState([
+    'Requested Date Due',
     'Title',
     'Description',
-    'Requested Date Due',
+    'Status',
+    'Assignee',
   ]);
   const columnExcludes = [
     'Attachments',
@@ -64,27 +68,29 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .catch(err => console.error(err));
   }, []);
 
-  console.log(searchResult.submissions);
-  console.log(fields);
-
   const Settings = React.forwardRef((props, settingsRef) => {
-    const closeModal = e => {
-      if (settingsRef.current && !settingsRef.current.contains(e.target)) {
-        console.log('you clicked outside of me!');
-      } else {
-        console.log('you clicked inside me?');
-      }
-    };
+    // const closeModal = e => {
+    //   if (settingsRef.current && !settingsRef.current.contains(e.target)) {
+    //     console.log('you clicked outside of me!');
+    //   } else {
+    //     console.log('you clicked inside me?');
+    //   }
+    // };
     return (
       <div
         className="table-settings"
         style={{ position: 'absolute', ...settingsPos }}
         ref={settingsRef}
-        onMouseUp={closeModal}
+        // onMouseUp={closeModal}
       >
         <div className="settings-header">
           <span>Columns</span>
-          <span onClick={() => setShowSettings(false)}>[X] Close</span>
+          <span
+            className="settings-close"
+            onClick={() => setShowSettings(false)}
+          >
+            [X] Close
+          </span>
         </div>
         {fields.map(field => {
           let checked = visible.includes(field);
@@ -112,11 +118,11 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     );
   });
 
-  console.log(settingsPos);
-  console.log({
-    x: tableRef.current?.offsetLeft,
-    y: tableRef.current?.offsetTop,
-  });
+  // console.log(settingsPos);
+  // console.log({
+  //   x: tableRef.current?.offsetLeft,
+  //   y: tableRef.current?.offsetTop,
+  // });
 
   return (
     <div className="card-wrapper">
@@ -143,7 +149,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
         <tbody>
           {searchResult.submissions?.map((submission, i) => {
             const id = submission.id;
-            console.log(id);
             return (
               <tr key={i} onClick={() => handleRowClick(id)}>
                 {visible.map(f => {
