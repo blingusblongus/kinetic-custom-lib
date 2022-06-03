@@ -12,5 +12,5 @@ export default {
   tickets,
   workLogs,
   organization,
-  settings,
+  // settings,
 };

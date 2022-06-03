@@ -35,7 +35,7 @@ const Dashboard = () => {
               label="Active Tickets"
               kapp={SLUGS.KAPPSLUG}
               form={SLUGS.TICKET_FORM_SLUG}
-              searchOptions={{ include: 'values', limit: 5 }}
+              searchOptions={{ include: 'values' }}
             />
             {/* <TicketTable columns={columns} rows={rows} createBtn /> */}
           </div>
@@ -45,7 +45,7 @@ const Dashboard = () => {
               label="Active Tickets"
               kapp={SLUGS.KAPPSLUG}
               form={SLUGS.TICKET_FORM_SLUG}
-              searchOptions={{ include: 'values', limit: 5 }}
+              searchOptions={{ include: 'values' }}
             />
           </div>
         )}

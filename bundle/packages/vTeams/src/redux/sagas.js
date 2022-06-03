@@ -11,6 +11,6 @@ export default function*() {
     watchTickets(),
     watchWorkLogs(),
     watchOrganization(),
-    watchSettings(),
+    // watchSettings(),
   ]);
 }
