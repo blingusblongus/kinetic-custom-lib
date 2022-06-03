@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   SubmissionSearch,
   searchSubmissions,
   fetchForm,
+  history,
 } from '@kineticdata/react';
 import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
+import URLS from '../../../globals/urls';
 import './CustomTable.scss';
 
 const CustomTable = ({ label, kapp, form, searchOptions }) => {
@@ -14,54 +16,28 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
 
   const [fields, setFields] = useState([]);
   const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
+  const [showSettings, setShowSettings] = useState(false);
 
+  const userSettings = [
+    {
+      name: 'My Tickets',
+      visible: ['Title', 'Description', 'Requested Date Due'],
+    },
+  ];
   const [visible, setVisible] = useState([
     'Title',
     'Description',
     'Requested Date Due',
   ]);
-  // //set defaults here instead of in parameters to avoid effect looping
-  // // if(!searchOptions){
-  // //   searchOptions = {
-  // //     limit: 5,
-  // //     include: 'values',
-  // //   }
-  // // }
+  const columnExcludes = [
+    'Attachments',
+    'Organization - deprecated',
+    'Number',
+    'Organization ID',
+  ];
 
-  // // let options = searchOptions;
-
-  // // Programmatically build search object
-
-  // const doSearch = (searchOptions) => {
-  //   let testSearch = new SubmissionSearch()
-  //   for (let key in searchOptions) {
-  //     const value = searchOptions[key];
-  //     testSearch[key](value);
-  //   }
-  //   testSearch = testSearch.build();
-
-  //   searchSubmissions({kapp, form, search: testSearch})
-  //       .then(result => setSearchResult(result))
-  //       .catch(err => console.error(err));
-  // }
-
-  // console.log(searchResult)
-
-  // // const search = new SubmissionSearch()
-  // // .pageToken(nextPageToken)
-  // // .include('values')
-  // // .build();
-
-  // const rows = useSelector(store => store.tickets.submissions);
-  // const nextPageToken = useSelector(store => store.tickets.nextPageToken);
-  // const nextPageSearch = new SubmissionSearch()
-  //   .pageToken(nextPageToken)
-  //   .include('values')
-  //   .build();
-
-  //   useEffect(() => {
-  //     doSearch();
-  //   }, [searchOptions])
+  const tableRef = useRef(null);
+  const settingsRef = useRef(null);
 
   const defaultSearch = () => {
     let testSearch = new SubmissionSearch();
@@ -76,6 +52,10 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .catch(err => console.error(err));
   };
 
+  const handleRowClick = id => {
+    history.push(`${URLS.CLIENT_SUBMIT}/${id}`);
+  };
+
   useEffect(() => {
     defaultSearch();
 
@@ -87,13 +67,25 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   console.log(searchResult.submissions);
   console.log(fields);
 
-  const Settings = () => {
+  const Settings = React.forwardRef((props, settingsRef) => {
+    const closeModal = e => {
+      if (settingsRef.current && !settingsRef.current.contains(e.target)) {
+        console.log('you clicked outside of me!');
+      } else {
+        console.log('you clicked inside me?');
+      }
+    };
     return (
       <div
         className="table-settings"
-        style={{ position: 'fixed', ...settingsPos }}
+        style={{ position: 'absolute', ...settingsPos }}
+        ref={settingsRef}
+        onMouseUp={closeModal}
       >
-        <div>Show Column</div>
+        <div className="settings-header">
+          <span>Columns</span>
+          <span onClick={() => setShowSettings(false)}>[X] Close</span>
+        </div>
         {fields.map(field => {
           let checked = visible.includes(field);
           const handleCheck = () => {
@@ -103,29 +95,43 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
               setVisible([...visible, field]);
             }
           };
-          return (
-            <div key={field}>
-              <input type="checkbox" checked={checked} onChange={handleCheck} />
-              <label>{field}</label>
-            </div>
-          );
+
+          if (!columnExcludes.includes(field))
+            return (
+              <div key={field}>
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={handleCheck}
+                />
+                <label>{field}</label>
+              </div>
+            );
         })}
       </div>
     );
-  };
+  });
 
   console.log(settingsPos);
+  console.log({
+    x: tableRef.current?.offsetLeft,
+    y: tableRef.current?.offsetTop,
+  });
 
   return (
     <div className="card-wrapper">
       <div className="table-header">
         <span className="table-title">{label}</span>
       </div>
-      <table>
+      <table ref={tableRef}>
         <thead
           onMouseUp={e => {
             e.preventDefault();
-            setSettingsPos({ top: e.pageY, left: e.pageX });
+            setShowSettings(true);
+            setSettingsPos({
+              top: e.pageY - tableRef.current?.offsetTop,
+              left: e.pageX - tableRef.current?.offsetLeft,
+            });
           }}
         >
           <tr>
@@ -136,11 +142,18 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
         </thead>
         <tbody>
           {searchResult.submissions?.map((submission, i) => {
-            const { TITLE, DESCRIPTION, STATUS, DATE_DUE } = FORM_FIELDS;
+            const id = submission.id;
+            console.log(id);
             return (
-              <tr key={i}>
+              <tr key={i} onClick={() => handleRowClick(id)}>
                 {visible.map(f => {
-                  return <td key={f}>{submission.values[f]}</td>;
+                  let content;
+                  if (typeof f == 'object') {
+                    content = JSON.parse(f);
+                  } else {
+                    content = submission.values[f];
+                  }
+                  return <td key={f + content}>{content}</td>;
                 })}
               </tr>
             );
@@ -148,11 +161,11 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
         </tbody>
       </table>
       <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        <TeamsButton>Next Page</TeamsButton>
-        <TeamsButton>Prev Page</TeamsButton>
-        <TeamsButton>Settings</TeamsButton>
+        {/* <TeamsButton>Next Page</TeamsButton> */}
+        {/* <TeamsButton>Prev Page</TeamsButton> */}
+        {/* <TeamsButton>Settings</TeamsButton> */}
       </div>
-      <Settings />
+      {showSettings && <Settings ref={settingsRef} />}
     </div>
   );
 };

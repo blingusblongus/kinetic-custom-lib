@@ -25,8 +25,6 @@ const Dashboard = () => {
 
   console.log(userProfile);
 
-  const myTicketsQuery = `createdBy=${userProfile.username}`;
-  const myOrgTicketsQuery = `createdBy!=${userProfile.username}AND`;
   return (
     <div>
       <PageTitle parts={['Home']} />
@@ -34,21 +32,22 @@ const Dashboard = () => {
         {fulfiller ? (
           <div className="table-wrapper">
             <CustomTable
-              label="My Tickets"
+              label="Active Tickets"
               kapp={SLUGS.KAPPSLUG}
               form={SLUGS.TICKET_FORM_SLUG}
               searchOptions={{ include: 'values', limit: 5 }}
             />
-            <CustomTable
-              label="My Org Tickets"
-              kapp={SLUGS.KAPPSLUG}
-              form={SLUGS.TICKET_FORM_SLUG}
-              searchOptions={{ include: 'values', limit: 5 }}
-            />
-            <TicketTable columns={columns} rows={rows} createBtn />
+            {/* <TicketTable columns={columns} rows={rows} createBtn /> */}
           </div>
         ) : (
-          <PlaceholderTable />
+          <div className="table-wrapper">
+            <CustomTable
+              label="Active Tickets"
+              kapp={SLUGS.KAPPSLUG}
+              form={SLUGS.TICKET_FORM_SLUG}
+              searchOptions={{ include: 'values', limit: 5 }}
+            />
+          </div>
         )}
 
         {!fulfiller && (

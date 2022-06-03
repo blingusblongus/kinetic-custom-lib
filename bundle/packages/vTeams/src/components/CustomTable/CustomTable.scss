@@ -12,6 +12,11 @@ table {
       background-color: $primary;
     }
   }
+
+  th,
+  td {
+    padding-left: 4px;
+  }
 }
 
 tr {
@@ -21,6 +26,15 @@ tr {
 
   &:nth-child(even) {
     background-color: $bg-secondary;
+  }
+}
+
+tbody {
+  tr {
+    &:hover {
+      background-color: rgb(226, 226, 226);
+      cursor: pointer;
+    }
   }
 }
 
@@ -38,4 +52,12 @@ tr {
 
 .table-settings {
   background-color: white;
+  border-radius: 3px;
+  z-index: 100;
+  padding: 3px;
+
+  .settings-header {
+    display: flex;
+    justify-content: space-between;
+  }
 }
