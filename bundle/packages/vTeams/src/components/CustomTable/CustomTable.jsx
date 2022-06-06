@@ -17,6 +17,25 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   const [fields, setFields] = useState([]);
   const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
   const [showSettings, setShowSettings] = useState(false);
+  const [sortOptions, setSortOptions] = useState({
+    criteria: 'Requested Date Due',
+    ascending: true,
+  });
+
+  const sortedSubmissions = searchResult.submissions?.sort((a, b) => {
+    const { criteria, ascending } = sortOptions;
+
+    if (a === b) return 0;
+    if (a === null) return 1;
+    if (b === null) return -1;
+    if (ascending) {
+      return a.values[criteria] < b.values[criteria] ? -1 : 1;
+    } else {
+      return a.values[criteria] > b.values[criteria] ? -1 : 1;
+    }
+  });
+
+  console.log(sortedSubmissions?.map(sub => sub.values[sortOptions.criteria]));
 
   // const userSettings = {
   //   settingsId: null,
@@ -67,6 +86,8 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .then(({ form }) => setFields(form.fields.map(field => field.name)))
       .catch(err => console.error(err));
   }, []);
+
+  console.log(searchResult);
 
   const Settings = React.forwardRef((props, settingsRef) => {
     // const closeModal = e => {
@@ -147,7 +168,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
           </tr>
         </thead>
         <tbody>
-          {searchResult.submissions?.map((submission, i) => {
+          {sortedSubmissions?.map((submission, i) => {
             const id = submission.id;
             return (
               <tr key={i} onClick={() => handleRowClick(id)}>
