@@ -62,12 +62,23 @@ const AppComponent = props => {
           .include('values')
           .build();
 
+    const settingsSearch = new SubmissionSearch().include('values').build();
+
     dispatch({
       type: 'FETCH_TICKETS',
       payload: {
         kapp: SLUGS.KAPPSLUG,
         form: SLUGS.TICKET_FORM_SLUG,
         search: ticketSearch,
+      },
+    });
+
+    dispatch({
+      type: 'FETCH_SETTINGS',
+      payload: {
+        kapp: SLUGS.KAPPSLUG,
+        form: 'user-settings',
+        search: settingsSearch,
       },
     });
 

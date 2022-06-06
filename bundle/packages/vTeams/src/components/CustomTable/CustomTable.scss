@@ -1,0 +1,72 @@
+@import '../../assets/styles/variables';
+
+table {
+  width: 100%;
+
+  thead {
+    background-color: $primary;
+    height: 2rem;
+    color: white;
+
+    tr {
+      background-color: $primary;
+    }
+  }
+
+  th,
+  td {
+    padding-left: 4px;
+  }
+}
+
+tr {
+  background-color: $bg-primary;
+  height: 1.5rem;
+  font-size: 14px;
+
+  &:nth-child(even) {
+    background-color: $bg-secondary;
+  }
+}
+
+tbody {
+  tr {
+    &:hover {
+      background-color: rgb(226, 226, 226);
+      cursor: pointer;
+    }
+  }
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 49px;
+  padding-bottom: 20px;
+
+  .table-title {
+    font-size: 20px;
+  }
+}
+
+.table-settings {
+  background-color: white;
+  border-radius: 3px;
+  z-index: 100;
+  padding: 10px;
+  overflow: hidden;
+
+  input:hover {
+    cursor: pointer;
+  }
+
+  .settings-header {
+    display: flex;
+    justify-content: space-between;
+
+    .settings-close:hover {
+      cursor: pointer;
+    }
+  }
+}

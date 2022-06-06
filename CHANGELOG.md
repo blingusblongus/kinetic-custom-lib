@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.1] - WIP
+
+### Added
+
+- New Custom Table with new theme and REST pattern.
+- Table hide/show columns menu to tableHeader onClick
+- Settings Reducer for holding custom user settings (not activated)
+
+### Changed
+
+- Card containers no longer have the box-shadow property
+
+### Removed
+
+- Removed MUI datatable
+
 ## [0.3.0] - 2022-06-01 
 ### Changed
 - Implemented new basic styling for
