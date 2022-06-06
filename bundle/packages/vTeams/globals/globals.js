@@ -14,6 +14,10 @@ export const FORM_FIELDS = {
   MONTHLY_HOURS: 'Monthly Hours',
   ORGANIZATION: 'Organization',
   COMMENT: 'Comment',
+  TITLE: 'Title',
+  DATE_DUE: 'Requested Date Due',
+  DESCRIPTION: 'Description',
+  STATUS: 'Status',
 }
 
 export const NAMES = {
