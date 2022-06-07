@@ -38,16 +38,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     }
   });
 
-  console.log(sortedSubmissions?.map(sub => sub.values[sortOptions.criteria]));
-
-  // const userSettings = {
-  //   settingsId: null,
-  //   tables: [{
-  //     name: 'Active Tickets',
-  //     visible: ['Title', 'Description', 'Requested Date Due'],
-  //   }]
-  // };
-
   const [visible, setVisible] = useState([
     'Requested Date Due',
     'Title',
@@ -81,8 +71,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   };
 
   const handleHeaderClick = field => {
-    console.log('clicked, ', field);
-    console.log('sortOptions.criteria:', sortOptions.criteria);
     if (field == sortOptions.criteria) {
       console.log('flip ascending', sortOptions.ascending);
       setSortOptions({ ...sortOptions, ascending: !sortOptions.ascending });
@@ -145,7 +133,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                           <span className="arrow">&darr;</span>
                         ))}
                       <span onClick={handleFilterClick}>
-                        <i class="fa fa-filter" />
+                        <i className="fa fa-filter" />
                       </span>
                     </span>
                   </span>
