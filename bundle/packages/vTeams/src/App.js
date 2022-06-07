@@ -16,6 +16,8 @@ import CoreTicket from './components/CoreTicketView/CoreTicketView';
 import Dashboard from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';
 import ClientOverview from './components/ClientOverview/ClientOverview';
+import Reports from './components/Reports/Reports';
+
 import { SLUGS, NAMES } from '../globals/globals';
 import { SubmissionSearch } from '@kineticdata/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -135,6 +137,7 @@ const AppComponent = props => {
                   <CoreTicket path="/ticket/:id" />
                   <Dashboard path="/home" />
                   <ClientOverview path="/clients" />
+                  <Reports path="/reports" />
                 </Router>
               </div>
             </div>
