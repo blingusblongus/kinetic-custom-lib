@@ -7,15 +7,22 @@ table {
     background-color: $primary;
     height: 2rem;
     color: white;
+    cursor: pointer;
 
     tr {
       background-color: $primary;
+    }
+
+    .header-cell {
+      display: flex;
+      justify-content: space-between;
     }
   }
 
   th,
   td {
     padding-left: 4px;
+    padding-right: 4px;
   }
 }
 

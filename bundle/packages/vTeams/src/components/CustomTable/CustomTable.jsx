@@ -7,6 +7,7 @@ import {
   fetchForm,
   history,
 } from '@kineticdata/react';
+import Settings from './SettingsMenu';
 import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import URLS from '../../../globals/urls';
 import './CustomTable.scss';
@@ -52,29 +53,27 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     'Status',
     'Assignee',
   ]);
-  const columnExcludes = [
-    'Attachments',
-    'Organization - deprecated',
-    'Number',
-    'Organization ID',
-  ];
 
   const tableRef = useRef(null);
   const settingsRef = useRef(null);
 
+  // Default Search on component mount
   const defaultSearch = () => {
     let testSearch = new SubmissionSearch();
+    // Configure search object with passed in searchOptions
     for (let key in searchOptions) {
       const value = searchOptions[key];
       value && testSearch[key](value);
     }
     testSearch = testSearch.build();
 
+    // send search
     searchSubmissions({ kapp, form, search: testSearch })
       .then(result => setSearchResult(result))
       .catch(err => console.error(err));
   };
 
+  // Redirect to Ticket Page
   const handleRowClick = id => {
     history.push(`${URLS.CLIENT_SUBMIT}/${id}`);
   };
@@ -88,62 +87,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   }, []);
 
   console.log(searchResult);
-
-  const Settings = React.forwardRef((props, settingsRef) => {
-    // const closeModal = e => {
-    //   if (settingsRef.current && !settingsRef.current.contains(e.target)) {
-    //     console.log('you clicked outside of me!');
-    //   } else {
-    //     console.log('you clicked inside me?');
-    //   }
-    // };
-    return (
-      <div
-        className="table-settings"
-        style={{ position: 'absolute', ...settingsPos }}
-        ref={settingsRef}
-        // onMouseUp={closeModal}
-      >
-        <div className="settings-header">
-          <span>Columns</span>
-          <span
-            className="settings-close"
-            onClick={() => setShowSettings(false)}
-          >
-            [X] Close
-          </span>
-        </div>
-        {fields.map(field => {
-          let checked = visible.includes(field);
-          const handleCheck = () => {
-            if (checked) {
-              setVisible(visible.filter(el => el != field));
-            } else {
-              setVisible([...visible, field]);
-            }
-          };
-
-          if (!columnExcludes.includes(field))
-            return (
-              <div key={field}>
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleCheck}
-                />
-                <label>{field}</label>
-              </div>
-            );
-        })}
-      </div>
-    );
-  });
-
-  // console.log(settingsPos);
-  // console.log({
-  //   x: tableRef.current?.offsetLeft,
-  //   y: tableRef.current?.offsetTop,
-  // });
 
   return (
     <div className="card-wrapper">
@@ -163,8 +106,18 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
         >
           <tr>
             {visible.map(f => {
-              return <th key={f}>{f}</th>;
+              return (
+                <th key={f}>
+                  <span className="header-cell">
+                    <span className="column-header">{f}</span>
+                    {sortOptions.criteria === f && (
+                      <span className="arrow">&darr;</span>
+                    )}
+                  </span>
+                </th>
+              );
             })}
+            <th>&#9881;</th>
           </tr>
         </thead>
         <tbody>
@@ -181,6 +134,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                   }
                   return <td key={f + content}>{content}</td>;
                 })}
+                <td />
               </tr>
             );
           })}
@@ -191,7 +145,16 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
         {/* <TeamsButton>Prev Page</TeamsButton> */}
         {/* <TeamsButton>Settings</TeamsButton> */}
       </div>
-      {showSettings && <Settings ref={settingsRef} />}
+      {showSettings && (
+        <Settings
+          settingsPos={settingsPos}
+          visible={visible}
+          setVisible={setVisible}
+          fields={fields}
+          setShowSettings={setShowSettings}
+          ref={settingsRef}
+        />
+      )}
     </div>
   );
 };
