@@ -19,7 +19,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
   const [showSettings, setShowSettings] = useState(false);
   const [sortOptions, setSortOptions] = useState({
-    criteria: 'Requested Date Due',
+    criteria: 'Status',
     ascending: true,
   });
 
@@ -78,6 +78,36 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     history.push(`${URLS.CLIENT_SUBMIT}/${id}`);
   };
 
+  const handleHeaderClick = field => {
+    console.log('clicked, ', field);
+    console.log('sortOptions.criteria:', sortOptions.criteria);
+    if (field == sortOptions.criteria) {
+      console.log('flip ascending', sortOptions.ascending);
+      setSortOptions({ ...sortOptions, ascending: !sortOptions.ascending });
+    } else {
+      setSortOptions({ ...sortOptions, criteria: field });
+    }
+  };
+
+  const handleFilterClick = e => {
+    e.stopPropagation();
+
+    let offsetLeft;
+    let right = window.innerWidth - e.pageX;
+
+    if (right < 300) {
+      offsetLeft = e.pageX - tableRef.current?.offsetLeft - 100;
+    } else {
+      offsetLeft = e.pageX - tableRef.current?.offsetLeft;
+    }
+
+    setSettingsPos({
+      top: e.pageY - tableRef.current?.offsetTop,
+      left: offsetLeft,
+    });
+    setShowSettings(true);
+  };
+
   useEffect(() => {
     defaultSearch();
 
@@ -85,8 +115,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .then(({ form }) => setFields(form.fields.map(field => field.name)))
       .catch(err => console.error(err));
   }, []);
-
-  console.log(searchResult);
 
   return (
     <div className="card-wrapper">
@@ -97,27 +125,30 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
         <thead
           onMouseUp={e => {
             e.preventDefault();
-            setShowSettings(true);
-            setSettingsPos({
-              top: e.pageY - tableRef.current?.offsetTop,
-              left: e.pageX - tableRef.current?.offsetLeft,
-            });
           }}
         >
           <tr>
             {visible.map(f => {
               return (
-                <th key={f}>
+                <th key={f} onClick={() => handleHeaderClick(f)}>
                   <span className="header-cell">
                     <span className="column-header">{f}</span>
-                    {sortOptions.criteria === f && (
-                      <span className="arrow">&darr;</span>
-                    )}
+                    <span>
+                      {sortOptions.criteria === f &&
+                        (sortOptions.ascending ? (
+                          <span className="arrow">&uarr;</span>
+                        ) : (
+                          <span className="arrow">&darr;</span>
+                        ))}
+                      <span onClick={handleFilterClick}>
+                        <i class="fa fa-filter" />
+                      </span>
+                    </span>
                   </span>
                 </th>
               );
             })}
-            <th>&#9881;</th>
+            {/* <th>&#9881;</th> */}
           </tr>
         </thead>
         <tbody>
@@ -140,11 +171,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
           })}
         </tbody>
       </table>
-      <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        {/* <TeamsButton>Next Page</TeamsButton> */}
-        {/* <TeamsButton>Prev Page</TeamsButton> */}
-        {/* <TeamsButton>Settings</TeamsButton> */}
-      </div>
+
       {showSettings && (
         <Settings
           settingsPos={settingsPos}
