@@ -25,14 +25,16 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
 
   const sortedSubmissions = searchResult.submissions?.sort((a, b) => {
     const { criteria, ascending } = sortOptions;
+    a = a.values[criteria];
+    b = b.values[criteria];
 
     if (a === b) return 0;
     if (a === null) return 1;
     if (b === null) return -1;
     if (ascending) {
-      return a.values[criteria] < b.values[criteria] ? -1 : 1;
+      return a < b ? -1 : 1;
     } else {
-      return a.values[criteria] > b.values[criteria] ? -1 : 1;
+      return a > b ? -1 : 1;
     }
   });
 
@@ -89,6 +91,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     }
   };
 
+  // Set filter menu position and open it (or close it)
   const handleFilterClick = e => {
     e.stopPropagation();
 
@@ -105,6 +108,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       top: e.pageY - tableRef.current?.offsetTop,
       left: offsetLeft,
     });
+
     setShowSettings(true);
   };
 
