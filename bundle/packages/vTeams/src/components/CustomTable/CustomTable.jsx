@@ -108,6 +108,8 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .catch(err => console.error(err));
   }, []);
 
+  const testSubmissions = [];
+
   return (
     <div className="card-wrapper">
       <div className="table-header">
@@ -161,6 +163,15 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
               </tr>
             );
           })}
+
+          {/* Empty Submission Display */}
+          {sortedSubmissions?.length < 1 && (
+            <tr>
+              <td className="no-ticket-msg" colSpan="100%">
+                No Tickets Available
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
 
