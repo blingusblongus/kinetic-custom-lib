@@ -83,6 +83,8 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   const handleFilterClick = e => {
     e.stopPropagation();
 
+    if (showSettings) return setShowSettings(false);
+
     let offsetLeft;
     let right = window.innerWidth - e.pageX;
 
@@ -134,15 +136,17 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                         ) : (
                           <span className="arrow">&darr;</span>
                         ))}
-                      <span onClick={handleFilterClick}>
+                      {/* <span onClick={handleFilterClick}>
                         <i className="fa fa-filter" />
-                      </span>
+                      </span> */}
                     </span>
                   </span>
                 </th>
               );
             })}
-            {/* <th>&#9881;</th> */}
+            <th onClick={handleFilterClick}>
+              <i className="fa fa-columns" />
+            </th>
           </tr>
         </thead>
         <tbody>
