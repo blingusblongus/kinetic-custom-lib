@@ -4,9 +4,24 @@
   background-color: white;
   padding: 70px;
   overflow-wrap: anywhere;
-  margin: auto;
+  margin: 0;
 }
 
 .print-page-container {
   padding: 20px;
+}
+
+@media print {
+  .page-break {
+    margin-top: 1rem;
+    display: block;
+    page-break-before: auto;
+  }
+  @page {
+    size: auto;
+    // margin: 0;
+  }
+  // .print-page {
+  //     margin: 20mm;
+  // }
 }

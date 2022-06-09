@@ -9,6 +9,7 @@ import ReactPDF, {
 import './Reports.scss';
 import { useReactToPrint } from 'react-to-print';
 import { weeklyReportsSearch } from './reports';
+import WeeklyReportTemplate from './WeeklyReportTemplate';
 
 const MyDocument = () => (
   <Document>
@@ -40,12 +41,8 @@ const Reports = () => {
       <button onClick={handlePrint}>Print ME</button>
       <div className="print-page-container">
         <div className="print-page" ref={printTarget}>
-          {Object.keys(reportData).map(org => {
-            return (
-              <div style={{ margin: '20px' }}>
-                {JSON.stringify(reportData[org])}
-              </div>
-            );
+          {Object.keys(reportData).map((org, i) => {
+            return <WeeklyReportTemplate orgData={reportData[org]} key={i} />;
           })}
         </div>
       </div>
