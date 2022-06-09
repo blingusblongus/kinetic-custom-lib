@@ -1,6 +1,21 @@
 # Changelog
 
-## [0.3.1] - WIP
+## [0.3.2] - WIP
+
+### Added
+
+- Custom Table columns are sortable by clicking on the column header
+- Custom Tables Display placeholder message when empty.
+
+### Changed
+
+- Custom Table Settings menu now triggered by the column icon on the right side of the header row.
+
+### Removed
+
+- Removed Confusing Filter Icons in Custom Table Headers
+
+## [0.3.1] - 2022-06-06
 
 ### Added
 

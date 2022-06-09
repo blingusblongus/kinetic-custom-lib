@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import TeamsButton from '../TeamsButton/TeamsButton';
-import { useDispatch, useSelector } from 'react-redux';
+
 import {
   SubmissionSearch,
   searchSubmissions,
   fetchForm,
   history,
 } from '@kineticdata/react';
+import Settings from './SettingsMenu';
 import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import URLS from '../../../globals/urls';
 import './CustomTable.scss';
@@ -17,14 +17,41 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   const [fields, setFields] = useState([]);
   const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
   const [showSettings, setShowSettings] = useState(false);
+  const [sortOptions, setSortOptions] = useState({
+    criteria: 'Status',
+    ascending: true,
+  });
+  const [filterOptions, setFilterOptions] = useState({});
+  const [showFilter, setShowFilter] = useState(false);
 
-  // const userSettings = {
-  //   settingsId: null,
-  //   tables: [{
-  //     name: 'Active Tickets',
-  //     visible: ['Title', 'Description', 'Requested Date Due'],
-  //   }]
-  // };
+  const filteredSubmissions = searchResult.submissions?.filter(sub => {
+    for (let key in filterOptions) {
+      const filterValue = filterOptions[key]?.toLowerCase();
+      if (!filterValue) continue;
+      if (!sub.values[key]) return false;
+
+      const subValue = sub.values[key]?.toLowerCase();
+
+      if (sub.values[key] && subValue.indexOf(filterValue) == -1) {
+        return false;
+      }
+    }
+    return true;
+  });
+  const sortedSubmissions = filteredSubmissions?.sort((a, b) => {
+    const { criteria, ascending } = sortOptions;
+    a = a.values[criteria];
+    b = b.values[criteria];
+
+    if (a === b) return 0;
+    if (a === null) return 1;
+    if (b === null) return -1;
+    if (ascending) {
+      return a < b ? -1 : 1;
+    } else {
+      return a > b ? -1 : 1;
+    }
+  });
 
   const [visible, setVisible] = useState([
     'Requested Date Due',
@@ -33,31 +60,65 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     'Status',
     'Assignee',
   ]);
-  const columnExcludes = [
-    'Attachments',
-    'Organization - deprecated',
-    'Number',
-    'Organization ID',
-  ];
 
   const tableRef = useRef(null);
   const settingsRef = useRef(null);
 
+  // Default Search on component mount
   const defaultSearch = () => {
     let testSearch = new SubmissionSearch();
+    // Configure search object with passed in searchOptions
     for (let key in searchOptions) {
       const value = searchOptions[key];
       value && testSearch[key](value);
     }
     testSearch = testSearch.build();
 
+    // send search
     searchSubmissions({ kapp, form, search: testSearch })
       .then(result => setSearchResult(result))
       .catch(err => console.error(err));
   };
 
+  // Redirect to Ticket Page
   const handleRowClick = id => {
     history.push(`${URLS.CLIENT_SUBMIT}/${id}`);
+  };
+
+  const handleHeaderClick = field => {
+    if (field == sortOptions.criteria) {
+      console.log('flip ascending', sortOptions.ascending);
+      setSortOptions({ ...sortOptions, ascending: !sortOptions.ascending });
+    } else {
+      setSortOptions({ ...sortOptions, criteria: field });
+    }
+  };
+
+  const handleFilterClick = (e, field) => {
+    e.stopPropagation();
+  };
+
+  // Set settings menu position and open it (or close it)
+  const handleSettingsClick = e => {
+    e.stopPropagation();
+
+    if (showSettings) return setShowSettings(false);
+
+    let offsetLeft;
+    let right = window.innerWidth - e.pageX;
+
+    if (right < 300) {
+      offsetLeft = e.pageX - tableRef.current?.offsetLeft - 100;
+    } else {
+      offsetLeft = e.pageX - tableRef.current?.offsetLeft;
+    }
+
+    setSettingsPos({
+      top: e.pageY - tableRef.current?.offsetTop,
+      left: offsetLeft,
+    });
+
+    setShowSettings(true);
   };
 
   useEffect(() => {
@@ -68,86 +129,75 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .catch(err => console.error(err));
   }, []);
 
-  const Settings = React.forwardRef((props, settingsRef) => {
-    // const closeModal = e => {
-    //   if (settingsRef.current && !settingsRef.current.contains(e.target)) {
-    //     console.log('you clicked outside of me!');
-    //   } else {
-    //     console.log('you clicked inside me?');
-    //   }
-    // };
-    return (
-      <div
-        className="table-settings"
-        style={{ position: 'absolute', ...settingsPos }}
-        ref={settingsRef}
-        // onMouseUp={closeModal}
-      >
-        <div className="settings-header">
-          <span>Columns</span>
-          <span
-            className="settings-close"
-            onClick={() => setShowSettings(false)}
-          >
-            [X] Close
-          </span>
-        </div>
-        {fields.map(field => {
-          let checked = visible.includes(field);
-          const handleCheck = () => {
-            if (checked) {
-              setVisible(visible.filter(el => el != field));
-            } else {
-              setVisible([...visible, field]);
-            }
-          };
-
-          if (!columnExcludes.includes(field))
-            return (
-              <div key={field}>
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleCheck}
-                />
-                <label>{field}</label>
-              </div>
-            );
-        })}
-      </div>
-    );
-  });
-
-  // console.log(settingsPos);
-  // console.log({
-  //   x: tableRef.current?.offsetLeft,
-  //   y: tableRef.current?.offsetTop,
-  // });
-
   return (
     <div className="card-wrapper">
       <div className="table-header">
         <span className="table-title">{label}</span>
       </div>
       <table ref={tableRef}>
-        <thead
-          onMouseUp={e => {
-            e.preventDefault();
-            setShowSettings(true);
-            setSettingsPos({
-              top: e.pageY - tableRef.current?.offsetTop,
-              left: e.pageX - tableRef.current?.offsetLeft,
-            });
-          }}
-        >
+        <thead>
           <tr>
             {visible.map(f => {
-              return <th key={f}>{f}</th>;
+              return (
+                <th key={f} onClick={() => handleHeaderClick(f)}>
+                  <span className="header-cell">
+                    <span className="column-header">{f}</span>
+                    <span>
+                      {sortOptions.criteria === f &&
+                        (sortOptions.ascending ? (
+                          <span className="arrow">&uarr;</span>
+                        ) : (
+                          <span className="arrow">&darr;</span>
+                        ))}
+                      <span onClick={e => handleFilterClick(e, f)}>
+                        {filterOptions[f] && (
+                          <i
+                            className="fa fa-filter"
+                            onClick={() => {
+                              delete filterOptions[f];
+                              setFilterOptions({ ...filterOptions });
+                            }}
+                          />
+                        )}
+                      </span>
+                    </span>
+                  </span>
+                </th>
+              );
             })}
+            <th>
+              <span>
+                <i className="fa fa-columns" onClick={handleSettingsClick} />
+                <i
+                  className="fa fa-filter"
+                  onClick={() => setShowFilter(!showFilter)}
+                />
+              </span>
+            </th>
           </tr>
+          {showFilter && (
+            <tr>
+              {visible.map(f => {
+                return (
+                  <th key={f}>
+                    <input
+                      type="text"
+                      value={filterOptions[f] || ''}
+                      onChange={e => {
+                        setFilterOptions({
+                          ...filterOptions,
+                          [f]: e.target.value,
+                        });
+                      }}
+                    />
+                  </th>
+                );
+              })}
+            </tr>
+          )}
         </thead>
         <tbody>
-          {searchResult.submissions?.map((submission, i) => {
+          {sortedSubmissions?.map((submission, i) => {
             const id = submission.id;
             return (
               <tr key={i} onClick={() => handleRowClick(id)}>
@@ -160,17 +210,32 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                   }
                   return <td key={f + content}>{content}</td>;
                 })}
+                <td />
               </tr>
             );
           })}
+
+          {/* Empty Submission Display */}
+          {sortedSubmissions?.length < 1 && (
+            <tr>
+              <td className="no-ticket-msg" colSpan="100%">
+                No Tickets Available
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
-      <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        {/* <TeamsButton>Next Page</TeamsButton> */}
-        {/* <TeamsButton>Prev Page</TeamsButton> */}
-        {/* <TeamsButton>Settings</TeamsButton> */}
-      </div>
-      {showSettings && <Settings ref={settingsRef} />}
+
+      {showSettings && (
+        <Settings
+          settingsPos={settingsPos}
+          visible={visible}
+          setVisible={setVisible}
+          fields={fields}
+          setShowSettings={setShowSettings}
+          ref={settingsRef}
+        />
+      )}
     </div>
   );
 };
