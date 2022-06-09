@@ -22,8 +22,33 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     criteria: 'Status',
     ascending: true,
   });
+  const [filterOptions, setFilterOptions] = useState({});
+  const [showFilter, setShowFilter] = useState(true);
 
-  const sortedSubmissions = searchResult.submissions?.sort((a, b) => {
+  const filteredSubmissions = searchResult.submissions?.filter(sub => {
+    for (let key in filterOptions) {
+      console.log('sub =', sub);
+      console.log(key);
+      console.log(sub.values[key]);
+
+      if (!sub.values[key]) return false;
+      const filterValue = filterOptions[key]?.toLowerCase();
+      const subValue = sub.values[key]?.toLowerCase();
+
+      console.log('filterValue', filterValue);
+      console.log('subValue', subValue);
+
+      if (!filterValue) continue;
+      console.log(subValue.indexOf(filterValue));
+
+      // const r = new RegExp(filterOptions[key], 'i')
+      if (sub.values[key] && subValue.indexOf(filterValue) == -1) {
+        return false;
+      }
+    }
+    return true;
+  });
+  const sortedSubmissions = filteredSubmissions?.sort((a, b) => {
     const { criteria, ascending } = sortOptions;
     a = a.values[criteria];
     b = b.values[criteria];
@@ -79,7 +104,11 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     }
   };
 
-  // Set filter menu position and open it (or close it)
+  const handleFilterClick = (e, field) => {
+    e.stopPropagation();
+  };
+
+  // Set settings menu position and open it (or close it)
   const handleSettingsClick = e => {
     e.stopPropagation();
 
@@ -110,17 +139,16 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .catch(err => console.error(err));
   }, []);
 
+  console.log(filterOptions);
+  console.log('results', filteredSubmissions);
+
   return (
     <div className="card-wrapper">
       <div className="table-header">
         <span className="table-title">{label}</span>
       </div>
       <table ref={tableRef}>
-        <thead
-          onMouseUp={e => {
-            e.preventDefault();
-          }}
-        >
+        <thead>
           <tr>
             {visible.map(f => {
               return (
@@ -134,11 +162,32 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                         ) : (
                           <span className="arrow">&darr;</span>
                         ))}
-                      {/* <span onClick={handleSettingsClick}>
+                      <span onClick={e => handleFilterClick(e, f)}>
                         <i className="fa fa-filter" />
-                      </span> */}
+                      </span>
                     </span>
                   </span>
+                </th>
+              );
+            })}
+            <th onClick={handleSettingsClick}>
+              <i className="fa fa-columns" />
+            </th>
+          </tr>
+          <tr>
+            {visible.map(f => {
+              return (
+                <th key={f}>
+                  <input
+                    type="text"
+                    value={filterOptions[f] || ''}
+                    onChange={e =>
+                      setFilterOptions({
+                        ...filterOptions,
+                        [f]: e.target.value,
+                      })
+                    }
+                  />
                 </th>
               );
             })}
