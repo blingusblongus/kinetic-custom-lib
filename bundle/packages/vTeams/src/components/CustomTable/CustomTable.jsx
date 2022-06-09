@@ -80,7 +80,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   };
 
   // Set filter menu position and open it (or close it)
-  const handleFilterClick = e => {
+  const handleSettingsClick = e => {
     e.stopPropagation();
 
     if (showSettings) return setShowSettings(false);
@@ -110,8 +110,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .catch(err => console.error(err));
   }, []);
 
-  const testSubmissions = [];
-
   return (
     <div className="card-wrapper">
       <div className="table-header">
@@ -136,7 +134,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                         ) : (
                           <span className="arrow">&darr;</span>
                         ))}
-                      {/* <span onClick={handleFilterClick}>
+                      {/* <span onClick={handleSettingsClick}>
                         <i className="fa fa-filter" />
                       </span> */}
                     </span>
@@ -144,7 +142,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                 </th>
               );
             })}
-            <th onClick={handleFilterClick}>
+            <th onClick={handleSettingsClick}>
               <i className="fa fa-columns" />
             </th>
           </tr>
