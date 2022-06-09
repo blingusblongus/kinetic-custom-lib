@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import TeamsButton from '../TeamsButton/TeamsButton';
-import { useDispatch, useSelector } from 'react-redux';
+
 import {
   SubmissionSearch,
   searchSubmissions,
@@ -23,25 +22,16 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     ascending: true,
   });
   const [filterOptions, setFilterOptions] = useState({});
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
 
   const filteredSubmissions = searchResult.submissions?.filter(sub => {
     for (let key in filterOptions) {
-      console.log('sub =', sub);
-      console.log(key);
-      console.log(sub.values[key]);
-
-      if (!sub.values[key]) return false;
       const filterValue = filterOptions[key]?.toLowerCase();
+      if (!filterValue) continue;
+      if (!sub.values[key]) return false;
+
       const subValue = sub.values[key]?.toLowerCase();
 
-      console.log('filterValue', filterValue);
-      console.log('subValue', subValue);
-
-      if (!filterValue) continue;
-      console.log(subValue.indexOf(filterValue));
-
-      // const r = new RegExp(filterOptions[key], 'i')
       if (sub.values[key] && subValue.indexOf(filterValue) == -1) {
         return false;
       }
@@ -139,9 +129,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
       .catch(err => console.error(err));
   }, []);
 
-  console.log(filterOptions);
-  console.log('results', filteredSubmissions);
-
   return (
     <div className="card-wrapper">
       <div className="table-header">
@@ -163,38 +150,51 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                           <span className="arrow">&darr;</span>
                         ))}
                       <span onClick={e => handleFilterClick(e, f)}>
-                        <i className="fa fa-filter" />
+                        {filterOptions[f] && (
+                          <i
+                            className="fa fa-filter"
+                            onClick={() => {
+                              delete filterOptions[f];
+                              setFilterOptions({ ...filterOptions });
+                            }}
+                          />
+                        )}
                       </span>
                     </span>
                   </span>
                 </th>
               );
             })}
-            <th onClick={handleSettingsClick}>
-              <i className="fa fa-columns" />
+            <th>
+              <span>
+                <i className="fa fa-columns" onClick={handleSettingsClick} />
+                <i
+                  className="fa fa-filter"
+                  onClick={() => setShowFilter(!showFilter)}
+                />
+              </span>
             </th>
           </tr>
-          <tr>
-            {visible.map(f => {
-              return (
-                <th key={f}>
-                  <input
-                    type="text"
-                    value={filterOptions[f] || ''}
-                    onChange={e =>
-                      setFilterOptions({
-                        ...filterOptions,
-                        [f]: e.target.value,
-                      })
-                    }
-                  />
-                </th>
-              );
-            })}
-            <th onClick={handleSettingsClick}>
-              <i className="fa fa-columns" />
-            </th>
-          </tr>
+          {showFilter && (
+            <tr>
+              {visible.map(f => {
+                return (
+                  <th key={f}>
+                    <input
+                      type="text"
+                      value={filterOptions[f] || ''}
+                      onChange={e => {
+                        setFilterOptions({
+                          ...filterOptions,
+                          [f]: e.target.value,
+                        });
+                      }}
+                    />
+                  </th>
+                );
+              })}
+            </tr>
+          )}
         </thead>
         <tbody>
           {sortedSubmissions?.map((submission, i) => {
