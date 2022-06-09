@@ -10,8 +10,9 @@ import Settings from './SettingsMenu';
 import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import URLS from '../../../globals/urls';
 import './CustomTable.scss';
+import { useSelector } from 'react-redux';
 
-const CustomTable = ({ label, kapp, form, searchOptions }) => {
+const CustomTable = ({ label, kapp, form, searchOptions, myTickets }) => {
   const [searchResult, setSearchResult] = useState({});
   // const tableSettings = useSelector(store => store.settings.settings?.find(obj => obj.name == label));
   const [fields, setFields] = useState([]);
@@ -23,8 +24,13 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   });
   const [filterOptions, setFilterOptions] = useState({});
   const [showFilter, setShowFilter] = useState(false);
+  const userProfile = useSelector(store => store.app.profile);
 
   const filteredSubmissions = searchResult.submissions?.filter(sub => {
+    //exclude non-personal tickets
+    if (myTickets && sub.submittedBy !== userProfile.username) return false;
+
+    //generic filter
     for (let key in filterOptions) {
       const filterValue = filterOptions[key]?.toLowerCase();
       if (!filterValue) continue;
@@ -38,6 +44,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     }
     return true;
   });
+
   const sortedSubmissions = filteredSubmissions?.sort((a, b) => {
     const { criteria, ascending } = sortOptions;
     a = a.values[criteria];
@@ -87,7 +94,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
 
   const handleHeaderClick = field => {
     if (field == sortOptions.criteria) {
-      console.log('flip ascending', sortOptions.ascending);
       setSortOptions({ ...sortOptions, ascending: !sortOptions.ascending });
     } else {
       setSortOptions({ ...sortOptions, criteria: field });
