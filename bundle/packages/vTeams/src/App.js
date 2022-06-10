@@ -16,7 +16,7 @@ import CoreTicket from './components/CoreTicketView/CoreTicketView';
 import Dashboard from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';
 import ClientOverview from './components/ClientOverview/ClientOverview';
-import Reports from './components/Reports/Reports';
+import Reports from './components/Reports/Reports.jsx';
 
 import { SLUGS, NAMES } from '../globals/globals';
 import { SubmissionSearch } from '@kineticdata/react';

@@ -1,93 +1,96 @@
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: auto;
-  font-size: 0.8em;
-}
-
-thead {
-  text-align: left;
-}
-
-tr:nth-child(even):not(.totals-row) {
-  background-color: #eef4f5;
-}
-
-th,
-td {
-  padding: 10px;
-  border: 1px solid #c4c4c4;
-}
-
-th {
-  background-color: #012b3f;
-  color: white;
-}
-
-.totals-row {
-  background-color: #012b3f;
-  color: white;
-}
-
-h1,
-h2 {
-  text-align: center;
-}
-
-h3 {
-  margin-left: 20px;
-  margin-top: 30px;
-}
-
-header {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  font-size: 0.8em;
-  padding: 5px;
-}
-
-header div {
-  text-align: right;
-}
-
-header img {
-  width: 35px;
-  margin: 10px;
-  object-fit: contain;
-}
-
 .weekly-report-page {
-  // padding: 20px;
-  font-family: 'Times New Roman', Times, serif;
-  // max-width: 600px;
-  margin: auto;
-}
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: auto;
+    font-size: 0.8em;
+  }
 
-.summary-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 15px;
-  width: 50%;
-  min-width: 350px;
-}
+  thead {
+    text-align: left;
+  }
 
-.client-logo {
-  width: 150px;
-  max-width: 250px;
-  max-height: 150px;
-  object-fit: contain;
-  margin: auto;
-}
+  tr:nth-child(even):not(.totals-row) {
+    background-color: #eef4f5;
+  }
 
-.logo-container {
-  display: flex;
-  justify-content: center;
-}
+  th,
+  td {
+    padding: 10px;
+    border: 1px solid #c4c4c4;
+  }
 
-footer {
-  text-align: center;
-  font-size: 0.8em;
-  font-style: italic;
-  margin: 20px;
+  th {
+    background-color: #012b3f;
+    color: white;
+  }
+
+  .totals-row {
+    background-color: #012b3f;
+    color: white;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  h3 {
+    margin-left: 20px;
+    margin-top: 30px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-size: 0.8em;
+    padding: 5px;
+  }
+
+  header div {
+    text-align: right;
+  }
+
+  header img {
+    width: 35px;
+    margin: 10px;
+    object-fit: contain;
+  }
+
+  .weekly-report-page {
+    // padding: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    // max-width: 600px;
+    margin: auto;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+    width: 50%;
+    min-width: 350px;
+  }
+
+  .client-logo {
+    width: 150px;
+    max-width: 250px;
+    max-height: 150px;
+    object-fit: contain;
+    margin: auto;
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.8em;
+    font-style: italic;
+    margin: 20px;
+    color: white;
+  }
 }
