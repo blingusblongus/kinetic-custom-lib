@@ -9,6 +9,15 @@ table {
     color: white;
     cursor: pointer;
 
+    .header-icon-container {
+      display: flex;
+      justify-content: flex-end;
+
+      i {
+        margin: auto 3px;
+      }
+    }
+
     tr {
       background-color: $primary;
     }

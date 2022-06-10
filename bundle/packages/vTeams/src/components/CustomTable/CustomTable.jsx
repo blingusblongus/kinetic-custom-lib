@@ -10,8 +10,9 @@ import Settings from './SettingsMenu';
 import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import URLS from '../../../globals/urls';
 import './CustomTable.scss';
+import { useSelector } from 'react-redux';
 
-const CustomTable = ({ label, kapp, form, searchOptions }) => {
+const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [searchResult, setSearchResult] = useState({});
   // const tableSettings = useSelector(store => store.settings.settings?.find(obj => obj.name == label));
   const [fields, setFields] = useState([]);
@@ -23,8 +24,25 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
   });
   const [filterOptions, setFilterOptions] = useState({});
   const [showFilter, setShowFilter] = useState(false);
+  const userProfile = useSelector(store => store.app.profile);
 
   const filteredSubmissions = searchResult.submissions?.filter(sub => {
+    // handle optional submitter prop
+    if (submitter) {
+      switch (submitter) {
+        case 'me':
+          if (sub.submittedBy !== userProfile.username) return false;
+          break;
+        case 'others':
+          if (sub.submittedBy === userProfile.username) return false;
+          break;
+        case 'all':
+        default:
+          break;
+      }
+    }
+
+    //generic filter
     for (let key in filterOptions) {
       const filterValue = filterOptions[key]?.toLowerCase();
       if (!filterValue) continue;
@@ -38,6 +56,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     }
     return true;
   });
+
   const sortedSubmissions = filteredSubmissions?.sort((a, b) => {
     const { criteria, ascending } = sortOptions;
     a = a.values[criteria];
@@ -87,7 +106,6 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
 
   const handleHeaderClick = field => {
     if (field == sortOptions.criteria) {
-      console.log('flip ascending', sortOptions.ascending);
       setSortOptions({ ...sortOptions, ascending: !sortOptions.ascending });
     } else {
       setSortOptions({ ...sortOptions, criteria: field });
@@ -121,6 +139,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
     setShowSettings(true);
   };
 
+  // fetch form data and search submissions when mounted
   useEffect(() => {
     defaultSearch();
 
@@ -154,6 +173,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
                           <i
                             className="fa fa-filter"
                             onClick={() => {
+                              // remove column from filterOptions
                               delete filterOptions[f];
                               setFilterOptions({ ...filterOptions });
                             }}
@@ -166,7 +186,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
               );
             })}
             <th>
-              <span>
+              <span className="header-icon-container">
                 <i className="fa fa-columns" onClick={handleSettingsClick} />
                 <i
                   className="fa fa-filter"
@@ -219,7 +239,7 @@ const CustomTable = ({ label, kapp, form, searchOptions }) => {
           {sortedSubmissions?.length < 1 && (
             <tr>
               <td className="no-ticket-msg" colSpan="100%">
-                No Tickets Available
+                No Tickets to Display
               </td>
             </tr>
           )}
