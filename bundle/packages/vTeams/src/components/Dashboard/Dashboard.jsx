@@ -43,18 +43,19 @@ const Dashboard = () => {
         ) : (
           <div className="table-wrapper">
             <CustomTable
-              label="Active Tickets"
+              label="My Tickets"
               kapp={SLUGS.KAPPSLUG}
               form={SLUGS.TICKET_FORM_SLUG}
               searchOptions={{ include: 'values' }}
+              submitter="me"
             />
 
             <CustomTable
-              label="My Org Tickets"
+              label="My Org Tickets (Others)"
               kapp={SLUGS.KAPPSLUG}
               form={SLUGS.TICKET_FORM_SLUG}
               searchOptions={{ include: 'values' }}
-              myTickets={true}
+              submitter="others"
             />
           </div>
         )}

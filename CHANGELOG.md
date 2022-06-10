@@ -6,14 +6,14 @@
 
 - Custom Table columns are sortable by clicking on the column header
 - Custom Tables Display placeholder message when empty.
+- Added new prop to CustomTable (submitter; accepts 'me'/'others'/'all') to easily create a table with an initial filter 
 
 ### Changed
 
 - Custom Table Settings menu now triggered by the column icon on the right side of the header row.
-
-### Removed
-
-- Removed Confusing Filter Icons in Custom Table Headers
+- Ticket Submission: 'Organization' and 'Title' fields are now required
+- Fixed Ticket 'Submission Update' workflow to avoid possible looping.
+- Moved misleading filter icons from CustomTable headers to last table header.
 
 ## [0.3.1] - 2022-06-06
 

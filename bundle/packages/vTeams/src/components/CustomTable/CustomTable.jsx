@@ -12,7 +12,7 @@ import URLS from '../../../globals/urls';
 import './CustomTable.scss';
 import { useSelector } from 'react-redux';
 
-const CustomTable = ({ label, kapp, form, searchOptions, myTickets }) => {
+const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [searchResult, setSearchResult] = useState({});
   // const tableSettings = useSelector(store => store.settings.settings?.find(obj => obj.name == label));
   const [fields, setFields] = useState([]);
@@ -27,8 +27,20 @@ const CustomTable = ({ label, kapp, form, searchOptions, myTickets }) => {
   const userProfile = useSelector(store => store.app.profile);
 
   const filteredSubmissions = searchResult.submissions?.filter(sub => {
-    //exclude non-personal tickets
-    if (myTickets && sub.submittedBy !== userProfile.username) return false;
+    // handle optional submitter prop
+    if (submitter) {
+      switch (submitter) {
+        case 'me':
+          if (sub.submittedBy !== userProfile.username) return false;
+          break;
+        case 'others':
+          if (sub.submittedBy === userProfile.username) return false;
+          break;
+        case 'all':
+        default:
+          break;
+      }
+    }
 
     //generic filter
     for (let key in filterOptions) {
@@ -135,6 +147,8 @@ const CustomTable = ({ label, kapp, form, searchOptions, myTickets }) => {
       .catch(err => console.error(err));
   }, []);
 
+  console.log('sortedSubmissions', sortedSubmissions);
+
   return (
     <div className="card-wrapper">
       <div className="table-header">
@@ -225,7 +239,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, myTickets }) => {
           {sortedSubmissions?.length < 1 && (
             <tr>
               <td className="no-ticket-msg" colSpan="100%">
-                No Tickets Available
+                No Tickets to Display
               </td>
             </tr>
           )}
