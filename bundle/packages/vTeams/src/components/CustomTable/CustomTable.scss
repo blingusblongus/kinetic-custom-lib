@@ -7,15 +7,31 @@ table {
     background-color: $primary;
     height: 2rem;
     color: white;
+    cursor: pointer;
+
+    .header-icon-container {
+      display: flex;
+      justify-content: flex-end;
+
+      i {
+        margin: auto 3px;
+      }
+    }
 
     tr {
       background-color: $primary;
+    }
+
+    .header-cell {
+      display: flex;
+      justify-content: space-between;
     }
   }
 
   th,
   td {
     padding-left: 4px;
+    padding-right: 4px;
   }
 }
 
@@ -35,6 +51,11 @@ tbody {
       background-color: rgb(226, 226, 226);
       cursor: pointer;
     }
+  }
+
+  .no-ticket-msg {
+    height: 4rem;
+    text-align: center;
   }
 }
 
