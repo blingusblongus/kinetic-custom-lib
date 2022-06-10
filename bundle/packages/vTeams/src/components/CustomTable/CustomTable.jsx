@@ -139,6 +139,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     setShowSettings(true);
   };
 
+  // fetch form data and search submissions when mounted
   useEffect(() => {
     defaultSearch();
 
@@ -146,8 +147,6 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       .then(({ form }) => setFields(form.fields.map(field => field.name)))
       .catch(err => console.error(err));
   }, []);
-
-  console.log('sortedSubmissions', sortedSubmissions);
 
   return (
     <div className="card-wrapper">
@@ -174,6 +173,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                           <i
                             className="fa fa-filter"
                             onClick={() => {
+                              // remove column from filterOptions
                               delete filterOptions[f];
                               setFilterOptions({ ...filterOptions });
                             }}
@@ -186,7 +186,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
               );
             })}
             <th>
-              <span>
+              <span className="header-icon-container">
                 <i className="fa fa-columns" onClick={handleSettingsClick} />
                 <i
                   className="fa fa-filter"
