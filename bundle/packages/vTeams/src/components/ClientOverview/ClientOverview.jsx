@@ -27,14 +27,23 @@ const ClientOverview = () => {
         const org = submission.values[FORM_FIELDS.ORGANIZATION];
         if (!org) continue;
 
+        console.log(submission.values['Logo']);
+        console.log(submission.values['Logo']?.[0].link);
+
+        const host = window.location.host + '/';
         if (!hash[org]) {
+          const logoValue = submission.values['Logo']?.[0].link;
+          console.log(logoValue);
+          const logoDownload = 'http://' + logoValue?.replace(/\/.*?\//, host);
+          console.log(logoDownload);
+
           hash[org] = {
             submissions: [],
             [FORM_FIELDS.HOURS_WORKED]: 0,
             [FORM_FIELDS.MONTHLY_HOURS]: Number(
               submission.values[FORM_FIELDS.MONTHLY_HOURS],
             ),
-            logo: submission.values['Logo Url'],
+            logo: logoDownload,
             name: org,
             id: submission.id,
           };
@@ -66,6 +75,8 @@ const ClientOverview = () => {
 
     fetchBurndownInfo();
   }, []);
+
+  console.log(data);
 
   return (
     <>
