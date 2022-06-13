@@ -68,8 +68,6 @@ const ClientOverview = () => {
     fetchBurndownInfo();
   }, []);
 
-  console.log(data);
-
   return (
     <>
       <div className="burndown-dashboard page-panel">
