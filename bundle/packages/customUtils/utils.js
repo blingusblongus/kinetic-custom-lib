@@ -18,12 +18,6 @@ export const parseSubsToTablegrid = (submissions) => {
                 id: sub.id,
             }
 
-            // for (let key in vals) {
-            //   console.log(vals[key]);
-            //   // if (Array.isArray(vals[key])) {
-
-            //   // }
-            // }
             rs.push(vals);
         }
     }
