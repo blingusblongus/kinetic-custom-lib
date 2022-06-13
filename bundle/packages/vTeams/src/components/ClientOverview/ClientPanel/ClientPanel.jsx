@@ -4,6 +4,7 @@ import { history } from '@kineticdata/react';
 
 const ClientPanel = ({ orgInfo }) => {
   const { logo, name, id } = orgInfo;
+  console.log(logo);
   return (
     <div className="burndown-panel">
       <div className="burndown-header">
