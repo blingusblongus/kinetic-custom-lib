@@ -39,3 +39,9 @@ export const parsePriority = (num) => {
     const priorities = ['Low', 'Medium', 'High'];
     return priorities[num];
 }
+
+export const getAttachmentDownload = (submission, field, index=0) => {
+    const host = window.location.host + '/';
+    const link = submission.values?.[field]?.[index].link
+    return 'http://' + link?.replace(/\/.*?\//, host);
+}
