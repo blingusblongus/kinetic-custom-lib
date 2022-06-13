@@ -18,12 +18,6 @@ export const parseSubsToTablegrid = (submissions) => {
                 id: sub.id,
             }
 
-            // for (let key in vals) {
-            //   console.log(vals[key]);
-            //   // if (Array.isArray(vals[key])) {
-
-            //   // }
-            // }
             rs.push(vals);
         }
     }
@@ -38,4 +32,17 @@ export const parseSubsToTablegrid = (submissions) => {
 export const parsePriority = (num) => {
     const priorities = ['Low', 'Medium', 'High'];
     return priorities[num];
+}
+
+/**
+ * 
+ * @param {obj} submission A KineticData submission object with included values
+ * @param {str} field The field name of the attachment to retrieve
+ * @param {int} index The index of the attachment file to retrieve
+ * @returns A link pointing toward the attachment resource
+ */
+export const getAttachmentDownload = (submission, field, index=0) => {
+    const host = window.location.host + '/';
+    const link = submission.values?.[field]?.[index].link
+    return 'http://' + link?.replace(/\/.*?\//, host);
 }
