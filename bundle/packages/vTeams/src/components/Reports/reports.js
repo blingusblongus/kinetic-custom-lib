@@ -1,11 +1,18 @@
 import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
 import { getPaginated } from '../../lib/utils';
 import { SLUGS } from '../../../globals/globals';
+import axios from 'axios';
 
-export const weeklyReportsSearch = async () => {
+export const getReportInfoByDateRange = async (startDate, endDate) => {
   let reportData = {};
 
   console.log('report called');
+  let d = new Date();
+  d.setDate(d.getDate() - 30);
+  console.log(d);
+
+  // const startDate = '2022-06-01';
+  // console.log(encodeURI(startDate));
 
   const { KAPPSLUG, CLIENTS_FORM_SLUG, ACTIVITIES_FORM_SLUG } = SLUGS;
   let defaultSearch = new SubmissionSearch()
@@ -30,24 +37,37 @@ export const weeklyReportsSearch = async () => {
     });
 
     //fetch worklog info as single list
+    /*
     response = await searchSubmissions({
       kapp: KAPPSLUG,
       form: ACTIVITIES_FORM_SLUG,
       search: defaultSearch,
     });
+    */
+
+    const origin = window.location.origin;
+    const query = encodeURI(
+      `submittedAt>"${startDate}"ANDsubmittedAt<"${endDate}"`,
+    );
+    const requestUrl = `${origin}/app/api/v1/kapps/${KAPPSLUG}/forms/${ACTIVITIES_FORM_SLUG}/submissions?direction=DESC&limit=1000&orderBy=submittedAt&q=${query}&include=values`;
+    response = await axios.get(requestUrl);
+    const worklogSubmissions = response.data?.submissions;
 
     //insert worklogs into reportData obj
-    response.submissions.forEach(sub => {
-      let org = sub.values['Organization'];
+    worklogSubmissions &&
+      worklogSubmissions.forEach(sub => {
+        let org = sub.values['Organization'];
 
-      if (!org) return;
+        if (!org) return;
+        if (!reportData[org])
+          reportData = { ...reportData, [org]: { worklogs: [] } };
 
-      if (!reportData[org].worklogs) {
-        reportData[org].worklogs = [sub];
-      } else {
-        reportData[org].worklogs.push(sub);
-      }
-    });
+        if (!reportData[org].worklogs) {
+          reportData[org].worklogs = [sub];
+        } else {
+          reportData[org].worklogs.push(sub);
+        }
+      });
 
     // calculate hour totals
     for (let org in reportData) {
@@ -59,7 +79,6 @@ export const weeklyReportsSearch = async () => {
         0,
       );
     }
-    console.log(reportData);
   } catch (err) {
     console.error(err);
     return;

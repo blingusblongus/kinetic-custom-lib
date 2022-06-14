@@ -8,7 +8,7 @@ import ReactPDF, {
 } from '@react-pdf/renderer';
 import './Reports.scss';
 import { useReactToPrint } from 'react-to-print';
-import { weeklyReportsSearch } from './reports';
+import { getReportInfoByDateRange } from './reports';
 import WeeklyReportTemplate from './WeeklyReportTemplate';
 
 const MyDocument = () => (
@@ -31,7 +31,9 @@ const Reports = () => {
   });
 
   useEffect(() => {
-    weeklyReportsSearch().then(response => setReportData(response));
+    getReportInfoByDateRange('2022-05-10', '2022-06-01').then(response =>
+      setReportData(response),
+    );
   }, []);
 
   console.log(reportData);

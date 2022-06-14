@@ -8,6 +8,7 @@ const WeeklyReportTemplate = ({ orgData }) => {
   const logoUrl = orgData['Logo Url'];
   const billingStartDate = orgData['Current Billing Period Start Date'];
   const worklogs = orgData['worklogs'];
+  const hoursWorked = orgData['hoursWorked'];
 
   const today = new Date();
 
@@ -34,7 +35,7 @@ const WeeklyReportTemplate = ({ orgData }) => {
                 <div>${vars('week_commencing')}</div> */}
         <div>Report Prepared On: </div>
         <div>{today.toISOString().split('T')[0]}</div>
-        <div>Hours Consumed this Week: </div>
+        <div>Hours Consumed this Week: {hoursWorked}</div>
         {/* <div>${vars('hours_consumed')}</div>
                 <div>Monthly Hours:</div>
                 <div>${vars('monthly_hours')}</div>
