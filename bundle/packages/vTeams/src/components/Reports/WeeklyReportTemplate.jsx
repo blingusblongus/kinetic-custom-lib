@@ -122,7 +122,7 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
                   </tr>
                 )}
                 <tr className="totals-row">
-                  <td colSpan="4">Total Hours</td>
+                  <td colSpan="3">Total Hours</td>
                   <td>{dayHours}</td>
                 </tr>
               </tbody>

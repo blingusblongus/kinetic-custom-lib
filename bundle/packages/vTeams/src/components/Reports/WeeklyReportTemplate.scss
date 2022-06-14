@@ -10,13 +10,17 @@
     text-align: left;
   }
 
+  tr {
+    font-size: 0.8em;
+  }
+
   tr:nth-child(even):not(.totals-row) {
     background-color: #eef4f5;
   }
 
   th,
   td {
-    padding: 10px;
+    padding: 4px;
     border: 1px solid #c4c4c4;
   }
 
