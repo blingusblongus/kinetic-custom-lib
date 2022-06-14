@@ -10,6 +10,8 @@ import './Reports.scss';
 import { useReactToPrint } from 'react-to-print';
 import { getReportInfoByDateRange } from './reports';
 import WeeklyReportTemplate from './WeeklyReportTemplate';
+import { useSelector } from 'react-redux';
+import { format, subDays } from 'date-fns';
 
 const MyDocument = () => (
   <Document>
@@ -23,11 +25,14 @@ const MyDocument = () => (
 );
 
 const Reports = () => {
+  const today = new Date();
+  const lastWeek = subDays(today, 30);
   const [report, setReport] = useState({});
   const [dates, setDates] = useState({
-    start: new Date().toISOString().split('T')[0],
-    end: new Date().toISOString().split('T')[0],
+    start: lastWeek.toISOString().split('T')[0],
+    end: today.toISOString().split('T')[0],
   });
+  const store = useSelector(store => store);
   const printTarget = useRef();
 
   const handlePrint = useReactToPrint({
@@ -40,32 +45,32 @@ const Reports = () => {
     );
   };
 
-  useEffect(() => {
-    // getReportInfoByDateRange('2022-05-10', '2022-06-01').then(response =>
-    //   setReport(response),
-    // );
-  }, []);
+  useEffect(() => {}, []);
 
   console.log(report);
   console.log('dates', dates);
 
   return (
-    <div>
-      <form onSubmit={e => e.preventDefault()}>
-        <label htmlFor="start-date">Start Date</label>
-        <input
-          type="date"
-          value={dates.start}
-          name="start-date"
-          onChange={e => setDates({ ...dates, start: e.target.value })}
-        />
-        <label htmlFor="end-date">End Date</label>
-        <input
-          type="date"
-          value={dates.end}
-          name="end-date"
-          onChange={e => setDates({ ...dates, start: e.target.value })}
-        />
+    <div className="reports-container">
+      <form className="date-range-form" onSubmit={e => e.preventDefault()}>
+        <span>
+          <label htmlFor="start-date">Start Date</label>
+          <input
+            type="date"
+            value={dates.start}
+            name="start-date"
+            onChange={e => setDates({ ...dates, start: e.target.value })}
+          />
+        </span>
+        <span>
+          <label htmlFor="end-date">End Date</label>
+          <input
+            type="date"
+            value={dates.end}
+            name="end-date"
+            onChange={e => setDates({ ...dates, start: e.target.value })}
+          />
+        </span>
 
         <button onClick={generateReport}>Generate</button>
       </form>

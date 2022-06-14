@@ -1,6 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import './WeeklyReportTemplate.scss';
+import { useSelector } from 'react-redux';
 
 const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
   console.log(orgData);
@@ -13,6 +14,11 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
 
   const today = new Date();
   const dateFormat = 'MMM Do, YYYY';
+
+  const tickets = useSelector(store => store.tickets);
+  console.log(tickets);
+
+  console.log(worklogs);
 
   return (
     <div className="weekly-report-page page-break">
@@ -57,6 +63,55 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
         Below are the details of all work carried out for you during this week
         against each of the tickets we worked on.
       </p>
+
+      {worklogs && (
+        <table>
+          <thead style={{ textAlign: 'left' }}>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Notes</th>
+              <th>Consultant</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            {worklogs.map(log => {
+              console.log(log);
+              const hours = log.values['Hours Worked'];
+              const consultant = log.values['Commenter'];
+              const notes = log.values['Comment'];
+              const date = format(log.submittedAt, dateFormat);
+
+              const ticket = tickets.submissions.find(
+                t => t.id === log.values['Ticket ID'],
+              );
+              const ticketTitle = ticket?.values['Title'];
+
+              return (
+                <tr key={log.id}>
+                  <td>{date}</td>
+                  <td>{ticketTitle}</td>
+                  <td>{notes}</td>
+                  <td>{consultant}</td>
+                  <td>{hours}</td>
+                </tr>
+              );
+            })}
+            {worklogs.length < 1 && (
+              <tr>
+                <td colSpan={'100%'} style={{ textAlign: 'center' }}>
+                  No Worklogs to Display
+                </td>
+              </tr>
+            )}
+            <tr className="totals-row">
+              <td colSpan="4">Total Hours</td>
+              <td>{hoursWorked}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
 
       {/* ${vars('activities_html')} */}
       {/* <!-- <table>
