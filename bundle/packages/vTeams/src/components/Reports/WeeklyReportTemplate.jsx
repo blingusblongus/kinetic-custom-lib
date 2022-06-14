@@ -20,6 +20,22 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
 
   console.log(worklogs);
 
+  const days = [];
+  for (let log of worklogs) {
+    let strDate = log['submittedAt'].split('T')[0];
+    let index = days.findIndex(day => strDate === day.stringDate);
+
+    if (days[index]) {
+      days[index].logs.push(log);
+    } else {
+      days.push({ stringDate: strDate, logs: [log] });
+    }
+  }
+
+  days.sort((a, b) => (a.stringDate > b.stringDate ? 1 : -1));
+
+  console.log(days);
+
   return (
     <div className="weekly-report-page page-break">
       <header>
@@ -39,8 +55,6 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
 
       <h3>Executive Summary</h3>
       <div className="summary-grid">
-        {/* <div>Week Commencing: </div>
-                <div>${vars('week_commencing')}</div> */}
         <div>Report Prepared On: </div>
         <div>{format(today, dateFormat)}</div>
 
@@ -48,14 +62,8 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
         <div>
           {format(startDate, dateFormat)} - {format(endDate, dateFormat)}
         </div>
-        <div>Hours Consumed: {hoursWorked}</div>
-        {/* <div>${vars('hours_consumed')}</div>
-                <div>Monthly Hours:</div>
-                <div>${vars('monthly_hours')}</div>
-                <div>Monthly Hours Consumed:</div>
-                <div>${vars('monthly_hours_used')}</div>
-                <div>Monthly Hours Remaining:</div>
-                <div>${vars('monthly_hours_remaining')}</div> */}
+        <div>Hours Consumed:</div>
+        <div>{hoursWorked}</div>
       </div>
 
       <h3>Work Details</h3>
@@ -64,54 +72,64 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
         against each of the tickets we worked on.
       </p>
 
-      {worklogs && (
-        <table>
-          <thead style={{ textAlign: 'left' }}>
-            <tr>
-              <th>Date</th>
-              <th>Title</th>
-              <th>Notes</th>
-              <th>Consultant</th>
-              <th>Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            {worklogs.map(log => {
-              console.log(log);
-              const hours = log.values['Hours Worked'];
-              const consultant = log.values['Commenter'];
-              const notes = log.values['Comment'];
-              const date = format(log.submittedAt, dateFormat);
+      {days.map(day => {
+        const dayHours =
+          day.logs.reduce((sum, log) => {
+            return (sum += parseFloat(log.values['Hours Worked']));
+          }, 0) || 0;
 
-              const ticket = tickets.submissions.find(
-                t => t.id === log.values['Ticket ID'],
-              );
-              const ticketTitle = ticket?.values['Title'];
-
-              return (
-                <tr key={log.id}>
-                  <td>{date}</td>
-                  <td>{ticketTitle}</td>
-                  <td>{notes}</td>
-                  <td>{consultant}</td>
-                  <td>{hours}</td>
+        return (
+          <div key={day.stringDate}>
+            <h3>{format(day.stringDate, dateFormat)}</h3>
+            <table>
+              <thead style={{ textAlign: 'left' }}>
+                <tr>
+                  {/* <th>Date</th> */}
+                  <th>Title</th>
+                  <th>Notes</th>
+                  <th>Consultant</th>
+                  <th>Duration</th>
                 </tr>
-              );
-            })}
-            {worklogs.length < 1 && (
-              <tr>
-                <td colSpan={'100%'} style={{ textAlign: 'center' }}>
-                  No Worklogs to Display
-                </td>
-              </tr>
-            )}
-            <tr className="totals-row">
-              <td colSpan="4">Total Hours</td>
-              <td>{hoursWorked}</td>
-            </tr>
-          </tbody>
-        </table>
-      )}
+              </thead>
+              <tbody>
+                {day.logs.map(log => {
+                  console.log(log);
+                  const hours = log.values['Hours Worked'];
+                  const consultant = log.values['Commenter'];
+                  const notes = log.values['Comment'];
+                  const date = format(log.submittedAt, dateFormat);
+
+                  const ticket = tickets.submissions.find(
+                    t => t.id === log.values['Ticket ID'],
+                  );
+                  const ticketTitle = ticket?.values['Title'];
+
+                  return (
+                    <tr key={log.id}>
+                      {/* <td>{date}</td> */}
+                      <td>{ticketTitle}</td>
+                      <td>{notes}</td>
+                      <td>{consultant}</td>
+                      <td>{hours}</td>
+                    </tr>
+                  );
+                })}
+                {worklogs.length < 1 && (
+                  <tr>
+                    <td colSpan={'100%'} style={{ textAlign: 'center' }}>
+                      No Worklogs to Display
+                    </td>
+                  </tr>
+                )}
+                <tr className="totals-row">
+                  <td colSpan="4">Total Hours</td>
+                  <td>{dayHours}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
 
       {/* ${vars('activities_html')} */}
       {/* <!-- <table>
