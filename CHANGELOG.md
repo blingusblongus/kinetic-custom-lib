@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.4.0] - WIP
+
+### Added
+
+- Attachment field for stable logo image references
+- getAttachmentDownload handler to customUtils. This handler takes the link string from a submission with an attachment field and parses the link into a useable url.
+
+### Changed
+
+- Switched logo image references from external web resource to kinetic-hosted resource (stored on client form)
+
+### Removed
+
+- Removed drop-shadow from Client Management Cards
+
 ## [0.3.2] - WIP
 
 ### Added

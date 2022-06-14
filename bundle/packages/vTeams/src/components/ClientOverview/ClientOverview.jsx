@@ -6,6 +6,7 @@ import './ClientOverview.scss';
 // import WorkLogList from './WorkLogList/WorkLogList';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import ClientPanel from './ClientPanel/ClientPanel';
+import { getAttachmentDownload } from '../../../../customUtils/utils';
 
 const ClientOverview = () => {
   const [data, setData] = useState({});
@@ -34,7 +35,7 @@ const ClientOverview = () => {
             [FORM_FIELDS.MONTHLY_HOURS]: Number(
               submission.values[FORM_FIELDS.MONTHLY_HOURS],
             ),
-            logo: submission.values['Logo Url'],
+            logo: getAttachmentDownload(submission, 'Logo'),
             name: org,
             id: submission.id,
           };
