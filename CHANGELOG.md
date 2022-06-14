@@ -6,6 +6,7 @@
 
 - Attachment field for stable logo image references
 - getAttachmentDownload handler to customUtils. This handler takes the link string from a submission with an attachment field and parses the link into a useable url.
+- Reports break pages between each report
 
 ### Changed
 
