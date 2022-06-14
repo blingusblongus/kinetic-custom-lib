@@ -4,7 +4,8 @@ import { SLUGS } from '../../../globals/globals';
 import axios from 'axios';
 
 export const getReportInfoByDateRange = async (startDate, endDate) => {
-  let reportData = {};
+  let report = { startDate, endDate, data: {} };
+  let reportData = report.data;
 
   console.log('report called');
   let d = new Date();
@@ -84,5 +85,5 @@ export const getReportInfoByDateRange = async (startDate, endDate) => {
     return;
   }
 
-  return reportData;
+  return report;
 };

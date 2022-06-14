@@ -67,9 +67,9 @@
 
   .summary-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 5fr;
     column-gap: 15px;
-    width: 50%;
+    width: 100%;
     min-width: 350px;
   }
 

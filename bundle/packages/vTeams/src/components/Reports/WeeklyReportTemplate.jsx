@@ -1,7 +1,8 @@
 import React from 'react';
+import { format } from 'date-fns';
 import './WeeklyReportTemplate.scss';
 
-const WeeklyReportTemplate = ({ orgData }) => {
+const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
   console.log(orgData);
   const client = orgData['Organization'];
   const monthlyHours = orgData['Monthly Hours'];
@@ -11,6 +12,7 @@ const WeeklyReportTemplate = ({ orgData }) => {
   const hoursWorked = orgData['hoursWorked'];
 
   const today = new Date();
+  const dateFormat = 'MMM Do, YYYY';
 
   return (
     <div className="weekly-report-page page-break">
@@ -34,8 +36,13 @@ const WeeklyReportTemplate = ({ orgData }) => {
         {/* <div>Week Commencing: </div>
                 <div>${vars('week_commencing')}</div> */}
         <div>Report Prepared On: </div>
-        <div>{today.toISOString().split('T')[0]}</div>
-        <div>Hours Consumed this Week: {hoursWorked}</div>
+        <div>{format(today, dateFormat)}</div>
+
+        <div>Date Range:</div>
+        <div>
+          {format(startDate, dateFormat)} - {format(endDate, dateFormat)}
+        </div>
+        <div>Hours Consumed: {hoursWorked}</div>
         {/* <div>${vars('hours_consumed')}</div>
                 <div>Monthly Hours:</div>
                 <div>${vars('monthly_hours')}</div>
