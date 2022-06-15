@@ -9,7 +9,7 @@ import ReactPDF, {
 import './Reports.scss';
 import { useReactToPrint } from 'react-to-print';
 import { getReportInfoByDateRange } from './reports';
-import WeeklyReportTemplate from './WeeklyReportTemplate';
+import ReportTemplate from './ReportTemplate';
 import { useSelector } from 'react-redux';
 import { format, subDays } from 'date-fns';
 import TeamsButton from '../TeamsButton/TeamsButton';
@@ -126,7 +126,7 @@ const Reports = () => {
           {report.data &&
             includedClients.map((org, i) => {
               return (
-                <WeeklyReportTemplate
+                <ReportTemplate
                   orgData={report.data[org]}
                   startDate={report.startDate}
                   endDate={report.endDate}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { format } from 'date-fns';
-import './WeeklyReportTemplate.scss';
+import './ReportTemplate.scss';
 import { useSelector } from 'react-redux';
 
-const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
+const ReportTemplate = ({ orgData, startDate, endDate }) => {
   console.log(orgData);
   const client = orgData['Organization'];
   const monthlyHours = orgData['Monthly Hours'];
@@ -152,4 +152,4 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
   );
 };
 
-export default WeeklyReportTemplate;
+export default ReportTemplate;
