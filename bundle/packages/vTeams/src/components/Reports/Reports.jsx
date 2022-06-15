@@ -79,8 +79,11 @@ const Reports = () => {
         </div>
       </form>
 
-      <div className="print-page-container">
-        <div className="print-page" ref={printTarget}>
+      <div className={`print-page-container`}>
+        <div
+          className={`print-page${report.data ? ' report-generated' : ''}`}
+          ref={printTarget}
+        >
           {report.data &&
             Object.keys(report.data).map((org, i) => {
               return (

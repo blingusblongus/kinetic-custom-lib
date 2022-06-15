@@ -15,6 +15,15 @@
   padding: 70px;
   overflow-wrap: anywhere;
   margin: 0;
+  margin-left: 100vw;
+  opacity: 0;
+  transition: margin-left 0.8s cubic-bezier(0.61, 0.07, 0.36, 1.15),
+    opacity 2s ease;
+
+  &.report-generated {
+    opacity: 1;
+    margin-left: 0;
+  }
 }
 
 .print-page-container {
