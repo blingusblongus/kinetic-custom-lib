@@ -90,11 +90,18 @@
     justify-content: center;
   }
 
+  .message-no-logs {
+    text-align: center;
+    vertical-align: auto;
+    background-color: lightgray;
+    height: 2rem;
+  }
+
   footer {
     text-align: center;
     font-size: 0.8em;
     font-style: italic;
-    margin: 20px;
+    // margin: 20px;
     color: white;
   }
 }

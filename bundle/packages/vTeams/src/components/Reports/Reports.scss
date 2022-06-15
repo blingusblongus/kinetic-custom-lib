@@ -28,6 +28,13 @@
     page-break-before: always;
   }
 
+  .weekly-report-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
   @page {
     size: auto;
     // margin: 0;

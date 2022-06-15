@@ -53,6 +53,7 @@ const Reports = () => {
   return (
     <div className="reports-container">
       <form className="date-range-form" onSubmit={e => e.preventDefault()}>
+        <h1>Generate Reports</h1>
         <span>
           <label htmlFor="start-date">Start Date</label>
           <input
@@ -72,9 +73,12 @@ const Reports = () => {
           />
         </span>
 
-        <button onClick={generateReport}>Generate</button>
+        <div>
+          <button onClick={generateReport}>Generate</button>
+          <button onClick={handlePrint}>Print ME</button>
+        </div>
       </form>
-      <button onClick={handlePrint}>Print ME</button>
+
       <div className="print-page-container">
         <div className="print-page" ref={printTarget}>
           {report.data &&
