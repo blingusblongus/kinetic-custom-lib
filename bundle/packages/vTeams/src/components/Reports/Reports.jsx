@@ -26,6 +26,11 @@ const MyDocument = () => (
 );
 
 const Reports = () => {
+  const clients = useSelector(store => store.clients);
+  const clientList = clients?.submissions.map(
+    client => client.values['Organization'],
+  );
+
   const today = new Date();
   const lastWeek = subDays(today, 30);
   const [report, setReport] = useState({});
@@ -33,23 +38,32 @@ const Reports = () => {
     start: lastWeek.toISOString().split('T')[0],
     end: today.toISOString().split('T')[0],
   });
-  const store = useSelector(store => store);
+  const [includedClients, setIncludedClients] = useState(clientList);
+
   const printTarget = useRef();
+
+  console.log(clients);
 
   const handlePrint = useReactToPrint({
     content: () => printTarget.current,
   });
 
   const generateReport = () => {
-    getReportInfoByDateRange(dates.start, dates.end).then(response =>
-      setReport(response),
-    );
+    setReport({});
+    getReportInfoByDateRange(dates.start, dates.end).then(response => {
+      setReport(response);
+    });
   };
 
-  useEffect(() => {}, []);
+  useEffect(
+    () => {
+      setIncludedClients(clientList);
+    },
+    [clients],
+  );
 
   console.log(report);
-  console.log('dates', dates);
+  console.log(includedClients);
 
   return (
     <div className="reports-container">
@@ -73,6 +87,28 @@ const Reports = () => {
             onChange={e => setDates({ ...dates, start: e.target.value })}
           />
         </span>
+        <span>
+          <label htmlFor="org-select">Client</label>
+          <select
+            name="org-select"
+            onChange={e => {
+              if (e.target.value === 'all') {
+                setIncludedClients(clientList);
+              } else {
+                setIncludedClients([e.target.value]);
+              }
+            }}
+          >
+            <option value="all">All</option>
+            {clientList.map(client => {
+              return (
+                <option value={client} key={client}>
+                  {client}
+                </option>
+              );
+            })}
+          </select>
+        </span>
 
         <div>
           <TeamsButton onClick={generateReport}>Generate</TeamsButton>
@@ -88,7 +124,7 @@ const Reports = () => {
           ref={printTarget}
         >
           {report.data &&
-            Object.keys(report.data).map((org, i) => {
+            includedClients.map((org, i) => {
               return (
                 <WeeklyReportTemplate
                   orgData={report.data[org]}

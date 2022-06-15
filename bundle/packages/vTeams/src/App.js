@@ -84,7 +84,7 @@ const AppComponent = props => {
       },
     });
 
-    // Client-specific fetches
+    // Role-specific fetches
     if (!fulfiller) {
       const workLogSearch = new SubmissionSearch()
         .eq('values[Organization]', organization)
@@ -112,6 +112,22 @@ const AppComponent = props => {
           kapp: SLUGS.KAPPSLUG,
           form: SLUGS.CLIENTS_FORM_SLUG,
           search: clientSearch,
+        },
+      });
+    } else {
+      //if fulfiller
+
+      const clientListSearch = new SubmissionSearch()
+        .limit(1000)
+        .include('values')
+        .build();
+
+      dispatch({
+        type: 'FETCH_CLIENTS',
+        payload: {
+          kapp: SLUGS.KAPPSLUG,
+          form: SLUGS.CLIENTS_FORM_SLUG,
+          search: clientListSearch,
         },
       });
     }

@@ -7,14 +7,6 @@ export const getReportInfoByDateRange = async (startDate, endDate) => {
   let report = { startDate, endDate, data: {} };
   let reportData = report.data;
 
-  console.log('report called');
-  let d = new Date();
-  d.setDate(d.getDate() - 30);
-  console.log(d);
-
-  // const startDate = '2022-06-01';
-  // console.log(encodeURI(startDate));
-
   const { KAPPSLUG, CLIENTS_FORM_SLUG, ACTIVITIES_FORM_SLUG } = SLUGS;
   let defaultSearch = new SubmissionSearch()
     .include('values')
@@ -36,15 +28,6 @@ export const getReportInfoByDateRange = async (startDate, endDate) => {
       //init worklogs holder
       reportData[name].worklogs = [];
     });
-
-    //fetch worklog info as single list
-    /*
-    response = await searchSubmissions({
-      kapp: KAPPSLUG,
-      form: ACTIVITIES_FORM_SLUG,
-      search: defaultSearch,
-    });
-    */
 
     const origin = window.location.origin;
     const query = encodeURI(
