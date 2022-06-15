@@ -143,6 +143,11 @@ const WeeklyReportTemplate = ({ orgData, startDate, endDate }) => {
           recipient(s) only
         </div>
       </footer>
+      <div className="no-print">
+        <hr />
+        End of Report
+        <hr />
+      </div>
     </div>
   );
 };

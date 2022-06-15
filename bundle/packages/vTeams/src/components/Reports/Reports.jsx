@@ -12,6 +12,7 @@ import { getReportInfoByDateRange } from './reports';
 import WeeklyReportTemplate from './WeeklyReportTemplate';
 import { useSelector } from 'react-redux';
 import { format, subDays } from 'date-fns';
+import TeamsButton from '../TeamsButton/TeamsButton';
 
 const MyDocument = () => (
   <Document>
@@ -74,8 +75,10 @@ const Reports = () => {
         </span>
 
         <div>
-          <button onClick={generateReport}>Generate</button>
-          <button onClick={handlePrint}>Print ME</button>
+          <TeamsButton onClick={generateReport}>Generate</TeamsButton>
+          {report.data && (
+            <TeamsButton onClick={handlePrint}>Print ME</TeamsButton>
+          )}
         </div>
       </form>
 

@@ -28,6 +28,7 @@
 
 .print-page-container {
   padding: 20px;
+  overflow-x: hidden;
 }
 
 @media print {
@@ -42,6 +43,10 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+  }
+
+  .no-print {
+    display: none;
   }
 
   @page {
