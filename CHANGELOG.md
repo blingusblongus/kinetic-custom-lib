@@ -6,6 +6,7 @@
 
 - Attachment field for stable logo image references
 - getAttachmentDownload handler to customUtils. This handler takes the link string from a submission with an attachment field and parses the link into a useable url.
+- Reports break pages between each report
 
 ### Changed
 
@@ -29,7 +30,8 @@
 - Ticket Submission: 'Organization' and 'Title' fields are now required
 - Fixed Ticket 'Submission Update' workflow to avoid possible looping.
 - Moved misleading filter icons from CustomTable headers to last table header.
-- Adjusted positioning on CustomTable Settings to prevent overflowing offscreen
+- Adjusted positioning on CustomTable Settings to prevent overflowing offscreen 
+- Fixed overflowing table styles from Reports/ReportTemplate.jsx
 
 ## [0.3.1] - 2022-06-06
 

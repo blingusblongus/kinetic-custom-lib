@@ -4,11 +4,12 @@ import { parseSubsToTablegrid } from '../../../../customUtils/utils';
 import { PageTitle } from '@kineticdata/bundle-common';
 import BurndownChart from '../BurndownChart/BurndownChart';
 import { useSelector } from 'react-redux';
-import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable';
+// import PlaceholderTable from '../Placeholders/PlaceholderTable/PlaceholderTable';
 import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 import './Dashboard.scss';
 import CustomTable from '../CustomTable/CustomTable';
 import { SLUGS } from '../../../globals/globals';
+import ReactPDFTest from '../ReactPDFTest/ReactPDFTest';
 
 const Dashboard = () => {
   // When fetching tickets
@@ -67,6 +68,7 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+      {/* <ReactPDFTest /> */}
     </div>
   );
 };
