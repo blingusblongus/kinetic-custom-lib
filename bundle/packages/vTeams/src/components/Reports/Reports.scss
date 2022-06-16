@@ -48,13 +48,17 @@
     height: 100%;
   }
 
+  .report-day-table {
+    page-break-inside: avoid;
+  }
+
   .no-print {
     display: none;
   }
 
   @page {
     size: auto;
-    // margin: 0;
+    margin: 1rem 0;
   }
 
   // .print-page {

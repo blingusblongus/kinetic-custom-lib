@@ -84,7 +84,7 @@ const ReportTemplate = ({ orgData, startDate, endDate }) => {
             }, 0) || 0;
 
           return (
-            <div key={day.stringDate}>
+            <div key={day.stringDate} className="report-day-table">
               <h3>{format(day.stringDate, dateFormat)}</h3>
               <table>
                 <thead style={{ textAlign: 'left' }}>
