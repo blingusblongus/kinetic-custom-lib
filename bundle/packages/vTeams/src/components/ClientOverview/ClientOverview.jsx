@@ -72,7 +72,7 @@ const ClientOverview = () => {
     <>
       <div className="burndown-dashboard page-panel">
         <div className="burndown-dashboard__header">
-          <div>Clients Dashboard</div>
+          <h1>Clients Dashboard</h1>
           <div>
             <TeamsButton
               linkpath={`/kapps/${SLUGS.KAPPSLUG}/forms/${
