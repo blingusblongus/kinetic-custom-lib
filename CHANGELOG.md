@@ -14,6 +14,7 @@
 - Switched logo image references from external web resource to kinetic-hosted resource (stored on client form)
 - Fixed heading color on ClientOverview component
 - Reports better fit pdfs, and split at better breakpoints
+- Fixed bug where vteams-ticket 'Submission Updated' workflow was failing to update 'Marked Resolved' field properly
 
 ### Removed
 

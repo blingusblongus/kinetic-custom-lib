@@ -10,19 +10,28 @@ import './Dashboard.scss';
 import CustomTable from '../CustomTable/CustomTable';
 import { SLUGS } from '../../../globals/globals';
 import ReactPDFTest from '../ReactPDFTest/ReactPDFTest';
+import { useDispatch } from 'react-redux';
+import QuickLook from '../QuickLook/QuickLook';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   // When fetching tickets
   // 'FETCH_TICKETS' returns one page of results => {submissions, messages, nextPageToken, count, countPageToken}
   // 'FETCH_TICKETS_ALL' returns all results in same format (collected in submissions);
   const rowData = useSelector(store => store.tickets.submissions);
   const worklogs = useSelector(store => store.workLogs);
   const clientData = useSelector(store => store.organization);
+  const store = useSelector(store => store);
+  console.log(store);
 
   let [columns, rows] = parseSubsToTablegrid(rowData);
 
   const userProfile = useSelector(store => store.app.profile);
   const fulfiller = isMemberOf(userProfile, 'vTeams');
+
+  // useEffect(() => {
+  //   dispatch({type: 'FETCH_RECENT_TICKETS'})
+  // }, [])
 
   console.log(userProfile);
 
@@ -61,10 +70,14 @@ const Dashboard = () => {
           </div>
         )}
 
-        {!fulfiller && (
+        {!fulfiller ? (
           <div className="dashboard-row">
             <BurndownChart clientData={clientData} worklogs={worklogs} />
-            <BurndownChart clientData={clientData} worklogs={worklogs} />
+            <QuickLook />
+          </div>
+        ) : (
+          <div className="dashboard-row">
+            <QuickLook />
           </div>
         )}
       </div>
