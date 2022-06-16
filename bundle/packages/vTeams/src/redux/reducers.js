@@ -5,6 +5,7 @@ import { tickets } from './modules/tickets';
 import { workLogs } from './modules/workLogs';
 import { organization } from './modules/organization';
 import { settings } from './modules/settings';
+import { clients } from './modules/clients';
 
 export default {
   app,
@@ -12,5 +13,6 @@ export default {
   tickets,
   workLogs,
   organization,
+  clients,
   // settings,
 };

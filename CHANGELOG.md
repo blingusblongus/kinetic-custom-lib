@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.3.3] - WIP
+
+### Added
+
+- Attachment field for stable logo image references
+- getAttachmentDownload handler to customUtils. This handler takes the link string from a submission with an attachment field and parses the link into a useable url.
+- Reports break pages between each report
+- Add ability to display/print reports by client, or all together
+
+### Changed
+
+- Switched logo image references from external web resource to kinetic-hosted resource (stored on client form)
+- Fixed heading color on ClientOverview component
+- Reports better fit pdfs, and split at better breakpoints
+
+### Removed
+
+- Removed drop-shadow from Client Management Cards
+
 ## [0.3.2] - WIP
 
 ### Added
@@ -14,6 +33,8 @@
 - Ticket Submission: 'Organization' and 'Title' fields are now required
 - Fixed Ticket 'Submission Update' workflow to avoid possible looping.
 - Moved misleading filter icons from CustomTable headers to last table header.
+- Adjusted positioning on CustomTable Settings to prevent overflowing offscreen 
+- Fixed overflowing table styles from Reports/ReportTemplate.jsx
 
 ## [0.3.1] - 2022-06-06
 

@@ -16,6 +16,8 @@ import CoreTicket from './components/CoreTicketView/CoreTicketView';
 import Dashboard from './components/Dashboard/Dashboard';
 import FormView from './components/FormView/FormView';
 import ClientOverview from './components/ClientOverview/ClientOverview';
+import Reports from './components/Reports/Reports.jsx';
+
 import { SLUGS, NAMES } from '../globals/globals';
 import { SubmissionSearch } from '@kineticdata/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -82,7 +84,7 @@ const AppComponent = props => {
       },
     });
 
-    // Client-specific fetches
+    // Role-specific fetches
     if (!fulfiller) {
       const workLogSearch = new SubmissionSearch()
         .eq('values[Organization]', organization)
@@ -112,6 +114,22 @@ const AppComponent = props => {
           search: clientSearch,
         },
       });
+    } else {
+      //if fulfiller
+
+      const clientListSearch = new SubmissionSearch()
+        .limit(1000)
+        .include('values')
+        .build();
+
+      dispatch({
+        type: 'FETCH_CLIENTS',
+        payload: {
+          kapp: SLUGS.KAPPSLUG,
+          form: SLUGS.CLIENTS_FORM_SLUG,
+          search: clientListSearch,
+        },
+      });
     }
   }, []);
 
@@ -135,6 +153,7 @@ const AppComponent = props => {
                   <CoreTicket path="/ticket/:id" />
                   <Dashboard path="/home" />
                   <ClientOverview path="/clients" />
+                  <Reports path="/reports" />
                 </Router>
               </div>
             </div>

@@ -5,7 +5,7 @@ $img-dimensions: 70px;
 .burndown-dashboard {
   .burndown-dashboard__header {
     font-weight: $weight-heavy;
-    color: $color-grey;
+    // color: $color-grey;
     padding: 30px;
     display: flex;
     justify-content: space-between;
@@ -24,7 +24,7 @@ $img-dimensions: 70px;
       width: 30%;
       max-height: 70vh;
       overflow: hidden;
-      filter: drop-shadow(1px 1px 2px $color-grey);
+      // filter: drop-shadow(1px 1px 2px $color-grey);
     }
 
     .burndown-header {
