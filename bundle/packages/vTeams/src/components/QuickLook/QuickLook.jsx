@@ -56,7 +56,7 @@ const QuickLook = () => {
           <i className="fa fa-plus" />
         </div>
         <div>
-          <customlabel>Tickets Raised This Week:</customlabel>
+          <div className="quick-look__label">Tickets Raised This Week:</div>
           <div className="quick-look-number">{createdThisWeek.length}</div>
         </div>
       </div>
@@ -65,7 +65,7 @@ const QuickLook = () => {
           <i className="fa fa-check" />
         </div>
         <div>
-          <customlabel>Tickets Resolved This Week:</customlabel>
+          <div className="quick-look__label">Tickets Resolved This Week:</div>
           <div className="quick-look-number">{resolvedThisWeek.length}</div>
         </div>
       </div>
