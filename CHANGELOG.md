@@ -8,6 +8,7 @@
 - getAttachmentDownload handler to customUtils. This handler takes the link string from a submission with an attachment field and parses the link into a useable url.
 - Reports break pages between each report
 - Add ability to display/print reports by client, or all together
+- Add QuickLook component to display tickets raised and resolved in the past 7 days
 
 ### Changed
 
@@ -15,6 +16,7 @@
 - Fixed heading color on ClientOverview component
 - Reports better fit pdfs, and split at better breakpoints
 - Fixed bug where vteams-ticket 'Submission Updated' workflow was failing to update 'Marked Resolved' field properly
+- Switched .dashboard-row class to flexbox with flex-grow to manage sizing on both client and fulfiller views
 
 ### Removed
 
