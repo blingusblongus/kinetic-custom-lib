@@ -11,8 +11,8 @@
     text-align: left;
   }
 
-  tr {
-    font-size: 0.8em;
+  tr td {
+    font-size: 0.8rem;
   }
 
   tr:nth-child(even):not(.totals-row) {
@@ -28,6 +28,7 @@
   th {
     background-color: #012b3f;
     color: white;
+    white-space: nowrap;
   }
 
   .totals-row {
@@ -40,7 +41,12 @@
     text-align: center;
   }
 
+  h2 {
+    font-size: 1.4rem;
+  }
+
   h3 {
+    font-size: 1.1rem;
     margin-left: 20px;
     margin-top: 30px;
   }
