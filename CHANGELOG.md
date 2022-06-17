@@ -19,6 +19,7 @@
 - Fixed bug where vteams-ticket 'Submission Updated' workflow was failing to update 'Marked Resolved' field properly
 - Switched .dashboard-row class to flexbox with flex-grow to manage sizing on both client and fulfiller views
 - Adjusted customTable to format all dates in similar, more succinct format
+- Custom Table now sorts status in proper order, rather than alphabetically
 
 ### Removed
 
