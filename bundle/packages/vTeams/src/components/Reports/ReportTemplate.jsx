@@ -16,9 +16,6 @@ const ReportTemplate = ({ orgData, startDate, endDate }) => {
   const dateFormat = 'MMM Do, YYYY';
 
   const tickets = useSelector(store => store.tickets);
-  console.log(tickets);
-
-  console.log(worklogs);
 
   const days = [];
   for (let log of worklogs) {
@@ -33,8 +30,6 @@ const ReportTemplate = ({ orgData, startDate, endDate }) => {
   }
 
   days.sort((a, b) => (a.stringDate > b.stringDate ? 1 : -1));
-
-  console.log(days);
 
   return (
     <div className="weekly-report-page page-break">
