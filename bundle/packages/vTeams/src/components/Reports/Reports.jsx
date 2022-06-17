@@ -1,29 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
-import ReactPDF, {
-  Page,
-  Text,
-  View,
-  Document,
-  PDFViewer,
-} from '@react-pdf/renderer';
 import './Reports.scss';
 import { useReactToPrint } from 'react-to-print';
 import { getReportInfoByDateRange } from './reports';
 import ReportTemplate from './ReportTemplate';
 import { useSelector } from 'react-redux';
-import { format, subDays } from 'date-fns';
+import { subDays } from 'date-fns';
 import TeamsButton from '../TeamsButton/TeamsButton';
-
-const MyDocument = () => (
-  <Document>
-    <Page size="A4">
-      <Text>Example Text</Text>
-      <View>
-        <Text>Example Text</Text>
-      </View>
-    </Page>
-  </Document>
-);
 
 const Reports = () => {
   const clients = useSelector(store => store.clients);
@@ -32,7 +14,7 @@ const Reports = () => {
   );
 
   const today = new Date();
-  const lastWeek = subDays(today, 30);
+  const lastWeek = subDays(today, 7);
   const [report, setReport] = useState({});
   const [dates, setDates] = useState({
     start: lastWeek.toISOString().split('T')[0],
@@ -41,8 +23,6 @@ const Reports = () => {
   const [includedClients, setIncludedClients] = useState(clientList);
 
   const printTarget = useRef();
-
-  console.log(clients);
 
   const handlePrint = useReactToPrint({
     content: () => printTarget.current,
@@ -61,9 +41,6 @@ const Reports = () => {
     },
     [clients],
   );
-
-  console.log(report);
-  console.log(includedClients);
 
   return (
     <div className="reports-container">
@@ -110,10 +87,10 @@ const Reports = () => {
           </select>
         </span>
 
-        <div>
+        <div className="report-generate-container">
           <TeamsButton onClick={generateReport}>Generate</TeamsButton>
           {report.data && (
-            <TeamsButton onClick={handlePrint}>Print ME</TeamsButton>
+            <TeamsButton onClick={handlePrint}>Print Report</TeamsButton>
           )}
         </div>
       </form>
@@ -136,9 +113,6 @@ const Reports = () => {
             })}
         </div>
       </div>
-      {/* <PDFViewer style={{ width: '100%', height: 800 }}>
-        <MyDocument />
-      </PDFViewer> */}
     </div>
   );
 };

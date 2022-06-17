@@ -53,7 +53,6 @@ const Activities = ({ id }) => {
 
     createSubmission({ kappSlug, formSlug, values })
       .then(submission => {
-        console.log('submitted:', submission);
         setCommentText('');
         setHoursSpent('');
         setReFetch(!reFetch);

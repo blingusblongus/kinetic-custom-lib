@@ -11,6 +11,7 @@ import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import URLS from '../../../globals/urls';
 import './CustomTable.scss';
 import { useSelector } from 'react-redux';
+import { format } from 'date-fns';
 
 const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [searchResult, setSearchResult] = useState({});
@@ -19,12 +20,25 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
   const [showSettings, setShowSettings] = useState(false);
   const [sortOptions, setSortOptions] = useState({
-    criteria: 'Status',
-    ascending: true,
+    criteria: 'Submitted At',
+    ascending: false,
   });
   const [filterOptions, setFilterOptions] = useState({});
   const [showFilter, setShowFilter] = useState(false);
   const userProfile = useSelector(store => store.app.profile);
+
+  const dateFormat = 'M/d/YY';
+
+  // sortMap is stopgap solution
+  // better to figure out how to fetch mappings from the form itself
+  const sortMap = {
+    ['Status']: {
+      'Not Started': 1,
+      'In Progress': 2,
+      Completed: 3,
+      Resolved: 4,
+    },
+  };
 
   const filteredSubmissions = searchResult.submissions?.filter(sub => {
     // handle optional submitter prop
@@ -59,8 +73,8 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
 
   const sortedSubmissions = filteredSubmissions?.sort((a, b) => {
     const { criteria, ascending } = sortOptions;
-    a = a.values[criteria];
-    b = b.values[criteria];
+    a = sortMap[criteria]?.[a.values[criteria]] || a.values[criteria];
+    b = sortMap[criteria]?.[b.values[criteria]] || b.values[criteria];
 
     if (a === b) return 0;
     if (a === null) return 1;
@@ -73,6 +87,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   });
 
   const [visible, setVisible] = useState([
+    'Submitted At',
     'Requested Date Due',
     'Title',
     'Description',
@@ -143,7 +158,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   useEffect(() => {
     defaultSearch();
 
-    fetchForm({ kappSlug: kapp, formSlug: form, include: 'fields' })
+    fetchForm({ kappSlug: kapp, formSlug: form, include: 'fields,details' })
       .then(({ form }) => setFields(form.fields.map(field => field.name)))
       .catch(err => console.error(err));
   }, []);
@@ -225,6 +240,8 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                   let content;
                   if (typeof f == 'object') {
                     content = JSON.parse(f);
+                  } else if (Date.parse(submission.values[f])) {
+                    content = format(submission.values[f], dateFormat);
                   } else {
                     content = submission.values[f];
                   }
