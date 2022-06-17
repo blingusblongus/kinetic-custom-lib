@@ -6,7 +6,7 @@
 
 - Attachment field for stable logo image references
 - getAttachmentDownload handler to customUtils. This handler takes the link string from a submission with an attachment field and parses the link into a useable url.
-- Add front-end report generation solution, accessible via sidebar menu.
+- Add front-end report generation solution, accessible via sidebar menu as an authorized fulfiller.
 - Add ability to display/print reports by client, or all together
 - Add QuickLook component to display tickets raised and resolved in the past 7 days
 - SubmittedAt now copied to values; appears as optional customTable field.
