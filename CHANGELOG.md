@@ -1,14 +1,15 @@
 # Changelog
 
-## [0.3.3] - WIP
+## [0.4.0] - WIP
 
 ### Added
 
 - Attachment field for stable logo image references
 - getAttachmentDownload handler to customUtils. This handler takes the link string from a submission with an attachment field and parses the link into a useable url.
-- Reports break pages between each report
+- Add front-end report generation solution, accessible via sidebar menu.
 - Add ability to display/print reports by client, or all together
 - Add QuickLook component to display tickets raised and resolved in the past 7 days
+- SubmittedAt now copied to values; appears as optional customTable field.
 
 ### Changed
 
@@ -17,6 +18,8 @@
 - Reports better fit pdfs, and split at better breakpoints
 - Fixed bug where vteams-ticket 'Submission Updated' workflow was failing to update 'Marked Resolved' field properly
 - Switched .dashboard-row class to flexbox with flex-grow to manage sizing on both client and fulfiller views
+- Adjusted customTable to format all dates in similar, more succinct format
+- Custom Table now sorts status in proper order, rather than alphabetically
 
 ### Removed
 
