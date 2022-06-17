@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { subDays } from 'date-fns';
-import { SubmissionSearch, searchSubmissions } from '@kineticdata/react';
 import { SLUGS } from '../../../globals/globals';
 import axios from 'axios';
 import './QuickLook.scss';
@@ -24,22 +23,10 @@ const QuickLook = () => {
     return ticket.updatedAt > sevenDaysAgo.toISOString();
   });
 
-  console.log('createdThisWeek', createdThisWeek);
-  console.log('updatedThisWeek', updatedThisWeek);
-  console.log('resolveTHiswkeeke', resolvedThisWeek);
-
   useEffect(() => {
-    // const search = new SubmissionSearch()
-    //     .eq('updatedAt')
-    //     .limit(1000)
-    //     .include('values')
-    //     .build()
-
-    // searchSubmissions({kapp: KAPPSLUG, form: TICKET_FORM_SLUG, search})
-
     const origin = window.location.origin;
     const dateQuery = encodeURI(`"${sevenDaysAgo.toISOString()}"`);
-    console.log(dateQuery);
+
     axios
       .get(
         `${origin}/app/api/v1/kapps/${KAPPSLUG}/forms/${TICKET_FORM_SLUG}/submissions?direction=DESC&limit=1000&orderBy=values%5BTitle%5D%2CupdatedAt&q=values%5BTitle%5D%3D%2A%22%22ANDupdatedAt%3E${dateQuery}&include=values,details`,
@@ -48,7 +35,6 @@ const QuickLook = () => {
       .catch(console.error);
   }, []);
 
-  console.log('recentTix', recentTix);
   return (
     <div className="quick-look">
       <div className="quick-look-section">
