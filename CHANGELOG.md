@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.3.3] - WIP
+## [0.4.0] - WIP
 
 ### Added
 
@@ -9,6 +9,7 @@
 - Reports break pages between each report
 - Add ability to display/print reports by client, or all together
 - Add QuickLook component to display tickets raised and resolved in the past 7 days
+- SubmittedAt now copied to values; appears as optional customTable field.
 
 ### Changed
 

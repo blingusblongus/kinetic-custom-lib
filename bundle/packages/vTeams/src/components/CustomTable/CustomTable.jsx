@@ -19,8 +19,8 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
   const [showSettings, setShowSettings] = useState(false);
   const [sortOptions, setSortOptions] = useState({
-    criteria: 'Status',
-    ascending: true,
+    criteria: 'Submitted At',
+    ascending: false,
   });
   const [filterOptions, setFilterOptions] = useState({});
   const [showFilter, setShowFilter] = useState(false);
@@ -73,6 +73,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   });
 
   const [visible, setVisible] = useState([
+    'Submitted At',
     'Requested Date Due',
     'Title',
     'Description',
