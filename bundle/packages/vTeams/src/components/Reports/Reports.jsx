@@ -87,10 +87,10 @@ const Reports = () => {
           </select>
         </span>
 
-        <div>
+        <div className="report-generate-container">
           <TeamsButton onClick={generateReport}>Generate</TeamsButton>
           {report.data && (
-            <TeamsButton onClick={handlePrint}>Print ME</TeamsButton>
+            <TeamsButton onClick={handlePrint}>Print Report</TeamsButton>
           )}
         </div>
       </form>
