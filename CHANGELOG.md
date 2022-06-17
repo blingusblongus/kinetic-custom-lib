@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.4.0] - WIP
+## [0.4.0] - 2022-06-17
 
 ### Added
 
@@ -25,7 +25,7 @@
 
 - Removed drop-shadow from Client Management Cards
 
-## [0.3.2] - WIP
+## [0.3.2] - 2022-06-10
 
 ### Added
 
