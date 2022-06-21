@@ -14,6 +14,7 @@
 - Refactored ClientPanelItems into own subcomponents.
 - BurndownChart now charts from the Billing Period start until the current day.
 - BurndownChart updated to handle Annual Billing Data as well.
+- getAttachmentDownload util accepts the referenced attachment object, rather than the submission (allows for more flexible usage).
 
 ## [0.4.0] - 2022-06-17
 

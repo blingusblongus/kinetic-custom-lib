@@ -2,13 +2,22 @@ import React from 'react';
 import { format } from 'date-fns';
 import './ReportTemplate.scss';
 import { useSelector } from 'react-redux';
+import { FORM_FIELDS } from '../../../globals/globals';
+import { getAttachmentDownload } from '../../../../customUtils/utils';
+
+const {
+  ORGANIZATION,
+  MONTHLY_HOURS,
+  BILLING_START,
+  BILLING_PERIOD,
+} = FORM_FIELDS;
 
 const ReportTemplate = ({ orgData, startDate, endDate }) => {
   console.log(orgData);
-  const client = orgData['Organization'];
-  const monthlyHours = orgData['Monthly Hours'];
-  const logoUrl = orgData['Logo Url'];
-  const billingStartDate = orgData['Current Billing Period Start Date'];
+  const client = orgData[ORGANIZATION];
+  const monthlyHours = orgData[MONTHLY_HOURS];
+  const logoUrl = getAttachmentDownload(orgData['Logo']);
+  const billingStartDate = orgData[BILLING_START];
   const worklogs = orgData['worklogs'];
   const hoursWorked = orgData['hoursWorked'];
 

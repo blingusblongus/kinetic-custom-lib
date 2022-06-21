@@ -43,7 +43,7 @@ const ClientOverview = () => {
           hash[org] = {
             submissions: [],
             [HOURS_WORKED]: 0,
-            logo: getAttachmentDownload(submission, 'Logo'),
+            logo: getAttachmentDownload(submission.values['Logo']),
             name: org,
             id: submission.id,
             [BILLING_PERIOD]: submission.values[BILLING_PERIOD] || 'Monthly',
@@ -75,7 +75,7 @@ const ClientOverview = () => {
 
       for (let log of worklogs) {
         if (!log) continue;
-        const org = log.values['Organization'];
+        const org = log.values[ORGANIZATION];
 
         if (log.submittedAt > hash[org][BILLING_START]) {
           hash[org].submissions.push(log);
