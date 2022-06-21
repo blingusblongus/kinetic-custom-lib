@@ -10,11 +10,22 @@ import { getAttachmentDownload } from '../../../../customUtils/utils';
 
 const ClientOverview = () => {
   const [data, setData] = useState({});
+  const {
+    ORGANIZATION,
+    HOURS_WORKED,
+    BILLING_PERIOD,
+    MONTHLY_HOURS,
+    ANNUAL_HOURS,
+    BILLING_START,
+  } = FORM_FIELDS;
   //   const [modal, setModal] = useState({ show: true, submissions: [] });
 
   useEffect(() => {
     const fetchBurndownInfo = async () => {
-      let search = new SubmissionSearch().include('values').build();
+      let search = new SubmissionSearch()
+        .include('values')
+        .limit(1000)
+        .build();
 
       const clientInfo = await getPaginated({
         kapp: SLUGS.KAPPSLUG,
@@ -25,41 +36,55 @@ const ClientOverview = () => {
       // Init hashmap to track burndown data
       const hash = {};
       for (let submission of clientInfo) {
-        const org = submission.values[FORM_FIELDS.ORGANIZATION];
+        const org = submission.values[ORGANIZATION];
+        console.log('org', submission.values);
         if (!org) continue;
 
+        //Transform data
         if (!hash[org]) {
           hash[org] = {
             submissions: [],
-            [FORM_FIELDS.HOURS_WORKED]: 0,
-            [FORM_FIELDS.MONTHLY_HOURS]: Number(
-              submission.values[FORM_FIELDS.MONTHLY_HOURS],
-            ),
+            [HOURS_WORKED]: 0,
             logo: getAttachmentDownload(submission, 'Logo'),
             name: org,
             id: submission.id,
+            [BILLING_PERIOD]: submission.values[BILLING_PERIOD] || 'Monthly',
+            [BILLING_START]: submission.values[BILLING_START],
           };
+
+          submission.values[BILLING_PERIOD] === 'Annually'
+            ? (hash[org][ANNUAL_HOURS] = Number(
+                submission.values[ANNUAL_HOURS],
+              ))
+            : (hash[org][MONTHLY_HOURS] = Number(
+                submission.values[MONTHLY_HOURS],
+              ));
         }
       }
 
+      // Get Worklogs
       search = new SubmissionSearch()
         .eq('values[isWorkLog]', 'true')
+        .limit(1000)
         .include('values')
         .build();
 
-      const workLogs = await getPaginated({
+      const worklogs = await getPaginated({
         kapp: SLUGS.KAPPSLUG,
         form: SLUGS.ACTIVITIES_FORM_SLUG,
         search,
       });
 
-      for (let log of workLogs) {
+      console.log('worklogs', worklogs);
+
+      for (let log of worklogs) {
         if (!log) continue;
         const org = log.values['Organization'];
-        hash[org].submissions.push(log);
-        hash[org][FORM_FIELDS.HOURS_WORKED] += Number(
-          log.values[FORM_FIELDS.HOURS_WORKED],
-        );
+
+        if (log.submittedAt > hash[org][BILLING_START]) {
+          hash[org].submissions.push(log);
+          hash[org][HOURS_WORKED] += Number(log.values[HOURS_WORKED]);
+        }
       }
 
       setData(hash);

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.0] - WIP
+
+### Added
+
+- 'Clients' form allows differentiation between monthly and hourly billing cycles.
+
+### Changed
+
+- 'Clients' form hours info now displays conditionally, and is required when displayed.
+
 ## [0.4.0] - 2022-06-17
 
 ### Added

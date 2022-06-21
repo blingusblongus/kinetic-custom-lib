@@ -4,7 +4,15 @@ import { history } from '@kineticdata/react';
 
 const ClientPanel = ({ orgInfo }) => {
   const { logo, name, id } = orgInfo;
-  console.log(logo);
+  const {
+    BILLING_PERIOD,
+    MONTHLY_HOURS,
+    ANNUAL_HOURS,
+    BILLING_START,
+    HOURS_WORKED,
+  } = FORM_FIELDS;
+
+  console.log(orgInfo);
   return (
     <div className="burndown-panel">
       <div className="burndown-header">
@@ -13,18 +21,26 @@ const ClientPanel = ({ orgInfo }) => {
       </div>
       <div className="burndown-body">
         <div className="burndown-item">
+          <span className="burndown-item--header">Billing Period: </span>
+          <span>{orgInfo[BILLING_PERIOD]}</span>
+        </div>
+        <div className="burndown-item">
+          <span className="burndown-item--header">Billing Period Start:</span>
+          <span>{orgInfo[BILLING_START]}</span>
+        </div>
+        <div className="burndown-item">
           <span className="burndown-item--header">Total Hours: </span>
-          <span>{orgInfo[FORM_FIELDS.MONTHLY_HOURS]}</span>
+          <span>{orgInfo[MONTHLY_HOURS] || orgInfo[ANNUAL_HOURS]}</span>
         </div>
         <div className="burndown-item">
           <span className="burndown-item--header">Hours Used: </span>
-          <span>{orgInfo[FORM_FIELDS.HOURS_WORKED]}</span>
+          <span>{orgInfo[HOURS_WORKED]}</span>
         </div>
         <div className="burndown-item">
           <span className="burndown-item--header">Hours Remaining: </span>
           <span>
-            {orgInfo[FORM_FIELDS.MONTHLY_HOURS] -
-              orgInfo[FORM_FIELDS.HOURS_WORKED]}
+            {(orgInfo[MONTHLY_HOURS] || orgInfo[ANNUAL_HOURS]) -
+              orgInfo[HOURS_WORKED]}
           </span>
         </div>
       </div>
