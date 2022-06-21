@@ -1,10 +1,21 @@
 import React from 'react';
 import { SLUGS, FORM_FIELDS } from '../../../../globals/globals';
 import { history } from '@kineticdata/react';
+import ClientPanelItem from './ClientPanelItem';
 
 const ClientPanel = ({ orgInfo }) => {
   const { logo, name, id } = orgInfo;
-  console.log(logo);
+  const {
+    BILLING_PERIOD,
+    MONTHLY_HOURS,
+    ANNUAL_HOURS,
+    BILLING_START,
+    HOURS_WORKED,
+  } = FORM_FIELDS;
+
+  const totalHours = orgInfo[MONTHLY_HOURS] || orgInfo[ANNUAL_HOURS];
+  const hoursRemaining = totalHours - orgInfo[HOURS_WORKED];
+
   return (
     <div className="burndown-panel">
       <div className="burndown-header">
@@ -12,25 +23,20 @@ const ClientPanel = ({ orgInfo }) => {
         <div className="burndown-organization">{name}</div>
       </div>
       <div className="burndown-body">
-        <div className="burndown-item">
-          <span className="burndown-item--header">Total Hours: </span>
-          <span>{orgInfo[FORM_FIELDS.MONTHLY_HOURS]}</span>
-        </div>
-        <div className="burndown-item">
-          <span className="burndown-item--header">Hours Used: </span>
-          <span>{orgInfo[FORM_FIELDS.HOURS_WORKED]}</span>
-        </div>
-        <div className="burndown-item">
-          <span className="burndown-item--header">Hours Remaining: </span>
-          <span>
-            {orgInfo[FORM_FIELDS.MONTHLY_HOURS] -
-              orgInfo[FORM_FIELDS.HOURS_WORKED]}
-          </span>
-        </div>
+        <ClientPanelItem
+          label="Billing Period"
+          value={orgInfo[BILLING_PERIOD]}
+        />
+        <ClientPanelItem
+          label="Billing Period Start"
+          value={orgInfo[BILLING_START]}
+        />
+        <ClientPanelItem label="Total Hours" value={totalHours} />
+        <ClientPanelItem label="Hours Used" value={orgInfo[HOURS_WORKED]} />
+        <ClientPanelItem label="Hours Remaining" value={hoursRemaining} />
       </div>
       <div
         className="burndown-footer"
-        // onClick={()=>setModal({show: true, submissions})}
         onClick={() =>
           history.push(
             `/kapps/${SLUGS.KAPPSLUG}/forms/${SLUGS.CLIENTS_FORM_SLUG}/${id}`,

@@ -18,6 +18,8 @@ export const FORM_FIELDS = {
   DATE_DUE: 'Requested Date Due',
   DESCRIPTION: 'Description',
   STATUS: 'Status',
+  BILLING_PERIOD: 'Billing Period',
+  ANNUAL_HOURS: 'Annual Hours',
 }
 
 export const NAMES = {
