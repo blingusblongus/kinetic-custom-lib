@@ -1,0 +1,72 @@
+.reports-container {
+  .date-range-form {
+    // background-color: grey;
+    // padding: 10px;
+    width: 50%;
+    min-width: 160px;
+    margin: auto;
+  }
+
+  .report-generate-container {
+    margin: 10px;
+  }
+}
+
+.print-page {
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  background-color: white;
+  color: black;
+  overflow-wrap: anywhere;
+  margin: auto;
+  transform: translateX(100vw);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.61, 0.07, 0.36, 1.15),
+    opacity 2s ease;
+
+  &.report-generated {
+    transform: translateX(0);
+    opacity: 1;
+    margin: auto;
+    padding: 70px;
+  }
+}
+
+.print-page-container {
+  padding: 20px;
+  overflow-x: hidden;
+  margin: auto;
+}
+
+@media print {
+  .page-break {
+    margin-top: 1rem;
+    display: block;
+    page-break-before: always;
+  }
+
+  .weekly-report-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .report-day-table {
+    page-break-inside: avoid;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  @page {
+    size: auto;
+    margin: 1rem 0;
+  }
+
+  // .print-page {
+  //     margin: 20mm;
+  // }
+}

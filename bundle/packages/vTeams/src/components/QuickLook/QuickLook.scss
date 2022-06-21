@@ -1,0 +1,63 @@
+@import '../../assets/styles/variables';
+
+.quick-look {
+  background-color: $bg-secondary;
+  color: white;
+  border: 3px solid white;
+  border-radius: 10px;
+  width: 300px;
+  max-width: 40%;
+  max-height: 200px;
+  text-align: left;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .quick-look-section {
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: $primary;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+
+    .quick-look__label {
+      font-size: 1rem;
+      text-align: end;
+    }
+
+    .quick-look__icon--container {
+      $iconSize: 50px;
+
+      background-color: $bg-secondary;
+      border-radius: 100%;
+      width: $iconSize;
+      min-width: $iconSize;
+      max-width: $iconSize;
+      height: $iconSize;
+      max-height: $iconSize;
+      min-height: $iconSize;
+
+      i {
+        display: inline-block;
+        font-size: 40px;
+        line-height: $iconSize;
+        width: $iconSize;
+        height: $iconSize;
+        text-align: center;
+        vertical-align: center;
+        filter: drop-shadow(0 0 1px $primary);
+      }
+    }
+
+    .quick-look-number {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: end;
+    }
+  }
+}

@@ -1,5 +1,80 @@
 # Changelog
 
+## [0.5.0] - WIP
+
+### Added
+
+- 'Clients' form allows differentiation between monthly and hourly billing cycles.
+- Add more visibility to ClientOverview Panels: Billing Period, Billing Period Start.
+- Add behind-the-scenes code to ReportTemplate to support future Billing Period Metrics
+
+### Changed
+
+- 'Clients' form hours info now displays conditionally, and is required when displayed.
+- ClientOverview Panels now accurately show only hours worked since the Billing Period Start
+- Refactored ClientPanelItems into own subcomponents.
+- BurndownChart now charts from the Billing Period start until the current day.
+- BurndownChart updated to handle Annual Billing Data as well.
+- getAttachmentDownload util accepts the referenced attachment object, rather than the submission (allows for more flexible usage).
+
+## [0.4.0] - 2022-06-17
+
+### Added
+
+- Attachment field for stable logo image references
+- getAttachmentDownload handler to customUtils. This handler takes the link string from a submission with an attachment field and parses the link into a useable url.
+- Add front-end report generation solution, accessible via sidebar menu as an authorized fulfiller.
+- Add ability to display/print reports by client, or all together
+- Add QuickLook component to display tickets raised and resolved in the past 7 days
+- SubmittedAt now copied to values; appears as optional customTable field.
+
+### Changed
+
+- Switched logo image references from external web resource to kinetic-hosted resource (stored on client form)
+- Fixed heading color on ClientOverview component
+- Reports better fit pdfs, and split at better breakpoints
+- Fixed bug where vteams-ticket 'Submission Updated' workflow was failing to update 'Marked Resolved' field properly
+- Switched .dashboard-row class to flexbox with flex-grow to manage sizing on both client and fulfiller views
+- Adjusted customTable to format all dates in similar, more succinct format
+- Custom Table now sorts status in proper order, rather than alphabetically
+
+### Removed
+
+- Removed drop-shadow from Client Management Cards
+
+## [0.3.2] - 2022-06-10
+
+### Added
+
+- Custom Table columns are sortable by clicking on the column header
+- Custom Tables Display placeholder message when empty.
+- Added new prop to CustomTable (submitter; accepts 'me'/'others'/'all') to easily create a table with an initial filter 
+
+### Changed
+
+- Custom Table Settings menu now triggered by the column icon on the right side of the header row.
+- Ticket Submission: 'Organization' and 'Title' fields are now required
+- Fixed Ticket 'Submission Update' workflow to avoid possible looping.
+- Moved misleading filter icons from CustomTable headers to last table header.
+- Adjusted positioning on CustomTable Settings to prevent overflowing offscreen 
+- Fixed overflowing table styles from Reports/ReportTemplate.jsx
+
+## [0.3.1] - 2022-06-06
+
+### Added
+
+- New Custom Table with new theme and REST pattern.
+- Table hide/show columns menu to tableHeader onClick
+- Settings Reducer for holding custom user settings (not activated)
+
+### Changed
+
+- Card containers no longer have the box-shadow property
+
+### Removed
+
+- Removed MUI datatable
+
 ## [0.3.0] - 2022-06-01 
 ### Changed
 - Implemented new basic styling for
