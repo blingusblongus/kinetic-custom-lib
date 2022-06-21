@@ -7,16 +7,17 @@ import TeamsButton from '../TeamsButton/TeamsButton';
 import ClientPanel from './ClientPanel/ClientPanel';
 import { getAttachmentDownload } from '../../../../customUtils/utils';
 
+const {
+  ORGANIZATION,
+  HOURS_WORKED,
+  BILLING_PERIOD,
+  MONTHLY_HOURS,
+  ANNUAL_HOURS,
+  BILLING_START,
+} = FORM_FIELDS;
+
 const ClientOverview = () => {
   const [data, setData] = useState({});
-  const {
-    ORGANIZATION,
-    HOURS_WORKED,
-    BILLING_PERIOD,
-    MONTHLY_HOURS,
-    ANNUAL_HOURS,
-    BILLING_START,
-  } = FORM_FIELDS;
 
   useEffect(() => {
     const fetchBurndownInfo = async () => {

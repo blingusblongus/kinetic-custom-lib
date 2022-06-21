@@ -1,5 +1,5 @@
 import React from 'react';
-import { format } from 'date-fns';
+import { format, addMonths, addYears } from 'date-fns';
 import './ReportTemplate.scss';
 import { useSelector } from 'react-redux';
 import { FORM_FIELDS } from '../../../globals/globals';
@@ -8,6 +8,7 @@ import { getAttachmentDownload } from '../../../../customUtils/utils';
 const {
   ORGANIZATION,
   MONTHLY_HOURS,
+  ANNUAL_HOURS,
   BILLING_START,
   BILLING_PERIOD,
 } = FORM_FIELDS;
@@ -15,9 +16,13 @@ const {
 const ReportTemplate = ({ orgData, startDate, endDate }) => {
   console.log(orgData);
   const client = orgData[ORGANIZATION];
-  const monthlyHours = orgData[MONTHLY_HOURS];
+  const totalHours = orgData[MONTHLY_HOURS] || orgData[ANNUAL_HOURS];
   const logoUrl = getAttachmentDownload(orgData['Logo']);
+  const annualBilling = orgData[BILLING_PERIOD] === 'Annually';
   const billingStartDate = orgData[BILLING_START];
+  const billingEndDate = annualBilling
+    ? addYears(billingStartDate, 1)
+    : addMonths(billingStartDate, 1);
   const worklogs = orgData['worklogs'];
   const hoursWorked = orgData['hoursWorked'];
 
@@ -63,12 +68,23 @@ const ReportTemplate = ({ orgData, startDate, endDate }) => {
           <div>Report Prepared On: </div>
           <div>{format(today, dateFormat)}</div>
 
-          <div>Date Range:</div>
+          <div>Report Date Range:</div>
           <div>
             {format(startDate, dateFormat)} - {format(endDate, dateFormat)}
           </div>
+
+          {/* <div>Billing Period:</div>
+          <div>{format(billingStartDate, dateFormat) + " - " +
+            format(billingEndDate, dateFormat)}</div>
+
+          <div>Total Hours This Period:</div>
+          <div>{totalHours}</div> */}
+
           <div>Hours Consumed:</div>
           <div>{hoursWorked}</div>
+
+          {/* <div>Hours Remaining:</div>
+          <div>{totalHours - hoursWorked}</div> */}
         </div>
 
         <h3>Work Details</h3>
