@@ -37,7 +37,6 @@ const ClientPanel = ({ orgInfo }) => {
       </div>
       <div
         className="burndown-footer"
-        // onClick={()=>setModal({show: true, submissions})}
         onClick={() =>
           history.push(
             `/kapps/${SLUGS.KAPPSLUG}/forms/${SLUGS.CLIENTS_FORM_SLUG}/${id}`,

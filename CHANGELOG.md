@@ -5,10 +5,13 @@
 ### Added
 
 - 'Clients' form allows differentiation between monthly and hourly billing cycles.
+- Add more visibility to ClientOverview Panels: Billing Period, Billing Period Start.
 
 ### Changed
 
 - 'Clients' form hours info now displays conditionally, and is required when displayed.
+- ClientOverview Panels now accurately show only hours worked since the Billing Period Start
+- Refactored ClientPanelItems into own subcomponents.
 
 ## [0.4.0] - 2022-06-17
 
