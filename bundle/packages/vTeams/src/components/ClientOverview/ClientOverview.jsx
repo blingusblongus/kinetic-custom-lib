@@ -3,7 +3,6 @@ import { SubmissionSearch } from '@kineticdata/react';
 import { getPaginated } from '../../lib/utils';
 import { SLUGS, FORM_FIELDS } from '../../../globals/globals';
 import './ClientOverview.scss';
-// import WorkLogList from './WorkLogList/WorkLogList';
 import TeamsButton from '../TeamsButton/TeamsButton';
 import ClientPanel from './ClientPanel/ClientPanel';
 import { getAttachmentDownload } from '../../../../customUtils/utils';
@@ -18,7 +17,6 @@ const ClientOverview = () => {
     ANNUAL_HOURS,
     BILLING_START,
   } = FORM_FIELDS;
-  //   const [modal, setModal] = useState({ show: true, submissions: [] });
 
   useEffect(() => {
     const fetchBurndownInfo = async () => {
@@ -37,7 +35,7 @@ const ClientOverview = () => {
       const hash = {};
       for (let submission of clientInfo) {
         const org = submission.values[ORGANIZATION];
-        console.log('org', submission.values);
+
         if (!org) continue;
 
         //Transform data
@@ -74,8 +72,6 @@ const ClientOverview = () => {
         form: SLUGS.ACTIVITIES_FORM_SLUG,
         search,
       });
-
-      console.log('worklogs', worklogs);
 
       for (let log of worklogs) {
         if (!log) continue;
@@ -116,11 +112,6 @@ const ClientOverview = () => {
           })}
         </div>
       </div>
-
-      {/* {modal.show && <WorkLogList 
-        submissions={modal.submissions}
-        setModal={setModal}
-        />} */}
     </>
   );
 };
