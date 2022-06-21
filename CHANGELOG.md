@@ -6,6 +6,7 @@
 
 - 'Clients' form allows differentiation between monthly and hourly billing cycles.
 - Add more visibility to ClientOverview Panels: Billing Period, Billing Period Start.
+- Add behind-the-scenes code to ReportTemplate to support future Billing Period Metrics
 
 ### Changed
 
