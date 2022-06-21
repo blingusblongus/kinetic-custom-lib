@@ -12,6 +12,8 @@
 - 'Clients' form hours info now displays conditionally, and is required when displayed.
 - ClientOverview Panels now accurately show only hours worked since the Billing Period Start
 - Refactored ClientPanelItems into own subcomponents.
+- BurndownChart now charts from the Billing Period start until the current day.
+- BurndownChart updated to handle Annual Billing Data as well.
 
 ## [0.4.0] - 2022-06-17
 
