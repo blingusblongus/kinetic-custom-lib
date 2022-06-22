@@ -141,7 +141,7 @@ export const EditProfileComponent = ({
                     ))}
                   </select>
                 </div>
-                {defaultKappDisplayEnabled && (
+                {/* {defaultKappDisplayEnabled && (
                   <div className="form-group col-md-6">
                     <label htmlFor="defaultKappDisplay">
                       <I18n>Default Kapp Display</I18n>
@@ -169,7 +169,7 @@ export const EditProfileComponent = ({
                       )}
                     />
                   </div>
-                )}
+                )} */}
               </div>
               {editingPassword ? (
                 <div>
@@ -322,7 +322,7 @@ export const EditProfileComponent = ({
             </section>
           )}
 
-          <section className="mt-5">
+          {/* <section className="mt-5">
             <h2 className="section__title">
               <span className="title">
                 <I18n>Roles</I18n>
@@ -359,7 +359,7 @@ export const EditProfileComponent = ({
                 <EmptyMessage title="No Teams Assigned" />
               )}
             </div>
-          </section>
+          </section> */}
         </div>
       </Fragment>
     )}
