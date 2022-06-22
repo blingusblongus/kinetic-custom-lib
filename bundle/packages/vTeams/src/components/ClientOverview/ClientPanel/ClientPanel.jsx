@@ -4,6 +4,7 @@ import { history } from '@kineticdata/react';
 import ClientPanelItem from './ClientPanelItem';
 
 const ClientPanel = ({ orgInfo }) => {
+  console.log(orgInfo);
   const { logo, name, id } = orgInfo;
   const {
     BILLING_PERIOD,
@@ -11,10 +12,43 @@ const ClientPanel = ({ orgInfo }) => {
     ANNUAL_HOURS,
     BILLING_START,
     HOURS_WORKED,
+    COMBINED_HOURS,
+    CARRYOVER_TYPE,
+    CARRYOVER_HOURS,
+    PERCENTAGE_CARRYOVER,
+    FIXED_CARRYOVER,
   } = FORM_FIELDS;
 
-  const totalHours = orgInfo[MONTHLY_HOURS] || orgInfo[ANNUAL_HOURS];
+  const periodHours = orgInfo[MONTHLY_HOURS] || orgInfo[ANNUAL_HOURS];
+  const totalHours =
+    Number(periodHours) + Number(orgInfo[CARRYOVER_HOURS] || 0);
   const hoursRemaining = totalHours - orgInfo[HOURS_WORKED];
+
+  let carryoverItem;
+  switch (orgInfo[CARRYOVER_TYPE]) {
+    case 'Percentage':
+      carryoverItem = (
+        <ClientPanelItem
+          label="Carryover Rule"
+          value={`${orgInfo[PERCENTAGE_CARRYOVER]}%`}
+        />
+      );
+      break;
+    case 'Fixed':
+      carryoverItem = (
+        <ClientPanelItem
+          label="Carryover Rule"
+          value={`${orgInfo[FIXED_CARRYOVER]} hours`}
+        />
+      );
+      break;
+    case 'None':
+      break;
+    default:
+      carryoverItem = (
+        <ClientPanelItem label="Carryover Rule" value={`Not Set`} />
+      );
+  }
 
   return (
     <div className="burndown-panel">
@@ -30,6 +64,12 @@ const ClientPanel = ({ orgInfo }) => {
         <ClientPanelItem
           label="Billing Period Start"
           value={orgInfo[BILLING_START]}
+        />
+        <ClientPanelItem label="Billing Period Hours" value={periodHours} />
+        {carryoverItem}
+        <ClientPanelItem
+          label="Hours Carried Over"
+          value={orgInfo[CARRYOVER_HOURS] || 0}
         />
         <ClientPanelItem label="Total Hours" value={totalHours} />
         <ClientPanelItem label="Hours Used" value={orgInfo[HOURS_WORKED]} />

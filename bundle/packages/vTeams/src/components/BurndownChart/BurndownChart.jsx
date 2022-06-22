@@ -21,6 +21,7 @@ const {
   HOURS_WORKED,
   MONTHLY_HOURS,
   ANNUAL_HOURS,
+  COMBINED_HOURS,
 } = FORM_FIELDS;
 
 const BurndownChart = ({ clientData, worklogs }) => {
@@ -33,9 +34,10 @@ const BurndownChart = ({ clientData, worklogs }) => {
     : addMonths(startDate, 1);
   const data = [];
   let d = startDate;
-  let totalHours = annualBilling
-    ? clientData[ANNUAL_HOURS]
-    : clientData[MONTHLY_HOURS];
+  let totalHours = Number(
+    clientData[COMBINED_HOURS] ||
+      (annualBilling ? clientData[ANNUAL_HOURS] : clientData[MONTHLY_HOURS]),
+  );
 
   const today = new Date();
   while (d < today) {
