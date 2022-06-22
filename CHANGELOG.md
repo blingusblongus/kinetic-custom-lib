@@ -7,6 +7,8 @@
 - 'Clients' form allows differentiation between monthly and hourly billing cycles.
 - Add more visibility to ClientOverview Panels: Billing Period, Billing Period Start.
 - Add behind-the-scenes code to ReportTemplate to support future Billing Period Metrics
+- Add ability to automatically calculate and carry over unused hours from one period to the next, either by percentage or fixed maximum.
+- ClientOverview Cards now also show the carryover hours and related info.
 
 ### Changed
 
@@ -16,6 +18,7 @@
 - BurndownChart now charts from the Billing Period start until the current day.
 - BurndownChart updated to handle Annual Billing Data as well.
 - getAttachmentDownload util accepts the referenced attachment object, rather than the submission (allows for more flexible usage).
+- BurndownChart will use the Combined Hours if hours are carried over from a previous month.
 
 ## [0.4.0] - 2022-06-17
 
