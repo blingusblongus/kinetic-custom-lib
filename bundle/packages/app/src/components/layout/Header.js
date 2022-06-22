@@ -27,8 +27,8 @@ const HeaderComponent = props => (
 
     <div className="mr-auto" aria-hidden="true" />
 
-    {props.authenticated && <SearchBar modal={props.mobile} />}
-    {props.authenticated && !props.alertsDisabled && <AlertsDropdown />}
+    {/* {props.authenticated && <SearchBar modal={props.mobile} />} */}
+    {/* {props.authenticated && !props.alertsDisabled && <AlertsDropdown />} */}
     {props.authenticated && <ProfileDropdown />}
     {!props.authenticated && (
       <Link className="nav-link" to={props.authRoute} title="Sign In">
