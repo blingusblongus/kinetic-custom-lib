@@ -20,6 +20,12 @@
 - getAttachmentDownload util accepts the referenced attachment object, rather than the submission (allows for more flexible usage).
 - BurndownChart will use the Combined Hours if hours are carried over from a previous month.
 
+### Removed
+
+- Deactivated Notifications link in header
+- Deactivated leftover Queue search bar
+- Deactivated unnecessary items in Profile Menu and EditProfile page
+
 ## [0.4.0] - 2022-06-17
 
 ### Added
