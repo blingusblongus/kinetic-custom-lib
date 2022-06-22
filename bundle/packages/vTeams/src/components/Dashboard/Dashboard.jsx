@@ -11,6 +11,7 @@ import QuickLook from '../QuickLook/QuickLook';
 const Dashboard = () => {
   const worklogs = useSelector(store => store.workLogs);
   const clientData = useSelector(store => store.organization);
+  console.log('clientData store', clientData);
 
   const userProfile = useSelector(store => store.app.profile);
   const fulfiller = isMemberOf(userProfile, 'vTeams');

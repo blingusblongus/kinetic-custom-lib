@@ -18,6 +18,7 @@
 - BurndownChart now charts from the Billing Period start until the current day.
 - BurndownChart updated to handle Annual Billing Data as well.
 - getAttachmentDownload util accepts the referenced attachment object, rather than the submission (allows for more flexible usage).
+- BurndownChart will use the Combined Hours if hours are carried over from a previous month.
 
 ## [0.4.0] - 2022-06-17
 
