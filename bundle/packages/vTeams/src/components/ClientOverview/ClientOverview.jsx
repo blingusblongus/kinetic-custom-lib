@@ -14,6 +14,11 @@ const {
   MONTHLY_HOURS,
   ANNUAL_HOURS,
   BILLING_START,
+  COMBINED_HOURS,
+  CARRYOVER_HOURS,
+  CARRYOVER_TYPE,
+  PERCENTAGE_CARRYOVER,
+  FIXED_CARRYOVER,
 } = FORM_FIELDS;
 
 const ClientOverview = () => {
@@ -49,6 +54,11 @@ const ClientOverview = () => {
             id: submission.id,
             [BILLING_PERIOD]: submission.values[BILLING_PERIOD] || 'Monthly',
             [BILLING_START]: submission.values[BILLING_START],
+            [CARRYOVER_HOURS]: submission.values[CARRYOVER_HOURS],
+            [COMBINED_HOURS]: submission.values[COMBINED_HOURS],
+            [CARRYOVER_TYPE]: submission.values[CARRYOVER_TYPE],
+            [FIXED_CARRYOVER]: submission.values[FIXED_CARRYOVER],
+            [PERCENTAGE_CARRYOVER]: submission.values[PERCENTAGE_CARRYOVER],
           };
 
           submission.values[BILLING_PERIOD] === 'Annually'

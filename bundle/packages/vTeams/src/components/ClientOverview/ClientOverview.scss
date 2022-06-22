@@ -53,10 +53,15 @@ $img-dimensions: 70px;
         display: flex;
         justify-content: space-between;
         width: 100%;
-        padding: 15px;
+        padding: 5px 10px;
+        border-bottom: 1px solid $bg-secondary;
 
         .burndown-item--header {
           font-weight: $weight-heavy;
+        }
+
+        &:last-child {
+          border-bottom: none;
         }
       }
     }

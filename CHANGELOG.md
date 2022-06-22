@@ -7,6 +7,8 @@
 - 'Clients' form allows differentiation between monthly and hourly billing cycles.
 - Add more visibility to ClientOverview Panels: Billing Period, Billing Period Start.
 - Add behind-the-scenes code to ReportTemplate to support future Billing Period Metrics
+- Add ability to automatically calculate and carry over unused hours from one period to the next, either by percentage or fixed maximum.
+- ClientOverview Cards now also show the carryover hours and related info.
 
 ### Changed
 
