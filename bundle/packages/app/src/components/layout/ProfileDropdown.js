@@ -67,7 +67,7 @@ const ProfileDropdownComponent = ({
         >
           <I18n>Profile</I18n>
         </Link>
-        {profile.spaceAdmin && (
+        {/* {profile.spaceAdmin && (
           <button
             onClick={openInviteOthersForm}
             className="dropdown-item"
@@ -75,7 +75,7 @@ const ProfileDropdownComponent = ({
           >
             <I18n>Invite Others</I18n>
           </button>
-        )}
+        )} */}
         <button
           onClick={openHelpForm}
           className="dropdown-item"
@@ -100,7 +100,7 @@ const ProfileDropdownComponent = ({
             <I18n>About My Space</I18n>
           </Link>
         )}
-        {hasTeamAccess && (
+        {/* {hasTeamAccess && (
           <Link
             to="/teams"
             className="dropdown-item"
@@ -109,7 +109,7 @@ const ProfileDropdownComponent = ({
           >
             <I18n>Teams</I18n>
           </Link>
-        )}
+        )} */}
         <hr />
         <button onClick={logout} className="dropdown-item" role="menuitem">
           <I18n>Logout</I18n>
