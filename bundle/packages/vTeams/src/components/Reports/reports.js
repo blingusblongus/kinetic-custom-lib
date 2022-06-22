@@ -1,5 +1,4 @@
 import { searchSubmissions, SubmissionSearch } from '@kineticdata/react';
-import { getPaginated } from '../../lib/utils';
 import { SLUGS } from '../../../globals/globals';
 import axios from 'axios';
 
@@ -42,7 +41,7 @@ export const getReportInfoByDateRange = async (startDate, endDate) => {
       worklogSubmissions.forEach(sub => {
         let org = sub.values['Organization'];
 
-        if (!org) return;
+        if (!org || sub.values['isWorkLog'] !== 'true') return;
         if (!reportData[org])
           reportData = { ...reportData, [org]: { worklogs: [] } };
 
