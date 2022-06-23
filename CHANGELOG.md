@@ -20,7 +20,7 @@
 - BurndownChart updated to handle Annual Billing Data as well.
 - getAttachmentDownload util accepts the referenced attachment object, rather than the submission (allows for more flexible usage).
 - BurndownChart will use the Combined Hours if hours are carried over from a previous month.
-- Assignee field now displays displayName and stores userName
+- Assignee field now displays displayName and stores userName in hidden field
 
 ### Removed
 
