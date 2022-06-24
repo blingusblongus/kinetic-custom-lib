@@ -12,6 +12,7 @@
 - Add automatically-set 'Requested By' Field to vteams-ticket form.
 - Add dynamic page titles based on hash location
 - Add optional Request Type (Bug, Feature, Enhancement) to Ticket form
+- Add ability for clients to generate their own reports via 'Reports' view accessible from the sidebar
 
 ### Changed
 
@@ -23,6 +24,7 @@
 - getAttachmentDownload util accepts the referenced attachment object, rather than the submission (allows for more flexible usage).
 - BurndownChart will use the Combined Hours if hours are carried over from a previous month.
 - Assignee field now displays displayName and stores userName in hidden field
+- Changed Client Report title, as it's no longer necessarily weekly
 
 ### Removed
 
