@@ -217,30 +217,33 @@ const SidebarComponent = props => {
           </SidebarLink>
         )} */}
       </div>
-      <div className="app-sidebar__group app-sidebar__group--static mt-auto">
-        <div className="action-wrapper">
-          <Link to="/settings">
-            <span className="fa fa-cogs" />
-            <span className="title">Settings</span>
-          </Link>
-          {kappSettingsList.length > 0 && (
-            <UncontrolledDropdown
-              direction={props.isSmallLayout ? 'up' : 'right'}
-            >
-              <DropdownToggle className="dropdown-toggle">
-                <span className={classNames('fa fa-angle-right')} />
-              </DropdownToggle>
-              <DropdownMenu>
-                {kappSettingsList.map(link => (
-                  <DropdownItem tag={Link} to={link.to} key={link.label}>
-                    <span className="title">{link.label}</span>
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          )}
+
+      {isMemberOf(props.profile, 'vTeams') && (
+        <div className="app-sidebar__group app-sidebar__group--static mt-auto">
+          <div className="action-wrapper">
+            <Link to="/settings">
+              <span className="fa fa-cogs" />
+              <span className="title">Settings</span>
+            </Link>
+            {kappSettingsList.length > 0 && (
+              <UncontrolledDropdown
+                direction={props.isSmallLayout ? 'up' : 'right'}
+              >
+                <DropdownToggle className="dropdown-toggle">
+                  <span className={classNames('fa fa-angle-right')} />
+                </DropdownToggle>
+                <DropdownMenu>
+                  {kappSettingsList.map(link => (
+                    <DropdownItem tag={Link} to={link.to} key={link.label}>
+                      <span className="title">{link.label}</span>
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

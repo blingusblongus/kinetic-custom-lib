@@ -4,7 +4,6 @@ import { history } from '@kineticdata/react';
 import ClientPanelItem from './ClientPanelItem';
 
 const ClientPanel = ({ orgInfo }) => {
-  console.log(orgInfo);
   const { logo, name, id } = orgInfo;
   const {
     BILLING_PERIOD,
