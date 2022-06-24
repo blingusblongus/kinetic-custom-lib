@@ -25,6 +25,7 @@
 - BurndownChart will use the Combined Hours if hours are carried over from a previous month.
 - Assignee field now displays displayName and stores userName in hidden field
 - Changed Client Report title, as it's no longer necessarily weekly
+- Fixed uneven BurndownChart margins
 
 ### Removed
 
