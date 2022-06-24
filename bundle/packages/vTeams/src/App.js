@@ -138,12 +138,19 @@ const AppComponent = props => {
   } else if (props.loading) {
     return <Loading text="App is loading ..." />;
   } else {
+    let title = window.location.hash.match(/(?<=\/vteams\/)\w*/g)[0];
+
+    title =
+      title.length > 1
+        ? title.charAt(0).toUpperCase() + title.substr(1)
+        : title.toUpperCase();
+
     return props.render({
       main: (
         <I18n>
           <ThemeProvider theme={THEME}>
             <div className="package-layout package-layout--vteams">
-              <PageTitle parts={['Loading...']} />
+              <PageTitle parts={[title]} />
               <div className="page-container">
                 <Router>
                   <FormView path="/forms/:formSlug" />
