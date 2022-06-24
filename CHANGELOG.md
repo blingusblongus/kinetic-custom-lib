@@ -10,6 +10,8 @@
 - Add ability to automatically calculate and carry over unused hours from one period to the next, either by percentage or fixed maximum.
 - ClientOverview Cards now also show the carryover hours and related info.
 - Add automatically-set 'Requested By' Field to vteams-ticket form.
+- Add dynamic page titles based on hash location
+- Add optional Request Type (Bug, Feature, Enhancement) to Ticket form
 
 ### Changed
 
