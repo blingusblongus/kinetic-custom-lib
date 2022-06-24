@@ -32,6 +32,7 @@
 - Deactivated Notifications link in header
 - Deactivated leftover Queue search bar
 - Deactivated unnecessary items in Profile Menu and EditProfile page
+- Deactivated Settings tab from sidebar for clients
 
 ## [0.4.0] - 2022-06-17
 
