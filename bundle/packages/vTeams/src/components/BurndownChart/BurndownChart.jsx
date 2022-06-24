@@ -25,7 +25,6 @@ const {
 } = FORM_FIELDS;
 
 const BurndownChart = ({ clientData, worklogs }) => {
-  console.log(clientData);
   if (!clientData || Object.keys(clientData).length < 1) return null;
   const startDate = Date.parse(clientData[BILLING_START]);
   const annualBilling = clientData[BILLING_PERIOD] === 'Annually';

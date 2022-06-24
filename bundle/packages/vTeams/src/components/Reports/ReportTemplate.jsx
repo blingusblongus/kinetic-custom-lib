@@ -56,7 +56,7 @@ const ReportTemplate = ({ orgData, startDate, endDate }) => {
             <div>Transforming Your Business Workflows on the Now Platform</div>
           </div>
         </header>
-        <h1>Weekly Client Report</h1>
+        <h1>Client Report</h1>
         <h2>{client}</h2>
 
         <div className="logo-container">

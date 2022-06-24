@@ -6,12 +6,15 @@ import ReportTemplate from './ReportTemplate';
 import { useSelector } from 'react-redux';
 import { subDays } from 'date-fns';
 import TeamsButton from '../TeamsButton/TeamsButton';
+import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 
 const Reports = () => {
+  const userProfile = useSelector(store => store.app.profile);
+  const fulfiller = isMemberOf(userProfile, 'vTeams');
   const clients = useSelector(store => store.clients);
-  const clientList = clients?.submissions.map(
-    client => client.values['Organization'],
-  );
+  const clientList = fulfiller
+    ? clients?.submissions.map(client => client.values['Organization'])
+    : userProfile.attributes.find(attr => attr.name == 'Organization').values;
 
   const today = new Date();
   const lastWeek = subDays(today, 7);
@@ -76,7 +79,7 @@ const Reports = () => {
               }
             }}
           >
-            <option value="all">All</option>
+            {fulfiller && <option value="all">All</option>}
             {clientList.map(client => {
               return (
                 <option value={client} key={client}>
