@@ -18,6 +18,13 @@ export const FORM_FIELDS = {
   DATE_DUE: 'Requested Date Due',
   DESCRIPTION: 'Description',
   STATUS: 'Status',
+  BILLING_PERIOD: 'Billing Period',
+  ANNUAL_HOURS: 'Annual Hours',
+  COMBINED_HOURS: 'Combined Hours',
+  CARRYOVER_HOURS: 'Carryover Hours',
+  CARRYOVER_TYPE: 'Carryover Type',
+  PERCENTAGE_CARRYOVER: 'Percentage Carryover',
+  FIXED_CARRYOVER: 'Fixed Carryover Hours',
 }
 
 export const NAMES = {

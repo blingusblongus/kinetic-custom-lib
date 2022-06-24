@@ -36,13 +36,12 @@ export const parsePriority = (num) => {
 
 /**
  * 
- * @param {obj} submission A KineticData submission object with included values
- * @param {str} field The field name of the attachment to retrieve
+ * @param {obj} attachment The object referenced by a submission attachment field
  * @param {int} index The index of the attachment file to retrieve
  * @returns A link pointing toward the attachment resource
  */
-export const getAttachmentDownload = (submission, field, index=0) => {
+export const getAttachmentDownload = (attachment, index=0) => {
     const host = window.location.host + '/';
-    const link = submission.values?.[field]?.[index].link
+    const link = attachment?.[index].link
     return 'http://' + link?.replace(/\/.*?\//, host);
 }

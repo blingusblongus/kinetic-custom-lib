@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.5.0] - WIP
+
+### Added
+
+- 'Clients' form allows differentiation between monthly and hourly billing cycles.
+- Add more visibility to ClientOverview Panels: Billing Period, Billing Period Start.
+- Add behind-the-scenes code to ReportTemplate to support future Billing Period Metrics
+- Add ability to automatically calculate and carry over unused hours from one period to the next, either by percentage or fixed maximum.
+- ClientOverview Cards now also show the carryover hours and related info.
+- Add automatically-set 'Requested By' Field to vteams-ticket form.
+- Add dynamic page titles based on hash location
+- Add optional Request Type (Bug, Feature, Enhancement) to Ticket form
+- Add ability for clients to generate their own reports via 'Reports' view accessible from the sidebar
+
+### Changed
+
+- 'Clients' form hours info now displays conditionally, and is required when displayed.
+- ClientOverview Panels now accurately show only hours worked since the Billing Period Start
+- Refactored ClientPanelItems into own subcomponents.
+- BurndownChart now charts from the Billing Period start until the current day.
+- BurndownChart updated to handle Annual Billing Data as well.
+- getAttachmentDownload util accepts the referenced attachment object, rather than the submission (allows for more flexible usage).
+- BurndownChart will use the Combined Hours if hours are carried over from a previous month.
+- Assignee field now displays displayName and stores userName in hidden field
+- Changed Client Report title, as it's no longer necessarily weekly
+- Fixed uneven BurndownChart margins
+
+### Removed
+
+- Deactivated Notifications link in header
+- Deactivated leftover Queue search bar
+- Deactivated unnecessary items in Profile Menu and EditProfile page
+
 ## [0.4.0] - 2022-06-17
 
 ### Added

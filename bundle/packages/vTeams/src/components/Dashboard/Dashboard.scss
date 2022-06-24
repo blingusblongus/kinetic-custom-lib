@@ -3,7 +3,13 @@
 .dashboard {
   height: 70vh;
   min-height: 300px;
-  margin-bottom: 500px;
+  margin-bottom: 400px;
+
+  .stats {
+    .stats-label {
+      transform: rotate(90deg);
+    }
+  }
 
   .chart-wrapper {
     width: 100%;
