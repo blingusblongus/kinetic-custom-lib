@@ -1,10 +1,10 @@
 # Changelog
 
-## [0.5.0] - WIP
+## [0.5.0] - 2022-06-24
 
 ### Added
 
-- 'Clients' form allows differentiation between monthly and hourly billing cycles.
+- 'Clients' form allows differentiation between monthly and annual billing cycles.
 - Add more visibility to ClientOverview Panels: Billing Period, Billing Period Start.
 - Add behind-the-scenes code to ReportTemplate to support future Billing Period Metrics
 - Add ability to automatically calculate and carry over unused hours from one period to the next, either by percentage or fixed maximum.
@@ -16,7 +16,7 @@
 
 ### Changed
 
-- 'Clients' form hours info now displays conditionally, and is required when displayed.
+- 'Clients' form annual/monthly input now displays conditionally, and is required when displayed.
 - ClientOverview Panels now accurately show only hours worked since the Billing Period Start
 - Refactored ClientPanelItems into own subcomponents.
 - BurndownChart now charts from the Billing Period start until the current day.
