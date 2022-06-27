@@ -9,7 +9,8 @@ import { updateSubmission, fetchSubmission } from '@kineticdata/react';
 const Activity = ({ submission, reFetch, setReFetch }) => {
   const [loading, setLoading] = useState(false);
   let { values, submittedAt } = submission;
-  const [date, time] = submittedAt.split('T');
+  const [date, time] = submittedAt.toLocaleString().split('T');
+  console.log(date, time);
   const [editMode, setEditMode] = useState(false);
   const [updateInfo, setUpdateInfo] = useState({
     [FORM_FIELDS.HOURS_WORKED]: submission.values[FORM_FIELDS.HOURS_WORKED],
