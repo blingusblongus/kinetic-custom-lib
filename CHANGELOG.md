@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.0] - WIP
+
+### Changed
+
+- Comment dates are now localized, with better formatting.
+
 ## [0.5.1] - WIP
 
 ### Changed
