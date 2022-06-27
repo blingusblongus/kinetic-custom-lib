@@ -26,6 +26,8 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [filterOptions, setFilterOptions] = useState({});
   const [showFilter, setShowFilter] = useState(false);
   const userProfile = useSelector(store => store.app.profile);
+  const [perPage, setPerPage] = useState(25);
+  const [pageStart, setPageStart] = useState(0);
 
   const dateFormat = 'M/d/YY';
 
@@ -85,6 +87,16 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       return a > b ? -1 : 1;
     }
   });
+
+  const paginatedSubmissions = sortedSubmissions?.slice(
+    pageStart,
+    pageStart + perPage,
+  );
+  const pages = Math.ceil(sortedSubmissions?.length / perPage);
+  const pageArr = [];
+  for (let i = 0; i < pages; i++) {
+    pageArr.push(i + 1);
+  }
 
   const [visible, setVisible] = useState([
     'Submitted At',
@@ -232,7 +244,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
           )}
         </thead>
         <tbody>
-          {sortedSubmissions?.map((submission, i) => {
+          {paginatedSubmissions?.map((submission, i) => {
             const id = submission.id;
             return (
               <tr key={i} onClick={() => handleRowClick(id)}>
@@ -253,7 +265,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
           })}
 
           {/* Empty Submission Display */}
-          {sortedSubmissions?.length < 1 && (
+          {paginatedSubmissions?.length < 1 && (
             <tr>
               <td className="no-ticket-msg" colSpan="100%">
                 No Tickets to Display
@@ -262,6 +274,42 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
           )}
         </tbody>
       </table>
+
+      {/* Pagination Options */}
+      {/* <select name="pagination-number"
+        value={perPage}
+        onChange={(e) => setPerPage(e.target.value)}>
+        <option value={10}>10</option>
+        <option value={25}>25</option>
+        <option value={50}>50</option>
+        <option value={100}>100</option>
+      </select> */}
+
+      <div className="pagination-controls">
+        <div className="pagination-controls--links">
+          {pageArr.map((el, i) => {
+            const page = Math.floor(pageStart / perPage);
+            return (
+              <a
+                key={i}
+                onClick={() => setPageStart((Number(el) - 1) * perPage)}
+                className={page == i ? 'selected' : ''}
+              >
+                {el}
+              </a>
+            );
+          })}
+        </div>
+        <div className="per-page-input-container">
+          <label htmlFor="per-page__input">Tickets Per Page: </label>
+          <input
+            type="number"
+            id="per-page__input"
+            value={perPage}
+            onChange={e => setPerPage(Number(e.target.value))}
+          />
+        </div>
+      </div>
 
       {showSettings && (
         <Settings
