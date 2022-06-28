@@ -4,12 +4,12 @@
 
 ### Changed
 
-- Comment dates are now localized, with better formatting.
 
-## [0.5.1] - WIP
+## [0.6.0] - 2022-06-28
 
 ### Changed
 
+- Comment dates are now localized, with better formatting.
 - Ticket form now requires an Assignee to be provided when Status is set to 'In Progress'
 - Organization field now only visible to fulfillers, never to Clients
 - Fixed bug where Requested By field was being overwritten when non-editable
