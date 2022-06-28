@@ -44,7 +44,7 @@ Fulfillers:
   3. run `export.rb -c "./config/servername_environment_export_config.yml"`
   4. run `import.rb -c "./config/servername_environment_import_config.yml"`
   5. If updates require stored resources (like email templates), clone and copy them manually:
-      1. If the resources are new (not present in the target datastore), export submissions for the datastore form on the source instance, and import them on the matching target datastore form. Errors will display for templates, etc. that already exist on the target instance, but the new templates will be successfully added. 
+      1. If the resources are new (not present in the target datastore), export submissions for the datastore form on the source instance, and import them on the matching target datastore form. Errors will display for templates, etc. that already exist on the target instance, but the new templates will be successfully added. (This can also be avoided by opening the exported .csv in a spreadsheet app and editing it).
       2. If the resources are already present on the target instance, and just require updating, they must be deleted from the target instance before importing from the source instance.
 
   Frontend:
