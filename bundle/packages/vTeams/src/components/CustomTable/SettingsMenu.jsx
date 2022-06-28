@@ -19,6 +19,7 @@ const Settings = React.forwardRef(
     //     console.log('you clicked inside me?');
     //   }
     // };
+    console.log(fields);
 
     return (
       <div
@@ -37,25 +38,26 @@ const Settings = React.forwardRef(
           </span>
         </div>
         {fields.map(field => {
-          let checked = visible.includes(field);
+          const name = field.name;
+          let checked = visible.includes(name);
 
           const handleCheck = () => {
             if (checked) {
-              setVisible(visible.filter(el => el != field));
+              setVisible(visible.filter(el => el != name));
             } else {
-              setVisible([...visible, field]);
+              setVisible([...visible, name]);
             }
           };
 
-          if (!columnExcludes.includes(field))
+          if (!columnExcludes.includes(name))
             return (
-              <div key={field}>
+              <div key={name}>
                 <input
                   type="checkbox"
                   checked={checked}
                   onChange={handleCheck}
                 />
-                <label>{field}</label>
+                <label>{name}</label>
               </div>
             );
         })}

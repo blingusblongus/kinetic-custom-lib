@@ -170,8 +170,16 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   useEffect(() => {
     defaultSearch();
 
-    fetchForm({ kappSlug: kapp, formSlug: form, include: 'fields,details' })
-      .then(({ form }) => setFields(form.fields.map(field => field.name)))
+    fetchForm({
+      kappSlug: kapp,
+      formSlug: form,
+      include: 'fields,details',
+      export: true,
+    })
+      .then(({ form }) => {
+        console.log('form', form);
+        setFields(form.pages[0].elements.filter(el => el.type === 'field'));
+      })
       .catch(err => console.error(err));
   }, []);
 
@@ -225,20 +233,67 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
           {showFilter && (
             <tr>
               {visible.map(f => {
-                return (
-                  <th key={f}>
-                    <input
-                      type="text"
-                      value={filterOptions[f] || ''}
-                      onChange={e => {
-                        setFilterOptions({
-                          ...filterOptions,
-                          [f]: e.target.value,
-                        });
-                      }}
-                    />
-                  </th>
-                );
+                console.log(fields);
+                const type = fields.find(field => field.name == f)?.renderType;
+                console.log('type', type);
+                switch (type) {
+                  case 'date':
+                    return (
+                      <th key={f}>
+                        <input
+                          type="date"
+                          value={filterOptions[f] || ''}
+                          onChange={e => {
+                            setFilterOptions({
+                              ...filterOptions,
+                              [f]: e.target.value,
+                            });
+                          }}
+                        />
+                      </th>
+                    );
+                  case 'dropdown':
+                    return (
+                      <th key={f}>
+                        <select
+                          value={filterOptions[f] || ''}
+                          onChange={e => {
+                            setFilterOptions({
+                              ...filterOptions,
+                              [f]: e.target.value,
+                            });
+                          }}
+                        >
+                          <option value="">All</option>
+                          {fields
+                            .find(field => field.name == f)
+                            .choices.map(choice => {
+                              return (
+                                <option key={choice.value} value={choice.value}>
+                                  {choice.label}
+                                </option>
+                              );
+                            })}
+                        </select>
+                      </th>
+                    );
+                  case 'text':
+                  default:
+                    return (
+                      <th key={f}>
+                        <input
+                          type="text"
+                          value={filterOptions[f] || ''}
+                          onChange={e => {
+                            setFilterOptions({
+                              ...filterOptions,
+                              [f]: e.target.value,
+                            });
+                          }}
+                        />
+                      </th>
+                    );
+                }
               })}
             </tr>
           )}
