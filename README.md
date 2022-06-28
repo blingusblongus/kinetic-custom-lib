@@ -43,7 +43,9 @@ Fulfillers:
   2. Edit `config/servername_environment_export_config.yml` and `config/servername_enviroment_import_config.yml` with space name, slug, and login info for both dev and prod instances
   3. run `export.rb -c "./config/servername_environment_export_config.yml"`
   4. run `import.rb -c "./config/servername_environment_import_config.yml"`
-  5. If updates require stored resources (like email templates), clone and copy them manually
+  5. If updates require stored resources (like email templates), clone and copy them manually:
+      1. If the resources are new (not present in the target datastore), export submissions for the datastore form on the source instance, and import them on the matching target datastore form. Errors will display for templates, etc. that already exist on the target instance, but the new templates will be successfully added. 
+      2. If the resources are already present on the target instance, and just require updating, they must be deleted from the target instance before importing from the source instance.
 
   Frontend:
   1. `git pull` any changes from the github repo
@@ -62,6 +64,7 @@ Fulfillers:
     </details>
     - Questions: What's the best practice for keeping things in sync when the data model on prod changes? Do we need scripting to cover our bases?
   - The bridge models broke after migration (though everything somehow still worked enough that I didn't notice until I tried to utilize the bridge models again). It seems the bridge plugins etc. don't get set-up or updated by default.
+  - Templates, and other resources that need to be specifically configured to work on the back-end, are not part of the normal development flow - they're easy to configure by a pro-code worker on a prod instance, but require being manually brought over/updated if they're designed on a dev instance (which seems important,  as they're likely included in flows that need to be tested).
  
  
 ## QA Testing
