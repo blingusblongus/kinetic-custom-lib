@@ -237,48 +237,54 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                 const type = fields.find(field => field.name == f)?.renderType;
                 console.log('type', type);
                 switch (type) {
-                  case 'date':
-                    return (
-                      <th key={f}>
-                        <input
-                          type="date"
-                          value={filterOptions[f] || ''}
-                          onChange={e => {
-                            setFilterOptions({
-                              ...filterOptions,
-                              [f]: e.target.value,
-                            });
-                          }}
-                        />
-                      </th>
-                    );
                   case 'dropdown':
-                    return (
-                      <th key={f}>
-                        <select
-                          value={filterOptions[f] || ''}
-                          onChange={e => {
-                            setFilterOptions({
-                              ...filterOptions,
-                              [f]: e.target.value,
-                            });
-                          }}
-                        >
-                          <option value="">All</option>
-                          {fields
-                            .find(field => field.name == f)
-                            .choices.map(choice => {
-                              return (
-                                <option key={choice.value} value={choice.value}>
-                                  {choice.label}
-                                </option>
-                              );
-                            })}
-                        </select>
-                      </th>
-                    );
+                    if (
+                      fields.find(field => field.name == f).choices.length > 0
+                    )
+                      return (
+                        <th key={f}>
+                          <select
+                            value={filterOptions[f] || ''}
+                            onChange={e => {
+                              setFilterOptions({
+                                ...filterOptions,
+                                [f]: e.target.value,
+                              });
+                            }}
+                          >
+                            <option value="">All</option>
+                            {fields
+                              .find(field => field.name == f)
+                              .choices.map(choice => {
+                                return (
+                                  <option
+                                    key={choice.value}
+                                    value={choice.value}
+                                  >
+                                    {choice.label}
+                                  </option>
+                                );
+                              })}
+                          </select>
+                        </th>
+                      );
+                  case 'date':
+                    // return (
+                    //   <th key={f}>
+                    //     <input
+                    //       type="date"
+                    //       value={filterOptions[f] || ''}
+                    //       onChange={e => {
+                    //         setFilterOptions({
+                    //           ...filterOptions,
+                    //           [f]: e.target.value,
+                    //         });
+                    //       }}
+                    //     />
+                    //   </th>
+                    // );
+                    return <th key={f} />;
                   case 'text':
-                  default:
                     return (
                       <th key={f}>
                         <input
@@ -293,6 +299,8 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                         />
                       </th>
                     );
+                  default:
+                    return <th key={f} />;
                 }
               })}
             </tr>
