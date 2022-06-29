@@ -47,7 +47,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [selectWhose, setSelectWhose] = useState('all');
   const [selectClientValue, setSelectClientValue] = useState('all');
 
-  const dateFormat = 'M/d/YY';
+  const dateFormat = 'M/D/YY';
 
   // sortMap is stopgap solution
   // better to figure out how to fetch mappings from the form itself
@@ -236,7 +236,6 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       export: true,
     })
       .then(({ form }) => {
-        console.log('form', form);
         setFields(form.pages[0].elements.filter(el => el.type === 'field'));
       })
       .catch(err => console.error(err));
@@ -440,7 +439,10 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                     !Number(submission.values[f]) &&
                     Date.parse(submission.values[f])
                   ) {
-                    content = format(submission.values[f], dateFormat);
+                    content = format(
+                      new Date(submission.values[f]),
+                      dateFormat,
+                    );
                   } else {
                     content = submission.values[f];
                   }
