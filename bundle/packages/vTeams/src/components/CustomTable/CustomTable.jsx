@@ -28,6 +28,14 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const userProfile = useSelector(store => store.app.profile);
   const [perPage, setPerPage] = useState(25);
   const [pageStart, setPageStart] = useState(0);
+  const [visible, setVisible] = useState([
+    'Submitted At',
+    'Requested Date Due',
+    'Title',
+    'Description',
+    'Status',
+    'Assignee',
+  ]);
 
   const dateFormat = 'M/d/YY';
 
@@ -42,6 +50,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     },
   };
 
+  // Filter submissions according to props.submitter
   const filteredSubmissions = searchResult.submissions?.filter(sub => {
     // handle optional submitter prop
     if (submitter) {
@@ -58,7 +67,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       }
     }
 
-    //generic filter
+    // Filter submissions by generic text filter
     for (let key in filterOptions) {
       const filterValue = filterOptions[key]?.toLowerCase();
       if (!filterValue) continue;
@@ -73,6 +82,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     return true;
   });
 
+  // sort submissions according to state.criteria & state.ascending
   const sortedSubmissions = filteredSubmissions?.sort((a, b) => {
     const { criteria, ascending } = sortOptions;
     a = sortMap[criteria]?.[a.values[criteria]] || a.values[criteria];
@@ -88,6 +98,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     }
   });
 
+  // Calculate pagination and build page number array
   const paginatedSubmissions = sortedSubmissions?.slice(
     pageStart,
     pageStart + perPage,
@@ -97,15 +108,6 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   for (let i = 0; i < pages; i++) {
     pageArr.push(i + 1);
   }
-
-  const [visible, setVisible] = useState([
-    'Submitted At',
-    'Requested Date Due',
-    'Title',
-    'Description',
-    'Status',
-    'Assignee',
-  ]);
 
   const tableRef = useRef(null);
   const settingsRef = useRef(null);
@@ -137,10 +139,6 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     } else {
       setSortOptions({ ...sortOptions, criteria: field });
     }
-  };
-
-  const handleFilterClick = (e, field) => {
-    e.stopPropagation();
   };
 
   // Set settings menu position and open it (or close it)
@@ -191,6 +189,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       <table ref={tableRef}>
         <thead>
           <tr>
+            {/* Conditional Header Rendering, based on state.visible */}
             {visible.map(f => {
               return (
                 <th key={f} onClick={() => handleHeaderClick(f)}>
@@ -203,7 +202,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                         ) : (
                           <span className="arrow">&darr;</span>
                         ))}
-                      <span onClick={e => handleFilterClick(e, f)}>
+                      <span>
                         {filterOptions[f] && (
                           <i
                             className="fa fa-filter"
@@ -300,7 +299,20 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                       </th>
                     );
                   default:
-                    return <th key={f} />;
+                    return (
+                      <th key={f}>
+                        <input
+                          type="text"
+                          value={filterOptions[f] || ''}
+                          onChange={e => {
+                            setFilterOptions({
+                              ...filterOptions,
+                              [f]: e.target.value,
+                            });
+                          }}
+                        />
+                      </th>
+                    );
                 }
               })}
             </tr>
