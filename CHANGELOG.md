@@ -10,6 +10,7 @@
 
 - CustomTable now includes pagination elements (clickable page numbers, and adjustable tickets per page)
 - Add new 'Client Select' dropdown to label area for quick filtering (fulfiller only)
+- Add CustomTable dropdown to quickly filter by Assignee
 
 ### Changed
 

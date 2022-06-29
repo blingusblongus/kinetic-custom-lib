@@ -14,14 +14,12 @@ import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
 import { isFulfiller } from '../../lib/utils';
 
 const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [searchResult, setSearchResult] = useState({});
-  // const tableSettings = useSelector(store => store.settings.settings?.find(obj => obj.name == label));
   const [fields, setFields] = useState([]);
   const [settingsPos, setSettingsPos] = useState({ top: null, left: null });
   const [showSettings, setShowSettings] = useState(false);
@@ -35,7 +33,6 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const clientNames = useSelector(store =>
     store.clients?.submissions.map(client => client.values.Organization),
   );
-  console.log(clientNames);
   const [perPage, setPerPage] = useState(25);
   const [pageStart, setPageStart] = useState(0);
   const [visible, setVisible] = useState([
@@ -46,11 +43,9 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     'Status',
     'Assignee',
   ]);
-  const fulfiller = isMemberOf(userProfile, 'vTeams');
   const [selectValue, setSelectValue] = useState(isFulfiller ? 'active' : '');
+  const [selectWhose, setSelectWhose] = useState('all');
   const [selectClientValue, setSelectClientValue] = useState('all');
-
-  console.log(selectValue);
 
   const dateFormat = 'M/d/YY';
 
@@ -93,12 +88,14 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
         break;
       case 'mine':
         if (sub.values.Assignee !== userProfile.displayName) return false;
+        break;
       case 'mine-unassigned':
         if (
           sub.values.Assignee !== userProfile.displayName &&
           sub.values.Assignee
         )
           return false;
+        break;
       case 'all':
       default:
         break;
@@ -110,6 +107,25 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       sub.values['Organization'] !== selectClientValue
     )
       return false;
+
+    let assignee = sub.values['Assignee'];
+
+    switch (selectWhose) {
+      case 'me':
+        if (assignee !== userProfile.displayName) return false;
+        break;
+      case 'me-unassigned':
+        if (assignee && assignee !== userProfile.displayName) return false;
+        break;
+      case 'unassigned':
+        if (assignee) return false;
+        break;
+      case 'others':
+        if (!assignee || assignee === userProfile.displayName) return false;
+        break;
+      case 'all':
+        break;
+    }
 
     // Filter submissions by generic text filter
     for (let key in filterOptions) {
@@ -123,6 +139,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
         return false;
       }
     }
+
     return true;
   });
 
@@ -240,9 +257,22 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                 sx={{ marginRight: '10px' }}
               >
                 <MenuItem value="active">Active Tickets</MenuItem>
-                <MenuItem value="mine">My Tickets</MenuItem>
-                <MenuItem value="mine-unassigned">Mine/Unassigned</MenuItem>
                 <MenuItem value="all">All Tickets</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl variant="standard" size="large">
+              <Select
+                id="table-header-select"
+                value={selectWhose}
+                onChange={e => setSelectWhose(e.target.value)}
+                sx={{ marginRight: '10px' }}
+              >
+                <MenuItem value="all">Anyone</MenuItem>
+                <MenuItem value="me">Me</MenuItem>
+                <MenuItem value="me-unassigned">Me/Unassigned</MenuItem>
+                <MenuItem value="unassigned">Unassigned</MenuItem>
+                <MenuItem value="others">Others</MenuItem>
               </Select>
             </FormControl>
 
@@ -251,6 +281,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                 id="table-header-select"
                 value={selectClientValue}
                 onChange={e => setSelectClientValue(e.target.value)}
+                sx={{ marginRight: '10px' }}
               >
                 <MenuItem value="all">All Clients</MenuItem>
                 {clientNames.map(org => (
@@ -308,10 +339,10 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
           </tr>
           {showFilter && (
             <tr>
+              {/* Render fields included in state.visible, 
+              and conditionally format filters based on field name / datatype */}
               {visible.map(f => {
-                console.log(fields);
                 const type = fields.find(field => field.name == f)?.renderType;
-                console.log('type', type);
                 switch (type) {
                   case 'dropdown':
                     if (
@@ -396,6 +427,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
           )}
         </thead>
         <tbody>
+          {/* Render the submissions that have been filtered, sorted, and paginated */}
           {paginatedSubmissions?.map((submission, i) => {
             const id = submission.id;
             return (
@@ -419,7 +451,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
             );
           })}
 
-          {/* Empty Submission Display */}
+          {/* Show this when no submissions are left to render */}
           {paginatedSubmissions?.length < 1 && (
             <tr>
               <td className="no-ticket-msg" colSpan="100%">
@@ -430,16 +462,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
         </tbody>
       </table>
 
-      {/* Pagination Options */}
-      {/* <select name="pagination-number"
-        value={perPage}
-        onChange={(e) => setPerPage(e.target.value)}>
-        <option value={10}>10</option>
-        <option value={25}>25</option>
-        <option value={50}>50</option>
-        <option value={100}>100</option>
-      </select> */}
-
+      {/* Pagination Page Numbers and Input */}
       <div className="pagination-controls">
         <div className="pagination-controls--links">
           {pageArr.map((el, i) => {
@@ -466,6 +489,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
         </div>
       </div>
 
+      {/* Conditional, absolutely positioned settings menu*/}
       {showSettings && (
         <Settings
           settingsPos={settingsPos}
