@@ -404,7 +404,10 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                   let content;
                   if (typeof f == 'object') {
                     content = JSON.parse(f);
-                  } else if (Date.parse(submission.values[f])) {
+                  } else if (
+                    !Number(submission.values[f]) &&
+                    Date.parse(submission.values[f])
+                  ) {
                     content = format(submission.values[f], dateFormat);
                   } else {
                     content = submission.values[f];
