@@ -12,6 +12,12 @@ import URLS from '../../../globals/urls';
 import './CustomTable.scss';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import { isMemberOf } from '@kineticdata/bundle-common/lib/utils';
+import { isFulfiller } from '../../lib/utils';
 
 const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [searchResult, setSearchResult] = useState({});
@@ -26,6 +32,8 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [filterOptions, setFilterOptions] = useState({});
   const [showFilter, setShowFilter] = useState(false);
   const userProfile = useSelector(store => store.app.profile);
+  const displayName = userProfile.displayName;
+  console.log(userProfile);
   const [perPage, setPerPage] = useState(25);
   const [pageStart, setPageStart] = useState(0);
   const [visible, setVisible] = useState([
@@ -36,6 +44,10 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     'Status',
     'Assignee',
   ]);
+  const fulfiller = isMemberOf(userProfile, 'vTeams');
+  const [selectValue, setSelectValue] = useState(isFulfiller ? 'active' : '');
+
+  console.log(selectValue);
 
   const dateFormat = 'M/d/YY';
 
@@ -50,7 +62,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     },
   };
 
-  // Filter submissions according to props.submitter
+  // Filter submissions according to props.submitter and state.selectValue
   const filteredSubmissions = searchResult.submissions?.filter(sub => {
     // handle optional submitter prop
     if (submitter) {
@@ -65,6 +77,27 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
         default:
           break;
       }
+    }
+
+    switch (selectValue) {
+      case 'active':
+        if (
+          sub.values.Status === 'Completed' ||
+          sub.values.Status === 'Resolved'
+        )
+          return false;
+        break;
+      case 'mine':
+        if (sub.values.Assignee !== userProfile.displayName) return false;
+      case 'mine-unassigned':
+        if (
+          sub.values.Assignee !== userProfile.displayName &&
+          sub.values.Assignee
+        )
+          return false;
+      case 'all':
+      default:
+        break;
     }
 
     // Filter submissions by generic text filter
@@ -184,7 +217,26 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   return (
     <div className="card-wrapper">
       <div className="table-header">
-        <span className="table-title">{label}</span>
+        {label ? (
+          <span className="table-title">{label}</span>
+        ) : (
+          <FormControl
+            variant="standard"
+            size="large"
+            sx={{ transform: 'scale(1.5)', transformOrigin: 'left top' }}
+          >
+            <Select
+              id="table-header-select"
+              value={selectValue}
+              onChange={e => setSelectValue(e.target.value)}
+            >
+              <MenuItem value="active">Active Tickets</MenuItem>
+              <MenuItem value="mine">My Tickets</MenuItem>
+              <MenuItem value="mine-unassigned">Mine/Unassigned</MenuItem>
+              <MenuItem value="all">All Tickets</MenuItem>
+            </Select>
+          </FormControl>
+        )}
       </div>
       <table ref={tableRef}>
         <thead>
