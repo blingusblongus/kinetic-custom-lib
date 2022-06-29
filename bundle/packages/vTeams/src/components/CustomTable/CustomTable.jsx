@@ -32,8 +32,10 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const [filterOptions, setFilterOptions] = useState({});
   const [showFilter, setShowFilter] = useState(false);
   const userProfile = useSelector(store => store.app.profile);
-  const displayName = userProfile.displayName;
-  console.log(userProfile);
+  const clientNames = useSelector(store =>
+    store.clients?.submissions.map(client => client.values.Organization),
+  );
+  console.log(clientNames);
   const [perPage, setPerPage] = useState(25);
   const [pageStart, setPageStart] = useState(0);
   const [visible, setVisible] = useState([
@@ -46,6 +48,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   ]);
   const fulfiller = isMemberOf(userProfile, 'vTeams');
   const [selectValue, setSelectValue] = useState(isFulfiller ? 'active' : '');
+  const [selectClientValue, setSelectClientValue] = useState('all');
 
   console.log(selectValue);
 
@@ -79,6 +82,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       }
     }
 
+    // Filter by Label Select
     switch (selectValue) {
       case 'active':
         if (
@@ -99,6 +103,13 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       default:
         break;
     }
+
+    // Filter by Label Client Select
+    if (
+      selectClientValue !== 'all' &&
+      sub.values['Organization'] !== selectClientValue
+    )
+      return false;
 
     // Filter submissions by generic text filter
     for (let key in filterOptions) {
@@ -220,22 +231,36 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
         {label ? (
           <span className="table-title">{label}</span>
         ) : (
-          <FormControl
-            variant="standard"
-            size="large"
-            sx={{ transform: 'scale(1.5)', transformOrigin: 'left top' }}
-          >
-            <Select
-              id="table-header-select"
-              value={selectValue}
-              onChange={e => setSelectValue(e.target.value)}
-            >
-              <MenuItem value="active">Active Tickets</MenuItem>
-              <MenuItem value="mine">My Tickets</MenuItem>
-              <MenuItem value="mine-unassigned">Mine/Unassigned</MenuItem>
-              <MenuItem value="all">All Tickets</MenuItem>
-            </Select>
-          </FormControl>
+          <div style={{ transform: 'scale(1.5)', transformOrigin: 'left top' }}>
+            <FormControl variant="standard" size="large">
+              <Select
+                id="table-header-select"
+                value={selectValue}
+                onChange={e => setSelectValue(e.target.value)}
+                sx={{ marginRight: '10px' }}
+              >
+                <MenuItem value="active">Active Tickets</MenuItem>
+                <MenuItem value="mine">My Tickets</MenuItem>
+                <MenuItem value="mine-unassigned">Mine/Unassigned</MenuItem>
+                <MenuItem value="all">All Tickets</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl variant="standard" size="large">
+              <Select
+                id="table-header-select"
+                value={selectClientValue}
+                onChange={e => setSelectClientValue(e.target.value)}
+              >
+                <MenuItem value="all">All Clients</MenuItem>
+                {clientNames.map(org => (
+                  <MenuItem key={org} value={org}>
+                    {org}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
         )}
       </div>
       <table ref={tableRef}>
@@ -379,7 +404,10 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                   let content;
                   if (typeof f == 'object') {
                     content = JSON.parse(f);
-                  } else if (Date.parse(submission.values[f])) {
+                  } else if (
+                    !Number(submission.values[f]) &&
+                    Date.parse(submission.values[f])
+                  ) {
                     content = format(submission.values[f], dateFormat);
                   } else {
                     content = submission.values[f];

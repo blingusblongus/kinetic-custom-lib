@@ -9,11 +9,13 @@
 ### Added
 
 - CustomTable now includes pagination elements (clickable page numbers, and adjustable tickets per page)
+- Add new 'Client Select' dropdown to label area for quick filtering (fulfiller only)
 
 ### Changed
 
 - Better Filters Added on Fulfiller view, deactivated on client view (due to accessing form definitions being forbidden)
 - Fullfiller CustomTable label now a `<select>`, allowing general filters to be applied
+- Fixed Non-dates being parsed as dates in CustomTable rows
 
 ## [0.6.0] - 2022-06-28
 
