@@ -91,3 +91,29 @@ tbody {
     }
   }
 }
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  input {
+    max-width: 100px;
+  }
+
+  a {
+    margin: auto 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
+    &.selected {
+      font-weight: bold;
+    }
+  }
+
+  .per-page-input-container {
+    display: flex;
+    align-items: center;
+  }
+}

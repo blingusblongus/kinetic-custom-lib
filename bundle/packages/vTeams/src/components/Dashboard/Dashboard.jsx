@@ -22,7 +22,7 @@ const Dashboard = () => {
         {fulfiller ? (
           <div className="table-wrapper">
             <CustomTable
-              label="Active Tickets"
+              // label="Active Tickets"
               kapp={SLUGS.KAPPSLUG}
               form={SLUGS.TICKET_FORM_SLUG}
               searchOptions={{ include: 'values' }}

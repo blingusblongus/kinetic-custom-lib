@@ -1,10 +1,38 @@
 # Changelog
 
-## [0.5.0] - WIP
+## [1.0.0] - WIP
+
+### Changed
+
+## [0.6.1] - WIP
 
 ### Added
 
-- 'Clients' form allows differentiation between monthly and hourly billing cycles.
+- CustomTable now includes pagination elements (clickable page numbers, and adjustable tickets per page)
+- Add new 'Client Select' dropdown to label area for quick filtering (fulfiller only)
+- Add CustomTable dropdown to quickly filter by Assignee
+
+### Changed
+
+- Better Filters Added on Fulfiller view, deactivated on client view (due to accessing form definitions being forbidden)
+- Fullfiller CustomTable label now a `<select>`, allowing general filters to be applied
+- Fixed Non-dates being parsed as dates in CustomTable rows
+
+## [0.6.0] - 2022-06-28
+
+### Changed
+
+- Comment dates are now localized, with better formatting.
+- Ticket form now requires an Assignee to be provided when Status is set to 'In Progress'
+- Organization field now only visible to fulfillers, never to Clients
+- Fixed bug where Requested By field was being overwritten when non-editable
+- Fixed bug where Assignee was not being properly populated on ticket load
+
+## [0.5.0] - 2022-06-24
+
+### Added
+
+- 'Clients' form allows differentiation between monthly and annual billing cycles.
 - Add more visibility to ClientOverview Panels: Billing Period, Billing Period Start.
 - Add behind-the-scenes code to ReportTemplate to support future Billing Period Metrics
 - Add ability to automatically calculate and carry over unused hours from one period to the next, either by percentage or fixed maximum.
@@ -16,7 +44,7 @@
 
 ### Changed
 
-- 'Clients' form hours info now displays conditionally, and is required when displayed.
+- 'Clients' form annual/monthly input now displays conditionally, and is required when displayed.
 - ClientOverview Panels now accurately show only hours worked since the Billing Period Start
 - Refactored ClientPanelItems into own subcomponents.
 - BurndownChart now charts from the Billing Period start until the current day.

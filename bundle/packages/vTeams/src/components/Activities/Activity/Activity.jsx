@@ -5,11 +5,13 @@ import './_Activity.scss';
 import { useSelector } from 'react-redux';
 import TeamsButton from '../../TeamsButton/TeamsButton';
 import { updateSubmission, fetchSubmission } from '@kineticdata/react';
+import { format } from 'date-fns';
 
 const Activity = ({ submission, reFetch, setReFetch }) => {
   const [loading, setLoading] = useState(false);
   let { values, submittedAt } = submission;
-  const [date, time] = submittedAt.split('T');
+  let d = new Date(submittedAt);
+
   const [editMode, setEditMode] = useState(false);
   const [updateInfo, setUpdateInfo] = useState({
     [FORM_FIELDS.HOURS_WORKED]: submission.values[FORM_FIELDS.HOURS_WORKED],
@@ -52,7 +54,7 @@ const Activity = ({ submission, reFetch, setReFetch }) => {
     <div className={`activity-container ${classes}`}>
       <div className="comment-header">
         <div>
-          {values['Commenter']}: {date} {time.split('.')[0]}
+          {values['Commenter']}: {format(d, 'h:mm aa, MMM Do YYYY')}
           {showEdit && ' '}
           {showEdit && (
             <span className="edit-button" onClick={toggleEdit}>
