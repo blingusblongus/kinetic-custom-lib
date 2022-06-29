@@ -484,7 +484,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
             type="number"
             id="per-page__input"
             value={perPage}
-            onChange={e => setPerPage(Number(e.target.value))}
+            onChange={e => setPerPage(Number(e.target.value) || 1)}
           />
         </div>
       </div>
