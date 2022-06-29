@@ -4,6 +4,16 @@
 
 ### Changed
 
+## [0.6.1] - WIP
+
+### Added
+
+- CustomTable now includes pagination elements (clickable page numbers, and adjustable tickets per page)
+
+### Changed
+
+- Better Filters Added on Fulfiller view, deactivated on client view (due to accessing form definitions being forbidden)
+- Fullfiller CustomTable label now a `<select>`, allowing general filters to be applied
 
 ## [0.6.0] - 2022-06-28
 
