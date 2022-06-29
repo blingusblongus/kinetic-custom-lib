@@ -272,6 +272,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                 id="table-header-select"
                 value={selectWhose}
                 onChange={e => setSelectWhose(e.target.value)}
+                sx={{ marginRight: '10px' }}
               >
                 <MenuItem value="all">Anyone</MenuItem>
                 <MenuItem value="me">Me</MenuItem>
@@ -286,6 +287,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                 id="table-header-select"
                 value={selectClientValue}
                 onChange={e => setSelectClientValue(e.target.value)}
+                sx={{ marginRight: '10px' }}
               >
                 <MenuItem value="all">All Clients</MenuItem>
                 {clientNames.map(org => (
