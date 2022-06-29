@@ -48,6 +48,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   ]);
   const fulfiller = isMemberOf(userProfile, 'vTeams');
   const [selectValue, setSelectValue] = useState(isFulfiller ? 'active' : '');
+  const [selectWhose, setSelectWhose] = useState('all');
   const [selectClientValue, setSelectClientValue] = useState('all');
 
   console.log(selectValue);
@@ -111,6 +112,22 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
     )
       return false;
 
+    let assignee = sub.values['Assignee'];
+    console.log(assignee, userProfile.displayName);
+    switch (selectWhose) {
+      case 'me':
+        if (assignee !== userProfile.displayName) return false;
+        break;
+      case 'me-unassigned':
+        if (!assignee || assignee !== userProfile.displayName) return false;
+      case 'unassigned':
+        if (assignee === null) return false;
+      case 'others':
+        if (!assignee || assignee === userProfile.displayName) return false;
+      case 'all':
+        break;
+    }
+
     // Filter submissions by generic text filter
     for (let key in filterOptions) {
       const filterValue = filterOptions[key]?.toLowerCase();
@@ -123,6 +140,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
         return false;
       }
     }
+
     return true;
   });
 
@@ -240,9 +258,21 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                 sx={{ marginRight: '10px' }}
               >
                 <MenuItem value="active">Active Tickets</MenuItem>
-                <MenuItem value="mine">My Tickets</MenuItem>
-                <MenuItem value="mine-unassigned">Mine/Unassigned</MenuItem>
                 <MenuItem value="all">All Tickets</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl variant="standard" size="large">
+              <Select
+                id="table-header-select"
+                value={selectWhose}
+                onChange={e => setSelectWhose(e.target.value)}
+              >
+                <MenuItem value="all">Anyone</MenuItem>
+                <MenuItem value="me">Me</MenuItem>
+                <MenuItem value="me-unassigned">Me/Unassigned</MenuItem>
+                <MenuItem value="unassigned">Unassigned</MenuItem>
+                <MenuItem value="others">Others</MenuItem>
               </Select>
             </FormControl>
 
