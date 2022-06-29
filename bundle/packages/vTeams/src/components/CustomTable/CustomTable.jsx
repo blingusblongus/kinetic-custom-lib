@@ -33,7 +33,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
   const clientNames = useSelector(store =>
     store.clients?.submissions.map(client => client.values.Organization),
   );
-  const [perPage, setPerPage] = useState(25);
+  const [perPage, setPerPage] = useState(15);
   const [pageStart, setPageStart] = useState(0);
   const [visible, setVisible] = useState([
     'Submitted At',
@@ -484,7 +484,7 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
             type="number"
             id="per-page__input"
             value={perPage}
-            onChange={e => setPerPage(Number(e.target.value))}
+            onChange={e => setPerPage(Number(e.target.value) || 1)}
           />
         </div>
       </div>
