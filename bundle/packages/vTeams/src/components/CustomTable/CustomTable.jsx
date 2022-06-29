@@ -236,7 +236,6 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       export: true,
     })
       .then(({ form }) => {
-        console.log('form', form);
         setFields(form.pages[0].elements.filter(el => el.type === 'field'));
       })
       .catch(err => console.error(err));
@@ -440,12 +439,10 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
                     !Number(submission.values[f]) &&
                     Date.parse(submission.values[f])
                   ) {
-                    console.log(submission.values[f]);
                     content = format(
                       new Date(submission.values[f]),
                       dateFormat,
                     );
-                    console.log(content + '\n==============');
                   } else {
                     content = submission.values[f];
                   }
