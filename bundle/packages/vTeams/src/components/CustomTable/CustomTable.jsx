@@ -94,12 +94,14 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
         break;
       case 'mine':
         if (sub.values.Assignee !== userProfile.displayName) return false;
+        break;
       case 'mine-unassigned':
         if (
           sub.values.Assignee !== userProfile.displayName &&
           sub.values.Assignee
         )
           return false;
+        break;
       case 'all':
       default:
         break;
@@ -113,17 +115,20 @@ const CustomTable = ({ label, kapp, form, searchOptions, submitter }) => {
       return false;
 
     let assignee = sub.values['Assignee'];
-    console.log(assignee, userProfile.displayName);
+
     switch (selectWhose) {
       case 'me':
         if (assignee !== userProfile.displayName) return false;
         break;
       case 'me-unassigned':
-        if (!assignee || assignee !== userProfile.displayName) return false;
+        if (assignee && assignee !== userProfile.displayName) return false;
+        break;
       case 'unassigned':
-        if (assignee === null) return false;
+        if (assignee) return false;
+        break;
       case 'others':
         if (!assignee || assignee === userProfile.displayName) return false;
+        break;
       case 'all':
         break;
     }
