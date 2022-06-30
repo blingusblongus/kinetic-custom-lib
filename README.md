@@ -7,7 +7,7 @@
 
 ## Usage
 
-Clients:
+### Clients:
 
 1. Login using the credentials supplied by a spaceAdmin or vTeams fulfiller
 2. Click the profile icon > profile submenu in the upper-right to view details about your profile, such as the organization you're associated with within vTEAMS, and change your password.
@@ -20,7 +20,7 @@ Clients:
 9. Logout via the Profile menu in the upper-right. Users will also be logged out after a period of inactivity.
 
 
-Fulfillers:
+### Fulfillers:
 
 1. Login using the credentials supplied by a spaceAdmin or vTeams fulfiller.
 2. Click the profile icon > profile submenu in the upper-right to view details about your profile, such as the organization you're associated with within vTEAMS, and change your password.
@@ -35,7 +35,29 @@ Fulfillers:
 8. Navigate to the 'Clients' view via the sidebar to:
     1. View general information about each client, such as Billing Period, Billing Period Start Date, Hours Carried Over (from the last billing period), and burndown.
     2. Add New Clients by clicking the button in the upper-right, and filling out the resulting form.
-9. Logout via the profile dropdown menu in the upper right of the screen. 
+9. Logout via the profile dropdown menu in the upper right of the screen.
+
+### Useful Actions
+
+- New Client Configuration
+    1. As a fulfiller, navigate to the client menu via the sidebar.
+    2. Click the 'Add Client' button in the upper right of the view.
+    3. Fill out the form and click submit.
+    4. Return to the clients page to verify that the new client has been added. 
+
+- New User Configuration
+    1. As a spaceAdmin, open the sidebar and select the settings bar at the bottom.
+    2. Click User Management > Create User
+    3. Fill out the user's information and submit.
+    4. Click on the new user's username that has appeared in the Users table.
+    5. **Update the `Organization` field under `User Attributes` with a name exactly matching the name of an existing organization.**
+    7. If the new user is a vTeams member, `Organization` must be set to 'vTeams', and the 'vTeams' team must also be added under the 'Memberships' section.
+    8. Notify the user of their temporary password, and the steps to change it.
+
+- Change Password
+    1. As any logged in user, click the profile icon to the furthest right of the header bar.
+    2. Click `Profile` from the dropdown menu.
+    3. Click the `Change Password` button under the 'General' section.
 
 ## Deployment
   Backend:
