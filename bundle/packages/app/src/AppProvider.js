@@ -81,7 +81,7 @@ const AppComponent = props => {
                 path="/forms/:formSlug"
                 to={`${SettingsApp.location}/datastore/:formSlug/new`}
               />
-              <Route default component={Home} />
+              <Redirect default path="/" to="/kapps/vteams/" />
             </Switch>
           </main>
         </I18n>

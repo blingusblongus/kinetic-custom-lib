@@ -1,8 +1,10 @@
 # Changelog
 
-## [1.0.0] - WIP
+## [0.6.2] - WIP
 
-### Changed
+### Added
+
+- Include fallback Redirect to kinetic app to route to vteams home rather than the default kinetic page
 
 ## [0.6.1] - 2022-06-30
 
