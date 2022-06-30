@@ -1,9 +1,26 @@
 # Changelog
 
-## [1.0.0] - WIP
+## [0.6.2] - WIP
+
+### Added
+
+- Include fallback Redirect to kinetic app to route to vteams home rather than the default kinetic page
+
+## [0.6.1] - 2022-06-30
+
+### Added
+
+- CustomTable now includes pagination elements (clickable page numbers, and adjustable tickets per page)
+- Add new 'Client Select' dropdown to label area for quick filtering (fulfiller only)
+- Add CustomTable dropdown to quickly filter by Assignee
 
 ### Changed
 
+- Better Filters Added on Fulfiller view, deactivated on client view (due to accessing form definitions being forbidden)
+- Fullfiller CustomTable label now a `<select>`, allowing general filters to be applied
+- Fixed Non-dates being parsed as dates in CustomTable rows
+- Fixed bug where null Tickets-per-page value would cause the page to crash
+- Fixed bug where dates were not formatting correctly within CustomTable
 
 ## [0.6.0] - 2022-06-28
 
