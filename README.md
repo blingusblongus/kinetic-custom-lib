@@ -46,7 +46,7 @@
     4. Return to the clients page to verify that the new client has been added. 
 
 - New User Configuration
-    1. As a fulfiller, open the sidebar and select the settings bar at the bottom.
+    1. As a spaceAdmin, open the sidebar and select the settings bar at the bottom.
     2. Click User Management > Create User
     3. Fill out the user's information and submit.
     4. Click on the new user's username that has appeared in the Users table.
